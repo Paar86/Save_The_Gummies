@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dkxue6f1axkkv" path="res://Assets/Player/throw_arrow.png" id="2_y6pnu"]
 
 [node name="ThrowArrowPivot" type="Marker2D"]
+process_mode = 4
 script = ExtResource("1_sqp48")
 
 [node name="ThrowArrowSprite" type="Sprite2D" parent="."]

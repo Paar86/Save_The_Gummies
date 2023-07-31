@@ -22,7 +22,6 @@ collision_layer = 2
 script = ExtResource("1_fgl7g")
 
 [node name="ThrowArrowPivot" parent="." instance=ExtResource("2_pd4ny")]
-process_mode = 4
 visible = false
 position = Vector2(0, -16)
 
