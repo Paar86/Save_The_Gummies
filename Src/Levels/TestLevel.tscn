@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2fyjbkib660i"]
+
+[ext_resource type="PackedScene" uid="uid://d2l1fpj8yehom" path="res://Src/Entities/Player/Player.tscn" id="1_tuk5t"]
+[ext_resource type="PackedScene" uid="uid://c36mwvup5f8ad" path="res://Src/Entities/BallCreature/BallCreature.tscn" id="2_bckp0"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ad3te"]
+bounce = 0.4
+
+[node name="TestLevel" type="Node"]
+
+[node name="BallCreature" parent="." instance=ExtResource("2_bckp0")]
+position = Vector2(259.416, 136.701)
+physics_material_override = SubResource("PhysicsMaterial_ad3te")
+
+[node name="Player" parent="." instance=ExtResource("1_tuk5t")]
+position = Vector2(80, 208)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(0, 240, 0, 0, 32, 0, 32, 208, 240, 208, 240, 192, 288, 192, 288, 0, 320, 0, 320, 240)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(0, 0, 0, 240, 320, 240, 320, 0, 288, 0, 288, 192, 240, 192, 240, 208, 32, 208, 32, 0)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D2"]
+position = Vector2(106.667, 160)
+scale = Vector2(0.666667, 0.230769)
+polygon = PackedVector2Array(32, 0, 31.9995, -34.6667, 19.9995, -34.6667, 19.9995, 69.3334, 116, 69.3334, 116, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+position = Vector2(64, -64)
+polygon = PackedVector2Array(56, 240, 120, 240, 120, 224, 64, 224, 64, 216, 56, 216)

@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://d2l1fpj8yehom"]
+
+[ext_resource type="Script" path="res://Src/Entities/Player/Player.gd" id="1_fgl7g"]
+[ext_resource type="Texture2D" uid="uid://dpxwf7ep8unr6" path="res://Assets/Player/player_temp.png" id="2_m718n"]
+[ext_resource type="Script" path="res://Src/Common/StateMachine/StateMachine.gd" id="3_ffp80"]
+[ext_resource type="Script" path="res://Src/Entities/Player/States/Move.gd" id="5_ob3jm"]
+[ext_resource type="Script" path="res://Src/Entities/Player/States/Idle.gd" id="6_kxhls"]
+[ext_resource type="Script" path="res://Src/Entities/Player/States/Run.gd" id="7_xjuja"]
+[ext_resource type="Script" path="res://Src/Entities/Player/States/Air.gd" id="8_j1lab"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7nepf"]
+size = Vector2(10, 22)
+
+[node name="Player" type="CharacterBody2D"]
+texture_filter = 1
+collision_layer = 2
+script = ExtResource("1_fgl7g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("2_m718n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -11)
+shape = SubResource("RectangleShape2D_7nepf")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_ffp80")
+initial_state = NodePath("Move/Idle")
+
+[node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("character")]
+script = ExtResource("5_ob3jm")
+character = NodePath("../..")
+abstract = true
+
+[node name="Idle" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state", "states_for_transition")]
+script = ExtResource("6_kxhls")
+move_state = NodePath("..")
+states_for_transition = [NodePath("../Run"), NodePath("../Air")]
+
+[node name="Run" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state", "states_for_transition")]
+script = ExtResource("7_xjuja")
+move_state = NodePath("..")
+states_for_transition = [NodePath("../Idle"), NodePath("../Air")]
+
+[node name="Air" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state", "states_for_transition")]
+script = ExtResource("8_j1lab")
+move_state = NodePath("..")
+states_for_transition = [NodePath("../Idle")]
+
+[node name="JumpTimer" type="Timer" parent="StateMachine/Move/Air"]
+process_callback = 0
+wait_time = 0.2
+one_shot = true
+
+[node name="BufferTimer" type="Timer" parent="StateMachine/Move/Air"]
+process_callback = 0
+wait_time = 0.08
+one_shot = true
+
+[node name="CoyoteTimer" type="Timer" parent="StateMachine/Move/Air"]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
+
+[node name="PickupTransform2D" type="RemoteTransform2D" parent="."]
+editor_description = "Set in code for currently picked ball creature."
+position = Vector2(6, -20)
+
+[connection signal="timeout" from="StateMachine/Move/Air/JumpTimer" to="StateMachine/Move/Air" method="_on_jump_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Move/Air/BufferTimer" to="StateMachine/Move/Air" method="_on_buffer_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Move/Air/CoyoteTimer" to="StateMachine/Move/Air" method="_on_coyote_timer_timeout"]

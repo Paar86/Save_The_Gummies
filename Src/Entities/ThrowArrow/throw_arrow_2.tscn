@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bke1aiuvi2vgt"]
+
+[ext_resource type="Script" path="res://Src/Entities/ThrowArrow/throw_arrow.gd" id="1_cvk3b"]
+[ext_resource type="Texture2D" uid="uid://dkxue6f1axkkv" path="res://Assets/Player/throw_arrow.png" id="2_0m7nl"]
+
+[node name="ThrowArrowPivot" type="Marker2D"]
+position = Vector2(0, 3.57628e-07)
+rotation = -0.785398
+script = ExtResource("1_cvk3b")
+
+[node name="ThrowArrow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.501961)
+position = Vector2(8, -3.57628e-07)
+texture = ExtResource("2_0m7nl")
+offset = Vector2(14, 5.96046e-07)

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c36mwvup5f8ad"]
+
+[ext_resource type="Texture2D" uid="uid://cl4m7uljkvnuc" path="res://Assets/BallCreature/ball_creature.png" id="1_p6apo"]
+[ext_resource type="Script" path="res://Src/Entities/BallCreature/BallCreature.gd" id="1_r5tyh"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_etqu6"]
+bounce = 0.4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_batwe"]
+radius = 7.0
+
+[node name="BallCreature" type="RigidBody2D"]
+texture_filter = 1
+collision_layer = 8
+mass = 1.4
+physics_material_override = SubResource("PhysicsMaterial_etqu6")
+script = ExtResource("1_r5tyh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_p6apo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_batwe")
