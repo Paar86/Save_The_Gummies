@@ -15,7 +15,7 @@ func physics_process(delta: float) -> void:
 
 func on_enter(params: StateParams) -> void:
 	move_state.character.pickup_transform.set_deferred("remote_path", move_state.character.hold_object.get_path())
-	move_state.max_speed = move_state.MAX_RUN_SPEED * 0.4
+	move_state.max_speed = move_state.MAX_RUN_SPEED * 0.5
 
 
 func on_exit() -> void:
