@@ -1,16 +1,18 @@
 extends State
 
-const THROW_STRENGTH: = 450.0
+const THROW_STRENGTH: = 900.0
 
 @export var move_state: PlayerMoveState
 # How long until aim arrow is shown
 @onready var to_aim_timer: Timer = $ToAimTimer
 
 var can_throw: = false
+var is_aiming: = false
 
 
 func physics_process(delta: float) -> void:
-	move_state.physics_process(delta)
+	if not is_aiming:
+		move_state.physics_process(delta)
 
 
 func on_enter(params: StateParams) -> void:
@@ -37,8 +39,10 @@ func unhandled_input(event: InputEvent) -> void:
 		Events.player_aiming_called_off.emit()
 		to_aim_timer.stop()
 		can_throw = false
+		is_aiming = false
 		return
 
 
 func on_to_aim_timer_timeout() -> void:
 	Events.player_aiming_requested.emit()
+	is_aiming = true

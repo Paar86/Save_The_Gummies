@@ -14,7 +14,10 @@ var gravity_scale: float = 1.0
 var acceleration_scale: float = 1.0
 var friction_scale: float = 1.0
 var face_direction: float = 1.0
-var previous_input_direction: float = 1.0
+
+
+func _ready() -> void:
+	Events.player_direction_changed.connect(on_player_direction_changed)
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -38,10 +41,8 @@ func physics_process(delta: float) -> void:
 	var acceleration = ACCELERATION
 
 	if input_direction != 0.0:
-		if input_direction != previous_input_direction:
+		if input_direction != face_direction:
 			Events.player_direction_changed.emit(input_direction)
-			previous_input_direction = input_direction
-			face_direction = input_direction
 
 		# Turning to the other side while moving should higher acceleration
 		if move_direction != input_direction:
@@ -64,3 +65,7 @@ func physics_process(delta: float) -> void:
 
 	if character.is_on_floor():
 		character.velocity.y = 0.0
+
+
+func on_player_direction_changed(new_direction: float) -> void:
+	face_direction = new_direction

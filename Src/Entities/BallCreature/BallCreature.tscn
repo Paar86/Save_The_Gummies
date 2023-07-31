@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Src/Entities/BallCreature/BallCreature.gd" id="1_r5tyh"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_etqu6"]
+rough = true
 bounce = 0.4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_batwe"]
@@ -12,7 +13,7 @@ radius = 7.0
 [node name="BallCreature" type="RigidBody2D"]
 texture_filter = 1
 collision_layer = 8
-mass = 1.4
+mass = 2.8
 physics_material_override = SubResource("PhysicsMaterial_etqu6")
 script = ExtResource("1_r5tyh")
 
