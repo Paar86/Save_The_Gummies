@@ -36,12 +36,12 @@ func _process(delta: float) -> void:
 
 func disable() -> void:
 	hide()
+	reset_angle()
 	process_mode = Node.PROCESS_MODE_DISABLED
 
 
 func enable() -> void:
 	show()
-	reset_angle()
 	process_mode = Node.PROCESS_MODE_INHERIT
 
 
@@ -60,8 +60,14 @@ func change_direction(new_direction: float) -> void:
 
 # Varies with facing left or right
 func get_default_angle() -> float:
-	var angle_difference = abs(lowest_angle_limit) - abs(highest_angle_limit)
-	return highest_angle_limit - angle_difference / 2
+	match facing_direction:
+		-1.0:
+			return LOWEST_ANGLE_LIMIT_LEFT
+
+	return HIGHEST_ANGLE_LIMIT_RIGHT
+
+#	var angle_difference = abs(lowest_angle_limit) - abs(highest_angle_limit)
+#	return highest_angle_limit - angle_difference / 2
 
 
 func reset_angle() -> void:

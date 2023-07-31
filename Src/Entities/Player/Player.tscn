@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://d2l1fpj8yehom"]
 
 [ext_resource type="Script" path="res://Src/Entities/Player/Player.gd" id="1_fgl7g"]
-[ext_resource type="PackedScene" uid="uid://bke1aiuvi2vgt" path="res://Src/Entities/ThrowArrow/throw_arrow_2.tscn" id="2_25l5w"]
 [ext_resource type="Texture2D" uid="uid://dfot7sdqtwr0v" path="res://Assets/Player/player_single.png" id="2_hj3vl"]
+[ext_resource type="PackedScene" uid="uid://5x2sdsxos3om" path="res://Src/Entities/ThrowArrow/ThrowArrow.tscn" id="2_vye7f"]
 [ext_resource type="Script" path="res://Src/Common/StateMachine/StateMachine.gd" id="3_ffp80"]
 [ext_resource type="Script" path="res://Src/Entities/Player/States/Move.gd" id="5_ob3jm"]
 [ext_resource type="Script" path="res://Src/Entities/Player/States/Idle.gd" id="6_kxhls"]
@@ -21,10 +21,9 @@ size = Vector2(18, 16)
 collision_layer = 2
 script = ExtResource("1_fgl7g")
 
-[node name="ThrowArrowPivot" parent="." instance=ExtResource("2_25l5w")]
-process_mode = 4
+[node name="ThrowArrowPivot" parent="." instance=ExtResource("2_vye7f")]
 visible = false
-position = Vector2(0, -13)
+position = Vector2(0, -16)
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -12)
