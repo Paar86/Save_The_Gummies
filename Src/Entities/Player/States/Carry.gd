@@ -8,11 +8,14 @@ const THROW_STRENGTH: = 900.0
 
 var can_throw: = false
 var is_aiming: = false
-
+var is_fast_aiming_up: = false
 
 func physics_process(delta: float) -> void:
 	if not is_aiming:
 		move_state.physics_process(delta)
+
+	var direction_vertical: = Input.get_axis("move_up", "move_down")
+	is_fast_aiming_up = true if direction_vertical < 0 else false
 
 
 func on_enter(params: StateParams) -> void:
@@ -30,7 +33,13 @@ func unhandled_input(event: InputEvent) -> void:
 		to_aim_timer.start()
 
 	if event.is_action_released("action") and can_throw:
-		release_pickup(move_state.character.aim_direction * THROW_STRENGTH)
+		var impulse = move_state.character.aim_direction * THROW_STRENGTH
+
+		# If player holds "up" key and quickly presses "action" button
+		if not is_aiming and is_fast_aiming_up:
+			impulse = get_fast_vertical_impulse()
+
+		release_pickup(impulse)
 		state_machine.transition_to("Idle")
 		return
 
@@ -51,6 +60,12 @@ func release_pickup(impulse: Vector2) -> void:
 	to_aim_timer.stop()
 	can_throw = false
 	is_aiming = false
+
+
+func get_fast_vertical_impulse() -> Vector2:
+	var rotated_up_vector = Vector2.UP.rotated(deg_to_rad(5.0) * move_state.face_direction)
+	var angle_rad = Vector2.RIGHT.angle_to(rotated_up_vector)
+	return Vector2.RIGHT.rotated(angle_rad).normalized() * THROW_STRENGTH
 
 
 func on_to_aim_timer_timeout() -> void:

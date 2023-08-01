@@ -5,7 +5,7 @@ const OSCILLATION_SPEED_MODIFIER: = 15.0
 const MIN_ANGLE: = deg_to_rad(-180.0)
 const MAX_ANGLE: = deg_to_rad(0.0)
 const ROTATION_SPEED: = 3.0
-const DEFAULT_ROTATION: = deg_to_rad(45.0)
+const DEFAULT_ROTATION: = deg_to_rad(65.0)
 
 @onready var throw_arrow_sprite: Sprite2D = $ThrowArrowSprite
 var face_direction: = 1.0
