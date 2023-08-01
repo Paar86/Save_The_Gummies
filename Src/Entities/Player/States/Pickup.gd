@@ -16,8 +16,10 @@ func on_enter(params: StateParams) -> void:
 
 	picked_object = character.pickable_objects.pop_back() as RigidBody2D
 	picked_object_original_position = picked_object.global_position
+	picked_object.set_deferred("freeze", true)
+	picked_object.disable_collision()
+
 	character.hold_object = picked_object
-	character.hold_object.set_deferred("freeze", true)
 
 	elapsed_time = 0.0
 	character.velocity = Vector2.ZERO

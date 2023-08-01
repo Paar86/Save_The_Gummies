@@ -30,17 +30,27 @@ func unhandled_input(event: InputEvent) -> void:
 		to_aim_timer.start()
 
 	if event.is_action_released("action") and can_throw:
-		var thrown_object = move_state.character.hold_object
-		move_state.character.hold_object = null
-		move_state.character.pickup_transform.set_deferred("remote_path", null)
-		thrown_object.set_deferred("freeze", false)
-		thrown_object.call_deferred("apply_central_impulse", move_state.character.aim_direction * THROW_STRENGTH)
+		release_pickup(move_state.character.aim_direction * THROW_STRENGTH)
 		state_machine.transition_to("Idle")
-		Events.player_aiming_called_off.emit()
-		to_aim_timer.stop()
-		can_throw = false
-		is_aiming = false
 		return
+
+	if event.is_action_released("move_down"):
+		release_pickup(Vector2.ZERO)
+		state_machine.transition_to("Idle")
+		return
+
+
+func release_pickup(impulse: Vector2) -> void:
+	var thrown_object = move_state.character.hold_object
+	move_state.character.hold_object = null
+	move_state.character.pickup_transform.set_deferred("remote_path", null)
+	thrown_object.set_deferred("freeze", false)
+	thrown_object.call_deferred("apply_central_impulse", impulse)
+	thrown_object.enable_collision()
+	Events.player_aiming_called_off.emit()
+	to_aim_timer.stop()
+	can_throw = false
+	is_aiming = false
 
 
 func on_to_aim_timer_timeout() -> void:
