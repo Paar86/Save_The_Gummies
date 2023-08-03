@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2fyjbkib660i"]
+[gd_scene load_steps=5 format=3 uid="uid://b2fyjbkib660i"]
 
 [ext_resource type="PackedScene" uid="uid://d2l1fpj8yehom" path="res://Src/Entities/Player/Player.tscn" id="1_tuk5t"]
 [ext_resource type="PackedScene" uid="uid://c36mwvup5f8ad" path="res://Src/Entities/BallCreature/BallCreature.tscn" id="2_bckp0"]
+[ext_resource type="TileSet" uid="uid://cjrgfevuawdgs" path="res://Src/Resources/Tilesets/tileset_green_test.tres" id="3_th6ex"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ad3te"]
 bounce = 0.4
@@ -13,25 +14,9 @@ position = Vector2(259.416, 136.701)
 physics_material_override = SubResource("PhysicsMaterial_ad3te")
 
 [node name="Player" parent="." instance=ExtResource("1_tuk5t")]
-position = Vector2(80, 208)
+position = Vector2(56, 208)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_mask = 0
-
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(0, 240, 0, 0, 32, 0, 32, 208, 240, 208, 240, 192, 288, 192, 288, 0, 320, 0, 320, 240)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(0, 0, 0, 240, 320, 240, 320, 0, 288, 0, 288, 192, 240, 192, 240, 208, 32, 208, 32, 0)
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-collision_mask = 0
-
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D2"]
-position = Vector2(106.667, 160)
-scale = Vector2(0.666667, 0.230769)
-polygon = PackedVector2Array(32, 0, 31.9995, -34.6667, 19.9995, -34.6667, 19.9995, 69.3334, 116, 69.3334, 116, 0)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
-position = Vector2(64, -64)
-polygon = PackedVector2Array(56, 240, 120, 240, 120, 224, 64, 224, 64, 216, 56, 216)
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("3_th6ex")
+format = 2
+layer_0/tile_data = PackedInt32Array(917504, 65536, 2, 917505, 131072, 3, 917506, 131072, 3, 917507, 131072, 3, 917508, 131072, 3, 917509, 131072, 3, 917510, 131072, 3, 917511, 131072, 3, 917512, 131072, 3, 917513, 131072, 3, 917514, 131072, 3, 917515, 131072, 3, 917516, 131072, 3, 917517, 131072, 3, 917518, 131072, 3, 917519, 131072, 3, 917520, 131072, 3, 917521, 131072, 3, 917522, 131072, 3, 917523, 196608, 2, 19, 196608, 0, 65555, 0, 1, 131091, 0, 1, 196627, 0, 1, 262163, 0, 1, 327699, 0, 1, 393235, 0, 1, 458771, 0, 1, 524307, 0, 1, 589843, 0, 1, 655379, 0, 1, 720915, 0, 1, 786451, 0, 1, 851987, 0, 1, 0, 65536, 0, 65536, 0, 1, 131072, 0, 1, 196608, 0, 1, 262144, 0, 1, 327680, 0, 1, 393216, 0, 1, 458752, 0, 1, 524288, 0, 1, 589824, 0, 1, 655360, 0, 1, 720896, 0, 1, 786432, 0, 1, 851968, 0, 1, 18, 131072, 3, 17, 131072, 3, 16, 131072, 3, 15, 131072, 3, 14, 131072, 3, 13, 131072, 3, 12, 131072, 3, 11, 131072, 3, 10, 131072, 3, 9, 131072, 3, 8, 131072, 3, 7, 131072, 3, 6, 131072, 3, 5, 131072, 3, 4, 131072, 3, 3, 131072, 3, 2, 131072, 3, 1, 131072, 3, 786433, 327680, 0, 786450, 0, 3, 786438, 262144, 0, 851975, 0, 3, 851976, 0, 3, 851977, 0, 3, 851978, 0, 3, 851979, 0, 3, 851980, 0, 3, 851981, 0, 3, 851982, 0, 3, 851983, 0, 3, 851984, 0, 3, 851985, 0, 3, 851986, 0, 3, 786439, 0, 3, 786440, 0, 3, 786441, 0, 3, 786442, 0, 3, 786443, 0, 3, 786444, 0, 3, 786445, 0, 3, 786446, 0, 3, 786447, 0, 3, 786448, 0, 3, 786449, 0, 3, 720903, 262144, 2, 720904, 327680, 2, 720905, 0, 3, 720906, 0, 3, 720907, 0, 3, 720908, 0, 3, 720909, 0, 3, 720910, 0, 3, 720911, 0, 3, 720912, 0, 3, 720913, 0, 3, 720914, 0, 3, 851974, 0, 3, 851973, 0, 3, 851972, 0, 3, 851971, 0, 3, 851970, 0, 3, 851969, 0, 3)

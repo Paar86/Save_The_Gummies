@@ -26,6 +26,9 @@ func on_player_direction_changed(new_direction: float) -> void:
 	# Reversing the pickup position
 	pickup_transform.position.x = abs(pickup_transform.position.x) * new_direction
 
+	# Position of the throw arrow
+	throw_arrow_pivot.position.x = abs(throw_arrow_pivot.position.x) * new_direction
+
 
 func on_player_aiming_requested() -> void:
 	throw_arrow_pivot.enable()

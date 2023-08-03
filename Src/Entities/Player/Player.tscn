@@ -23,7 +23,7 @@ script = ExtResource("1_fgl7g")
 
 [node name="ThrowArrowPivot" parent="." instance=ExtResource("2_pd4ny")]
 visible = false
-position = Vector2(0, -16)
+position = Vector2(9, -19)
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -12)
