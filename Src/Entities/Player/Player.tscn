@@ -19,6 +19,7 @@ size = Vector2(18, 16)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
+floor_snap_length = 5.0
 script = ExtResource("1_fgl7g")
 
 [node name="ThrowArrowPivot" parent="." instance=ExtResource("2_pd4ny")]

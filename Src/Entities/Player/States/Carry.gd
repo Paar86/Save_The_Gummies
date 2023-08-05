@@ -63,7 +63,7 @@ func release_pickup(impulse: Vector2) -> void:
 
 
 func get_fast_vertical_impulse() -> Vector2:
-	var rotated_up_vector = Vector2.UP.rotated(deg_to_rad(5.0) * move_state.face_direction)
+	var rotated_up_vector = Vector2.UP.rotated(deg_to_rad(10.0) * move_state.face_direction)
 	var angle_rad = Vector2.RIGHT.angle_to(rotated_up_vector)
 	return Vector2.RIGHT.rotated(angle_rad).normalized() * THROW_STRENGTH
 
