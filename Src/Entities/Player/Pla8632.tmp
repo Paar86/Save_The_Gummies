@@ -24,7 +24,7 @@ safe_margin = 0.05
 script = ExtResource("1_fgl7g")
 
 [node name="ThrowArrowPivot" parent="." instance=ExtResource("2_pd4ny")]
-position = Vector2(7, -12)
+position = Vector2(5, -12)
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
@@ -33,7 +33,7 @@ offset = Vector2(-2, 0)
 
 [node name="PickupTransform2D" type="RemoteTransform2D" parent="."]
 editor_description = "Set in code for currently picked ball creature."
-position = Vector2(7, -12)
+position = Vector2(5, -12)
 update_scale = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

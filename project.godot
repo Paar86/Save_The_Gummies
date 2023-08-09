@@ -20,11 +20,11 @@ Events="*res://Src/Autoload/Events.gd"
 
 [display]
 
-window/size/viewport_width=320
-window/size/viewport_height=240
+window/size/viewport_width=128
+window/size/viewport_height=128
 window/size/resizable=false
-window/size/window_width_override=1600
-window/size/window_height_override=1200
+window/size/window_width_override=1024
+window/size/window_height_override=1024
 window/stretch/mode="viewport"
 
 [input]
@@ -71,5 +71,3 @@ action={
 
 textures/canvas_textures/default_texture_filter=0
 environment/defaults/default_clear_color=Color(0.529412, 0.529412, 0.529412, 1)
-2d/snap/snap_2d_transforms_to_pixel=true
-2d/snap/snap_2d_vertices_to_pixel=true

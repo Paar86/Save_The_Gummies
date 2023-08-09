@@ -1,10 +1,10 @@
 class_name PlayerMoveState extends State
 
-const MAX_RUN_SPEED := 150.0
-const MAX_FALL_SPEED := 200.0
-const ACCELERATION := 400.0
-const TURN_ACCELERATION := 800.0
-const FRICTION := 500.0
+const MAX_RUN_SPEED := 80.0
+const MAX_FALL_SPEED := 100.0
+const ACCELERATION := 200.0
+const TURN_ACCELERATION := 400.0
+const FRICTION := 250.0
 
 @export var character: CharacterBody2D
 

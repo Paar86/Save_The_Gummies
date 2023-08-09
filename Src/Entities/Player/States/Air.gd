@@ -1,6 +1,6 @@
 extends State
 
-const JUMP_FORCE: = 180.0
+const JUMP_FORCE: = 100.0
 const JUMP_GRAVITY_SCALE: = 1.4
 
 @export var move_state: PlayerMoveState

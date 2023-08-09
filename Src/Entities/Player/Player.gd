@@ -2,7 +2,7 @@ class_name Player extends CharacterBody2D
 
 @onready var player_sprite: Sprite2D = $PlayerSprite
 @onready var throw_arrow_pivot: Marker2D = $ThrowArrowPivot
-@onready var throw_arrow_sprite: Sprite2D = $ThrowArrowPivot/ThrowArrowSprite
+@onready var throw_arrow_sprite: Sprite2D = $ThrowArrowPivot/SpriteContainer/ThrowArrowSprite
 @onready var pickup_transform: RemoteTransform2D = $PickupTransform2D
 
 var pickable_objects: Array[RigidBody2D] = []
@@ -21,7 +21,7 @@ func _ready() -> void:
 
 func on_player_direction_changed(new_direction: float) -> void:
 	# Reversing the player sprite
-	player_sprite.flip_h = true if new_direction < 0 else false
+	player_sprite.scale.x = abs(player_sprite.scale.x) * new_direction
 
 	# Reversing the pickup position
 	pickup_transform.position.x = abs(pickup_transform.position.x) * new_direction

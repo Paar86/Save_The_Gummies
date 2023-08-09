@@ -7,7 +7,9 @@ const MAX_ANGLE: = deg_to_rad(0.0)
 const ROTATION_SPEED: = 3.0
 const DEFAULT_ROTATION: = deg_to_rad(65.0)
 
-@onready var throw_arrow_sprite: Sprite2D = $ThrowArrowSprite
+@onready var throw_sprite: Sprite2D = $SpriteContainer/ThrowArrowSprite
+
+#@onready var throw_arrow_sprite: Sprite2D = $ThrowArrowSprite
 var face_direction: = 1.0
 var aiming_enabled: = false
 var elapsed_time: = 0.0
@@ -15,13 +17,13 @@ var orig_horiz_position: = 0.0
 
 
 func _ready() -> void:
-	orig_horiz_position = throw_arrow_sprite.position.x
+#	orig_horiz_position = throw_arrow_sprite.position.x
 	Events.player_direction_changed.connect(on_player_direction_changed)
 
 
 func _process(delta: float) -> void:
-	elapsed_time += delta
-	throw_arrow_sprite.position.x = orig_horiz_position + sin(elapsed_time * OSCILLATION_SPEED_MODIFIER) * OSCILLATION_DISTANCE
+#	elapsed_time += delta
+#	throw_arrow_sprite.position.x = orig_horiz_position + sin(elapsed_time * OSCILLATION_SPEED_MODIFIER) * OSCILLATION_DISTANCE
 
 	var rotation_modifier = Input.get_axis("move_left", "move_right")
 	rotation += rotation_modifier * ROTATION_SPEED * delta
@@ -32,14 +34,14 @@ func _process(delta: float) -> void:
 
 
 func enable() -> void:
-	show()
+	throw_sprite.show()
 	aiming_enabled = true
 	rotation = get_default_rotation_rad()
 	process_mode = Node.PROCESS_MODE_INHERIT
 
 
 func disable() -> void:
-	hide()
+	throw_sprite.hide()
 	aiming_enabled = false
 	rotation = get_default_rotation_rad()
 	process_mode = Node.PROCESS_MODE_DISABLED
