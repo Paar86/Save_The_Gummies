@@ -1,5 +1,7 @@
 extends State
 
+signal vertical_velocity_changed
+
 const JUMP_FORCE: = 100.0
 const JUMP_GRAVITY_SCALE: = 1.4
 
@@ -16,8 +18,9 @@ var is_jumping: = false
 var is_jump_buffered: = false
 var allow_coyote_jump: = false
 
-
 func on_enter(params: StateParams) -> void:
+	state_machine.change_animation("jump_rise")
+
 	# To make more difficult to steer in the air
 	move_state.acceleration_scale = 0.4
 	move_state.friction_scale = 0.3

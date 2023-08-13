@@ -8,6 +8,9 @@ func on_enter(params: StateParams) -> void:
 		var new_params := StateParams.new()
 		new_params.initiated_jumping = true
 		state_machine.transition_to("Air", new_params)
+		return
+
+	state_machine.change_animation("idle")
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -21,6 +24,6 @@ func physics_process(delta: float) -> void:
 		state_machine.transition_to("Air")
 		return
 
-	if move_state.character.velocity.x != 0.0:
+	if not move_state.character.is_on_wall() and move_state.character.velocity.x != 0.0:
 		state_machine.transition_to("Run")
 		return

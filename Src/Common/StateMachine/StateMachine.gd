@@ -1,6 +1,7 @@
 class_name StateMachine extends Node
 
 @export var initial_state: State = null
+@export var animated_sprite: AnimatedSprite2D = null
 
 var states: Array[State] = []
 var current_state: State = null
@@ -39,3 +40,18 @@ func transition_to(state_name: String, params: StateParams = null) -> void:
 
 	current_state = desired_state
 	current_state.on_enter(params)
+
+
+func change_animation(animation_name: String) -> void:
+	if not animated_sprite:
+		return
+
+	animated_sprite.play(animation_name)
+	animated_sprite.speed_scale = 1.0
+
+
+func change_animation_speed_scale(scale: float) -> void:
+	if not animated_sprite:
+		return
+
+	animated_sprite.speed_scale = scale
