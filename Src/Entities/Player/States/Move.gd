@@ -15,13 +15,17 @@ var acceleration_scale: float = 1.0
 var friction_scale: float = 1.0
 var face_direction: float = 1.0
 
+var movement_enabled: = true
+
 
 func _ready() -> void:
 	Events.player_direction_changed.connect(on_player_direction_changed)
+	Events.player_aiming_requested.connect(on_aiming_requested)
+	Events.player_aiming_called_off.connect(on_aiming_called_off)
 
 
 func unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("jump"):
+	if event.is_action_pressed("jump") and movement_enabled:
 		var params := StateParams.new()
 		params.initiated_jumping = true
 		state_machine.transition_to("Air", params)
@@ -37,6 +41,9 @@ func physics_process(delta: float) -> void:
 
 	var input_direction: float = Input.get_axis("move_left", "move_right")
 	var move_direction: float = sign(character.velocity.x)
+
+	if not movement_enabled:
+		input_direction = 0.0
 
 	var acceleration = ACCELERATION
 
@@ -69,3 +76,11 @@ func physics_process(delta: float) -> void:
 
 func on_player_direction_changed(new_direction: float) -> void:
 	face_direction = new_direction
+
+
+func on_aiming_requested() -> void:
+	movement_enabled = false
+
+
+func on_aiming_called_off() -> void:
+	movement_enabled = true

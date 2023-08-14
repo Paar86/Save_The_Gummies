@@ -1,6 +1,5 @@
 class_name Player extends CharacterBody2D
 
-@onready var player_sprite: Sprite2D = $PlayerSprite
 @onready var player_animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var throw_arrow_pivot: Marker2D = $ThrowArrowPivot
 @onready var throw_arrow_sprite: Sprite2D = $ThrowArrowPivot/SpriteContainer/ThrowArrowSprite

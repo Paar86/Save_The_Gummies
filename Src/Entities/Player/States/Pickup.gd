@@ -31,5 +31,5 @@ func physics_process(delta: float) -> void:
 
 	picked_object.global_position = picked_object_original_position.lerp(character.pickup_transform.global_position, elapsed_time)
 	if picked_object.global_position == character.pickup_transform.global_position:
-		state_machine.transition_to("Carry")
+		state_machine.transition_to("CarryIdle")
 		return

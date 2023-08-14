@@ -1,4 +1,4 @@
-extends State
+class_name PlayerCarryState extends State
 
 const THROW_STRENGTH: = 700.0
 
@@ -11,8 +11,13 @@ var is_aiming: = false
 var is_fast_aiming_up: = false
 
 func physics_process(delta: float) -> void:
-	if not is_aiming:
-		move_state.physics_process(delta)
+#	if not is_aiming:
+	move_state.physics_process(delta)
+
+	if not move_state.character.is_on_floor():
+		release_pickup(Vector2.ZERO)
+		state_machine.transition_to("Air")
+		return
 
 	var direction_vertical: = Input.get_axis("move_up", "move_down")
 	is_fast_aiming_up = true if direction_vertical < 0 else false
@@ -40,13 +45,9 @@ func unhandled_input(event: InputEvent) -> void:
 			impulse = get_fast_vertical_impulse()
 
 		release_pickup(impulse)
-		state_machine.transition_to("Idle")
-		return
 
 	if event.is_action_released("move_down"):
 		release_pickup(Vector2.ZERO)
-		state_machine.transition_to("Idle")
-		return
 
 
 func release_pickup(impulse: Vector2) -> void:
@@ -60,6 +61,12 @@ func release_pickup(impulse: Vector2) -> void:
 	to_aim_timer.stop()
 	can_throw = false
 	is_aiming = false
+
+	if impulse != Vector2.ZERO:
+		state_machine.transition_to("Kick")
+		return
+
+	state_machine.transition_to("Idle")
 
 
 func get_fast_vertical_impulse() -> Vector2:

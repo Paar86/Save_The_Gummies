@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://d2l1fpj8yehom"]
+[gd_scene load_steps=42 format=3 uid="uid://d2l1fpj8yehom"]
 
 [ext_resource type="Script" path="res://Src/Entities/Player/Player.gd" id="1_fgl7g"]
 [ext_resource type="PackedScene" uid="uid://438y4wpihhn1" path="res://Src/Entities/ThrowArrow/ThrowArrowPivot.tscn" id="2_pd4ny"]
@@ -10,6 +10,49 @@
 [ext_resource type="Script" path="res://Src/Entities/Player/States/Carry.gd" id="8_be3oy"]
 [ext_resource type="Script" path="res://Src/Entities/Player/States/Air.gd" id="8_j1lab"]
 [ext_resource type="Script" path="res://Src/Entities/Player/States/Pickup.gd" id="8_pln1i"]
+[ext_resource type="Script" path="res://Src/Entities/Player/States/CarryIdle.gd" id="10_8rxfi"]
+[ext_resource type="Script" path="res://Src/Entities/Player/States/CarryWalk.gd" id="11_b3060"]
+[ext_resource type="Script" path="res://Src/Entities/Player/States/Kick.gd" id="13_puh06"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6qj4"]
+atlas = ExtResource("3_ppmj7")
+region = Rect2(0, 54, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4b8t"]
+atlas = ExtResource("3_ppmj7")
+region = Rect2(18, 54, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sdae"]
+atlas = ExtResource("3_ppmj7")
+region = Rect2(0, 72, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qo25r"]
+atlas = ExtResource("3_ppmj7")
+region = Rect2(18, 72, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0b5nc"]
+atlas = ExtResource("3_ppmj7")
+region = Rect2(36, 72, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cwnr"]
+atlas = ExtResource("3_ppmj7")
+region = Rect2(54, 72, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xa4t2"]
+atlas = ExtResource("3_ppmj7")
+region = Rect2(72, 72, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjons"]
+atlas = ExtResource("3_ppmj7")
+region = Rect2(90, 72, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2358"]
+atlas = ExtResource("3_ppmj7")
+region = Rect2(108, 72, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bne38"]
+atlas = ExtResource("3_ppmj7")
+region = Rect2(126, 72, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5u8oi"]
 atlas = ExtResource("3_ppmj7")
@@ -34,6 +77,10 @@ region = Rect2(18, 18, 18, 18)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ok10a"]
 atlas = ExtResource("3_ppmj7")
 region = Rect2(0, 18, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btrci"]
+atlas = ExtResource("3_ppmj7")
+region = Rect2(36, 54, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0wiak"]
 atlas = ExtResource("3_ppmj7")
@@ -71,6 +118,46 @@ region = Rect2(54, 36, 18, 18)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_y6qj4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4b8t")
+}],
+"loop": true,
+"name": &"carry_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sdae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qo25r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0b5nc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7cwnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xa4t2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjons")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2358")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bne38")
+}],
+"loop": true,
+"name": &"carry_walk",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_5u8oi")
 }, {
 "duration": 1.0,
@@ -104,6 +191,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_btrci")
+}],
+"loop": true,
+"name": &"kick",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_0wiak")
 }, {
 "duration": 1.0,
@@ -129,7 +224,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 14.0
+"speed": 18.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nepf"]
@@ -145,18 +240,19 @@ safe_margin = 0.05
 script = ExtResource("1_fgl7g")
 
 [node name="ThrowArrowPivot" parent="." instance=ExtResource("2_pd4ny")]
-position = Vector2(7, -12)
+z_index = 4096
+position = Vector2(7, -7)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_qnlu6")
-animation = &"walk"
-frame_progress = 0.0913006
+animation = &"jump_fall"
+frame_progress = 0.621976
 offset = Vector2(-2, 0)
 
 [node name="PickupTransform2D" type="RemoteTransform2D" parent="."]
 editor_description = "Set in code for currently picked ball creature."
-position = Vector2(7, -12)
+position = Vector2(7, -7)
 update_scale = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -203,19 +299,39 @@ process_callback = 0
 wait_time = 0.1
 one_shot = true
 
-[node name="Carry" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state", "states_for_transition")]
+[node name="Carry" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state")]
 script = ExtResource("8_be3oy")
 move_state = NodePath("..")
-states_for_transition = [NodePath("../Idle")]
+abstract = true
 
 [node name="ToAimTimer" type="Timer" parent="StateMachine/Move/Carry"]
 wait_time = 0.2
 one_shot = true
 
+[node name="CarryIdle" type="Node" parent="StateMachine/Move/Carry" node_paths=PackedStringArray("move_state", "carry_state", "states_for_transition")]
+script = ExtResource("10_8rxfi")
+move_state = NodePath("../..")
+carry_state = NodePath("..")
+states_for_transition = [NodePath("../../../Kick"), NodePath("../CarryWalk"), NodePath("../../Air"), NodePath("../../Idle")]
+
+[node name="CarryWalk" type="Node" parent="StateMachine/Move/Carry" node_paths=PackedStringArray("move_state", "carry_state", "states_for_transition")]
+script = ExtResource("11_b3060")
+move_state = NodePath("../..")
+carry_state = NodePath("..")
+states_for_transition = [NodePath("../CarryIdle"), NodePath("../../../Kick"), NodePath("../../Air"), NodePath("../../Idle")]
+
 [node name="Pickup" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "states_for_transition")]
 script = ExtResource("8_pln1i")
 character = NodePath("../..")
-states_for_transition = [NodePath("../Move/Carry")]
+states_for_transition = [NodePath("../Move/Carry/CarryIdle")]
+
+[node name="Kick" type="Node" parent="StateMachine" node_paths=PackedStringArray("states_for_transition")]
+script = ExtResource("13_puh06")
+states_for_transition = [NodePath("../Move/Idle")]
+
+[node name="Timer" type="Timer" parent="StateMachine/Kick"]
+wait_time = 0.15
+one_shot = true
 
 [node name="PickupArea" type="Area2D" parent="."]
 position = Vector2(0, -11)

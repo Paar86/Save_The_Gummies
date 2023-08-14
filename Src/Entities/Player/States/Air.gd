@@ -2,7 +2,7 @@ extends State
 
 signal vertical_velocity_changed
 
-const JUMP_FORCE: = 100.0
+const JUMP_FORCE: = 110.0
 const JUMP_GRAVITY_SCALE: = 1.4
 
 @export var move_state: PlayerMoveState
