@@ -4,6 +4,7 @@ class_name Player extends CharacterBody2D
 @onready var throw_arrow_pivot: Marker2D = $ThrowArrowPivot
 @onready var throw_arrow_sprite: Sprite2D = $ThrowArrowPivot/SpriteContainer/ThrowArrowSprite
 @onready var pickup_transform: RemoteTransform2D = $PickupTransform2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var pickable_objects: Array[RigidBody2D] = []
 var hold_object: BallCreature = null

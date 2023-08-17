@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://d2l1fpj8yehom"]
+[gd_scene load_steps=45 format=3 uid="uid://d2l1fpj8yehom"]
 
 [ext_resource type="Script" path="res://Src/Entities/Player/Player.gd" id="1_fgl7g"]
 [ext_resource type="PackedScene" uid="uid://438y4wpihhn1" path="res://Src/Entities/ThrowArrow/ThrowArrowPivot.tscn" id="2_pd4ny"]
@@ -233,6 +233,44 @@ size = Vector2(9, 13)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_akgtd"]
 size = Vector2(13, 9)
 
+[sub_resource type="Animation" id="Animation_kpv3r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -9)]
+}
+
+[sub_resource type="Animation" id="Animation_w701b"]
+resource_name = "small_jump"
+length = 0.15
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.15),
+"transitions": PackedFloat32Array(1, 0.267944, 1),
+"update": 0,
+"values": [Vector2(0, -9), Vector2(0, -12), Vector2(0, -9)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3ri2q"]
+_data = {
+"RESET": SubResource("Animation_kpv3r"),
+"small_jump": SubResource("Animation_w701b")
+}
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 floor_snap_length = 5.0
@@ -240,14 +278,14 @@ safe_margin = 0.05
 script = ExtResource("1_fgl7g")
 
 [node name="ThrowArrowPivot" parent="." instance=ExtResource("2_pd4ny")]
+visible = false
 z_index = 4096
 position = Vector2(7, -7)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_qnlu6")
-animation = &"jump_fall"
-frame_progress = 0.621976
+animation = &"idle"
 offset = Vector2(-2, 0)
 
 [node name="PickupTransform2D" type="RemoteTransform2D" parent="."]
@@ -325,13 +363,10 @@ script = ExtResource("8_pln1i")
 character = NodePath("../..")
 states_for_transition = [NodePath("../Move/Carry/CarryIdle")]
 
-[node name="Kick" type="Node" parent="StateMachine" node_paths=PackedStringArray("states_for_transition")]
+[node name="Kick" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "states_for_transition")]
 script = ExtResource("13_puh06")
+character = NodePath("../..")
 states_for_transition = [NodePath("../Move/Idle")]
-
-[node name="Timer" type="Timer" parent="StateMachine/Kick"]
-wait_time = 0.15
-one_shot = true
 
 [node name="PickupArea" type="Area2D" parent="."]
 position = Vector2(0, -11)
@@ -341,6 +376,11 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
 position = Vector2(-0.5, 6.5)
 shape = SubResource("RectangleShape2D_akgtd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3ri2q")
+}
 
 [connection signal="timeout" from="StateMachine/Move/Air/JumpTimer" to="StateMachine/Move/Air" method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Move/Air/BufferTimer" to="StateMachine/Move/Air" method="_on_buffer_timer_timeout"]
