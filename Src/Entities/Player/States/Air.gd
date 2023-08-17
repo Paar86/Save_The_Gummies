@@ -2,7 +2,7 @@ extends State
 
 signal vertical_velocity_changed
 
-const JUMP_FORCE: = 110.0
+const JUMP_FORCE: = 120.0
 # Gravity scale when falling down versus jumping up; 1.0 means no change
 const JUMP_GRAVITY_SCALE: = 1.0
 

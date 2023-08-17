@@ -1,6 +1,6 @@
 class_name PlayerCarryState extends State
 
-const THROW_STRENGTH: = 700.0
+const THROW_STRENGTH: = 800.0
 
 @export var move_state: PlayerMoveState
 # How long until aim arrow is shown
