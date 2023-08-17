@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Ball_Creatures"
-run/main_scene="res://Src/Levels/level_test.tscn"
+run/main_scene="res://Src/Levels/LevelTest.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 
 [autoload]
