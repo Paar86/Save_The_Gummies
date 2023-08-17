@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvje8c8sahcwc"]
+
+[ext_resource type="Script" path="res://Src/Levels/LevelBase.gd" id="1_03m7p"]
+[ext_resource type="PackedScene" uid="uid://bq2tohpkkvyrt" path="res://Src/Common/Camera/PlayerCamera.tscn" id="2_fykds"]
+[ext_resource type="PackedScene" uid="uid://d2l1fpj8yehom" path="res://Src/Entities/Player/Player.tscn" id="2_kapmh"]
+
+[node name="LevelBase" type="Node"]
+script = ExtResource("1_03m7p")
+
+[node name="TileMap" type="TileMap" parent="."]
+cell_quadrant_size = 8
+format = 2
+
+[node name="PlayerCamera" parent="." instance=ExtResource("2_fykds")]
+
+[node name="Player" parent="." instance=ExtResource("2_kapmh")]
+
+[node name="CameraTransform" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../PlayerCamera")

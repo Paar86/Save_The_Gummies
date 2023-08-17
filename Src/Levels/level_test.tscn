@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://becvu2tommbnh"]
+
+[ext_resource type="PackedScene" uid="uid://dvje8c8sahcwc" path="res://Src/Levels/LevelBase.tscn" id="1_wv10m"]
+[ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://Src/Resources/Tilesets/grass_tiny_tileset.tres" id="2_y5w7g"]
+
+[node name="LevelTest" instance=ExtResource("1_wv10m")]
+
+[node name="TileMap" parent="." index="0"]
+tile_set = ExtResource("2_y5w7g")
+layer_0/tile_data = PackedInt32Array(0, 262144, 0, 65536, 0, 1, 131072, 0, 1, 196608, 0, 1, 262144, 0, 1, 327680, 0, 1, 393216, 0, 1, 458752, 0, 1, 524288, 0, 1, 589824, 0, 1, 655360, 0, 1, 720896, 0, 1, 786432, 0, 1, 851968, 0, 1, 917504, 0, 1, 983040, 262144, 1, 983041, 131072, 3, 983042, 131072, 3, 983043, 131072, 3, 983044, 131072, 3, 983045, 131072, 3, 983046, 131072, 3, 983047, 131072, 3, 983048, 131072, 3, 983049, 131072, 3, 983050, 131072, 3, 983051, 131072, 3, 983052, 131072, 3, 983053, 131072, 3, 983054, 131072, 3, 983055, 327680, 1, 917519, 0, 1, 851983, 0, 1, 786447, 0, 1, 720911, 0, 1, 655375, 0, 1, 589839, 0, 1, 524303, 0, 1, 458767, 0, 1, 393231, 0, 1, 327695, 0, 1, 262159, 0, 1, 196623, 0, 1, 131087, 0, 1, 65551, 0, 1, 15, 327680, 0, 14, 131072, 3, 13, 131072, 3, 12, 131072, 3, 11, 131072, 3, 10, 131072, 3, 9, 131072, 3, 8, 131072, 3, 7, 131072, 3, 6, 131072, 3, 5, 131072, 3, 4, 131072, 3, 3, 131072, 3, 2, 131072, 3, 1, 131072, 3)
+
+[node name="Camera" parent="." index="1"]
+position = Vector2(21, 120)
+
+[node name="Player" parent="." index="2"]
+position = Vector2(21, 120)
+
+[node name="CameraTransform" parent="Player" index="7"]
+update_rotation = false
+update_scale = false
