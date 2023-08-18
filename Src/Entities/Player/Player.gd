@@ -7,6 +7,7 @@ class_name Player extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var pickable_objects: Array[RigidBody2D] = []
+var touching_ladders: Array[Area2D] = []
 var hold_object: BallCreature = null
 
 var aim_direction: Vector2:
@@ -48,3 +49,14 @@ func on_pickup_detector_body_entered(body: PhysicsBody2D) -> void:
 func on_pickup_detector_body_exited(body: PhysicsBody2D) -> void:
 	if body is RigidBody2D and pickable_objects.has(body):
 		pickable_objects.erase(body)
+
+
+func on_objects_detector_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Ladders"):
+		touching_ladders.append(area)
+
+
+func on_objects_detector_area_exited(area: Area2D) -> void:
+	if area.is_in_group("Ladders"):
+		touching_ladders.erase(area)
+		Events.player_exited_ladder.emit()

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpjklwe1a6wss"]
+
+[ext_resource type="Texture2D" uid="uid://c5xmt17rxx4fu" path="res://Assets/Objects/ladder.png" id="1_lrb3x"]
+
+[node name="Ladder" type="Area2D" groups=["Ladders"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("1_lrb3x")
+offset = Vector2(0, -4)
+region_enabled = true
+region_rect = Rect2(0, 0, 8, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

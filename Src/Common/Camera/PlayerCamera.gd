@@ -2,11 +2,11 @@ extends Camera2D
 
 const OFFSET_X_DEFAULT: float = 8.0
 
-@export var enable_offset: = false
 @export var drag_margin: = 0.125
 
-var offset_x_target: float = OFFSET_X_DEFAULT
-var helper_offset_x: float = OFFSET_X_DEFAULT
+var enable_offset: = false
+var offset_x_target: float = 0.0
+var helper_offset_x: float = 0.0
 var player_direction: float = 1.0
 
 

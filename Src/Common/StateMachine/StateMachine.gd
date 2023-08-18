@@ -31,7 +31,7 @@ func transition_to(state_name: String, params: StateParams = null) -> void:
 
 	var desired_state := desired_states.pop_front() as State
 	if current_state and !current_state.states_for_transition.has(desired_state):
-		push_error("State '%s' cannot transition to a state '%s'" % [current_state.state_name, desired_state.state_name])
+		assert(false, "State '%s' cannot transition to a state '%s'" % [current_state.state_name, desired_state.state_name])
 		return
 
 	# There is no state at the beginning so nothing can "exit"

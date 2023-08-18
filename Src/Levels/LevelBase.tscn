@@ -7,6 +7,8 @@
 [node name="LevelBase" type="Node"]
 script = ExtResource("1_03m7p")
 
+[node name="Objects" type="Node" parent="."]
+
 [node name="TileMap" type="TileMap" parent="."]
 cell_quadrant_size = 8
 format = 2
@@ -25,3 +27,5 @@ layer_1/tile_data = PackedInt32Array()
 
 [node name="CameraTransform" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../PlayerCamera")
+update_rotation = false
+update_scale = false

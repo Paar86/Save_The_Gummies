@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://d2l1fpj8yehom"]
+[gd_scene load_steps=49 format=3 uid="uid://d2l1fpj8yehom"]
 
 [ext_resource type="Script" path="res://Src/Entities/Player/Player.gd" id="1_fgl7g"]
 [ext_resource type="PackedScene" uid="uid://438y4wpihhn1" path="res://Src/Entities/ThrowArrow/ThrowArrowPivot.tscn" id="2_pd4ny"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Src/Entities/Player/States/CarryIdle.gd" id="10_8rxfi"]
 [ext_resource type="Script" path="res://Src/Entities/Player/States/CarryWalk.gd" id="11_b3060"]
 [ext_resource type="Script" path="res://Src/Entities/Player/States/Kick.gd" id="13_puh06"]
+[ext_resource type="Script" path="res://Src/Entities/Player/States/Climb.gd" id="14_ab6lr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y6qj4"]
 atlas = ExtResource("3_ppmj7")
@@ -81,6 +82,14 @@ region = Rect2(0, 18, 18, 18)
 [sub_resource type="AtlasTexture" id="AtlasTexture_btrci"]
 atlas = ExtResource("3_ppmj7")
 region = Rect2(36, 54, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jev2q"]
+atlas = ExtResource("3_ppmj7")
+region = Rect2(0, 90, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aobfx"]
+atlas = ExtResource("3_ppmj7")
+region = Rect2(18, 90, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0wiak"]
 atlas = ExtResource("3_ppmj7")
@@ -199,6 +208,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_jev2q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aobfx")
+}],
+"loop": true,
+"name": &"ladder",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_0wiak")
 }, {
 "duration": 1.0,
@@ -228,10 +248,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nepf"]
-size = Vector2(9, 13)
+size = Vector2(7, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_akgtd"]
-size = Vector2(13, 9)
+size = Vector2(12, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4tvp5"]
+size = Vector2(10, 8)
 
 [sub_resource type="Animation" id="Animation_kpv3r"]
 length = 0.001
@@ -294,7 +317,7 @@ position = Vector2(7, -7)
 update_scale = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -7.5)
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_7nepf")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "animated_sprite")]
@@ -310,17 +333,17 @@ abstract = true
 [node name="Idle" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state", "states_for_transition")]
 script = ExtResource("6_kxhls")
 move_state = NodePath("..")
-states_for_transition = [NodePath("../Run"), NodePath("../Air"), NodePath("../../Pickup")]
+states_for_transition = [NodePath("../Run"), NodePath("../Air"), NodePath("../../Pickup"), NodePath("../../Climb")]
 
 [node name="Run" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state", "states_for_transition")]
 script = ExtResource("7_xjuja")
 move_state = NodePath("..")
-states_for_transition = [NodePath("../Idle"), NodePath("../Air"), NodePath("../../Pickup")]
+states_for_transition = [NodePath("../Idle"), NodePath("../Air"), NodePath("../../Pickup"), NodePath("../../Climb")]
 
 [node name="Air" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state", "states_for_transition")]
 script = ExtResource("8_j1lab")
 move_state = NodePath("..")
-states_for_transition = [NodePath("../Idle")]
+states_for_transition = [NodePath("../Idle"), NodePath("../../Climb")]
 
 [node name="JumpTimer" type="Timer" parent="StateMachine/Move/Air"]
 process_callback = 0
@@ -368,14 +391,27 @@ script = ExtResource("13_puh06")
 character = NodePath("../..")
 states_for_transition = [NodePath("../Move/Idle")]
 
+[node name="Climb" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "states_for_transition")]
+script = ExtResource("14_ab6lr")
+character = NodePath("../..")
+states_for_transition = [NodePath("../Move/Idle"), NodePath("../Move/Air")]
+
 [node name="PickupArea" type="Area2D" parent="."]
 position = Vector2(0, -11)
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
-position = Vector2(-0.5, 6.5)
+position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_akgtd")
+
+[node name="ObjectsDetector" type="Area2D" parent="."]
+position = Vector2(0, -5)
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectsDetector"]
+shape = SubResource("RectangleShape2D_4tvp5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -388,3 +424,5 @@ libraries = {
 [connection signal="timeout" from="StateMachine/Move/Carry/ToAimTimer" to="StateMachine/Move/Carry" method="on_to_aim_timer_timeout"]
 [connection signal="body_entered" from="PickupArea" to="." method="on_pickup_detector_body_entered"]
 [connection signal="body_exited" from="PickupArea" to="." method="on_pickup_detector_body_exited"]
+[connection signal="area_entered" from="ObjectsDetector" to="." method="on_objects_detector_area_entered"]
+[connection signal="area_exited" from="ObjectsDetector" to="." method="on_objects_detector_area_exited"]
