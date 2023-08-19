@@ -5,9 +5,13 @@ class_name Player extends CharacterBody2D
 @onready var throw_arrow_sprite: Sprite2D = $ThrowArrowPivot/SpriteContainer/ThrowArrowSprite
 @onready var pickup_transform: RemoteTransform2D = $PickupTransform2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var ladder_detector_left: RayCast2D = $Raycasts/LadderDetectorLeft
+@onready var ladder_detector_middle: RayCast2D = $Raycasts/LadderDetectorMiddle
+@onready var ladder_detector_right: RayCast2D = $Raycasts/LadderDetectorRight
 
 var pickable_objects: Array[RigidBody2D] = []
 var touching_ladders: Array[Area2D] = []
+var ladders_under_player: Array[Area2D] = []
 var hold_object: BallCreature = null
 
 var aim_direction: Vector2:
@@ -19,6 +23,30 @@ func _ready() -> void:
 	Events.player_direction_changed.connect(on_player_direction_changed)
 	Events.player_aiming_requested.connect(on_player_aiming_requested)
 	Events.player_aiming_called_off.connect(on_player_aiming_called_off)
+
+
+func _process(delta: float) -> void:
+	ladders_under_player = []
+
+	var ladder_detector_left_collider = ladder_detector_left.get_collider()
+	var ladder_detector_middle_collider = ladder_detector_middle.get_collider()
+	var ladder_detector_right_collider = ladder_detector_right.get_collider()
+
+	if ladder_detector_left_collider and ladder_detector_left_collider.is_in_group("Ladders"):
+		if not ladders_under_player.has(ladder_detector_left_collider):
+			ladders_under_player.append(ladder_detector_left_collider)
+
+	if ladder_detector_middle_collider and ladder_detector_middle_collider.is_in_group("Ladders"):
+		if not ladders_under_player.has(ladder_detector_middle_collider):
+			ladders_under_player.append(ladder_detector_middle_collider)
+
+	if ladder_detector_right_collider and ladder_detector_right_collider.is_in_group("Ladders"):
+		if not ladders_under_player.has(ladder_detector_right_collider):
+			ladders_under_player.append(ladder_detector_right_collider)
+
+
+func toggle_world_collision(value: bool) -> void:
+	set_collision_mask_value(1, value)
 
 
 func on_player_direction_changed(new_direction: float) -> void:

@@ -23,7 +23,6 @@ Events="*res://Src/Autoload/Events.gd"
 window/size/viewport_width=128
 window/size/viewport_height=128
 window/size/resizable=false
-window/size/always_on_top=true
 window/size/window_width_override=1024
 window/size/window_height_override=1024
 window/stretch/mode="viewport"
@@ -68,6 +67,10 @@ action={
 2d_physics/layer_3="Enemy"
 2d_physics/layer_4="BallCreature"
 2d_physics/layer_5="WorldObject"
+
+[physics]
+
+2d/default_gravity=900.0
 
 [rendering]
 

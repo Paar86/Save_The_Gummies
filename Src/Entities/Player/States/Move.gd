@@ -26,7 +26,15 @@ func _ready() -> void:
 
 func unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("move_up") and character.touching_ladders.size() > 0:
-		state_machine.transition_to("Climb")
+		var params := StateParams.new()
+		params.climbing_up = true
+		state_machine.transition_to("Climb", params)
+		return
+
+	if event.is_action_pressed("move_down") and character.ladders_under_player.size() > 0:
+		var params := StateParams.new()
+		params.climbing_down = true
+		state_machine.transition_to("Climb", params)
 		return
 
 	if event.is_action_pressed("jump") and movement_enabled:

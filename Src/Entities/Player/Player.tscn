@@ -251,7 +251,7 @@ animations = [{
 size = Vector2(7, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_akgtd"]
-size = Vector2(12, 8)
+size = Vector2(12, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4tvp5"]
 size = Vector2(10, 8)
@@ -308,7 +308,7 @@ position = Vector2(7, -7)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_qnlu6")
-animation = &"idle"
+animation = &"ladder"
 offset = Vector2(-2, 0)
 
 [node name="PickupTransform2D" type="RemoteTransform2D" parent="."]
@@ -397,21 +397,49 @@ character = NodePath("../..")
 states_for_transition = [NodePath("../Move/Idle"), NodePath("../Move/Air")]
 
 [node name="PickupArea" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -11)
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
-position = Vector2(0, 7)
+position = Vector2(0, 6.5)
 shape = SubResource("RectangleShape2D_akgtd")
 
 [node name="ObjectsDetector" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -5)
 collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectsDetector"]
 shape = SubResource("RectangleShape2D_4tvp5")
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="LadderDetectorLeft" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-5, -1)
+target_position = Vector2(0, 2)
+collision_mask = 16
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="LadderDetectorMiddle" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, -1)
+target_position = Vector2(0, 2)
+collision_mask = 16
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="LadderDetectorRight" type="RayCast2D" parent="Raycasts"]
+position = Vector2(5, -1)
+target_position = Vector2(0, 2)
+collision_mask = 16
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
