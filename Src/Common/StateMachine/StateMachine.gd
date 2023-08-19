@@ -46,6 +46,9 @@ func change_animation(animation_name: String) -> void:
 	if not animated_sprite:
 		return
 
+	if animated_sprite.animation == animation_name:
+		return
+
 	animated_sprite.play(animation_name)
 	animated_sprite.speed_scale = 1.0
 

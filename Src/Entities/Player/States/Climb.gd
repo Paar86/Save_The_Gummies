@@ -32,9 +32,12 @@ func on_enter(params: StateParams) -> void:
 
 	character.global_position.x = climbed_ladder.global_position.x
 	if params and params.climbing_down:
+		character.global_position.y = ladder_top
 		character.toggle_world_collision(false)
+		state_machine.change_animation("ladder_edge")
 
-	state_machine.change_animation("ladder")
+	if params and params.climbing_up:
+		state_machine.change_animation("ladder")
 
 
 func on_exit() -> void:
@@ -59,6 +62,11 @@ func physics_process(delta: float) -> void:
 		state_machine.change_animation_speed_scale(1.0)
 
 	character.move_and_slide()
+
+	if character.global_position.y < ladder_top + 3:
+		state_machine.change_animation("ladder_edge")
+	else:
+		state_machine.change_animation("ladder")
 
 	var is_above_threshold_old: = is_above_threshold
 	is_above_threshold = character.global_position.y < ladder_threshold

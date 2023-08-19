@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c36mwvup5f8ad" path="res://Src/Entities/BallCreature/BallCreature.tscn" id="3_su1xc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gq168"]
-size = Vector2(6, 79)
+size = Vector2(6, 78)
 
 [node name="LevelTest" instance=ExtResource("1_wv10m")]
 
@@ -23,7 +23,7 @@ position = Vector2(0, -36)
 region_rect = Rect2(0, 0, 8, 80)
 
 [node name="CollisionShape2D" parent="Objects/Ladder" index="1"]
-position = Vector2(0, -39.5)
+position = Vector2(0, -39)
 shape = SubResource("RectangleShape2D_gq168")
 
 [node name="PlayerCamera" parent="." index="2"]
