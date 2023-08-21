@@ -1,7 +1,7 @@
 class_name PlayerMoveState extends State
 
 const MAX_RUN_SPEED := 80.0
-const MAX_FALL_SPEED := 100.0
+const MAX_FALL_SPEED := 180.0
 const ACCELERATION := 200.0
 const TURN_ACCELERATION := 400.0
 const FRICTION := 250.0
@@ -50,6 +50,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 func physics_process(delta: float) -> void:
 	character.velocity.y += gravity * gravity_scale * delta
+	character.velocity.y = min(character.velocity.y, MAX_FALL_SPEED)
 
 	var input_direction: float = Input.get_axis("move_left", "move_right")
 	var move_direction: float = sign(character.velocity.x)

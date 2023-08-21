@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c5xmt17rxx4fu" path="res://Assets/Objects/ladder.png" id="1_lrb3x"]
 
 [node name="Ladder" type="Area2D" groups=["Ladders"]]
+editor_description = "Top edge of collision shape should be 2px below tile's walk side."
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_1lyxq")
