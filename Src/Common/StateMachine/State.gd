@@ -29,3 +29,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 func physics_process(delta: float) -> void:
 	pass
+
+
+func propagate_effects(effects: Array[String]) -> void:
+	pass

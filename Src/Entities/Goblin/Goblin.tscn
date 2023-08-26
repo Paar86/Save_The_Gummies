@@ -1,12 +1,17 @@
-[gd_scene load_steps=22 format=3 uid="uid://c1ny4x7ikhd2j"]
+[gd_scene load_steps=27 format=3 uid="uid://c1ny4x7ikhd2j"]
 
 [ext_resource type="Script" path="res://Src/Entities/Goblin/Goblin.gd" id="1_i1jgx"]
 [ext_resource type="Script" path="res://Src/Common/StateMachine/StateMachine.gd" id="2_icrb6"]
 [ext_resource type="Texture2D" uid="uid://dyyhfhyi43oym" path="res://Assets/Enemies/goblin_sheet.png" id="2_s3wem"]
+[ext_resource type="PackedScene" uid="uid://cnm077r8cak41" path="res://Src/Common/Components/Hurtbox/HurtboxComponent.tscn" id="2_w1lkx"]
 [ext_resource type="Texture2D" uid="uid://dtnlj4i4wf327" path="res://Assets/Enemies/exclamation_mark.png" id="3_rft8p"]
 [ext_resource type="Script" path="res://Src/Entities/Goblin/States/Move.gd" id="3_rvk6g"]
 [ext_resource type="Script" path="res://Src/Entities/Goblin/States/Idle.gd" id="4_v4a5c"]
 [ext_resource type="Script" path="res://Src/Entities/Goblin/States/Walk.gd" id="5_ty2ch"]
+[ext_resource type="Script" path="res://Src/Entities/Goblin/States/Stunned.gd" id="9_1x0gj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_atj1a"]
+size = Vector2(8, 12)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rl4pl"]
 atlas = ExtResource("2_s3wem")
@@ -23,6 +28,14 @@ region = Rect2(36, 0, 18, 18)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fovxf"]
 atlas = ExtResource("2_s3wem")
 region = Rect2(54, 0, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_suugf"]
+atlas = ExtResource("2_s3wem")
+region = Rect2(0, 36, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_huyxi"]
+atlas = ExtResource("2_s3wem")
+region = Rect2(18, 36, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_suau5"]
 atlas = ExtResource("2_s3wem")
@@ -73,7 +86,18 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 8.0
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_suugf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_huyxi")
+}],
+"loop": true,
+"name": &"stunned",
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -112,11 +136,19 @@ size = Vector2(6, 12)
 collision_layer = 4
 script = ExtResource("1_i1jgx")
 
+[node name="HurtboxComponent" parent="." instance=ExtResource("2_w1lkx")]
+collision_layer = 4
+
+[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_atj1a")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_b24yo")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.489601
 offset = Vector2(2, 1)
 
 [node name="ExclamationMark" type="Sprite2D" parent="."]
@@ -141,7 +173,7 @@ abstract = true
 [node name="Idle" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state", "states_for_transition")]
 script = ExtResource("4_v4a5c")
 move_state = NodePath("..")
-states_for_transition = [NodePath("../Walk")]
+states_for_transition = [NodePath("../Walk"), NodePath("../Stunned")]
 
 [node name="IdleTimer" type="Timer" parent="StateMachine/Move/Idle"]
 editor_description = "Time to go from Idle to Walk again."
@@ -151,8 +183,21 @@ one_shot = true
 [node name="Walk" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state", "states_for_transition")]
 script = ExtResource("5_ty2ch")
 move_state = NodePath("..")
-states_for_transition = [NodePath("../Idle")]
+states_for_transition = [NodePath("../Idle"), NodePath("../Stunned")]
 
 [node name="WalkTimer" type="Timer" parent="StateMachine/Move/Walk"]
 wait_time = 5.0
 one_shot = true
+
+[node name="Stunned" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state", "states_for_transition")]
+script = ExtResource("9_1x0gj")
+move_state = NodePath("..")
+states_for_transition = [NodePath("../Idle")]
+
+[node name="StunTimer" type="Timer" parent="StateMachine/Move/Stunned"]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="StateMachine/Move/Stunned/StunTimer" to="StateMachine/Move/Stunned" method="on_stun_timer_timeout"]
+
+[editable path="HurtboxComponent"]

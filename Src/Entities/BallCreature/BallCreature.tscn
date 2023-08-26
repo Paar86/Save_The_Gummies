@@ -8,7 +8,7 @@ rough = true
 bounce = 0.4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_batwe"]
-radius = 4.0
+radius = 3.5
 
 [node name="BallCreature" type="RigidBody2D"]
 texture_filter = 1

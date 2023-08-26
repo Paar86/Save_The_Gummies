@@ -24,5 +24,9 @@ func on_exit() -> void:
 	move_state.horizontal_speed_scale = 1.0
 
 
+func propagate_effects(effects: Array[String]) -> void:
+	move_state.propagate_effects(effects)
+
+
 func on_idle_timer_timeout() -> void:
 	state_machine.transition_to("Walk")

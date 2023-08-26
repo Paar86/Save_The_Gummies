@@ -32,3 +32,8 @@ func physics_process(delta: float) -> void:
 	if character.is_on_wall():
 		direction *= -1
 		character.change_direction(direction)
+
+
+func propagate_effects(effects: Array[String]) -> void:
+	if effects.has("stun"):
+		state_machine.transition_to("Stunned")

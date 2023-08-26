@@ -34,11 +34,13 @@ region_rect = Rect2(0, 0, 8, 80)
 position = Vector2(0, -39)
 shape = SubResource("RectangleShape2D_gq168")
 
-[node name="PlayerCamera" parent="." index="3"]
-position = Vector2(15, 40)
+[node name="Enemies" type="Node" parent="." index="3"]
 
-[node name="Goblin" parent="." index="4" instance=ExtResource("5_tw3wu")]
-position = Vector2(61, 64)
+[node name="Goblin" parent="Enemies" index="0" instance=ExtResource("5_tw3wu")]
+position = Vector2(68, 64)
+
+[node name="PlayerCamera" parent="." index="4"]
+position = Vector2(15, 40)
 
 [node name="BallCreature" parent="." index="5" instance=ExtResource("3_su1xc")]
 position = Vector2(21, 35)
@@ -47,4 +49,4 @@ position = Vector2(21, 35)
 position = Vector2(15, 40)
 
 [editable path="Objects/Ladder"]
-[editable path="Goblin"]
+[editable path="Enemies/Goblin"]

@@ -12,10 +12,11 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func physics_process(delta: float) -> void:
-	var movement_speed_scale: float = abs(move_state.character.velocity.x) / move_state.max_speed
-	state_machine.change_animation_speed_scale(movement_speed_scale)
-
 	move_state.physics_process(delta)
+
+	var real_velocity = move_state.character.get_real_velocity()
+	var movement_speed_scale: float = abs(real_velocity.length()) / move_state.max_speed
+	state_machine.change_animation_speed_scale(movement_speed_scale)
 
 	if not move_state.character.is_on_floor():
 		state_machine.transition_to("Air")

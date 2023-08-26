@@ -20,6 +20,8 @@ var is_jump_buffered: = false
 var allow_coyote_jump: = false
 
 func on_enter(params: StateParams) -> void:
+	Events.player_bounce_up_requested.connect(on_bounce_up_requested)
+
 	state_machine.change_animation("jump_rise")
 
 	# To make more difficult to steer in the air
@@ -45,6 +47,8 @@ func on_enter(params: StateParams) -> void:
 
 
 func on_exit() -> void:
+	Events.player_bounce_up_requested.disconnect(on_bounce_up_requested)
+
 	move_state.gravity_scale = 1.0
 	move_state.acceleration_scale = 1.0
 	move_state.friction_scale = 1.0
@@ -114,3 +118,7 @@ func _on_buffer_timer_timeout() -> void:
 func _on_jump_timer_timeout() -> void:
 	is_jumping = false
 	move_state.gravity_scale = 1.0
+
+
+func on_bounce_up_requested() -> void:
+	move_state.character.velocity.y = -JUMP_FORCE

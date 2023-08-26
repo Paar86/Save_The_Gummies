@@ -1,8 +1,10 @@
-[gd_scene load_steps=50 format=3 uid="uid://d2l1fpj8yehom"]
+[gd_scene load_steps=53 format=3 uid="uid://d2l1fpj8yehom"]
 
 [ext_resource type="Script" path="res://Src/Entities/Player/Player.gd" id="1_fgl7g"]
 [ext_resource type="PackedScene" uid="uid://438y4wpihhn1" path="res://Src/Entities/ThrowArrow/ThrowArrowPivot.tscn" id="2_pd4ny"]
+[ext_resource type="PackedScene" uid="uid://cvsgunn02v50s" path="res://Src/Common/Components/Hurtbox/HitboxComponent.tscn" id="2_s3s30"]
 [ext_resource type="Script" path="res://Src/Common/StateMachine/StateMachine.gd" id="3_ffp80"]
+[ext_resource type="Script" path="res://Src/Entities/Player/Components/PlayerHitboxComponent.gd" id="3_id8yp"]
 [ext_resource type="Texture2D" uid="uid://crbwx0hf8x731" path="res://Assets/Player/player_sheet.png" id="3_ppmj7"]
 [ext_resource type="Script" path="res://Src/Entities/Player/States/Move.gd" id="5_ob3jm"]
 [ext_resource type="Script" path="res://Src/Entities/Player/States/Idle.gd" id="6_kxhls"]
@@ -14,6 +16,9 @@
 [ext_resource type="Script" path="res://Src/Entities/Player/States/CarryWalk.gd" id="11_b3060"]
 [ext_resource type="Script" path="res://Src/Entities/Player/States/Kick.gd" id="13_puh06"]
 [ext_resource type="Script" path="res://Src/Entities/Player/States/Climb.gd" id="14_ab6lr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s5oim"]
+size = Vector2(10, 4)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y6qj4"]
 atlas = ExtResource("3_ppmj7")
@@ -312,6 +317,14 @@ floor_snap_length = 5.0
 safe_margin = 0.05
 script = ExtResource("1_fgl7g")
 
+[node name="HitboxComponent" parent="." instance=ExtResource("2_s3s30")]
+collision_mask = 4
+script = ExtResource("3_id8yp")
+
+[node name="CollisionShape2D" parent="HitboxComponent" index="0"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_s5oim")
+
 [node name="ThrowArrowPivot" parent="." instance=ExtResource("2_pd4ny")]
 visible = false
 z_index = 4096
@@ -320,7 +333,7 @@ position = Vector2(7, -7)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_qnlu6")
-animation = &"walk"
+animation = &"jump_rise"
 offset = Vector2(-2, 0)
 
 [node name="PickupTransform2D" type="RemoteTransform2D" parent="."]
@@ -466,3 +479,5 @@ libraries = {
 [connection signal="body_exited" from="PickupArea" to="." method="on_pickup_detector_body_exited"]
 [connection signal="area_entered" from="ObjectsDetector" to="." method="on_objects_detector_area_entered"]
 [connection signal="area_exited" from="ObjectsDetector" to="." method="on_objects_detector_area_exited"]
+
+[editable path="HitboxComponent"]
