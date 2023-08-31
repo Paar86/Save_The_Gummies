@@ -18,11 +18,11 @@ func on_exit() -> void:
 
 
 func physics_process(delta: float) -> void:
-	move_state.physics_process(delta)
-
 	var real_velocity = move_state.character.get_real_velocity()
 	var animation_speed_scale = abs(real_velocity.length()) / move_state.horizontal_speed
 	state_machine.change_animation_speed_scale(animation_speed_scale)
+
+	move_state.physics_process(delta)
 
 
 func propagate_effects(effects: Array[String]) -> void:

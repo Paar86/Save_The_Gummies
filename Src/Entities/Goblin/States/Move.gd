@@ -1,14 +1,17 @@
 class_name GoblinMoveState extends State
 
 
-const HORIZONTAL_SPEED_DEFUALT: int = 8
+const HORIZONTAL_SPEED_DEFUALT: int = 12
 const MAX_FALLING_SPEED: int = 90
 
 @export var character: Goblin = null
+@onready var can_attack_timer: Timer = $CanAttackTimer
+
 var horizontal_speed: int = HORIZONTAL_SPEED_DEFUALT
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction: float = 11.0
 var horizontal_speed_scale: float = 1.0
+var can_attack: bool = true
 
 
 func _ready() -> void:
@@ -33,7 +36,15 @@ func physics_process(delta: float) -> void:
 		direction *= -1
 		character.change_direction(direction)
 
+	if character.player_detector.is_colliding() and can_attack:
+		can_attack_timer.stop()
+		state_machine.transition_to("ReadyToAttack")
+
 
 func propagate_effects(effects: Array[String]) -> void:
 	if effects.has("stun"):
 		state_machine.transition_to("Stunned")
+
+
+func on_can_attack_timer_timeout() -> void:
+	can_attack = true

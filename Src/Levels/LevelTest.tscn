@@ -37,16 +37,17 @@ shape = SubResource("RectangleShape2D_gq168")
 [node name="Enemies" type="Node" parent="." index="3"]
 
 [node name="Goblin" parent="Enemies" index="0" instance=ExtResource("5_tw3wu")]
-position = Vector2(68, 64)
+position = Vector2(89, 121)
 
 [node name="PlayerCamera" parent="." index="4"]
-position = Vector2(15, 40)
+position = Vector2(44, 121)
 
 [node name="BallCreature" parent="." index="5" instance=ExtResource("3_su1xc")]
 position = Vector2(21, 35)
 
 [node name="Player" parent="." index="6"]
-position = Vector2(15, 40)
+position = Vector2(44, 121)
 
 [editable path="Objects/Ladder"]
 [editable path="Enemies/Goblin"]
+[editable path="Enemies/Goblin/HurtboxComponent"]

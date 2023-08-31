@@ -8,6 +8,7 @@ class_name Player extends CharacterBody2D
 @onready var ladder_detector_left: RayCast2D = $Raycasts/LadderDetectorLeft
 @onready var ladder_detector_middle: RayCast2D = $Raycasts/LadderDetectorMiddle
 @onready var ladder_detector_right: RayCast2D = $Raycasts/LadderDetectorRight
+@onready var hitbox_component: HitboxComponent = $HitboxComponent
 
 var pickable_objects: Array[RigidBody2D] = []
 var touching_ladders: Array[Area2D] = []
@@ -47,6 +48,10 @@ func _process(delta: float) -> void:
 
 func toggle_world_collision(value: bool) -> void:
 	set_collision_mask_value(1, value)
+
+
+func toggle_hitbox_collider(value: bool) -> void:
+	hitbox_component.monitoring = value
 
 
 func on_player_direction_changed(new_direction: float) -> void:

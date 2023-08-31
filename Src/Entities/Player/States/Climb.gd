@@ -18,7 +18,7 @@ var is_above_threshold: = false
 func on_enter(params: StateParams) -> void:
 	assert(character, "Character node cannot be null!")
 
-#	Events.player_exited_ladder.connect(on_player_exited_ladder)
+	character.toggle_hitbox_collider(false)
 	passed_ladder_threshold.connect(on_ladder_threshold_passed)
 	var is_climbing_down: = false
 	if params:
@@ -41,17 +41,9 @@ func on_enter(params: StateParams) -> void:
 
 
 func on_exit() -> void:
-#	Events.player_exited_ladder.disconnect(on_player_exited_ladder)
+	character.toggle_hitbox_collider(true)
 	passed_ladder_threshold.disconnect(on_ladder_threshold_passed)
 	is_above_threshold = false
-
-
-#func unhandled_input(event: InputEvent) -> void:
-#	if event.is_action_pressed("jump"):
-#		var new_params := StateParams.new()
-#		new_params.initiated_jumping = true
-#		state_machine.transition_to("Air", new_params)
-#		return
 
 
 func physics_process(delta: float) -> void:

@@ -1,17 +1,24 @@
-[gd_scene load_steps=27 format=3 uid="uid://c1ny4x7ikhd2j"]
+[gd_scene load_steps=32 format=3 uid="uid://c1ny4x7ikhd2j"]
 
 [ext_resource type="Script" path="res://Src/Entities/Goblin/Goblin.gd" id="1_i1jgx"]
 [ext_resource type="Script" path="res://Src/Common/StateMachine/StateMachine.gd" id="2_icrb6"]
 [ext_resource type="Texture2D" uid="uid://dyyhfhyi43oym" path="res://Assets/Enemies/goblin_sheet.png" id="2_s3wem"]
 [ext_resource type="PackedScene" uid="uid://cnm077r8cak41" path="res://Src/Common/Components/Hurtbox/HurtboxComponent.tscn" id="2_w1lkx"]
+[ext_resource type="PackedScene" uid="uid://cvsgunn02v50s" path="res://Src/Common/Components/Hurtbox/HitboxComponent.tscn" id="3_qa6k3"]
 [ext_resource type="Texture2D" uid="uid://dtnlj4i4wf327" path="res://Assets/Enemies/exclamation_mark.png" id="3_rft8p"]
 [ext_resource type="Script" path="res://Src/Entities/Goblin/States/Move.gd" id="3_rvk6g"]
+[ext_resource type="Script" path="res://Src/Entities/Goblin/Components/GoblinHitboxComponent.gd" id="4_3316s"]
 [ext_resource type="Script" path="res://Src/Entities/Goblin/States/Idle.gd" id="4_v4a5c"]
 [ext_resource type="Script" path="res://Src/Entities/Goblin/States/Walk.gd" id="5_ty2ch"]
 [ext_resource type="Script" path="res://Src/Entities/Goblin/States/Stunned.gd" id="9_1x0gj"]
+[ext_resource type="Script" path="res://Src/Entities/Goblin/States/Attack.gd" id="10_2ugi7"]
+[ext_resource type="Script" path="res://Src/Entities/Goblin/States/ReadyToAttack.gd" id="11_a8cgn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_atj1a"]
-size = Vector2(8, 12)
+size = Vector2(8, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujn23"]
+size = Vector2(4, 4)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rl4pl"]
 atlas = ExtResource("2_s3wem")
@@ -143,6 +150,19 @@ collision_layer = 4
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_atj1a")
 
+[node name="HitboxComponent" parent="." instance=ExtResource("3_qa6k3")]
+position = Vector2(7, -4)
+collision_mask = 2
+script = ExtResource("4_3316s")
+
+[node name="CollisionShape2D" parent="HitboxComponent" index="0"]
+shape = SubResource("RectangleShape2D_ujn23")
+
+[node name="PlayerDetectorRayCast" type="RayCast2D" parent="."]
+position = Vector2(0, -3)
+target_position = Vector2(48, 0)
+collision_mask = 2
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_b24yo")
@@ -173,7 +193,7 @@ abstract = true
 [node name="Idle" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state", "states_for_transition")]
 script = ExtResource("4_v4a5c")
 move_state = NodePath("..")
-states_for_transition = [NodePath("../Walk"), NodePath("../Stunned")]
+states_for_transition = [NodePath("../Walk"), NodePath("../Stunned"), NodePath("../../ReadyToAttack")]
 
 [node name="IdleTimer" type="Timer" parent="StateMachine/Move/Idle"]
 editor_description = "Time to go from Idle to Walk again."
@@ -183,7 +203,7 @@ one_shot = true
 [node name="Walk" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state", "states_for_transition")]
 script = ExtResource("5_ty2ch")
 move_state = NodePath("..")
-states_for_transition = [NodePath("../Idle"), NodePath("../Stunned")]
+states_for_transition = [NodePath("../Idle"), NodePath("../Stunned"), NodePath("../../ReadyToAttack")]
 
 [node name="WalkTimer" type="Timer" parent="StateMachine/Move/Walk"]
 wait_time = 5.0
@@ -198,6 +218,31 @@ states_for_transition = [NodePath("../Idle")]
 wait_time = 3.0
 one_shot = true
 
+[node name="Attack" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state", "states_for_transition")]
+script = ExtResource("10_2ugi7")
+move_state = NodePath("..")
+states_for_transition = [NodePath("../Idle"), NodePath("../Stunned")]
+
+[node name="AttackTimer" type="Timer" parent="StateMachine/Move/Attack"]
+wait_time = 2.0
+one_shot = true
+
+[node name="CanAttackTimer" type="Timer" parent="StateMachine/Move"]
+wait_time = 3.0
+one_shot = true
+
+[node name="ReadyToAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "states_for_transition")]
+script = ExtResource("11_a8cgn")
+character = NodePath("../..")
+states_for_transition = [NodePath("../Move/Stunned"), NodePath("../Move/Attack")]
+
+[node name="ExclamationMarkTimer" type="Timer" parent="StateMachine/ReadyToAttack"]
+one_shot = true
+
 [connection signal="timeout" from="StateMachine/Move/Stunned/StunTimer" to="StateMachine/Move/Stunned" method="on_stun_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Move/Attack/AttackTimer" to="StateMachine/Move/Attack" method="on_attack_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Move/CanAttackTimer" to="StateMachine/Move" method="on_can_attack_timer_timeout"]
+[connection signal="timeout" from="StateMachine/ReadyToAttack/ExclamationMarkTimer" to="StateMachine/ReadyToAttack" method="on_exclamation_mark_timer_timeout"]
 
 [editable path="HurtboxComponent"]
+[editable path="HitboxComponent"]
