@@ -9,11 +9,17 @@ class_name Player extends CharacterBody2D
 @onready var ladder_detector_middle: RayCast2D = $Raycasts/LadderDetectorMiddle
 @onready var ladder_detector_right: RayCast2D = $Raycasts/LadderDetectorRight
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
+@onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 
 var pickable_objects: Array[RigidBody2D] = []
 var touching_ladders: Array[Area2D] = []
 var ladders_under_player: Array[Area2D] = []
 var hold_object: BallCreature = null
+
+# in seconds
+var sprite_flash_frequency: float = 0.10
+var sprite_flash_duration: float = 3.0
+var is_flashing: bool = false
 
 var aim_direction: Vector2:
 	get:
@@ -24,6 +30,9 @@ func _ready() -> void:
 	Events.player_direction_changed.connect(on_player_direction_changed)
 	Events.player_aiming_requested.connect(on_player_aiming_requested)
 	Events.player_aiming_called_off.connect(on_player_aiming_called_off)
+
+	hurtbox_component.lives_changed.connect(on_damage_taken)
+	hurtbox_component.lives_depleted.connect(on_lives_depleted)
 
 
 func _process(delta: float) -> void:
@@ -52,6 +61,10 @@ func toggle_world_collision(value: bool) -> void:
 
 func toggle_hitbox_collider(value: bool) -> void:
 	hitbox_component.monitoring = value
+
+
+func toggle_hurtbox_collider(value: bool) -> void:
+	hurtbox_component.set_deferred("monitorable", value)
 
 
 func on_player_direction_changed(new_direction: float) -> void:
@@ -93,3 +106,24 @@ func on_objects_detector_area_exited(area: Area2D) -> void:
 	if area.is_in_group("Ladders"):
 		touching_ladders.erase(area)
 		Events.player_exited_ladder.emit()
+
+
+func on_damage_taken() -> void:
+	toggle_hurtbox_collider(false)
+	is_flashing = true
+	get_tree().create_timer(sprite_flash_duration).timeout.connect(on_flash_duration_expired)
+
+	while(is_flashing):
+		player_animated_sprite.visible = !player_animated_sprite.visible
+		await get_tree().create_timer(sprite_flash_frequency).timeout
+
+	player_animated_sprite.visible = true
+	toggle_hurtbox_collider(true)
+
+
+func on_flash_duration_expired() -> void:
+	is_flashing = false
+
+
+func on_lives_depleted() -> void:
+	queue_free()

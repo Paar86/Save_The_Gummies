@@ -4,7 +4,7 @@ signal lives_changed
 signal lives_depleted
 signal effects_propagated(effects: Array[String])
 
-@export var lives = 1
+@export var lives = 99
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 var collision_bitmask_default: int = 0
 
@@ -19,6 +19,8 @@ func make_damage(damage: int) -> void:
 	lives -= damage
 	if lives <= 0:
 		lives_depleted.emit()
+	else:
+		lives_changed.emit()
 
 
 # To propagate some effect on owner, e.g. stun

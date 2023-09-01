@@ -51,3 +51,4 @@ position = Vector2(44, 121)
 [editable path="Objects/Ladder"]
 [editable path="Enemies/Goblin"]
 [editable path="Enemies/Goblin/HurtboxComponent"]
+[editable path="Enemies/Goblin/HitboxComponent"]

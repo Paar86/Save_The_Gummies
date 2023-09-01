@@ -15,7 +15,7 @@
 [ext_resource type="Script" path="res://Src/Entities/Goblin/States/ReadyToAttack.gd" id="11_a8cgn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_atj1a"]
-size = Vector2(8, 10)
+size = Vector2(12, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujn23"]
 size = Vector2(4, 4)
@@ -159,7 +159,7 @@ script = ExtResource("4_3316s")
 shape = SubResource("RectangleShape2D_ujn23")
 
 [node name="PlayerDetectorRayCast" type="RayCast2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(0, -5)
 target_position = Vector2(48, 0)
 collision_mask = 2
 

@@ -18,6 +18,8 @@ func on_enter(params: StateParams) -> void:
 	move_state.horizontal_speed_scale = 0.0
 	idle_timer.start()
 
+	move_state.character.velocity = move_state.character.velocity.floor()
+
 	if not move_state.can_attack:
 		move_state.can_attack_timer.start()
 
