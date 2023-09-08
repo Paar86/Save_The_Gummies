@@ -39,8 +39,8 @@ size = Vector2(120, 80)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r73lc"]
 size = Vector2(120, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2wuc6"]
-size = Vector2(40, 2)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7ibx"]
+size = Vector2(40, 4)
 
 [node name="LevelTest" instance=ExtResource("1_wv10m")]
 
@@ -120,8 +120,8 @@ region_rect = Rect2(0, 8, 24, 8)
 [node name="GlueFloorEnd" parent="ObjectsInFront/GlueFloor" index="2"]
 position = Vector2(32, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectsInFront/GlueFloor" index="3"]
-position = Vector2(20, -1)
-shape = SubResource("RectangleShape2D_2wuc6")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectsInFront/GlueFloor" index="4"]
+position = Vector2(20, -2)
+shape = SubResource("RectangleShape2D_h7ibx")
 
 [editable path="ObjectsInFront/GlueFloor"]

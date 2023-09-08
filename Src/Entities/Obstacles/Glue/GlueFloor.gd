@@ -32,8 +32,8 @@ func _run_configuration(value = null) -> void:
 
 	var collision_shape = create_collision_shape(
 		glue_middle_sprite.position,
-		Vector2(glue_start_end_distance + 8, 2),
-		Vector2(4, -1)
+		Vector2(glue_start_end_distance + 8, 4),
+		Vector2(4, -2)
 	)
 
 	add_child(collision_shape, true)

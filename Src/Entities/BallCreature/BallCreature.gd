@@ -40,7 +40,9 @@ func enable_collision() -> void:
 
 func effect_added(effect: Enums.effects) -> void:
 	linear_damp = 5
+	physics_material_override.bounce = 0.0
 
 
 func effect_removed(effect: Enums.effects) -> void:
 	linear_damp = damp_default
+	physics_material_override.bounce = 0.4
