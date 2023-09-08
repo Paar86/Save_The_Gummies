@@ -1,13 +1,13 @@
 class_name GoblinMoveState extends State
 
 
-const HORIZONTAL_SPEED_DEFUALT: int = 12
+const HORIZONTAL_SPEED_DEFAULT: int = 12
 const MAX_FALLING_SPEED: int = 90
 
 @export var character: Goblin = null
 @onready var can_attack_timer: Timer = $CanAttackTimer
 
-var horizontal_speed: int = HORIZONTAL_SPEED_DEFUALT
+var horizontal_speed: int = HORIZONTAL_SPEED_DEFAULT
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction: float = 11.0
 var horizontal_speed_scale: float = 1.0
@@ -19,6 +19,9 @@ func _ready() -> void:
 
 	await owner.ready
 	direction = character.get_facing_direction()
+
+	character.effect_added.connect(on_effect_added)
+	character.effect_removed.connect(on_effect_removed)
 
 
 func physics_process(delta: float) -> void:
@@ -48,3 +51,15 @@ func propagate_effects(effects: Array[String]) -> void:
 
 func on_can_attack_timer_timeout() -> void:
 	can_attack = true
+
+
+func on_effect_added(effect: Enums.effects) -> void:
+	match effect:
+		Enums.effects.GLUED:
+			horizontal_speed_scale = 0.5
+
+
+func on_effect_removed(effect: Enums.effects) -> void:
+	match effect:
+		Enums.effects.GLUED:
+			horizontal_speed_scale = 1.0

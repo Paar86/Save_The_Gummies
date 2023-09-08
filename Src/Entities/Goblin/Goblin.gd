@@ -1,4 +1,4 @@
-class_name Goblin extends CharacterBody2D
+class_name Goblin extends GameCharacter
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var exclamation_mark: Sprite2D = $ExclamationMark

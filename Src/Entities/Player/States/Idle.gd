@@ -4,7 +4,7 @@ extends State
 
 
 func on_enter(params: StateParams) -> void:
-	if params and params.is_jump_buffered:
+	if params and params.is_jump_buffered and move_state.jump_enabled:
 		var new_params := StateParams.new()
 		new_params.initiated_jumping = true
 		state_machine.transition_to("Air", new_params)

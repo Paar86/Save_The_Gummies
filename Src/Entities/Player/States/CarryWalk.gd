@@ -18,7 +18,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func physics_process(delta: float) -> void:
-	var movement_speed_scale: float = abs(move_state.character.velocity.x) / move_state.MAX_RUN_SPEED
+	var movement_speed_scale: float = abs(move_state.character.velocity.x) / move_state.MAX_RUN_SPEED_DEFAULT
 	state_machine.change_animation_speed_scale(movement_speed_scale)
 
 	if move_state.character.velocity.x == 0.0:

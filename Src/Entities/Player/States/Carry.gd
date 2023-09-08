@@ -1,6 +1,7 @@
 class_name PlayerCarryState extends State
 
 const THROW_STRENGTH: = 800.0
+const MAX_SPEED_OVERRIDE: = move_state.MAX_RUN_SPEED_DEFAULT / 2
 
 @export var move_state: PlayerMoveState
 # How long until aim arrow is shown
@@ -25,11 +26,11 @@ func physics_process(delta: float) -> void:
 
 func on_enter(params: StateParams) -> void:
 	move_state.character.pickup_transform.set_deferred("remote_path", move_state.character.hold_object.get_path())
-	move_state.max_speed = move_state.MAX_RUN_SPEED * 0.5
+	move_state.max_speed = MAX_SPEED_OVERRIDE
 
 
 func on_exit() -> void:
-	move_state.max_speed = move_state.MAX_RUN_SPEED
+	move_state.max_speed = move_state.MAX_RUN_SPEED_DEFAULT
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -51,7 +52,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func release_pickup(impulse: Vector2) -> void:
-	var thrown_object = move_state.character.hold_object
+	var thrown_object = move_state.character.hold_object as BallCreature
 	move_state.character.hold_object = null
 	move_state.character.pickup_transform.set_deferred("remote_path", null)
 	thrown_object.set_deferred("freeze", false)
@@ -69,6 +70,7 @@ func release_pickup(impulse: Vector2) -> void:
 	state_machine.transition_to("Idle")
 
 
+# For throwing creature upwards without aiming with crosshair
 func get_fast_vertical_impulse() -> Vector2:
 	var rotated_up_vector = Vector2.UP.rotated(deg_to_rad(10.0) * move_state.face_direction)
 	var angle_rad = Vector2.RIGHT.angle_to(rotated_up_vector)

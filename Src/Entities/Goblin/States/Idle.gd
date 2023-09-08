@@ -15,7 +15,7 @@ func physics_process(delta: float) -> void:
 func on_enter(params: StateParams) -> void:
 	state_machine.change_animation("idle")
 	# Setting to 0.0 so the Goblin is not moving
-	move_state.horizontal_speed_scale = 0.0
+	move_state.horizontal_speed = 0.0
 	idle_timer.start()
 
 	move_state.character.velocity = move_state.character.velocity.floor()
@@ -26,7 +26,7 @@ func on_enter(params: StateParams) -> void:
 
 func on_exit() -> void:
 	idle_timer.stop()
-	move_state.horizontal_speed_scale = 1.0
+	move_state.horizontal_speed = move_state.HORIZONTAL_SPEED_DEFAULT
 
 
 func propagate_effects(effects: Array[String]) -> void:

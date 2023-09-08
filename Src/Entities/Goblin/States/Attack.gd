@@ -6,13 +6,13 @@ extends State
 
 func on_enter(params: StateParams) -> void:
 	state_machine.change_animation("walk")
-	move_state.horizontal_speed_scale = 4
+	move_state.horizontal_speed = move_state.HORIZONTAL_SPEED_DEFAULT * 4
 	move_state.can_attack = false
 	attack_timer.start()
 
 
 func on_exit() -> void:
-	move_state.horizontal_speed_scale = 1
+	move_state.horizontal_speed = move_state.HORIZONTAL_SPEED_DEFAULT
 	attack_timer.stop()
 
 

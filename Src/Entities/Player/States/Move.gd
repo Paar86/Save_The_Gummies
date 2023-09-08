@@ -1,20 +1,23 @@
 class_name PlayerMoveState extends State
 
-const MAX_RUN_SPEED := 80.0
+const MAX_RUN_SPEED_DEFAULT := 80.0
 const MAX_FALL_SPEED := 180.0
 const ACCELERATION := 200.0
 const TURN_ACCELERATION := 400.0
 const FRICTION := 250.0
 
-@export var character: CharacterBody2D
+@export var character: GameCharacter
 
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
-var max_speed: float = MAX_RUN_SPEED
+var max_speed: float = MAX_RUN_SPEED_DEFAULT
+var max_speed_modifier: float = 1.0
+var face_direction: float = 1.0
+
 var gravity_scale: float = 1.0
 var acceleration_scale: float = 1.0
 var friction_scale: float = 1.0
-var face_direction: float = 1.0
 
+var jump_enabled: = true
 var movement_enabled: = true
 
 
@@ -22,6 +25,9 @@ func _ready() -> void:
 	Events.player_direction_changed.connect(on_player_direction_changed)
 	Events.player_aiming_requested.connect(on_aiming_requested)
 	Events.player_aiming_called_off.connect(on_aiming_called_off)
+
+	character.effect_added.connect(on_effect_added)
+	character.effect_removed.connect(on_effect_removed)
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -37,7 +43,7 @@ func unhandled_input(event: InputEvent) -> void:
 		state_machine.transition_to("Climb", params)
 		return
 
-	if event.is_action_pressed("jump") and movement_enabled:
+	if event.is_action_pressed("jump") and movement_enabled and jump_enabled:
 		var params := StateParams.new()
 		params.initiated_jumping = true
 		state_machine.transition_to("Air", params)
@@ -71,7 +77,7 @@ func physics_process(delta: float) -> void:
 	if input_direction:
 		character.velocity.x = move_toward(
 			character.velocity.x,
-			input_direction * max_speed,
+			input_direction * max_speed * max_speed_modifier,
 			acceleration * acceleration_scale * delta
 		)
 	else:
@@ -97,3 +103,17 @@ func on_aiming_requested() -> void:
 
 func on_aiming_called_off() -> void:
 	movement_enabled = true
+
+
+func on_effect_added(effect: Enums.effects) -> void:
+	match effect:
+		Enums.effects.GLUED:
+			jump_enabled = false
+			max_speed_modifier = 0.5
+
+
+func on_effect_removed(effect: Enums.effects) -> void:
+	match effect:
+		Enums.effects.GLUED:
+			jump_enabled = true
+			max_speed_modifier = 1.0

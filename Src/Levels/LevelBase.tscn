@@ -19,7 +19,7 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
 
-[node name="Objects" type="Node" parent="."]
+[node name="ObjectsBehind" type="Node" parent="."]
 
 [node name="PlayerCamera" parent="." instance=ExtResource("2_fykds")]
 
@@ -29,3 +29,5 @@ layer_1/tile_data = PackedInt32Array()
 remote_path = NodePath("../../PlayerCamera")
 update_rotation = false
 update_scale = false
+
+[node name="ObjectsInFront" type="Node" parent="."]
