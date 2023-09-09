@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cpovy1sj2g2mi"]
 
-[ext_resource type="Texture2D" uid="uid://b8la8ld06g04" path="res://Assets/Obstacles/arrow_shooter.png" id="1_tmmk1"]
 [ext_resource type="Script" path="res://Src/Entities/Obstacles/ArrowShooter/ArrowShooter.gd" id="1_weg2i"]
+[ext_resource type="Texture2D" uid="uid://bvvhyq4ndt28u" path="res://Assets/Obstacles/arrow_shoot.png" id="2_dmxhy"]
 
 [node name="ArrowShooter" type="Node2D"]
 script = ExtResource("1_weg2i")
@@ -18,9 +18,8 @@ one_shot = true
 
 [node name="ShooterSprite" type="Sprite2D" parent="."]
 position = Vector2(1, -3)
-texture = ExtResource("1_tmmk1")
+texture = ExtResource("2_dmxhy")
 offset = Vector2(0, -1)
-region_enabled = true
 region_rect = Rect2(0, 0, 2, 8)
 
 [connection signal="timeout" from="AfterShotTimer" to="." method="_on_after_shot_timer_timeout"]

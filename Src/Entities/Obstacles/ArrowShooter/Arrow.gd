@@ -4,6 +4,7 @@ const SPEED_DEFAULT: float = 120.0
 
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var self_destruct_timer: Timer = $SelfDestructTimer
 var speed: float = SPEED_DEFAULT
 
@@ -21,6 +22,8 @@ func start_self_destruct_countdown() -> void:
 	hurtbox_component.set_collision_layer_value(3, false)
 	hitbox_component.toggle_collision(false)
 	self_destruct_timer.start()
+	animated_sprite.stop()
+
 	await self_destruct_timer.timeout
 	queue_free()
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8la8ld06g04"
-path="res://.godot/imported/arrow_shooter.png-b69df6c3f4c27665a8a8cddbe379c6c3.ctex"
+uid="uid://bvvhyq4ndt28u"
+path="res://.godot/imported/arrow_shoot.png-931a77d934a0093668dd0655d017cf22.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Obstacles/arrow_shooter.png"
-dest_files=["res://.godot/imported/arrow_shooter.png-b69df6c3f4c27665a8a8cddbe379c6c3.ctex"]
+source_file="res://Assets/Obstacles/arrow_shoot.png"
+dest_files=["res://.godot/imported/arrow_shoot.png-931a77d934a0093668dd0655d017cf22.ctex"]
 
 [params]
 
