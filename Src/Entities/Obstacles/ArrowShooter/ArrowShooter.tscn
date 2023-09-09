@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpovy1sj2g2mi"]
+
+[ext_resource type="Texture2D" uid="uid://b8la8ld06g04" path="res://Assets/Obstacles/arrow_shooter.png" id="1_tmmk1"]
+[ext_resource type="Script" path="res://Src/Entities/Obstacles/ArrowShooter/ArrowShooter.gd" id="1_weg2i"]
+
+[node name="ArrowShooter" type="Node2D"]
+script = ExtResource("1_weg2i")
+
+[node name="Arrows" type="Node2D" parent="."]
+
+[node name="AfterShotTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="PrepareTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="ShooterSprite" type="Sprite2D" parent="."]
+position = Vector2(1, -4)
+texture = ExtResource("1_tmmk1")
+region_enabled = true
+region_rect = Rect2(0, 4, 2, 8)
+
+[connection signal="timeout" from="AfterShotTimer" to="." method="_on_after_shot_timer_timeout"]

@@ -34,7 +34,7 @@ func on_area_shape_entered(
 		var other_contact_point = collision_contacts[current_index + 1]
 
 		var normal_vector = (other_contact_point - contact_point).normalized()
-		if normal_vector == Vector2.UP:
+		if normal_vector.dot(Vector2.UP) > 0.9:
 			contact_from_above = true
 			break
 
