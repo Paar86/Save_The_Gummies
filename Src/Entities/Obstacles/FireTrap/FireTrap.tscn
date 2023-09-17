@@ -71,6 +71,7 @@ script = ExtResource("3_b2mnv")
 [node name="CollisionShape2D" parent="HitboxComponent" index="0"]
 position = Vector2(4, -7)
 shape = SubResource("RectangleShape2D_n4fwd")
+disabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(4, -8)

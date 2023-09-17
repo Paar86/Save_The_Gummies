@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvje8c8sahcwc"]
+[gd_scene load_steps=5 format=3 uid="uid://dvje8c8sahcwc"]
 
 [ext_resource type="Script" path="res://Src/Levels/LevelBase.gd" id="1_03m7p"]
 [ext_resource type="PackedScene" uid="uid://bq2tohpkkvyrt" path="res://Src/Common/Camera/PlayerCamera.tscn" id="2_fykds"]
 [ext_resource type="PackedScene" uid="uid://d2l1fpj8yehom" path="res://Src/Entities/Player/Player.tscn" id="2_kapmh"]
+[ext_resource type="Script" path="res://Src/Common/Camera/PeekCamera.gd" id="3_lfylg"]
 
 [node name="LevelBase" type="Node"]
 script = ExtResource("1_03m7p")
@@ -22,6 +23,12 @@ layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
 
 [node name="PlayerCamera" parent="." instance=ExtResource("2_fykds")]
+offset = Vector2(0, 0)
+
+[node name="PeekCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player_camera", "player")]
+script = ExtResource("3_lfylg")
+player_camera = NodePath("../PlayerCamera")
+player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_kapmh")]
 
@@ -31,3 +38,9 @@ update_rotation = false
 update_scale = false
 
 [node name="ObjectsInFront" type="Node" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
