@@ -1,5 +1,7 @@
 class_name Player extends GameCharacter
 
+signal lives_changed(new_value: int)
+
 @onready var player_animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var throw_arrow_pivot: Marker2D = $ThrowArrowPivot
 @onready var throw_arrow_sprite: Sprite2D = $ThrowArrowPivot/SpriteContainer/ThrowArrowSprite
@@ -86,6 +88,10 @@ func on_player_aiming_called_off() -> void:
 	throw_arrow_pivot.disable()
 
 
+func get_current_lives() -> int:
+	return hurtbox_component.lives
+
+
 func on_pickup_detector_body_entered(body: PhysicsBody2D) -> void:
 	if body is RigidBody2D and not pickable_objects.has(body):
 		if (body as BallCreature).pickable:
@@ -108,7 +114,9 @@ func on_objects_detector_area_exited(area: Area2D) -> void:
 		Events.player_exited_ladder.emit()
 
 
-func on_damage_taken() -> void:
+func on_damage_taken(current_lives: int) -> void:
+	lives_changed.emit(current_lives)
+
 	toggle_hurtbox_collider(false)
 	is_flashing = true
 	get_tree().create_timer(sprite_flash_duration).timeout.connect(on_flash_duration_expired)

@@ -1,6 +1,6 @@
 class_name HurtboxComponent extends Area2D
 
-signal lives_changed
+signal lives_changed(new_value: int)
 signal lives_depleted
 signal effects_propagated(effects: Array[String])
 
@@ -18,9 +18,10 @@ func _ready() -> void:
 func make_damage(damage: int) -> void:
 	lives -= damage
 	if lives <= 0:
+		lives_changed.emit(lives)
 		lives_depleted.emit()
 	else:
-		lives_changed.emit()
+		lives_changed.emit(lives)
 
 
 # To propagate some effect on owner, e.g. stun
