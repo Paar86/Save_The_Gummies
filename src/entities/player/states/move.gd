@@ -105,15 +105,15 @@ func on_aiming_called_off() -> void:
 	movement_enabled = true
 
 
-func on_effect_added(effect: Enums.effects) -> void:
+func on_effect_added(effect: Enums.effect) -> void:
 	match effect:
-		Enums.effects.GLUED:
+		Enums.effect.GLUED:
 			jump_enabled = false
 			max_speed_modifier = 0.5
 
 
-func on_effect_removed(effect: Enums.effects) -> void:
+func on_effect_removed(effect: Enums.effect) -> void:
 	match effect:
-		Enums.effects.GLUED:
+		Enums.effect.GLUED:
 			jump_enabled = true
 			max_speed_modifier = 1.0

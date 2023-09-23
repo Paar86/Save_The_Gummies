@@ -53,13 +53,13 @@ func on_can_attack_timer_timeout() -> void:
 	can_attack = true
 
 
-func on_effect_added(effect: Enums.effects) -> void:
+func on_effect_added(effect: Enums.effect) -> void:
 	match effect:
 		Enums.effects.GLUED:
 			horizontal_speed_scale = 0.5
 
 
-func on_effect_removed(effect: Enums.effects) -> void:
+func on_effect_removed(effect: Enums.effect) -> void:
 	match effect:
 		Enums.effects.GLUED:
 			horizontal_speed_scale = 1.0

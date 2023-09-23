@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c36mwvup5f8ad" path="res://src/entities/ball_creature/ball_creature.tscn" id="3_su1xc"]
 [ext_resource type="PackedScene" uid="uid://cpovy1sj2g2mi" path="res://src/entities/obstacles/arrow_shooter/arrow_shooter.tscn" id="4_3n1k1"]
 [ext_resource type="PackedScene" uid="uid://blpixln5eug03" path="res://src/entities/obstacles/glue/glue_floor.tscn" id="5_igaj5"]
-[ext_resource type="Script" path="res://Src/Utils/tilemap_collision_baker.gd" id="5_umixs"]
+[ext_resource type="Script" path="res://src/utils/tilemap_collision_baker.gd" id="5_umixs"]
 [ext_resource type="PackedScene" uid="uid://dayyvi88hdu0a" path="res://src/entities/obstacles/fire_trap/fire_trap.tscn" id="6_u2tis"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rpne2"]

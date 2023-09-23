@@ -4,7 +4,7 @@ extends Area2D
 @export var run_configuration: bool = false: set = _run_configuration
 @onready var splash_container: Node = $GlueSplashContainer
 
-var glue_splash_scene: PackedScene = preload("res://Src/Entities/Obstacles/Glue/glue_splash.tscn")
+var glue_splash_scene: PackedScene = preload("res://src/entities/obstacles/glue/glue_splash.tscn")
 
 
 func _run_configuration(value = null) -> void:
@@ -62,14 +62,14 @@ func _on_body_entered(body: PhysicsBody2D) -> void:
 	spawn_glue_splash(body.global_position)
 
 	if body is GameCharacter or body is BallCreature:
-		body.apply_effect(Enums.effects.GLUED)
+		body.apply_effect(Enums.effect.GLUED)
 
 
 func _on_body_exited(body: Node2D) -> void:
 	spawn_glue_splash(body.global_position)
 
 	if body is GameCharacter or body is BallCreature:
-		body.remove_effect(Enums.effects.GLUED)
+		body.remove_effect(Enums.effect.GLUED)
 
 
 func _on_glue_splash_timout(glue_splash: Node2D) -> void:

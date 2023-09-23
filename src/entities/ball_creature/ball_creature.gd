@@ -9,24 +9,24 @@ var pickable: bool = true:
 	get:
 		return pickable
 
-var applied_effects: Array[Enums.effects] = []
+var applied_effects: Array[Enums.effect] = []
 
 
-func apply_effect(effect: Enums.effects) -> void:
+func apply_effect(effect: Enums.effect) -> void:
 	if not applied_effects.has(effect):
 		effect_added(effect)
 
 	applied_effects.append(effect)
 
 
-func remove_effect(effect: Enums.effects) -> void:
+func remove_effect(effect: Enums.effect) -> void:
 	applied_effects.erase(effect)
 
 	if not applied_effects.has(effect):
 		effect_removed(effect)
 
 
-func is_effect_active(effect: Enums.effects) -> bool:
+func is_effect_active(effect: Enums.effect) -> bool:
 	return applied_effects.has(effect)
 
 
@@ -38,11 +38,11 @@ func enable_collision() -> void:
 	collision_shape.set_deferred("disabled", false)
 
 
-func effect_added(effect: Enums.effects) -> void:
+func effect_added(effect: Enums.effect) -> void:
 	linear_damp = 5
 	physics_material_override.bounce = 0.0
 
 
-func effect_removed(effect: Enums.effects) -> void:
+func effect_removed(effect: Enums.effect) -> void:
 	linear_damp = damp_default
 	physics_material_override.bounce = 0.4
