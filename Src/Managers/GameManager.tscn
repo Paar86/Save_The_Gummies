@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cgc87flocko36"]
+
+[node name="GameManager" type="Node"]
+
+[node name="ActiveScene" type="Node" parent="."]

@@ -2,14 +2,13 @@ extends Node
 
 signal camera_above_player
 
+var ball_creature: BallCreature
+
 @onready var player: Player = $Player
 @onready var player_camera: Camera2D = $PlayerCamera
 @onready var peek_camera: PeekCamera = $PeekCamera
 @onready var tile_map: TileMap = $TileMap
 @onready var health_ui: TextureRect = $UI/HealthCounter
-
-var ball_creature: BallCreature
-
 
 func _ready() -> void:
 	var ball_creature_scenes = find_children("*", "BallCreature")
