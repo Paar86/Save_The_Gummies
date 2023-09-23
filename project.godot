@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="Ball_Creatures"
-run/main_scene="res://Src/Levels/LevelTest.tscn"
+run/main_scene="res://src/levels/level_test.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 
 [autoload]
 
-Events="*res://Src/Autoload/Events.gd"
-Enums="*res://Src/Autoload/Enums.gd"
+Events="*res://src/autoload/events.gd"
+Enums="*res://src/autoload/enums.gd"
 
 [display]
 

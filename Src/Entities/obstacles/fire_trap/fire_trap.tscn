@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://dayyvi88hdu0a"]
+
+[ext_resource type="Texture2D" uid="uid://m3usghthgrv2" path="res://assets/obstacles/fire.png" id="1_46k66"]
+[ext_resource type="Script" path="res://src/entities/obstacles/fire_trap/fire_trap.gd" id="1_oclme"]
+[ext_resource type="PackedScene" uid="uid://cvsgunn02v50s" path="res://src/common/components/hitbox/hitbox_component.tscn" id="2_74sil"]
+[ext_resource type="Script" path="res://src/entities/obstacles/fire_trap/fire_trap_hitbox_component.gd" id="3_b2mnv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n4fwd"]
+size = Vector2(6, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a28gs"]
+atlas = ExtResource("1_46k66")
+region = Rect2(24, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfq43"]
+atlas = ExtResource("1_46k66")
+region = Rect2(32, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sh35v"]
+atlas = ExtResource("1_46k66")
+region = Rect2(0, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s3gk"]
+atlas = ExtResource("1_46k66")
+region = Rect2(8, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syx0x"]
+atlas = ExtResource("1_46k66")
+region = Rect2(16, 0, 8, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i0r4u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a28gs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfq43")
+}],
+"loop": true,
+"name": &"active",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sh35v")
+}],
+"loop": true,
+"name": &"inactive",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s3gk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_syx0x")
+}],
+"loop": true,
+"name": &"telegraph",
+"speed": 15.0
+}]
+
+[node name="FireTrap" type="Node2D"]
+script = ExtResource("1_oclme")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("2_74sil")]
+collision_mask = 2
+script = ExtResource("3_b2mnv")
+
+[node name="CollisionShape2D" parent="HitboxComponent" index="0"]
+position = Vector2(4, -7)
+shape = SubResource("RectangleShape2D_n4fwd")
+disabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, -8)
+sprite_frames = SubResource("SpriteFrames_i0r4u")
+animation = &"active"
+autoplay = "inactive"
+frame_progress = 0.672295
+
+[node name="InactiveTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="TelegraphTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="ActiveTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="InactiveTimer" to="." method="_on_inactive_timer_timeout"]
+[connection signal="timeout" from="TelegraphTimer" to="." method="_on_telegraph_timer_timeout"]
+[connection signal="timeout" from="ActiveTimer" to="." method="_on_active_timer_timeout"]
+
+[editable path="HitboxComponent"]

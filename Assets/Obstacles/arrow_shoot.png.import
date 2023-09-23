@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bvvhyq4ndt28u"
-path="res://.godot/imported/arrow_shoot.png-931a77d934a0093668dd0655d017cf22.ctex"
+path="res://.godot/imported/arrow_shoot.png-2deafb4ecb149a802e443fe7ee438274.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Obstacles/arrow_shoot.png"
-dest_files=["res://.godot/imported/arrow_shoot.png-931a77d934a0093668dd0655d017cf22.ctex"]
+source_file="res://assets/obstacles/arrow_shoot.png"
+dest_files=["res://.godot/imported/arrow_shoot.png-2deafb4ecb149a802e443fe7ee438274.ctex"]
 
 [params]
 

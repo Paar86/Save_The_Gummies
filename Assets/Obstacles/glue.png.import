@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://fpt4ef8hy1tw"
-path="res://.godot/imported/glue.png-6acdefd69c483261e49c223538b14eeb.ctex"
+path="res://.godot/imported/glue.png-2d3837fcc0ab4a8712e344e9fadd4723.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Obstacles/glue.png"
-dest_files=["res://.godot/imported/glue.png-6acdefd69c483261e49c223538b14eeb.ctex"]
+source_file="res://assets/obstacles/glue.png"
+dest_files=["res://.godot/imported/glue.png-2d3837fcc0ab4a8712e344e9fadd4723.ctex"]
 
 [params]
 
