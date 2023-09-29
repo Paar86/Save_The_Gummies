@@ -8,8 +8,6 @@ class_name State extends Node
 @export var abstract := false
 
 var state_machine: StateMachine = null
-var physics_body: PhysicsBody2D = null
-
 var state_name: String:
 	get:
 		return self.name

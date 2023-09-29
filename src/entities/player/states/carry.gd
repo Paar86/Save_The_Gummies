@@ -4,12 +4,14 @@ const THROW_STRENGTH: = 800.0
 const MAX_SPEED_OVERRIDE: = move_state.MAX_RUN_SPEED_DEFAULT / 2
 
 @export var move_state: PlayerMoveState
-# How long until aim arrow is shown
-@onready var to_aim_timer: Timer = $ToAimTimer
 
-var can_throw: = false
-var is_aiming: = false
-var is_fast_aiming_up: = false
+var _can_throw: = false
+var _is_aiming: = false
+var _is_fast_aiming_up: = false
+
+# How long until aim arrow is shown
+@onready var _to_aim_timer: Timer = $ToAimTimer
+
 
 func physics_process(delta: float) -> void:
 #	if not is_aiming:
@@ -21,7 +23,7 @@ func physics_process(delta: float) -> void:
 		return
 
 	var direction_vertical: = Input.get_axis("move_up", "move_down")
-	is_fast_aiming_up = true if direction_vertical < 0 else false
+	_is_fast_aiming_up = true if direction_vertical < 0 else false
 
 
 func on_enter(params: StateParams) -> void:
@@ -35,14 +37,14 @@ func on_exit() -> void:
 
 func unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("action"):
-		can_throw = true
-		to_aim_timer.start()
+		_can_throw = true
+		_to_aim_timer.start()
 
-	if event.is_action_released("action") and can_throw:
+	if event.is_action_released("action") and _can_throw:
 		var impulse = move_state.character.aim_direction * THROW_STRENGTH
 
 		# If player holds "up" key and quickly presses "action" button
-		if not is_aiming and is_fast_aiming_up:
+		if not _is_aiming and _is_fast_aiming_up:
 			impulse = get_fast_vertical_impulse()
 
 		release_pickup(impulse)
@@ -59,9 +61,9 @@ func release_pickup(impulse: Vector2) -> void:
 	thrown_object.call_deferred("apply_central_impulse", impulse)
 	thrown_object.enable_collision()
 	Events.player_aiming_called_off.emit()
-	to_aim_timer.stop()
-	can_throw = false
-	is_aiming = false
+	_to_aim_timer.stop()
+	_can_throw = false
+	_is_aiming = false
 
 	if impulse != Vector2.ZERO:
 		state_machine.transition_to("Kick")
@@ -79,4 +81,4 @@ func get_fast_vertical_impulse() -> Vector2:
 
 func on_to_aim_timer_timeout() -> void:
 	Events.player_aiming_requested.emit()
-	is_aiming = true
+	_is_aiming = true

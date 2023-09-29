@@ -1,11 +1,11 @@
 extends State
 
 @export var move_state: GoblinMoveState = null
-@onready var idle_timer: Timer = $IdleTimer
+@onready var _idle_timer: Timer = $IdleTimer
 
 
 func _ready() -> void:
-	idle_timer.timeout.connect(on_idle_timer_timeout)
+	_idle_timer.timeout.connect(on_idle_timer_timeout)
 
 
 func physics_process(delta: float) -> void:
@@ -16,7 +16,7 @@ func on_enter(params: StateParams) -> void:
 	state_machine.change_animation("idle")
 	# Setting to 0.0 so the Goblin is not moving
 	move_state.horizontal_speed = 0.0
-	idle_timer.start()
+	_idle_timer.start()
 
 	move_state.character.velocity = move_state.character.velocity.floor()
 
@@ -25,7 +25,7 @@ func on_enter(params: StateParams) -> void:
 
 
 func on_exit() -> void:
-	idle_timer.stop()
+	_idle_timer.stop()
 	move_state.horizontal_speed = move_state.HORIZONTAL_SPEED_DEFAULT
 
 

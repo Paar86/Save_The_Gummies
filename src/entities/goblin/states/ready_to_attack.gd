@@ -1,19 +1,19 @@
 extends State
 
 @export var character: Goblin
-@onready var exclamation_mark_timer: Timer = $ExclamationMarkTimer
+@onready var _exclamation_mark_timer: Timer = $ExclamationMarkTimer
 
 
 func on_enter(params: StateParams) -> void:
 	state_machine.change_animation_speed_scale(0)
 	character.exclamation_mark.show()
-	exclamation_mark_timer.start()
+	_exclamation_mark_timer.start()
 
 
 func on_exit() -> void:
 	state_machine.change_animation_speed_scale(1)
 	character.exclamation_mark.hide()
-	exclamation_mark_timer.stop()
+	_exclamation_mark_timer.stop()
 
 
 func propagate_effects(effects: Array[String]) -> void:

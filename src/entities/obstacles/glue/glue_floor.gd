@@ -2,9 +2,10 @@
 extends Area2D
 
 @export var run_configuration: bool = false: set = _run_configuration
-@onready var splash_container: Node = $GlueSplashContainer
 
-var glue_splash_scene: PackedScene = preload("res://src/entities/obstacles/glue/glue_splash.tscn")
+var _glue_splash_scene: PackedScene = preload("res://src/entities/obstacles/glue/glue_splash.tscn")
+
+@onready var splash_container: Node = $GlueSplashContainer
 
 
 func _run_configuration(value = null) -> void:
@@ -52,7 +53,7 @@ func create_collision_shape(position: Vector2, size: Vector2, offset: Vector2) -
 
 
 func spawn_glue_splash(target_global_position: Vector2) -> void:
-	var glue_splash: Node2D = glue_splash_scene.instantiate()
+	var glue_splash: Node2D = _glue_splash_scene.instantiate()
 	glue_splash.global_position = target_global_position
 	splash_container.add_child(glue_splash)
 	get_tree().create_timer(2.0).timeout.connect(_on_glue_splash_timout.bind(glue_splash))

@@ -4,34 +4,35 @@ signal arrived_at_player
 
 @export var player_camera: Camera2D
 @export var player: Player
+
 var ball_creature: Node2D
-var current_target_object: Node2D
-var follow_player_camera: bool = true
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
-		follow_player_camera = false
-		current_target_object = ball_creature
-
-	if event.is_action_released("ui_accept"):
-		arrived_at_player.emit()
-		follow_player_camera = true
+var _current_target_object: Node2D
+var _follow_player_camera: bool = true
 
 
 func _ready() -> void:
 	assert(player, "Player node not specified!")
-	current_target_object = player_camera
+	_current_target_object = player_camera
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
+		_follow_player_camera = false
+		_current_target_object = ball_creature
+
+	if event.is_action_released("ui_accept"):
+		arrived_at_player.emit()
+		_follow_player_camera = true
 
 
 # We do the calculation in physics_process to eliminate most of the jitter when the creature is moving
 func _physics_process(delta: float) -> void:
-	var target_global_position = current_target_object.global_position
-	if current_target_object is Camera2D:
-		target_global_position = (current_target_object as Camera2D).get_target_position()
+	var target_global_position = _current_target_object.global_position
+	if _current_target_object is Camera2D:
+		target_global_position = (_current_target_object as Camera2D).get_target_position()
 
 	# Don't do anything if the camera is already at destination
-	if follow_player_camera:
+	if _follow_player_camera:
 		global_position = player_camera.get_target_position()
 		return
 

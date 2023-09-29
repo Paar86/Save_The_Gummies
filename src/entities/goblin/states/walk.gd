@@ -1,20 +1,20 @@
 extends State
 
 @export var move_state: GoblinMoveState = null
-@onready var walk_timer: Timer = $WalkTimer
+@onready var _walk_timer: Timer = $WalkTimer
 
 
 func _ready() -> void:
-	walk_timer.timeout.connect(on_walk_timer_timeout)
+	_walk_timer.timeout.connect(on_walk_timer_timeout)
 
 
 func on_enter(params: StateParams) -> void:
 	state_machine.change_animation("walk")
-	walk_timer.start()
+	_walk_timer.start()
 
 
 func on_exit() -> void:
-	walk_timer.stop()
+	_walk_timer.stop()
 
 
 func physics_process(delta: float) -> void:

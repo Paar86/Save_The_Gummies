@@ -5,13 +5,13 @@ signal lives_depleted
 signal effects_propagated(effects: Array[String])
 
 @export var lives = 99
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
-var collision_bitmask_default: int = 0
+
+var _collision_bitmask_default: int = 0
 
 
 func _ready() -> void:
 	# Remember the value for toggling the collision on/off
-	collision_bitmask_default = collision_layer
+	_collision_bitmask_default = collision_layer
 
 
 # To lower lives of the owner
@@ -32,6 +32,6 @@ func propagate_effects(effects: Array[String]) -> void:
 # Toggle the collision layer on/off
 func toggle_collider(value: bool) -> void:
 	if value:
-		collision_layer = collision_bitmask_default
+		collision_layer = _collision_bitmask_default
 	else:
 		collision_layer = 0

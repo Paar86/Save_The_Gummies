@@ -1,12 +1,13 @@
 class_name HitboxComponent extends Area2D
 
 signal damage_made(amount: int)
+
 @export var damage: int = 1
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 
 
 func _ready() -> void:
-	area_shape_entered.connect(on_area_shape_entered)
+	area_shape_entered.connect(_on_area_shape_entered)
 
 
 func is_valid_hurtbox(area: Area2D) -> bool:
@@ -17,10 +18,10 @@ func is_valid_hurtbox(area: Area2D) -> bool:
 
 
 func toggle_collision(value: bool) -> void:
-	collision_shape.set_deferred("disabled", !value)
+	_collision_shape.set_deferred("disabled", !value)
 
 
-func on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	if not is_valid_hurtbox(area):
 		return
 
