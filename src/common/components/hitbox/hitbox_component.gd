@@ -26,4 +26,4 @@ func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, 
 		return
 
 	(area as HurtboxComponent).make_damage(damage)
-	damage_made.emit(damage)
+	damage_made.emit(damage, area)
