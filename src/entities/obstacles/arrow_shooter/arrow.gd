@@ -1,6 +1,8 @@
 class_name Arrow extends Area2D
 
 const SPEED_DEFAULT: float = 120.0
+const WORLD_WAIT_TIME: float = 2.0
+const PLAYER_WAIT_TIME: float = 6.0
 
 var _speed: float = SPEED_DEFAULT
 
@@ -19,9 +21,10 @@ func _physics_process(delta: float) -> void:
 	position += transform.x * _speed * delta
 
 
-func start_self_destruct_countdown() -> void:
+func start_self_destruct_countdown(wait_time) -> void:
 	_hurtbox_component.set_collision_layer_value(3, false)
 	_hitbox_component.toggle_collision(false)
+	_self_destruct_timer.wait_time = wait_time 
 	_self_destruct_timer.start()
 	_animated_sprite.stop()
 
@@ -32,12 +35,18 @@ func start_self_destruct_countdown() -> void:
 # Collision with world
 func _on_body_entered(body: Node2D) -> void:
 	_speed = 0.0
-	start_self_destruct_countdown()
+	start_self_destruct_countdown(WORLD_WAIT_TIME)
 
 
 # Damage made to player
-func on_damage_made(amount: int) -> void:
-	queue_free()
+func on_damage_made(amount: int, area: Area2D) -> void:
+	var transform_matrix = global_transform
+	get_parent().remove_child(self)
+	area.add_child(self)
+	global_transform = transform_matrix
+	
+	_speed = 0.0
+	start_self_destruct_countdown(PLAYER_WAIT_TIME)
 
 
 # Damage from player/ball
