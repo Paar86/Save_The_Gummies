@@ -8,6 +8,13 @@ var _glue_splash_scene: PackedScene = preload("res://src/entities/obstacles/glue
 @onready var splash_container: Node = $GlueSplashContainer
 
 
+func spawn_glue_splash(target_global_position: Vector2) -> void:
+	var glue_splash: Node2D = _glue_splash_scene.instantiate()
+	glue_splash.global_position = target_global_position
+	splash_container.add_child(glue_splash)
+	get_tree().create_timer(2.0).timeout.connect(_on_glue_splash_timout.bind(glue_splash))
+
+
 func _run_configuration(value = null) -> void:
 	var glue_start_sprite: Sprite2D = get_node("GlueFloorStart")
 	var glue_middle_sprite: Sprite2D = get_node("GlueFloorMiddle")
@@ -31,7 +38,9 @@ func _run_configuration(value = null) -> void:
 	for shape in collision_shapes:
 		remove_child(shape)
 
-	var collision_shape = create_collision_shape(
+	var utils = Utils.new()
+
+	var collision_shape = utils.create_collision_shape(
 		glue_middle_sprite.position,
 		Vector2(glue_start_end_distance + 8, 4),
 		Vector2(4, -2)
@@ -39,24 +48,7 @@ func _run_configuration(value = null) -> void:
 
 	add_child(collision_shape, true)
 	collision_shape.owner = get_tree().edited_scene_root
-
-
-func create_collision_shape(position: Vector2, size: Vector2, offset: Vector2) -> CollisionShape2D:
-	var collisionShape = CollisionShape2D.new()
-	var rectangleShape = RectangleShape2D.new()
-
-	rectangleShape.size = size
-	collisionShape.set_shape(rectangleShape)
-	collisionShape.position = position + offset
-
-	return collisionShape
-
-
-func spawn_glue_splash(target_global_position: Vector2) -> void:
-	var glue_splash: Node2D = _glue_splash_scene.instantiate()
-	glue_splash.global_position = target_global_position
-	splash_container.add_child(glue_splash)
-	get_tree().create_timer(2.0).timeout.connect(_on_glue_splash_timout.bind(glue_splash))
+	utils.free()
 
 
 func _on_body_entered(body: PhysicsBody2D) -> void:
