@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmmhoexfwl035"]
+
+[ext_resource type="Texture2D" uid="uid://bpb4smfafvgv1" path="res://assets/obstacles/barrier_sheet.png" id="1_cixiy"]
+[ext_resource type="Script" path="res://src/entities/obstacles/barrier/barrier.gd" id="1_mji35"]
+[ext_resource type="PackedScene" uid="uid://cnm077r8cak41" path="res://src/common/components/hurtbox/hurtbox_component.tscn" id="2_ayyv1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8jdmd"]
+size = Vector2(10, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wr3gm"]
+size = Vector2(12, 20)
+
+[node name="Barrier" type="StaticBody2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_mji35")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("1_cixiy")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_8jdmd")
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("2_ayyv1")]
+collision_layer = 16
+
+[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_wr3gm")
+
+[editable path="HurtboxComponent"]

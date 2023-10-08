@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://becvu2tommbnh"]
+[gd_scene load_steps=23 format=3 uid="uid://becvu2tommbnh"]
 
 [ext_resource type="PackedScene" uid="uid://dvje8c8sahcwc" path="res://src/levels/level_base.tscn" id="1_wv10m"]
 [ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/grass_tiny_tileset.tres" id="2_y5w7g"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cpovy1sj2g2mi" path="res://src/entities/obstacles/arrow_shooter/arrow_shooter.tscn" id="4_3n1k1"]
 [ext_resource type="PackedScene" uid="uid://blpixln5eug03" path="res://src/entities/obstacles/glue/glue_floor.tscn" id="5_igaj5"]
 [ext_resource type="Script" path="res://src/utils/tilemap_collision_baker.gd" id="5_umixs"]
+[ext_resource type="PackedScene" uid="uid://bmmhoexfwl035" path="res://src/entities/obstacles/barrier/barrier.tscn" id="6_i5wt7"]
 [ext_resource type="PackedScene" uid="uid://dayyvi88hdu0a" path="res://src/entities/obstacles/fire_trap/fire_trap.tscn" id="6_u2tis"]
 [ext_resource type="PackedScene" uid="uid://cpjklwe1a6wss" path="res://src/entities/objects/ladder.tscn" id="8_llwp4"]
 
@@ -42,7 +43,7 @@ size = Vector2(24, 80)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ed28"]
 size = Vector2(24, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o1q62"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e5a8d"]
 size = Vector2(8, 78)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7ibx"]
@@ -123,7 +124,10 @@ region_rect = Rect2(0, 0, 8, 64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectsMiddle/Ladder" index="3"]
 position = Vector2(0, -39)
-shape = SubResource("RectangleShape2D_o1q62")
+shape = SubResource("RectangleShape2D_e5a8d")
+
+[node name="Barrier" parent="ObjectsMiddle" index="1" instance=ExtResource("6_i5wt7")]
+position = Vector2(140, 120)
 
 [node name="BallCreature" parent="." index="4" instance=ExtResource("3_su1xc")]
 position = Vector2(87, 68)

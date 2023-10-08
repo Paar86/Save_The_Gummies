@@ -1,10 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpjklwe1a6wss"]
+[gd_scene load_steps=3 format=3 uid="uid://cpjklwe1a6wss"]
 
 [ext_resource type="Script" path="res://src/entities/objects/ladder.gd" id="1_1lyxq"]
 [ext_resource type="Texture2D" uid="uid://c5xmt17rxx4fu" path="res://assets/objects/ladder.png" id="1_lrb3x"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tnsj"]
-size = Vector2(8, 22)
 
 [node name="Ladder" type="Area2D" groups=["Ladders"]]
 editor_description = "Top edge of collision shape should be 2px below tile's walk side."
@@ -32,7 +29,3 @@ position = Vector2(0, -4)
 texture = ExtResource("1_lrb3x")
 region_enabled = true
 region_rect = Rect2(0, 0, 8, 8)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -11)
-shape = SubResource("RectangleShape2D_8tnsj")

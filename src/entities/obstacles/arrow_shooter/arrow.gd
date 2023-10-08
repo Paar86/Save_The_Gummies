@@ -41,7 +41,7 @@ func _on_body_entered(body: Node2D) -> void:
 # Damage made to player
 func on_damage_made(amount: int, area: Area2D) -> void:
 	var transform_matrix = global_transform
-	get_parent().remove_child(self)
+	get_parent().call_deferred("remove_child", self)
 	area.add_child(self)
 	global_transform = transform_matrix
 
