@@ -8,7 +8,7 @@
 size = Vector2(10, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wr3gm"]
-size = Vector2(12, 20)
+size = Vector2(14, 22)
 
 [node name="Barrier" type="StaticBody2D"]
 collision_layer = 16
@@ -18,7 +18,7 @@ script = ExtResource("1_mji35")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -12)
 texture = ExtResource("1_cixiy")
-hframes = 2
+hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
@@ -26,9 +26,10 @@ shape = SubResource("RectangleShape2D_8jdmd")
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("2_ayyv1")]
 collision_layer = 16
+lives = 2
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
-position = Vector2(0, -10)
+position = Vector2(0, -11)
 shape = SubResource("RectangleShape2D_wr3gm")
 
 [editable path="HurtboxComponent"]
