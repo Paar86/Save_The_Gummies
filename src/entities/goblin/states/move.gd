@@ -11,7 +11,7 @@ var direction: float = 11.0
 var horizontal_speed_scale: float = 1.0
 var can_attack: bool = true
 
-@onready var _can_attack_timer: Timer = $CanAttackTimer
+@onready var can_attack_timer: Timer = $CanAttackTimer
 
 
 func _ready() -> void:
@@ -40,7 +40,7 @@ func physics_process(delta: float) -> void:
 		character.change_direction(direction)
 
 	if character.player_detector.is_colliding() and can_attack:
-		_can_attack_timer.stop()
+		can_attack_timer.stop()
 		state_machine.transition_to("ReadyToAttack")
 
 
@@ -55,11 +55,11 @@ func on_can_attack_timer_timeout() -> void:
 
 func on_effect_added(effect: Enums.effect) -> void:
 	match effect:
-		Enums.effects.GLUED:
+		Enums.effect.GLUED:
 			horizontal_speed_scale = 0.5
 
 
 func on_effect_removed(effect: Enums.effect) -> void:
 	match effect:
-		Enums.effects.GLUED:
+		Enums.effect.GLUED:
 			horizontal_speed_scale = 1.0

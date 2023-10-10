@@ -3,8 +3,8 @@ class_name StateMachine extends Node
 @export var initial_state: State = null
 @export var animated_sprite: AnimatedSprite2D = null
 
+var current_state: State = null
 var _states: Array[State] = []
-var _current_state: State = null
 
 
 func _ready() -> void:
@@ -17,11 +17,11 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	_current_state.unhandled_input(event)
+	current_state.unhandled_input(event)
 
 
 func _physics_process(delta: float) -> void:
-	_current_state.physics_process(delta)
+	current_state.physics_process(delta)
 
 
 func transition_to(state_name: String, params: StateParams = null) -> void:
@@ -30,16 +30,16 @@ func transition_to(state_name: String, params: StateParams = null) -> void:
 		return
 
 	var desired_state := desired_states.pop_front() as State
-	if _current_state and !_current_state.states_for_transition.has(desired_state):
-		assert(false, "State '%s' cannot transition to a state '%s'" % [_current_state.state_name, desired_state.state_name])
+	if current_state and !current_state.states_for_transition.has(desired_state):
+		assert(false, "State '%s' cannot transition to a state '%s'" % [current_state.state_name, desired_state.state_name])
 		return
 
 	# There is no state at the beginning so nothing can "exit"
-	if _current_state:
-		_current_state.on_exit()
+	if current_state:
+		current_state.on_exit()
 
-	_current_state = desired_state
-	_current_state.on_enter(params)
+	current_state = desired_state
+	current_state.on_enter(params)
 
 
 func change_animation(animation_name: String) -> void:

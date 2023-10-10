@@ -24,6 +24,8 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
 
+[node name="Enemies" type="Node" parent="."]
+
 [node name="PlayerCamera" parent="." instance=ExtResource("2_fykds")]
 offset = Vector2(0, 0)
 
