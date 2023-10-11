@@ -10,6 +10,7 @@ var _speed: float = SPEED_DEFAULT
 @onready var _hitbox_component: HitboxComponent = $HitboxComponent
 @onready var _animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var _self_destruct_timer: Timer = $SelfDestructTimer
+@onready var _gpu_particles : GPUParticles2D = $GPUParticles2D
 
 
 func _ready() -> void:
@@ -29,6 +30,17 @@ func start_self_destruct_countdown(wait_time) -> void:
 	_animated_sprite.stop()
 
 	await _self_destruct_timer.timeout
+	play_destruct_animation()
+
+
+
+func play_destruct_animation():
+	_gpu_particles.emitting = true
+	await get_tree().create_timer(0.15).timeout
+	_animated_sprite.hide()
+	await get_tree().create_timer(0.35).timeout
+	_gpu_particles.emitting = false
+	await get_tree().create_timer(1).timeout
 	queue_free()
 
 
@@ -41,7 +53,7 @@ func _on_body_entered(body: Node2D) -> void:
 # Damage made to player
 func on_damage_made(amount: int, area: Area2D) -> void:
 	var transform_matrix = global_transform
-	get_parent().call_deferred("remove_child", self)
+	get_parent().remove_child(self)
 	area.add_child(self)
 	global_transform = transform_matrix
 
