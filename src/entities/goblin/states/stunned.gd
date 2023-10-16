@@ -20,5 +20,5 @@ func on_exit() -> void:
 	move_state.character.toggle_hitbox_collider(true)
 
 
-func on_stun_timer_timeout() -> void:
+func _on_stun_timer_timeout() -> void:
 	state_machine.transition_to("Idle")

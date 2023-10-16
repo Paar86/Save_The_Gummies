@@ -240,7 +240,7 @@ states_for_transition = [NodePath("../Move/Stunned"), NodePath("../Move/Attack")
 [node name="ExclamationMarkTimer" type="Timer" parent="StateMachine/ReadyToAttack"]
 one_shot = true
 
-[connection signal="timeout" from="StateMachine/Move/Stunned/StunTimer" to="StateMachine/Move/Stunned" method="on_stun_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Move/Stunned/StunTimer" to="StateMachine/Move/Stunned" method="_on_stun_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Move/Attack/AttackTimer" to="StateMachine/Move/Attack" method="on_attack_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Move/CanAttackTimer" to="StateMachine/Move" method="on_can_attack_timer_timeout"]
 [connection signal="timeout" from="StateMachine/ReadyToAttack/ExclamationMarkTimer" to="StateMachine/ReadyToAttack" method="on_exclamation_mark_timer_timeout"]

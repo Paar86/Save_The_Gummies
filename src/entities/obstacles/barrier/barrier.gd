@@ -1,5 +1,7 @@
 class_name Barrier extends StaticBody2D
 
+var _wooden_particles: PackedScene = preload("res://src/effects/particles/wooden_debris.tscn")
+
 @onready var _hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var _sprite: Sprite2D = $Sprite2D
 
@@ -19,6 +21,10 @@ func _on_damage_taken(damage: int) -> void:
 
 	if _hurtbox_component.lives <= 0:
 		_sprite.frame = 2
+
+	var particles = _wooden_particles.instantiate()
+	particles.position = _sprite.position
+	add_child(particles)
 
 
 func _on_destroyed() -> void:

@@ -13,8 +13,9 @@ var _speed: float = SPEED_DEFAULT
 
 
 func _ready() -> void:
-	_hitbox_component.damage_made.connect(on_damage_made)
+	_hitbox_component.damage_made.connect(_on_damage_made)
 	_hurtbox_component.effects_propagated.connect(_on_effects_propagated)
+	_hurtbox_component.lives_depleted.connect(_on_lives_depleted)
 
 
 func _physics_process(delta: float) -> void:
@@ -39,9 +40,9 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 # Damage made to player
-func on_damage_made(amount: int, area: Area2D) -> void:
+func _on_damage_made(amount: int, area: Area2D) -> void:
 	var transform_matrix = global_transform
-	get_parent().call_deferred("remove_child", self)
+	get_parent().remove_child(self)
 	area.add_child(self)
 	global_transform = transform_matrix
 
@@ -54,3 +55,7 @@ func _on_effects_propagated(effects: Array[String]) -> void:
 	# Stomp from player
 	if effects.has("stun"):
 		queue_free()
+
+
+func _on_lives_depleted() -> void:
+	queue_free()

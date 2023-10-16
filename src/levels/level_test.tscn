@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://becvu2tommbnh"]
+[gd_scene load_steps=23 format=3 uid="uid://becvu2tommbnh"]
 
 [ext_resource type="PackedScene" uid="uid://dvje8c8sahcwc" path="res://src/levels/level_base.tscn" id="1_wv10m"]
 [ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/grass_tiny_tileset.tres" id="2_y5w7g"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://src/utils/tilemap_collision_baker.gd" id="5_umixs"]
 [ext_resource type="PackedScene" uid="uid://bmmhoexfwl035" path="res://src/entities/obstacles/barrier/barrier.tscn" id="6_i5wt7"]
 [ext_resource type="PackedScene" uid="uid://dayyvi88hdu0a" path="res://src/entities/obstacles/fire_trap/fire_trap.tscn" id="6_u2tis"]
-[ext_resource type="PackedScene" uid="uid://c1ny4x7ikhd2j" path="res://src/entities/goblin/goblin.tscn" id="7_7lchj"]
 [ext_resource type="PackedScene" uid="uid://cpjklwe1a6wss" path="res://src/entities/objects/ladder.tscn" id="8_llwp4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rpne2"]
@@ -129,9 +128,6 @@ shape = SubResource("RectangleShape2D_e5a8d")
 
 [node name="Barrier" parent="ObjectsMiddle" index="1" instance=ExtResource("6_i5wt7")]
 position = Vector2(140, 120)
-
-[node name="Goblin" parent="Enemies" index="0" instance=ExtResource("7_7lchj")]
-position = Vector2(52, 120)
 
 [node name="BallCreature" parent="." index="5" instance=ExtResource("3_su1xc")]
 position = Vector2(87, 68)
