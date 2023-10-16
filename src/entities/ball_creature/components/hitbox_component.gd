@@ -1,7 +1,7 @@
 extends HitboxComponent
 
 # How fast has the creature to move to make damage
-const DAMAGE_VELOCITY_THRESHOLD: = 180.0
+const DAMAGE_VELOCITY_THRESHOLD: = 160.0
 @export var _ball_creature: BallCreature
 
 
