@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Save_The_Gummies"
-run/main_scene="res://src/levels/level_test.tscn"
+run/main_scene="res://src/managers/game_manager.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 
 [autoload]

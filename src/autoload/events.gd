@@ -7,3 +7,6 @@ signal player_exited_ladder
 signal player_hurt
 signal player_dead
 signal player_bounce_up_requested
+
+signal change_level
+signal reload_level
