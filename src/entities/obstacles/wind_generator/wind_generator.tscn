@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxoq0cmr425ux"]
+
+[ext_resource type="Texture2D" uid="uid://rs4hl0x11mav" path="res://assets/obstacles/fan_spritesheet.png" id="1_hvisb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhbd7"]
+atlas = ExtResource("1_hvisb")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wc5n6"]
+atlas = ExtResource("1_hvisb")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50fty"]
+atlas = ExtResource("1_hvisb")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rybtx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhbd7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wc5n6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50fty")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v40qx"]
+size = Vector2(10, 22)
+
+[node name="WindGenerator" type="StaticBody2D"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_rybtx")
+autoplay = "default"
+frame_progress = 0.0394836
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -11)
+shape = SubResource("RectangleShape2D_v40qx")
