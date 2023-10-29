@@ -3,6 +3,9 @@ class_name BallCreature extends RigidBody2D
 signal effect_added(effect: Enums.effect)
 signal effect_removed(effect: Enums.effect)
 
+# Secondary velocity has different effect on RigidBody2D so we should be able to tweak it
+const VELOCITY_SECONDARY_SCALE: = 2.0
+
 var pickable: bool = true:
 	set(value):
 		pickable = value
@@ -25,7 +28,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if _effects_applier_component.velocity_secondary != Vector2.ZERO:
-		apply_central_force(_effects_applier_component.velocity_secondary)
+		apply_central_force(_effects_applier_component.velocity_secondary * VELOCITY_SECONDARY_SCALE)
 
 
 func apply_effect(effect: Enums.effect) -> void:

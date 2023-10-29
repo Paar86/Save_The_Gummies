@@ -425,7 +425,7 @@ states_for_transition = [NodePath("../CarryIdle"), NodePath("../../../Kick"), No
 [node name="Pickup" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "states_for_transition")]
 script = ExtResource("8_pln1i")
 character = NodePath("../..")
-states_for_transition = [NodePath("../Move/Carry/CarryIdle")]
+states_for_transition = [NodePath("../Move/Carry/CarryIdle"), NodePath("../Move/Idle")]
 
 [node name="Kick" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "states_for_transition")]
 script = ExtResource("13_puh06")

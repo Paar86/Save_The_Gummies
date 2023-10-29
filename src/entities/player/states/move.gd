@@ -49,7 +49,8 @@ func unhandled_input(event: InputEvent) -> void:
 		state_machine.transition_to("Air", params)
 		return
 
-	if event.is_action_pressed("action") and character.pickable_objects.size() > 0:
+	# We shouldn't be able to pick up anything when we're in windy area
+	if event.is_action_pressed("action") and character.pickable_objects.size() > 0 and character.velocity_secondary == Vector2.ZERO:
 		state_machine.transition_to("Pickup")
 		return
 
