@@ -67,8 +67,7 @@ rotation = -3.14159
 scale = Vector2(1, -1)
 
 [node name="WindGenerator" parent="ObjectsBehind" index="1" instance=ExtResource("3_3leu3")]
-position = Vector2(232, 72)
-scale = Vector2(-1, 1)
+position = Vector2(16, 120)
 
 [node name="TilemapBody" type="StaticBody2D" parent="." index="1"]
 collision_mask = 0

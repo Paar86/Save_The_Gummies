@@ -31,17 +31,17 @@ func on_enter(params: StateParams) -> void:
 	if params:
 		_is_jumping = params.initiated_jumping
 		if _is_jumping:
-			move_state.character.velocity.y = -JUMP_FORCE
+			move_state.character.velocity_primary.y = -JUMP_FORCE
 			move_state.gravity_scale = 0.0
 			_jump_timer.start()
 		elif params.initial_impulse:
-			move_state.character.velocity = params.initial_impulse
+			move_state.character.velocity_primary = params.initial_impulse
 
 	# Procaution if the jump has been initiated by Idle state using buffered jump
 	if not Input.is_action_pressed("jump"):
 		_is_jumping = false
 
-	if move_state.character.velocity.y > 0.0:
+	if move_state.character.velocity_primary.y > 0.0:
 		_allow_coyote_jump = true
 		_coyote_timer.start()
 
@@ -71,7 +71,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 	if event.is_action_pressed("jump"):
 		if _allow_coyote_jump:
-			move_state.character.velocity.y = -JUMP_FORCE
+			move_state.character.velocity_primary.y = -JUMP_FORCE
 			_allow_coyote_jump = false
 			_is_jumping = true
 			_jump_timer.start()
@@ -87,9 +87,9 @@ func physics_process(delta: float) -> void:
 
 	# As long as the player holds the jump button
 	if _is_jumping:
-		move_state.character.velocity.y = -JUMP_FORCE
+		move_state.character.velocity_primary.y = -JUMP_FORCE
 
-	if sign(move_state.character.velocity.y) > 0.0:
+	if sign(move_state.character.velocity_primary.y) > 0.0:
 			move_state.gravity_scale = JUMP_GRAVITY_SCALE
 
 	if move_state.character.is_on_floor():
@@ -101,7 +101,7 @@ func physics_process(delta: float) -> void:
 		return
 
 	if move_state.character.is_on_ceiling():
-		move_state.character.velocity.y = 0.0
+		move_state.character.velocity_primary.y = 0.0
 		move_state.gravity_scale = JUMP_GRAVITY_SCALE
 		_is_jumping = false
 
@@ -121,4 +121,4 @@ func _on_jump_timer_timeout() -> void:
 
 
 func on_bounce_up_requested() -> void:
-	move_state.character.velocity.y = -JUMP_FORCE
+	move_state.character.velocity_primary.y = -JUMP_FORCE

@@ -22,7 +22,7 @@ func on_enter(params: StateParams) -> void:
 	character.hold_object = _picked_object
 
 	_elapsed_time = 0.0
-	character.velocity = Vector2.ZERO
+	character.velocity_primary = Vector2.ZERO
 
 
 func physics_process(delta: float) -> void:

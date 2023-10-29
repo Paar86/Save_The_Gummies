@@ -40,6 +40,9 @@ func on_enter(params: StateParams) -> void:
 	if params and params.climbing_up:
 		state_machine.change_animation("ladder")
 
+	# Reset the primary velocity so the player doesn't move when exiting the state
+	character.velocity_primary = Vector2.ZERO
+
 
 func on_exit() -> void:
 	character.toggle_hitbox_collider(true)

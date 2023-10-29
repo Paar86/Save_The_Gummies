@@ -55,11 +55,11 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func physics_process(delta: float) -> void:
-	character.velocity.y += gravity * gravity_scale * delta
-	character.velocity.y = min(character.velocity.y, MAX_FALL_SPEED)
+	character.velocity_primary.y += gravity * gravity_scale * delta
+	character.velocity_primary.y = min(character.velocity_primary.y, MAX_FALL_SPEED)
 
 	var input_direction: float = Input.get_axis("move_left", "move_right")
-	var move_direction: float = sign(character.velocity.x)
+	var move_direction: float = sign(character.velocity_primary.x)
 
 	if not movement_enabled:
 		input_direction = 0.0
@@ -75,22 +75,24 @@ func physics_process(delta: float) -> void:
 			acceleration = TURN_ACCELERATION
 
 	if input_direction:
-		character.velocity.x = move_toward(
-			character.velocity.x,
+		character.velocity_primary.x = move_toward(
+			character.velocity_primary.x,
 			input_direction * max_speed * max_speed_modifier,
 			acceleration * acceleration_scale * delta
 		)
 	else:
-		character.velocity.x = move_toward(
-			character.velocity.x,
+		character.velocity_primary.x = move_toward(
+			character.velocity_primary.x,
 			0,
 			FRICTION * friction_scale * delta
 		)
 
+	print("Secondary velocity: " + str(character.velocity_secondary))
+	character.velocity = character.velocity_combined
 	character.move_and_slide()
 
 	if character.is_on_floor():
-		character.velocity.y = 0.0
+		character.velocity_primary.y = 0.0
 
 
 func on_player_direction_changed(new_direction: float) -> void:

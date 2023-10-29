@@ -24,6 +24,6 @@ func physics_process(delta: float) -> void:
 		state_machine.transition_to("Air")
 		return
 
-	if not move_state.character.is_on_wall() and move_state.character.velocity.x != 0.0:
+	if not move_state.character.is_on_wall() and move_state.character.velocity_primary.x != 0.0:
 		state_machine.transition_to("Run")
 		return
