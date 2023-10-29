@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://c36mwvup5f8ad"]
+[gd_scene load_steps=9 format=3 uid="uid://c36mwvup5f8ad"]
 
 [ext_resource type="Script" path="res://src/entities/ball_creature/ball_creature.gd" id="1_r5tyh"]
 [ext_resource type="Texture2D" uid="uid://cvnkx10pug7s8" path="res://assets/ball_creature/ball_creature_tiny.png" id="2_0gvlg"]
 [ext_resource type="PackedScene" uid="uid://cvsgunn02v50s" path="res://src/common/components/hitbox/hitbox_component.tscn" id="2_4pech"]
+[ext_resource type="PackedScene" uid="uid://c8wqsow14x6ea" path="res://src/common/components/effects_applier/effects_applier_component.tscn" id="2_36s0l"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/components/hitbox_component.gd" id="3_208bs"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_etqu6"]
@@ -16,12 +17,13 @@ radius = 6.0
 radius = 3.5
 
 [node name="BallCreature" type="RigidBody2D"]
-texture_filter = 1
 collision_layer = 8
 collision_mask = 17
 mass = 3.0
 physics_material_override = SubResource("PhysicsMaterial_etqu6")
 script = ExtResource("1_r5tyh")
+
+[node name="EffectsApplierComponent" parent="." instance=ExtResource("2_36s0l")]
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_ball_creature") instance=ExtResource("2_4pech")]
 collision_mask = 20

@@ -87,7 +87,6 @@ func physics_process(delta: float) -> void:
 			FRICTION * friction_scale * delta
 		)
 
-	print("Secondary velocity: " + str(character.velocity_secondary))
 	character.velocity = character.velocity_combined
 	character.move_and_slide()
 

@@ -29,6 +29,8 @@ var _is_flashing: bool = false
 
 
 func _ready() -> void:
+	super._ready()
+
 	Events.player_direction_changed.connect(_on_player_direction_changed)
 	Events.player_aiming_requested.connect(_on_player_aiming_requested)
 	Events.player_aiming_called_off.connect(_on_player_aiming_called_off)

@@ -149,13 +149,13 @@ shape = SubResource("RectangleShape2D_e5a8d")
 position = Vector2(140, 120)
 
 [node name="BallCreature" parent="." index="5" instance=ExtResource("3_su1xc")]
-position = Vector2(152, 84)
+position = Vector2(44, 116)
 
 [node name="PlayerCamera" parent="." index="6"]
-position = Vector2(20, 40)
+position = Vector2(16, 120)
 
 [node name="Player" parent="." index="8"]
-position = Vector2(20, 40)
+position = Vector2(16, 120)
 
 [node name="GlueFloor" parent="ObjectsInFront" index="0" instance=ExtResource("5_igaj5")]
 position = Vector2(88, 120)
@@ -172,7 +172,7 @@ position = Vector2(20, -2)
 shape = SubResource("RectangleShape2D_h7ibx")
 
 [node name="FireTrap" parent="ObjectsInFront" index="1" instance=ExtResource("6_u2tis")]
-position = Vector2(60, 120)
+position = Vector2(160, 88)
 
 [editable path="ObjectsMiddle/Ladder"]
 [editable path="ObjectsInFront/GlueFloor"]

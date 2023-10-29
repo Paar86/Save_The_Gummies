@@ -5,46 +5,42 @@ signal effect_removed(effect: Enums.effect)
 
 # Main movement velocity
 var velocity_primary: Vector2 = Vector2.ZERO
-# Velocity from external forces (e.g. wind)
-var velocity_secondary: Vector2 = Vector2.ZERO
 
-var _applied_effects: Array[Enums.effect] = []
-var _applied_movement_modificators: Array[Vector2] = []
-#var _combined_movement_modificator: Vector2 = Vector2.ZERO
+# Properties
+var velocity_secondary: Vector2:
+	get:
+		return _effects_applier_component.velocity_secondary
 
 var velocity_combined: Vector2:
 	get:
 		return velocity_primary + velocity_secondary
 
+# Nodes
+@onready var _effects_applier_component: EffectsApplierComponent = $EffectsApplierComponent
 
+
+func _ready() -> void:
+	# Delegating signals from effect applier component for use in FSM
+	_effects_applier_component.effect_added.connect(func(effect: Enums.effect) -> void: effect_added.emit(effect))
+	_effects_applier_component.effect_removed.connect(func(effect: Enums.effect) -> void: effect_removed.emit(effect))
+
+
+# Proxy calls to EffectsApplierComponent
 func apply_effect(effect: Enums.effect) -> void:
-	if not _applied_effects.has(effect):
-		effect_added.emit(effect)
-
-	_applied_effects.append(effect)
+	_effects_applier_component.apply_effect(effect)
 
 
 func remove_effect(effect: Enums.effect) -> void:
-	_applied_effects.erase(effect)
-
-	if not _applied_effects.has(effect):
-		effect_removed.emit(effect)
+	_effects_applier_component.remove_effect(effect)
 
 
 func apply_movement_modificator(modificator: Vector2) -> void:
-	if not _applied_movement_modificators.has(modificator):
-		velocity_secondary += modificator
-
-	_applied_movement_modificators.push_back(modificator)
+	_effects_applier_component.apply_movement_modificator(modificator)
 
 
 func remove_movement_modificator(modificator: Vector2) -> void:
-	_applied_movement_modificators.erase(modificator)
-
-	var occurrences = _applied_movement_modificators.count(modificator)
-	if occurrences == 0:
-		velocity_secondary -= modificator
+	_effects_applier_component.remove_movement_modificator(modificator)
 
 
 func is_effect_active(effect: Enums.effect) -> bool:
-	return _applied_effects.has(effect)
+	return _effects_applier_component.is_effect_active(effect)
