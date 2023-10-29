@@ -22,12 +22,12 @@ var movement_enabled: = true
 
 
 func _ready() -> void:
-	Events.player_direction_changed.connect(on_player_direction_changed)
-	Events.player_aiming_requested.connect(on_aiming_requested)
-	Events.player_aiming_called_off.connect(on_aiming_called_off)
+	Events.player_direction_changed.connect(_on_player_direction_changed)
+	Events.player_aiming_requested.connect(_on_aiming_requested)
+	Events.player_aiming_called_off.connect(_on_aiming_called_off)
 
-	character.effect_added.connect(on_effect_added)
-	character.effect_removed.connect(on_effect_removed)
+	character.effect_added.connect(_on_effect_added)
+	character.effect_removed.connect(_on_effect_removed)
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -95,26 +95,28 @@ func physics_process(delta: float) -> void:
 		character.velocity_primary.y = 0.0
 
 
-func on_player_direction_changed(new_direction: float) -> void:
+func _on_player_direction_changed(new_direction: float) -> void:
 	face_direction = new_direction
 
 
-func on_aiming_requested() -> void:
+func _on_aiming_requested() -> void:
 	movement_enabled = false
 
 
-func on_aiming_called_off() -> void:
+func _on_aiming_called_off() -> void:
 	movement_enabled = true
 
 
-func on_effect_added(effect: Enums.effect) -> void:
+func _on_effect_added(effect: Enums.effect) -> void:
 	match effect:
 		Enums.effect.GLUED:
 			jump_enabled = false
 			max_speed_modifier = 0.5
+		Enums.effect.WIND:
+			Events.player_pickup_drop_requested.emit()
 
 
-func on_effect_removed(effect: Enums.effect) -> void:
+func _on_effect_removed(effect: Enums.effect) -> void:
 	match effect:
 		Enums.effect.GLUED:
 			jump_enabled = true

@@ -13,6 +13,10 @@ var _is_fast_aiming_up: = false
 @onready var _to_aim_timer: Timer = $ToAimTimer
 
 
+func _ready() -> void:
+	Events.player_pickup_drop_requested.connect(_on_player_pickup_drop_requested)
+
+
 func physics_process(delta: float) -> void:
 #	if not is_aiming:
 	move_state.physics_process(delta)
@@ -55,6 +59,9 @@ func unhandled_input(event: InputEvent) -> void:
 
 func release_pickup(impulse: Vector2) -> void:
 	var thrown_object = move_state.character.hold_object as BallCreature
+	if not thrown_object:
+		return
+
 	move_state.character.hold_object = null
 	move_state.character.pickup_transform.set_deferred("remote_path", null)
 	thrown_object.set_deferred("freeze", false)
@@ -82,3 +89,7 @@ func get_fast_vertical_impulse() -> Vector2:
 func on_to_aim_timer_timeout() -> void:
 	Events.player_aiming_requested.emit()
 	_is_aiming = true
+
+
+func _on_player_pickup_drop_requested() -> void:
+	release_pickup(Vector2.ZERO)

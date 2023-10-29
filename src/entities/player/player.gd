@@ -29,9 +29,9 @@ var _is_flashing: bool = false
 
 
 func _ready() -> void:
-	Events.player_direction_changed.connect(on_player_direction_changed)
-	Events.player_aiming_requested.connect(on_player_aiming_requested)
-	Events.player_aiming_called_off.connect(on_player_aiming_called_off)
+	Events.player_direction_changed.connect(_on_player_direction_changed)
+	Events.player_aiming_requested.connect(_on_player_aiming_requested)
+	Events.player_aiming_called_off.connect(_on_player_aiming_called_off)
 
 	_hurtbox_component.lives_changed.connect(on_damage_taken)
 	_hurtbox_component.lives_depleted.connect(on_lives_depleted)
@@ -69,7 +69,7 @@ func toggle_hurtbox_collider(value: bool) -> void:
 	_hurtbox_component.set_deferred("monitorable", value)
 
 
-func on_player_direction_changed(new_direction: float) -> void:
+func _on_player_direction_changed(new_direction: float) -> void:
 	# Reversing the player sprite
 	_player_animated_sprite.scale.x = abs(_player_animated_sprite.scale.x) * new_direction
 
@@ -80,11 +80,11 @@ func on_player_direction_changed(new_direction: float) -> void:
 	_throw_arrow_pivot.position.x = abs(_throw_arrow_pivot.position.x) * new_direction
 
 
-func on_player_aiming_requested() -> void:
+func _on_player_aiming_requested() -> void:
 	_throw_arrow_pivot.enable()
 
 
-func on_player_aiming_called_off() -> void:
+func _on_player_aiming_called_off() -> void:
 	_throw_arrow_pivot.disable()
 
 
