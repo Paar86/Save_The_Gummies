@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c36mwvup5f8ad"]
+[gd_scene load_steps=11 format=3 uid="uid://c36mwvup5f8ad"]
 
 [ext_resource type="Script" path="res://src/entities/ball_creature/ball_creature.gd" id="1_r5tyh"]
 [ext_resource type="Texture2D" uid="uid://cvnkx10pug7s8" path="res://assets/ball_creature/ball_creature_tiny.png" id="2_0gvlg"]
 [ext_resource type="PackedScene" uid="uid://cvsgunn02v50s" path="res://src/common/components/hitbox/hitbox_component.tscn" id="2_4pech"]
 [ext_resource type="PackedScene" uid="uid://c8wqsow14x6ea" path="res://src/common/components/effects_applier/effects_applier_component.tscn" id="2_36s0l"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/components/hitbox_component.gd" id="3_208bs"]
+[ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie.gdshader" id="5_6f6km"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_etqu6"]
 rough = true
@@ -15,6 +16,10 @@ radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_batwe"]
 radius = 3.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_12c18"]
+shader = ExtResource("5_6f6km")
+shader_parameter/palette = 0
 
 [node name="BallCreature" type="RigidBody2D"]
 collision_layer = 8
@@ -43,6 +48,7 @@ update_rotation = false
 [node name="Node" type="Node" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Node"]
+material = SubResource("ShaderMaterial_12c18")
 texture = ExtResource("2_0gvlg")
 
 [editable path="HitboxComponent"]

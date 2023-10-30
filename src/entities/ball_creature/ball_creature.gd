@@ -1,3 +1,4 @@
+@tool
 class_name BallCreature extends RigidBody2D
 
 signal effect_added(effect: Enums.effect)
@@ -5,6 +6,10 @@ signal effect_removed(effect: Enums.effect)
 
 # Secondary velocity has different effect on RigidBody2D so we should be able to tweak it
 const VELOCITY_SECONDARY_SCALE: = 2.0
+enum colors {BLUE_DARK_BLUE, GREEN_DARK_GREEN, YELLOW_DARK_YELLOW, 
+	MAGENTA_MAROON, PINK_MAROON, DARK_YELLOW_BROWN, WHEAT_YELLOW_BROWN}
+
+@export var color = colors.BLUE_DARK_BLUE;
 
 var pickable: bool = true:
 	set(value):
@@ -16,19 +21,24 @@ var _damp_default: float = ProjectSettings.get_setting("physics/2d/default_linea
 
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var _effects_applier_component: EffectsApplierComponent = $EffectsApplierComponent
+@onready var _sprite: Sprite2D = $Node/Sprite2D
 
 
 func _ready() -> void:
-	_effects_applier_component.effect_added.connect(func(effect: Enums.effect) -> void: effect_added.emit(effect))
-	_effects_applier_component.effect_removed.connect(func(effect: Enums.effect) -> void: effect_removed.emit(effect))
+	if not Engine.is_editor_hint():
+		_effects_applier_component.effect_added.connect(func(effect: Enums.effect) -> void: effect_added.emit(effect))
+		_effects_applier_component.effect_removed.connect(func(effect: Enums.effect) -> void: effect_removed.emit(effect))
 
-	effect_added.connect(_on_effect_added)
-	effect_removed.connect(_on_effect_removed)
+		effect_added.connect(_on_effect_added)
+		effect_removed.connect(_on_effect_removed)
 
 
 func _physics_process(delta: float) -> void:
-	if _effects_applier_component.velocity_secondary != Vector2.ZERO:
-		apply_central_force(_effects_applier_component.velocity_secondary * VELOCITY_SECONDARY_SCALE)
+	_sprite.get_material().set_shader_parameter("palette", color)
+
+	if not Engine.is_editor_hint():
+		if _effects_applier_component.velocity_secondary != Vector2.ZERO:
+			apply_central_force(_effects_applier_component.velocity_secondary * VELOCITY_SECONDARY_SCALE)
 
 
 func apply_effect(effect: Enums.effect) -> void:
