@@ -37,6 +37,10 @@ void fragment() {
 			secondary = vec3(171, 82, 54);
 			break;
 	}
-	COLOR.rgb = step(0.5, color.r)*(secondary/255.0) + step(color.r, 0.9)*(primary/255.0);
+	if (color.r < 0.5) {
+		COLOR.rgb = secondary/255.0;
+	} else {
+		COLOR.rgb = primary/255.0;
+	}
 }
 
