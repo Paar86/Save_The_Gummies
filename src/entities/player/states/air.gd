@@ -54,6 +54,7 @@ func on_exit() -> void:
 	move_state.friction_scale = 1.0
 	_is_jumping = false
 	_is_jump_buffered = false
+	_allow_coyote_jump = false
 	_jump_timer.stop()
 	_buffer_timer.stop()
 	_coyote_timer.stop()

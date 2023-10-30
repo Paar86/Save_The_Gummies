@@ -53,8 +53,8 @@ size = Vector2(40, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e5a8d"]
 size = Vector2(8, 78)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7ibx"]
-size = Vector2(40, 4)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5nqq"]
+size = Vector2(40, 8)
 
 [node name="LevelTest" instance=ExtResource("1_wv10m")]
 
@@ -169,7 +169,7 @@ position = Vector2(32, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectsInFront/GlueFloor" index="4"]
 position = Vector2(20, -2)
-shape = SubResource("RectangleShape2D_h7ibx")
+shape = SubResource("RectangleShape2D_h5nqq")
 
 [node name="FireTrap" parent="ObjectsInFront" index="1" instance=ExtResource("6_u2tis")]
 position = Vector2(160, 88)
