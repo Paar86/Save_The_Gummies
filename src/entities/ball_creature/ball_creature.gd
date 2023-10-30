@@ -9,7 +9,7 @@ const VELOCITY_SECONDARY_SCALE: = 2.0
 enum colors {BLUE_DARK_BLUE, GREEN_DARK_GREEN, YELLOW_DARK_YELLOW, 
 	MAGENTA_MAROON, PINK_MAROON, DARK_YELLOW_BROWN, WHEAT_YELLOW_BROWN}
 
-@export var color = colors.BLUE_DARK_BLUE;
+@export var color = colors.BLUE_DARK_BLUE : set = _set_color;
 
 var pickable: bool = true:
 	set(value):
@@ -34,8 +34,6 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	_sprite.get_material().set_shader_parameter("palette", color)
-
 	if not Engine.is_editor_hint():
 		if _effects_applier_component.velocity_secondary != Vector2.ZERO:
 			apply_central_force(_effects_applier_component.velocity_secondary * VELOCITY_SECONDARY_SCALE)
@@ -83,3 +81,7 @@ func _on_effect_removed(effect: Enums.effect) -> void:
 		Enums.effect.GLUED:
 			linear_damp = _damp_default
 			physics_material_override.bounce = 0.4
+
+func _set_color(new_color : colors):
+	_sprite.get_material().set_shader_parameter("palette", new_color)
+	color = new_color
