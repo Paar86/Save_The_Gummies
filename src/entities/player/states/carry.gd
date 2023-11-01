@@ -62,6 +62,7 @@ func release_pickup(impulse: Vector2) -> void:
 	if not thrown_object:
 		return
 
+	thrown_object.collision_layer = 0
 	move_state.character.hold_object = null
 	move_state.character.pickup_transform.set_deferred("remote_path", null)
 	thrown_object.set_deferred("freeze", false)
@@ -74,6 +75,8 @@ func release_pickup(impulse: Vector2) -> void:
 
 	if impulse != Vector2.ZERO:
 		state_machine.transition_to("Kick")
+		await get_tree().create_timer(0.07).timeout
+		thrown_object.collision_layer = 8
 		return
 
 	state_machine.transition_to("Idle")
