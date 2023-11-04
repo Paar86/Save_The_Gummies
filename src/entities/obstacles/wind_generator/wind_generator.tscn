@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxoq0cmr425ux"]
+[gd_scene load_steps=15 format=3 uid="uid://dxoq0cmr425ux"]
 
 [ext_resource type="Texture2D" uid="uid://rs4hl0x11mav" path="res://assets/obstacles/fan_spritesheet.png" id="1_hvisb"]
 [ext_resource type="Script" path="res://src/entities/obstacles/wind_generator/wind_generator.gd" id="1_i4jgy"]
+[ext_resource type="Texture2D" uid="uid://dy5xjxlyr1wwe" path="res://assets/obstacles/wind_particles.png" id="3_pu4xk"]
+[ext_resource type="Script" path="res://src/entities/obstacles/wind_generator/wind_particles.gd" id="4_0o7nl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhbd7"]
 atlas = ExtResource("1_hvisb")
@@ -36,7 +38,33 @@ animations = [{
 size = Vector2(10, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmg1f"]
-size = Vector2(44, 22)
+size = Vector2(74, 22)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cxuel"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_3s1vy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_uu3n6"]
+curve = SubResource("Curve_3s1vy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i106c"]
+emission_shape = 3
+emission_box_extents = Vector3(8, 12, 1)
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(98, 0, 0)
+initial_velocity_min = 160.0
+initial_velocity_max = 160.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+anim_offset_max = 1.0
+anim_offset_curve = SubResource("CurveTexture_uu3n6")
 
 [node name="WindGenerator" type="StaticBody2D"]
 collision_layer = 16
@@ -59,8 +87,19 @@ collision_mask = 14
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WindArea"]
-position = Vector2(29, -11)
+position = Vector2(42, -11)
 shape = SubResource("RectangleShape2D_lmg1f")
+
+[node name="WindParticles" type="GPUParticles2D" parent="WindArea"]
+material = SubResource("CanvasItemMaterial_cxuel")
+position = Vector2(13, -11)
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_i106c")
+texture = ExtResource("3_pu4xk")
+lifetime = 0.4
+randomness = 1.0
+visibility_rect = Rect2(-23.4819, -26.3594, 117.494, 53.3361)
+script = ExtResource("4_0o7nl")
 
 [connection signal="body_entered" from="WindArea" to="." method="_on_wind_area_body_entered"]
 [connection signal="body_exited" from="WindArea" to="." method="_on_wind_area_body_exited"]
