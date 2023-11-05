@@ -18,6 +18,11 @@ func physics_process(delta: float) -> void:
 	var movement_speed_scale: float = abs(real_velocity.length()) / move_state.max_speed
 	state_machine.change_animation_speed_scale(movement_speed_scale)
 
+	# As we're not using character.velocity which would return 0.0 value
+	# on x axis after move_and_slide() we must reset the primary velocity ourselves.
+	if move_state.character.is_on_wall():
+		move_state.character.velocity_primary.x = 0.0
+
 	if not move_state.character.is_on_floor():
 		state_machine.transition_to("Air")
 		return
