@@ -14,7 +14,6 @@ var _speed: float = SPEED_DEFAULT
 
 func _ready() -> void:
 	_hitbox_component.damage_made.connect(_on_damage_made)
-	_hurtbox_component.effects_propagated.connect(_on_effects_propagated)
 	_hurtbox_component.lives_depleted.connect(_on_lives_depleted)
 
 
@@ -48,13 +47,6 @@ func _on_damage_made(amount: int, area: Area2D) -> void:
 
 	_speed = 0.0
 	start_self_destruct_countdown(PLAYER_WAIT_TIME)
-
-
-# Damage from player/ball
-func _on_effects_propagated(effects: Array[String]) -> void:
-	# Stomp from player
-	if effects.has("stun"):
-		queue_free()
 
 
 func _on_lives_depleted() -> void:

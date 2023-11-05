@@ -40,4 +40,9 @@ func _on_area_shape_entered(
 
 	if contact_from_above:
 		Events.player_bounce_up_requested.emit()
-		(area.owner as GameCharacter).apply_effect(Enums.effect.STUNNED)
+
+		if area.owner is GameCharacter:
+			(area.owner as GameCharacter).apply_effect(Enums.effect.STUNNED)
+
+		if area.owner is Arrow:
+			(area as HurtboxComponent).make_damage(1)
