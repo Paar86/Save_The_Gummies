@@ -40,4 +40,4 @@ func _on_area_shape_entered(
 
 	if contact_from_above:
 		Events.player_bounce_up_requested.emit()
-		(area as HurtboxComponent).propagate_effects(["stun"])
+		(area.owner as GameCharacter).apply_effect(Enums.effect.STUNNED)

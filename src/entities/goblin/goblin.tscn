@@ -1,7 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://c1ny4x7ikhd2j"]
+[gd_scene load_steps=33 format=3 uid="uid://c1ny4x7ikhd2j"]
 
 [ext_resource type="Script" path="res://src/entities/goblin/goblin.gd" id="1_i1jgx"]
 [ext_resource type="Script" path="res://src/common/state_machine/state_machine.gd" id="2_icrb6"]
+[ext_resource type="PackedScene" uid="uid://c8wqsow14x6ea" path="res://src/common/components/effects_applier/effects_applier_component.tscn" id="2_jj1ia"]
 [ext_resource type="Texture2D" uid="uid://dyyhfhyi43oym" path="res://assets/enemies/goblin_sheet.png" id="2_s3wem"]
 [ext_resource type="PackedScene" uid="uid://cnm077r8cak41" path="res://src/common/components/hurtbox/hurtbox_component.tscn" id="2_w1lkx"]
 [ext_resource type="PackedScene" uid="uid://cvsgunn02v50s" path="res://src/common/components/hitbox/hitbox_component.tscn" id="3_qa6k3"]
@@ -144,6 +145,8 @@ collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_i1jgx")
 
+[node name="EffectsApplierComponent" parent="." instance=ExtResource("2_jj1ia")]
+
 [node name="HurtboxComponent" parent="." instance=ExtResource("2_w1lkx")]
 collision_layer = 4
 
@@ -242,7 +245,7 @@ one_shot = true
 
 [connection signal="timeout" from="StateMachine/Move/Stunned/StunTimer" to="StateMachine/Move/Stunned" method="_on_stun_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Move/Attack/AttackTimer" to="StateMachine/Move/Attack" method="on_attack_timer_timeout"]
-[connection signal="timeout" from="StateMachine/Move/CanAttackTimer" to="StateMachine/Move" method="on_can_attack_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Move/CanAttackTimer" to="StateMachine/Move" method="_on_can_attack_timer_timeout"]
 [connection signal="timeout" from="StateMachine/ReadyToAttack/ExclamationMarkTimer" to="StateMachine/ReadyToAttack" method="on_exclamation_mark_timer_timeout"]
 
 [editable path="HurtboxComponent"]

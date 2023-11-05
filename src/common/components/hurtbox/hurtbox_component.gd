@@ -25,6 +25,7 @@ func make_damage(damage: int) -> void:
 
 
 # To propagate some effect on owner, e.g. stun
+# OBSOLETE, we're using EffectsApplierComponent
 func propagate_effects(effects: Array[String]) -> void:
 	effects_propagated.emit(effects)
 

@@ -1,3 +1,3 @@
 extends Node
 
-enum effect { GLUED, WIND }
+enum effect { GLUED, WIND, STUNNED }

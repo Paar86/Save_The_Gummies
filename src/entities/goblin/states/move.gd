@@ -20,46 +20,50 @@ func _ready() -> void:
 	await owner.ready
 	direction = character.get_facing_direction()
 
-	character.effect_added.connect(on_effect_added)
-	character.effect_removed.connect(on_effect_removed)
+	character.effect_added.connect(_on_effect_added)
+	character.effect_removed.connect(_on_effect_removed)
 
 
 func physics_process(delta: float) -> void:
 	if character.is_on_floor():
-		character.velocity.y = 0.0
+		character.velocity_primary.y = 0.0
 	else:
-		character.velocity.y += gravity * delta
+		character.velocity_primary.y += gravity * delta
 
-	character.velocity.y = min(character.velocity.y, MAX_FALLING_SPEED)
-	character.velocity.x = horizontal_speed * direction * horizontal_speed_scale
+	character.velocity_primary.y = min(character.velocity_primary.y, MAX_FALLING_SPEED)
+	character.velocity_primary.x = horizontal_speed * direction * horizontal_speed_scale
 
+	character.velocity = character.velocity_combined
 	character.move_and_slide()
 
 	if character.is_on_wall():
-		direction *= -1
-		character.change_direction(direction)
+		_change_direction()
 
 	if character.player_detector.is_colliding() and can_attack:
 		can_attack_timer.stop()
 		state_machine.transition_to("ReadyToAttack")
 
 
-func propagate_effects(effects: Array[String]) -> void:
-	if effects.has("stun"):
-		state_machine.transition_to("Stunned")
+func _change_direction() -> void:
+	direction *= -1
+	character.change_direction(direction)
 
 
-func on_can_attack_timer_timeout() -> void:
+func _on_can_attack_timer_timeout() -> void:
 	can_attack = true
 
 
-func on_effect_added(effect: Enums.effect) -> void:
+func _on_effect_added(effect: Enums.effect) -> void:
 	match effect:
 		Enums.effect.GLUED:
 			horizontal_speed_scale = 0.5
+		Enums.effect.STUNNED:
+			state_machine.transition_to("Stunned")
+		Enums.effect.WIND:
+			_change_direction()
 
 
-func on_effect_removed(effect: Enums.effect) -> void:
+func _on_effect_removed(effect: Enums.effect) -> void:
 	match effect:
 		Enums.effect.GLUED:
 			horizontal_speed_scale = 1.0

@@ -19,6 +19,8 @@ func on_exit() -> void:
 	move_state.character.toggle_hurtbox_collider(true)
 	move_state.character.toggle_hitbox_collider(true)
 
+	move_state.character.flush_effect(Enums.effect.STUNNED)
+
 
 func _on_stun_timer_timeout() -> void:
 	state_machine.transition_to("Idle")

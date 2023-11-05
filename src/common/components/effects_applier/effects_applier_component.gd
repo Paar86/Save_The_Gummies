@@ -11,6 +11,7 @@ var _applied_movement_modificators: Array[Vector2] = []
 
 
 func apply_effect(effect: Enums.effect) -> void:
+	# We should only react if there is no other effect of the same type
 	if not _applied_effects.has(effect):
 		effect_added.emit(effect)
 
@@ -20,6 +21,7 @@ func apply_effect(effect: Enums.effect) -> void:
 func remove_effect(effect: Enums.effect) -> void:
 	_applied_effects.erase(effect)
 
+	# We should react only if there is no other effect of the same type
 	if not _applied_effects.has(effect):
 		effect_removed.emit(effect)
 
@@ -37,6 +39,11 @@ func remove_movement_modificator(modificator: Vector2) -> void:
 	var occurrences = _applied_movement_modificators.count(modificator)
 	if occurrences == 0:
 		velocity_secondary -= modificator
+
+
+# Removes all occurences of a specified effect
+func flush_effect(effect: Enums.effect) -> void:
+	_applied_effects = _applied_effects.filter(func(applied_effect): return applied_effect != effect)
 
 
 func is_effect_active(effect: Enums.effect) -> bool:

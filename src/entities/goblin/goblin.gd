@@ -10,7 +10,7 @@ class_name Goblin extends GameCharacter
 
 
 func _ready() -> void:
-	_hurtbox_component.effects_propagated.connect(_on_effects_propagated)
+	super._ready()
 	_hurtbox_component.lives_depleted.connect(_on_lives_depleted)
 
 
@@ -35,10 +35,6 @@ func change_direction(new_direction: float) -> void:
 	player_detector.scale.x = sign(new_direction)
 	_animated_sprite.scale.x = sign(new_direction)
 	_hitbox_component.set_deferred("position", Vector2(abs(_hitbox_component.position.x) * new_direction, _hitbox_component.position.y))
-
-
-func _on_effects_propagated(effects: Array[String]) -> void:
-	state_machine.current_state.propagate_effects(effects)
 
 
 func _on_lives_depleted() -> void:
