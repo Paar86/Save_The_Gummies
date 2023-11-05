@@ -14,10 +14,17 @@ config/name="Save_The_Gummies"
 run/main_scene="res://src/managers/game_manager.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 
+[audio]
+
+buses/default_bus_layout="res://src/autoload/audio_manager/bus_layout.tres"
+
 [autoload]
 
 Events="*res://src/autoload/events.gd"
 Enums="*res://src/autoload/enums.gd"
+MusicManager="*res://src/autoload/audio_manager/music_manager.gd"
+AudioStreamManager="*res://src/autoload/audio_manager/audio_stream_manager.gd"
+AudioStreamManager2d="*res://src/autoload/audio_manager/audio_stream_manager_2D.gd"
 
 [display]
 
