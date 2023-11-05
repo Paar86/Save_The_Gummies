@@ -6,8 +6,15 @@ signal effect_removed(effect: Enums.effect)
 
 # Secondary velocity has different effect on RigidBody2D so we should be able to tweak it
 const VELOCITY_SECONDARY_SCALE: = 2.0
-enum colors {BLUE_DARK_BLUE, GREEN_DARK_GREEN, YELLOW_DARK_YELLOW,
-	MAGENTA_MAROON, PINK_MAROON, DARK_YELLOW_BROWN, WHEAT_YELLOW_BROWN}
+enum colors {
+	BLUE_DARK_BLUE,
+	GREEN_DARK_GREEN,
+	YELLOW_DARK_YELLOW,
+	MAGENTA_MAROON,
+	PINK_MAROON,
+	DARK_YELLOW_BROWN,
+	WHEAT_YELLOW_BROWN
+}
 
 @export var color = colors.BLUE_DARK_BLUE : set = _set_color;
 

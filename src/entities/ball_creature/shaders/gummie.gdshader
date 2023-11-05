@@ -1,12 +1,12 @@
 shader_type canvas_item;
 
-uniform int palette :hint_range(0, 6) = 0;
+uniform int palette: hint_range(0, 6) = 0;
 
 void fragment() {
 	vec3 primary;
 	vec3 secondary;
 	vec4 color = texture(TEXTURE, UV);
-	
+
 	switch (palette) {
 		case 0:
 			primary = vec3(41, 173, 255);
@@ -37,9 +37,11 @@ void fragment() {
 			secondary = vec3(171, 82, 54);
 			break;
 	}
+
 	if (color.r < 0.5) {
 		COLOR.rgb = secondary/255.0;
-	} else {
+	}
+	else {
 		COLOR.rgb = primary/255.0;
 	}
 }
