@@ -79,6 +79,7 @@ func release_pickup(impulse: Vector2) -> void:
 		thrown_object.collision_layer = 8
 		return
 
+	thrown_object.collision_layer = 8
 	state_machine.transition_to("Idle")
 
 
