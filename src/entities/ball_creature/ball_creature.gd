@@ -24,11 +24,13 @@ var pickable: bool = true:
 	get:
 		return pickable
 
+var attack_strength_buffered: = 0.0
 var _damp_default: float = ProjectSettings.get_setting("physics/2d/default_linear_damp")
 
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var _effects_applier_component: EffectsApplierComponent = $EffectsApplierComponent
 @onready var _sprite: Sprite2D = $Node/Sprite2D
+@onready var _hitbox_component: HitboxComponent = $HitboxComponent
 
 
 func _ready() -> void:
@@ -49,6 +51,15 @@ func _physics_process(delta: float) -> void:
 	if _effects_applier_component.velocity_secondary != Vector2.ZERO:
 		apply_central_force(_effects_applier_component.velocity_secondary * VELOCITY_SECONDARY_SCALE)
 
+	var attack_strength = linear_velocity.length()
+	# For a case when the ball is already in other hurtbox
+	# so it can make a damage (e.g. standing right next to wooden barrier)
+	if attack_strength_buffered != 0.0:
+		attack_strength = attack_strength_buffered
+		attack_strength_buffered = 0.0
+
+	set_attack_velocity_strength(attack_strength)
+
 
 func apply_effect(effect: Enums.effect) -> void:
 	_effects_applier_component.apply_effect(effect)
@@ -56,6 +67,10 @@ func apply_effect(effect: Enums.effect) -> void:
 
 func remove_effect(effect: Enums.effect) -> void:
 	_effects_applier_component.remove_effect(effect)
+
+
+func set_attack_velocity_strength(strength: float) -> void:
+	_hitbox_component.attack_velocity_strength = strength
 
 
 func is_effect_active(effect: Enums.effect) -> bool:
@@ -72,14 +87,15 @@ func remove_movement_modificator(modificator: Vector2) -> void:
 
 func disable_collision() -> void:
 	_collision_shape.set_deferred("disabled", true)
+	_hitbox_component.toggle_collision(false)
 
 
 func enable_collision() -> void:
 	_collision_shape.set_deferred("disabled", false)
+	_hitbox_component.toggle_collision(true)
 
 
 func _on_effect_added(effect: Enums.effect) -> void:
-	print("Effect applied.")
 	match effect:
 		Enums.effect.GLUED:
 			linear_damp = 5
@@ -87,11 +103,11 @@ func _on_effect_added(effect: Enums.effect) -> void:
 
 
 func _on_effect_removed(effect: Enums.effect) -> void:
-	print("Effect removed.")
 	match effect:
 		Enums.effect.GLUED:
 			linear_damp = _damp_default
 			physics_material_override.bounce = 0.4
+
 
 func _set_color(new_color : colors):
 	_sprite.get_material().set_shader_parameter("palette", new_color)
