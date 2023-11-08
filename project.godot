@@ -25,6 +25,7 @@ Enums="*res://src/autoload/enums.gd"
 MusicManager="*res://src/autoload/audio_manager/music_manager.gd"
 AudioStreamManager="*res://src/autoload/audio_manager/audio_stream_manager.gd"
 AudioStreamManager2d="*res://src/autoload/audio_manager/audio_stream_manager_2D.gd"
+AreaCollisionHandler="*res://src/autoload/utilities/area_collision_handler.gd"
 
 [display]
 
