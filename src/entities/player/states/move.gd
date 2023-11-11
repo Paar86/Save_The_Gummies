@@ -20,8 +20,6 @@ var friction_scale: float = 1.0
 var jump_enabled: = true
 var movement_enabled: = true
 
-var _jump_sfx: Resource = preload("res://assets/sfx/player/player_jump.wav")
-
 
 func _ready() -> void:
 	Events.player_direction_changed.connect(_on_player_direction_changed)
@@ -46,7 +44,6 @@ func unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed("jump") and movement_enabled and jump_enabled:
-		AudioStreamManager2d.play_sound(_jump_sfx, character)
 		var params := StateParams.new()
 		params.initiated_jumping = true
 		state_machine.transition_to("Air", params)

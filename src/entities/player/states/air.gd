@@ -18,6 +18,7 @@ const JUMP_GRAVITY_SCALE: = 1.0
 var _is_jumping: = false
 var _is_jump_buffered: = false
 var _allow_coyote_jump: = false
+var _jump_sfx: Resource = preload("res://assets/sfx/player/player_jump.wav")
 
 func on_enter(params: StateParams) -> void:
 	Events.player_bounce_up_requested.connect(on_bounce_up_requested)
@@ -31,6 +32,7 @@ func on_enter(params: StateParams) -> void:
 	if params:
 		_is_jumping = params.initiated_jumping
 		if _is_jumping:
+			AudioStreamManager2d.play_sound(_jump_sfx, move_state.character)
 			move_state.character.velocity_primary.y = -JUMP_FORCE
 			move_state.gravity_scale = 0.0
 			_jump_timer.start()
