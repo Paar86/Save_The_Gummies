@@ -38,4 +38,5 @@ func change_direction(new_direction: float) -> void:
 
 
 func _on_lives_depleted() -> void:
+	_generate_death_scene(_animated_sprite.global_position)
 	queue_free()

@@ -136,4 +136,5 @@ func on_flash_duration_expired() -> void:
 
 
 func on_lives_depleted() -> void:
+	_generate_death_scene(_player_animated_sprite.global_position)
 	queue_free()

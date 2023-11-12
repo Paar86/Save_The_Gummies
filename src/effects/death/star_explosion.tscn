@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2i2kkiainlg4"]
+
+[ext_resource type="Texture2D" uid="uid://chwx8oiokampl" path="res://assets/effects/star.png" id="1_35r2n"]
+[ext_resource type="Script" path="res://src/effects/death/star_explosion.gd" id="1_yd05b"]
+
+[node name="StarExplosion" type="Node2D"]
+position = Vector2(56, 49)
+script = ExtResource("1_yd05b")
+
+[node name="StarA" type="Sprite2D" parent="."]
+texture = ExtResource("1_35r2n")
+
+[node name="StarB" type="Sprite2D" parent="."]
+texture = ExtResource("1_35r2n")
+
+[node name="StarC" type="Sprite2D" parent="."]
+texture = ExtResource("1_35r2n")
+
+[node name="StarD" type="Sprite2D" parent="."]
+texture = ExtResource("1_35r2n")

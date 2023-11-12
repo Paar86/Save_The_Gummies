@@ -17,6 +17,9 @@ var velocity_combined: Vector2:
 
 # Nodes
 @onready var _effects_applier_component: EffectsApplierComponent = $EffectsApplierComponent
+@onready var _death_animation: PackedScene = preload("res://src/effects/death/death_smoke.tscn")
+@onready var _star_explosion: PackedScene = preload("res://src/effects/death/star_explosion.tscn")
+@onready var _death_sfx: Resource = preload("res://assets/sfx/effects/death.wav")
 
 
 func _ready() -> void:
@@ -48,3 +51,16 @@ func remove_movement_modificator(modificator: Vector2) -> void:
 
 func is_effect_active(effect: Enums.effect) -> bool:
 	return _effects_applier_component.is_effect_active(effect)
+
+
+func _generate_death_scene(origin_global_position: Vector2) -> void:
+	var scenes_array: = [
+		_death_animation.instantiate(),
+		_star_explosion.instantiate(),
+	]
+
+	for effect_scene in scenes_array:
+		effect_scene.global_position = origin_global_position
+		get_parent().add_child(effect_scene)
+
+	AudioStreamManager2D.play_sound(_death_sfx, self)

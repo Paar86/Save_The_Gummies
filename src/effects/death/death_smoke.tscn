@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://b0udwfh3ykvmi"]
+
+[ext_resource type="Texture2D" uid="uid://c2po77lu05h2f" path="res://assets/effects/death_smoke_spritesheet.png" id="1_yuor5"]
+[ext_resource type="Script" path="res://src/effects/death/death_smoke.gd" id="2_6kvea"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pfbt"]
+atlas = ExtResource("1_yuor5")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xtbur"]
+atlas = ExtResource("1_yuor5")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ox1pk"]
+atlas = ExtResource("1_yuor5")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_473jk"]
+atlas = ExtResource("1_yuor5")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jh2eh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pfbt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xtbur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pfbt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ox1pk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_473jk")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="DeathAnimation" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_jh2eh")
+autoplay = "default"
+script = ExtResource("2_6kvea")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

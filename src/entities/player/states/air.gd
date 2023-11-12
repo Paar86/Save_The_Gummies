@@ -32,7 +32,7 @@ func on_enter(params: StateParams) -> void:
 	if params:
 		_is_jumping = params.initiated_jumping
 		if _is_jumping:
-			AudioStreamManager2d.play_sound(_jump_sfx, move_state.character)
+			AudioStreamManager2D.play_sound(_jump_sfx, move_state.character)
 			move_state.character.velocity_primary.y = -JUMP_FORCE
 			move_state.gravity_scale = 0.0
 			_jump_timer.start()

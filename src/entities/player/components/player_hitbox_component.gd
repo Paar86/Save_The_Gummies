@@ -1,5 +1,7 @@
 extends HitboxComponent
 
+var _stomp_sfx: Resource = preload("res://assets/sfx/player/player_stomp.wav")
+
 
 func _on_area_shape_entered(
 	area_rid: RID,
@@ -32,3 +34,5 @@ func _on_area_shape_entered(
 
 		if area.owner is Arrow:
 			(area as HurtboxComponent).make_damage(1)
+
+		AudioStreamManager2D.play_sound(_stomp_sfx, owner as Player)
