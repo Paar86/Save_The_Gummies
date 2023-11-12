@@ -18,7 +18,7 @@ const JUMP_GRAVITY_SCALE: = 1.0
 var _is_jumping: = false
 var _is_jump_buffered: = false
 var _allow_coyote_jump: = false
-var _jump_sfx: Resource = preload("res://assets/sfx/player/player_jump.wav")
+var _jump_sfx: Resource = preload(SfxResources.PLAYER_JUMP)
 
 func on_enter(params: StateParams) -> void:
 	Events.player_bounce_up_requested.connect(on_bounce_up_requested)

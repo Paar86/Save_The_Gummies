@@ -8,10 +8,13 @@ const STAR_TRAVEL_DISTANCE: = 15.0
 @onready var star_d: = $StarD
 
 var stars_directions_dict: = {}
+var _death_sfx: Resource = preload(SfxResources.DEATH_EXPLOSION)
 
 
 func _ready() -> void:
 	_build_star_dictionary()
+
+	AudioStreamManager2D.play_sound(_death_sfx, self)
 
 	# Interpolate all stars
 	var tween: = get_tree().create_tween()

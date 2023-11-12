@@ -5,6 +5,8 @@ signal effect_removed(effect: Enums.effect)
 
 # Main movement velocity
 var velocity_primary: Vector2 = Vector2.ZERO
+var _death_animation: PackedScene = preload("res://src/effects/death/death_smoke.tscn")
+var _star_explosion: PackedScene = preload("res://src/effects/death/star_explosion.tscn")
 
 # Properties
 var velocity_secondary: Vector2:
@@ -17,9 +19,6 @@ var velocity_combined: Vector2:
 
 # Nodes
 @onready var _effects_applier_component: EffectsApplierComponent = $EffectsApplierComponent
-@onready var _death_animation: PackedScene = preload("res://src/effects/death/death_smoke.tscn")
-@onready var _star_explosion: PackedScene = preload("res://src/effects/death/star_explosion.tscn")
-@onready var _death_sfx: Resource = preload("res://assets/sfx/effects/death.wav")
 
 
 func _ready() -> void:
@@ -62,5 +61,3 @@ func _generate_death_scene(origin_global_position: Vector2) -> void:
 	for effect_scene in scenes_array:
 		effect_scene.global_position = origin_global_position
 		get_parent().add_child(effect_scene)
-
-	AudioStreamManager2D.play_sound(_death_sfx, self)

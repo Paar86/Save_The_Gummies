@@ -1,6 +1,6 @@
 extends HitboxComponent
 
-var _stomp_sfx: Resource = preload("res://assets/sfx/player/player_stomp.wav")
+var _stomp_sfx: Resource = preload(SfxResources.PLAYER_STOMP)
 
 
 func _on_area_shape_entered(
