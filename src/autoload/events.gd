@@ -13,3 +13,4 @@ signal player_pickup_drop_requested
 # Global events
 signal change_level
 signal reload_level
+signal pause_level
