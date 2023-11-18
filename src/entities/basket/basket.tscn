@@ -1,70 +1,76 @@
-[gd_scene load_steps=7 format=3 uid="uid://4h183oy5hfs8"]
+[gd_scene load_steps=9 format=3 uid="uid://4h183oy5hfs8"]
 
 [ext_resource type="Script" path="res://src/entities/basket/basket.gd" id="1_lintc"]
-[ext_resource type="Texture2D" uid="uid://1edwdeq8wv5d" path="res://assets/basket/basket_tiny.png" id="2_pgq6e"]
+[ext_resource type="Texture2D" uid="uid://c7mjkutaiklje" path="res://assets/basket/basket.png" id="2_6hfvy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kts0q"]
+size = Vector2(4, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmt7r"]
+size = Vector2(4, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tebis"]
-size = Vector2(14, 5)
+size = Vector2(14, 6)
 
-[sub_resource type="Animation" id="Animation_4ai3n"]
-resource_name = "CREATURE_IN"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, -5), Vector2(1, -3), Vector2(1, -5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 0.8), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_q7ycr"]
+[sub_resource type="Animation" id="Animation_emub2"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("Sprite2D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, -5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(12, -6)]
+}
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7x4up"]
+[sub_resource type="Animation" id="Animation_10d2q"]
+resource_name = "CREATURE_IN"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.666667), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(12, -6), Vector2(12, -4), Vector2(12, -6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qgpqw"]
 _data = {
-"CREATURE_IN": SubResource("Animation_4ai3n"),
-"RESET": SubResource("Animation_q7ycr")
+"CREATURE_IN": SubResource("Animation_10d2q"),
+"RESET": SubResource("Animation_emub2")
 }
 
 [node name="Basket" type="StaticBody2D"]
@@ -72,24 +78,28 @@ collision_mask = 0
 script = ExtResource("1_lintc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1, -5)
-texture = ExtResource("2_pgq6e")
+position = Vector2(12, -6)
+texture = ExtResource("2_6hfvy")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(1, 0)
-polygon = PackedVector2Array(-11, 0, 11, 0, 12, -9, 8, -9, 8, -1, -8, -1, -8, -9, -12, -9)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -5)
+shape = SubResource("RectangleShape2D_kts0q")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(22, -5)
+shape = SubResource("RectangleShape2D_cmt7r")
 
 [node name="CreatureDetector" type="Area2D" parent="."]
+position = Vector2(12, -5)
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CreatureDetector"]
-position = Vector2(1, -3.5)
 shape = SubResource("RectangleShape2D_tebis")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_7x4up")
+"": SubResource("AnimationLibrary_qgpqw")
 }
 
 [connection signal="body_entered" from="CreatureDetector" to="." method="on_creature_detector_body_entered"]

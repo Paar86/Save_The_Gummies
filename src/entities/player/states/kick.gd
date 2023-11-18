@@ -1,6 +1,7 @@
 extends State
 
 @export var character: CharacterBody2D
+var _kick_sfx: Resource = preload(SfxResources.PLAYER_KICK)
 
 
 func _ready() -> void:
@@ -10,6 +11,7 @@ func _ready() -> void:
 
 
 func on_enter(params: StateParams) -> void:
+	AudioStreamManager2D.play_sound(_kick_sfx, character)
 	state_machine.change_animation("kick")
 	character.animation_player.play("small_jump")
 

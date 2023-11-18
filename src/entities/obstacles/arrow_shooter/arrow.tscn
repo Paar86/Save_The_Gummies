@@ -30,7 +30,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 10.0
+"speed": 15.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tpgf6"]
@@ -57,7 +57,7 @@ shape = SubResource("RectangleShape2D_036uj")
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_1s2k5")
 autoplay = "default"
-frame_progress = 0.385847
+frame_progress = 0.626173
 
 [node name="SelfDestructTimer" type="Timer" parent="."]
 wait_time = 2.0

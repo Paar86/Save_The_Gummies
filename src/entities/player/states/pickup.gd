@@ -7,12 +7,15 @@ const PICKUP_SPEED_MODIFIER: = 10.0
 var _picked_object: RigidBody2D
 var _picked_object_original_position: = Vector2.ZERO
 var _elapsed_time: float = 0.0
+var _pickup_sfx: Resource = preload(SfxResources.PLAYER_PICKUP)
 
 
 func on_enter(params: StateParams) -> void:
 	if character.pickable_objects.size() == 0:
 		state_machine.transition_to("Idle")
 		return
+
+	AudioStreamManager2D.play_sound(_pickup_sfx, character)
 
 	_picked_object = character.pickable_objects.pop_back() as RigidBody2D
 	_picked_object_original_position = _picked_object.global_position
