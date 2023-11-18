@@ -1,15 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgc87flocko36"]
+[gd_scene load_steps=6 format=3 uid="uid://cgc87flocko36"]
 
 [ext_resource type="Script" path="res://src/managers/game_manager.gd" id="1_x3hhf"]
 [ext_resource type="PackedScene" uid="uid://blqx3sorahm5u" path="res://src/user_interface/title_screen/title_screen.tscn" id="2_f2yxe"]
 [ext_resource type="PackedScene" uid="uid://becvu2tommbnh" path="res://src/levels/level_test.tscn" id="2_l8iq4"]
 [ext_resource type="PackedScene" uid="uid://dyfvc3jli6hx" path="res://src/user_interface/pause_screen/pause_screen.tscn" id="3_ehts2"]
+[ext_resource type="PackedScene" uid="uid://bnuhq8nf46q8i" path="res://src/levels/level_test_2.tscn" id="4_ksfj6"]
 
 [node name="GameManager" type="Node"]
 process_mode = 3
 script = ExtResource("1_x3hhf")
 title_screen = ExtResource("2_f2yxe")
-levels = Array[PackedScene]([ExtResource("2_l8iq4")])
+levels = Array[PackedScene]([ExtResource("2_l8iq4"), ExtResource("4_ksfj6")])
 pause_screen = ExtResource("3_ehts2")
 
 [node name="ActiveScene" type="Node" parent="."]
