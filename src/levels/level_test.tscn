@@ -189,5 +189,9 @@ position = Vector2(160, 88)
 [node name="Basket" parent="ObjectsInFront" index="2" instance=ExtResource("12_m5erk")]
 position = Vector2(-96, 112)
 
+[node name="DecorationsTileMap" parent="." index="10"]
+cell_quadrant_size = 8
+layer_0/tile_data = PackedInt32Array(-393212, 1, 2, -393210, 1, 2, -393209, 65537, 2, 851963, 393217, 0, 917499, 393217, 1, 851964, 458753, 0, 917500, 458753, 1, 917524, 1, 1, 917525, 65537, 1, 458760, 262145, 0, 262148, 262145, 0, 917502, 262145, 1, 917503, 327681, 1, 458765, 1, 0, 851954, 131073, 0, 917490, 131073, 1, 851955, 196609, 0, 917491, 196609, 1, 917512, 262145, 1, 917513, 327681, 1)
+
 [editable path="ObjectsMiddle/Ladder"]
 [editable path="ObjectsInFront/GlueFloor"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvje8c8sahcwc"]
+[gd_scene load_steps=8 format=3 uid="uid://dvje8c8sahcwc"]
 
 [ext_resource type="Script" path="res://src/levels/level_base.gd" id="1_03m7p"]
 [ext_resource type="PackedScene" uid="uid://bq2tohpkkvyrt" path="res://src/common/camera/player_camera.tscn" id="2_fykds"]
 [ext_resource type="PackedScene" uid="uid://d2l1fpj8yehom" path="res://src/entities/player/player.tscn" id="2_kapmh"]
 [ext_resource type="Script" path="res://src/common/camera/peek_camera.gd" id="3_lfylg"]
+[ext_resource type="TileSet" uid="uid://ctlwpvc6uoe4p" path="res://src/resources/tilesets/decorations_tileset.tres" id="5_6yw2v"]
 [ext_resource type="Texture2D" uid="uid://dx3d0l08f7xrg" path="res://assets/ui/heart.png" id="5_pd1ws"]
 [ext_resource type="Script" path="res://src/levels/health_counter.gd" id="6_y8hi7"]
 
@@ -42,6 +43,11 @@ update_rotation = false
 update_scale = false
 
 [node name="ObjectsInFront" type="Node" parent="."]
+
+[node name="DecorationsTileMap" type="TileMap" parent="."]
+tile_set = ExtResource("5_6yw2v")
+format = 2
+layer_0/tile_data = PackedInt32Array(-393212, 1, 2, -393210, 1, 2, -393209, 65537, 2)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
