@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c36mwvup5f8ad"]
+[gd_scene load_steps=13 format=3 uid="uid://c36mwvup5f8ad"]
 
 [ext_resource type="Script" path="res://src/entities/ball_creature/ball_creature.gd" id="1_r5tyh"]
 [ext_resource type="Texture2D" uid="uid://cvnkx10pug7s8" path="res://assets/ball_creature/ball_creature_tiny.png" id="2_0gvlg"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://c8wqsow14x6ea" path="res://src/common/components/effects_applier/effects_applier_component.tscn" id="2_36s0l"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/components/hitbox_component.gd" id="3_208bs"]
 [ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie.gdshader" id="5_6f6km"]
+[ext_resource type="Texture2D" uid="uid://bpesacbyulktm" path="res://assets/ball_creature/arrow_marker.png" id="7_e5flx"]
+[ext_resource type="Script" path="res://src/entities/ball_creature/components/arrow_marker.gd" id="8_7l0pn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_etqu6"]
 rough = true
@@ -50,5 +52,11 @@ update_rotation = false
 [node name="Sprite2D" type="Sprite2D" parent="Node"]
 material = SubResource("ShaderMaterial_12c18")
 texture = ExtResource("2_0gvlg")
+
+[node name="ArrowMarker" type="Sprite2D" parent="."]
+visible = false
+z_index = 10
+texture = ExtResource("7_e5flx")
+script = ExtResource("8_7l0pn")
 
 [editable path="HitboxComponent"]
