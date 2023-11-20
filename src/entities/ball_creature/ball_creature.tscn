@@ -53,7 +53,7 @@ update_rotation = false
 material = SubResource("ShaderMaterial_12c18")
 texture = ExtResource("2_0gvlg")
 
-[node name="ArrowMarker" type="Sprite2D" parent="."]
+[node name="ArrowMarker" type="Sprite2D" parent="Node/Sprite2D"]
 visible = false
 z_index = 10
 texture = ExtResource("7_e5flx")
