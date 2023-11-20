@@ -4,8 +4,8 @@ const TEXT_SPEED: = 0.4
 const START_WAIT_TIME: = 1.5
 const END_WAIT_TIME: = 1.0
 
-@onready var credits_pivot = $Control/Pivot
-@onready var credits_text = $Control/Pivot/CreditsText
+@onready var credits_pivot: Control = $Control/Pivot
+@onready var credits_text: Label = $Control/Pivot/CreditsText
 
 var _move: bool = false
 
