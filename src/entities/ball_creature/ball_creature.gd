@@ -25,7 +25,9 @@ var pickable: bool = true:
 		return pickable
 
 var attack_strength_buffered: = 0.0
+var _produce_bounce_sfx: = false
 var _damp_default: float = ProjectSettings.get_setting("physics/2d/default_linear_damp")
+var _bounce_sfx: = preload(SfxResources.BALL_BOUNCE)
 
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var _effects_applier_component: EffectsApplierComponent = $EffectsApplierComponent
@@ -112,3 +114,11 @@ func _on_effect_removed(effect: Enums.effect) -> void:
 func _set_color(new_color : colors):
 	_sprite.get_material().set_shader_parameter("palette", new_color)
 	color = new_color
+
+
+func _on_body_entered(body: Node) -> void:
+	if not _produce_bounce_sfx:
+		_produce_bounce_sfx = true
+		return
+
+	AudioStreamManager2D.play_sound(_bounce_sfx, self)
