@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://d2l1fpj8yehom"]
+[gd_scene load_steps=58 format=3 uid="uid://d2l1fpj8yehom"]
 
 [ext_resource type="Script" path="res://src/entities/player/player.gd" id="1_fgl7g"]
 [ext_resource type="PackedScene" uid="uid://cnm077r8cak41" path="res://src/common/components/hurtbox/hurtbox_component.tscn" id="2_e0d2b"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://src/entities/player/states/carry_walk.gd" id="11_b3060"]
 [ext_resource type="Script" path="res://src/entities/player/states/kick.gd" id="13_puh06"]
 [ext_resource type="Script" path="res://src/entities/player/states/climb.gd" id="14_ab6lr"]
+[ext_resource type="Script" path="res://src/entities/player/states/whistle.gd" id="19_ghrr3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n6kf7"]
 size = Vector2(8, 10)
@@ -136,6 +137,10 @@ region = Rect2(36, 36, 18, 18)
 [sub_resource type="AtlasTexture" id="AtlasTexture_m3vns"]
 atlas = ExtResource("3_ppmj7")
 region = Rect2(54, 36, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rc04r"]
+atlas = ExtResource("3_ppmj7")
+region = Rect2(0, 108, 18, 18)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qnlu6"]
 animations = [{
@@ -267,6 +272,14 @@ animations = [{
 "loop": true,
 "name": &"walk",
 "speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rc04r")
+}],
+"loop": true,
+"name": &"whistle",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nepf"]
@@ -349,7 +362,7 @@ position = Vector2(7, -7)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_qnlu6")
-animation = &"idle"
+animation = &"whistle"
 offset = Vector2(-2, 0)
 
 [node name="PickupTransform2D" type="RemoteTransform2D" parent="."]
@@ -374,12 +387,12 @@ abstract = true
 [node name="Idle" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state", "states_for_transition")]
 script = ExtResource("6_kxhls")
 move_state = NodePath("..")
-states_for_transition = [NodePath("../Run"), NodePath("../Air"), NodePath("../../Pickup"), NodePath("../../Climb")]
+states_for_transition = [NodePath("../Run"), NodePath("../Air"), NodePath("../../Pickup"), NodePath("../../Climb"), NodePath("../../Whistle")]
 
 [node name="Run" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state", "states_for_transition")]
 script = ExtResource("7_xjuja")
 move_state = NodePath("..")
-states_for_transition = [NodePath("../Idle"), NodePath("../Air"), NodePath("../../Pickup"), NodePath("../../Climb")]
+states_for_transition = [NodePath("../Idle"), NodePath("../Air"), NodePath("../../Pickup"), NodePath("../../Climb"), NodePath("../../Whistle")]
 
 [node name="Air" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state", "states_for_transition")]
 script = ExtResource("8_j1lab")
@@ -436,6 +449,11 @@ states_for_transition = [NodePath("../Move/Idle")]
 script = ExtResource("14_ab6lr")
 character = NodePath("../..")
 states_for_transition = [NodePath("../Move/Idle"), NodePath("../Move/Air")]
+
+[node name="Whistle" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "states_for_transition")]
+script = ExtResource("19_ghrr3")
+character = NodePath("../..")
+states_for_transition = [NodePath("../Move/Idle")]
 
 [node name="PickupArea" type="Area2D" parent="."]
 visible = false
