@@ -21,7 +21,7 @@ var _allow_coyote_jump: = false
 var _jump_sfx: Resource = preload(SfxResources.PLAYER_JUMP)
 
 func on_enter(params: StateParams) -> void:
-	Events.player_bounce_up_requested.connect(on_bounce_up_requested)
+	Events.player_bounce_up_requested.connect(_on_bounce_up_requested)
 
 	state_machine.change_animation("jump_rise")
 
@@ -32,8 +32,7 @@ func on_enter(params: StateParams) -> void:
 	if params:
 		_is_jumping = params.initiated_jumping
 		if _is_jumping:
-			AudioStreamManager2D.play_sound(_jump_sfx, move_state.character)
-			move_state.character.velocity_primary.y = -JUMP_FORCE
+			_apply_upward_force_with_sound()
 			move_state.gravity_scale = 0.0
 			_jump_timer.start()
 		elif params.initial_impulse:
@@ -49,7 +48,7 @@ func on_enter(params: StateParams) -> void:
 
 
 func on_exit() -> void:
-	Events.player_bounce_up_requested.disconnect(on_bounce_up_requested)
+	Events.player_bounce_up_requested.disconnect(_on_bounce_up_requested)
 
 	move_state.gravity_scale = 1.0
 	move_state.acceleration_scale = 1.0
@@ -74,7 +73,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 	if event.is_action_pressed("jump"):
 		if _allow_coyote_jump:
-			move_state.character.velocity_primary.y = -JUMP_FORCE
+			_apply_upward_force_with_sound()
 			_allow_coyote_jump = false
 			_is_jumping = true
 			_jump_timer.start()
@@ -109,6 +108,11 @@ func physics_process(delta: float) -> void:
 		_is_jumping = false
 
 
+func _apply_upward_force_with_sound() -> void:
+	AudioStreamManager2D.play_sound(_jump_sfx, move_state.character)
+	move_state.character.velocity_primary.y = -JUMP_FORCE
+
+
 func _on_coyote_timer_timeout() -> void:
 	_allow_coyote_jump = false
 
@@ -123,5 +127,5 @@ func _on_jump_timer_timeout() -> void:
 	move_state.gravity_scale = 1.0
 
 
-func on_bounce_up_requested() -> void:
+func _on_bounce_up_requested() -> void:
 	move_state.character.velocity_primary.y = -JUMP_FORCE
