@@ -52,6 +52,10 @@ func is_effect_active(effect: Enums.effect) -> bool:
 	return _effects_applier_component.is_effect_active(effect)
 
 
+func propagate_whistle(source_body: GameCharacter) -> void:
+	pass
+
+
 func _generate_death_scene(origin_global_position: Vector2) -> void:
 	var scenes_array: = [
 		_death_animation.instantiate(),

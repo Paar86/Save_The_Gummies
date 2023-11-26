@@ -97,6 +97,10 @@ func enable_collision() -> void:
 	_hitbox_component.toggle_collision(true)
 
 
+func propagate_whistle(source_body: GameCharacter) -> void:
+	pass
+
+
 func _on_effect_added(effect: Enums.effect) -> void:
 	match effect:
 		Enums.effect.GLUED:

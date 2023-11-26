@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://d2l1fpj8yehom"]
+[gd_scene load_steps=59 format=3 uid="uid://d2l1fpj8yehom"]
 
 [ext_resource type="Script" path="res://src/entities/player/player.gd" id="1_fgl7g"]
 [ext_resource type="PackedScene" uid="uid://cnm077r8cak41" path="res://src/common/components/hurtbox/hurtbox_component.tscn" id="2_e0d2b"]
@@ -288,6 +288,9 @@ size = Vector2(7, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_akgtd"]
 size = Vector2(12, 7)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8nf7h"]
+size = Vector2(112, 112)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4tvp5"]
 size = Vector2(10, 8)
 
@@ -465,6 +468,14 @@ collision_mask = 8
 position = Vector2(0, 6.5)
 shape = SubResource("RectangleShape2D_akgtd")
 
+[node name="WhistleArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WhistleArea"]
+shape = SubResource("RectangleShape2D_8nf7h")
+
 [node name="ObjectsDetector" type="Area2D" parent="."]
 visible = false
 position = Vector2(0, -5)
@@ -510,6 +521,8 @@ libraries = {
 [connection signal="timeout" from="StateMachine/Move/Carry/ToAimTimer" to="StateMachine/Move/Carry" method="on_to_aim_timer_timeout"]
 [connection signal="body_entered" from="PickupArea" to="." method="on_pickup_detector_body_entered"]
 [connection signal="body_exited" from="PickupArea" to="." method="on_pickup_detector_body_exited"]
+[connection signal="body_entered" from="WhistleArea" to="." method="_on_whistle_area_body_entered"]
+[connection signal="body_exited" from="WhistleArea" to="." method="_on_whistle_area_body_exited"]
 [connection signal="area_entered" from="ObjectsDetector" to="." method="on_objects_detector_area_entered"]
 [connection signal="area_exited" from="ObjectsDetector" to="." method="on_objects_detector_area_exited"]
 

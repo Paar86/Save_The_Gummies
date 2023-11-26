@@ -3,6 +3,7 @@ class_name Player extends GameCharacter
 signal lives_changed(new_value: int)
 
 var pickable_objects: Array[RigidBody2D] = []
+var whistle_affected_bodies: Array[PhysicsBody2D] = []
 var touching_ladders: Array[Area2D] = []
 var ladders_under_player: Array[Area2D] = []
 var hold_object: BallCreature = null
@@ -138,3 +139,17 @@ func on_flash_duration_expired() -> void:
 func on_lives_depleted() -> void:
 	_generate_death_scene(_player_animated_sprite.global_position)
 	queue_free()
+
+
+func _on_whistle_area_body_entered(body: Node2D) -> void:
+	if not body is GameCharacter and not body is BallCreature:
+		return
+
+	whistle_affected_bodies.append(body)
+
+
+func _on_whistle_area_body_exited(body: Node2D) -> void:
+	if not whistle_affected_bodies.has(body):
+		return
+
+	whistle_affected_bodies.erase(body)
