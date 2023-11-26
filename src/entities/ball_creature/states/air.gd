@@ -4,7 +4,11 @@ extends State
 
 
 func on_enter(params: StateParams) -> void:
-	pass
+	ball_creature.ignore_following = true
+
+
+func on_exit() -> void:
+	ball_creature.ignore_following = false
 
 
 func physics_process(delta: float) -> void:

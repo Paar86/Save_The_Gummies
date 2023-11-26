@@ -6,6 +6,13 @@ signal effect_removed(effect: Enums.effect)
 
 # Secondary velocity has different effect on RigidBody2D so we should be able to tweak it
 const VELOCITY_SECONDARY_SCALE: = 2.0
+
+const FOLLOWING_FORCE: = 50.0
+
+# Creature stops following a player if too near or too far (only in following mode)
+const STOP_FOLLOWING_DISTANCE_NEAR: = 8.0
+const STOP_FOLLOWING_DISTANCE_FAR: = 120.0
+
 enum colors {
 	BLUE_DARK_BLUE,
 	GREEN_DARK_GREEN,
@@ -29,6 +36,9 @@ var is_on_floor: bool:
 		return _ground_detector.is_colliding()
 
 var attack_strength_buffered: = 0.0
+var whistling_player: Player
+var ignore_following: bool = false
+
 var _produce_bounce_sfx: = false
 var _damp_default: float = ProjectSettings.get_setting("physics/2d/default_linear_damp")
 var _bounce_sfx: = preload(SfxResources.BALL_BOUNCE)
@@ -38,6 +48,9 @@ var _bounce_sfx: = preload(SfxResources.BALL_BOUNCE)
 @onready var _sprite: Sprite2D = $Node/Sprite2D
 @onready var _hitbox_component: HitboxComponent = $HitboxComponent
 @onready var _ground_detector: RayCast2D = $Node/Sprite2D/GroundDetector
+@onready var _exclamation_timer: Timer = $ExclamationTimer
+@onready var _exclamation_sprite: Sprite2D = $Node/Sprite2D/ExclamationSprite
+@onready var _following_timer: Timer = $FollowingTimer
 
 
 func _ready() -> void:
@@ -66,6 +79,19 @@ func _physics_process(delta: float) -> void:
 		attack_strength_buffered = 0.0
 
 	set_attack_velocity_strength(attack_strength)
+
+	if whistling_player == null or ignore_following:
+		return
+
+	var to_player_vector = whistling_player.global_position - global_position
+	var player_distance = to_player_vector.length()
+
+	if player_distance <= STOP_FOLLOWING_DISTANCE_NEAR or player_distance >= STOP_FOLLOWING_DISTANCE_FAR:
+		whistling_player = null
+		return
+
+	var following_direction = sign(to_player_vector.x)
+	apply_force(Vector2.RIGHT * FOLLOWING_FORCE * following_direction)
 
 
 func apply_effect(effect: Enums.effect) -> void:
@@ -103,7 +129,10 @@ func enable_collision() -> void:
 
 
 func propagate_whistle(source_body: GameCharacter) -> void:
-	pass
+	whistling_player = source_body
+	_exclamation_sprite.show()
+	_exclamation_timer.start()
+	_following_timer.start()
 
 
 func _on_effect_added(effect: Enums.effect) -> void:
@@ -131,3 +160,11 @@ func _on_body_entered(body: Node) -> void:
 		return
 
 	AudioStreamManager2D.play_sound(_bounce_sfx, self)
+
+
+func _on_exclamation_timer_timeout() -> void:
+	_exclamation_sprite.hide()
+
+
+func _on_following_timer_timeout() -> void:
+	whistling_player = null

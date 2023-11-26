@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c36mwvup5f8ad"]
+[gd_scene load_steps=19 format=3 uid="uid://c36mwvup5f8ad"]
 
 [ext_resource type="Script" path="res://src/entities/ball_creature/ball_creature.gd" id="1_r5tyh"]
 [ext_resource type="Texture2D" uid="uid://cvnkx10pug7s8" path="res://assets/ball_creature/ball_creature_tiny.png" id="2_0gvlg"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bpesacbyulktm" path="res://assets/ball_creature/arrow_marker.png" id="7_e5flx"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/components/arrow_marker.gd" id="8_7l0pn"]
 [ext_resource type="Script" path="res://src/common/state_machine/state_machine.gd" id="9_mseys"]
+[ext_resource type="Texture2D" uid="uid://dtnlj4i4wf327" path="res://assets/enemies/exclamation_mark.png" id="9_ruu5t"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/states/idle.gd" id="10_gsxf2"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/states/rolling.gd" id="11_2yhqs"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/states/air.gd" id="12_hhntu"]
@@ -69,6 +70,11 @@ script = ExtResource("8_7l0pn")
 [node name="GroundDetector" type="RayCast2D" parent="Node/Sprite2D"]
 target_position = Vector2(0, 5)
 
+[node name="ExclamationSprite" type="Sprite2D" parent="Node/Sprite2D"]
+visible = false
+position = Vector2(0, -10)
+texture = ExtResource("9_ruu5t")
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("9_mseys")
 initial_state = NodePath("Idle")
@@ -93,6 +99,16 @@ script = ExtResource("13_6dm14")
 ball_creature = NodePath("../..")
 states_for_transition = [NodePath("../Air")]
 
+[node name="ExclamationTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="FollowingTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="ExclamationTimer" to="." method="_on_exclamation_timer_timeout"]
+[connection signal="timeout" from="FollowingTimer" to="." method="_on_following_timer_timeout"]
 
 [editable path="HitboxComponent"]
