@@ -27,12 +27,13 @@ func _on_area_shape_entered(
 			break
 
 	if contact_from_above:
-		Events.player_bounce_up_requested.emit()
-
-		if area.owner is GameCharacter:
+		# For player not jumping on enemy indefinitely
+		if area.owner is GameCharacter and not (area.owner as GameCharacter).is_effect_active(Enums.effect.STUNNED):
 			(area.owner as GameCharacter).apply_effect(Enums.effect.STUNNED)
-
-		if area.owner is Arrow:
+		elif area.owner is Arrow:
 			(area as HurtboxComponent).make_damage(1)
+		else:
+			return
 
+		Events.player_bounce_up_requested.emit()
 		AudioStreamManager2D.play_sound(_stomp_sfx, owner as Player)
