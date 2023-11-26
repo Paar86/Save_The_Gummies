@@ -24,6 +24,10 @@ var pickable: bool = true:
 	get:
 		return pickable
 
+var is_on_floor: bool:
+	get:
+		return _ground_detector.is_colliding()
+
 var attack_strength_buffered: = 0.0
 var _produce_bounce_sfx: = false
 var _damp_default: float = ProjectSettings.get_setting("physics/2d/default_linear_damp")
@@ -33,6 +37,7 @@ var _bounce_sfx: = preload(SfxResources.BALL_BOUNCE)
 @onready var _effects_applier_component: EffectsApplierComponent = $EffectsApplierComponent
 @onready var _sprite: Sprite2D = $Node/Sprite2D
 @onready var _hitbox_component: HitboxComponent = $HitboxComponent
+@onready var _ground_detector: RayCast2D = $Node/Sprite2D/GroundDetector
 
 
 func _ready() -> void:

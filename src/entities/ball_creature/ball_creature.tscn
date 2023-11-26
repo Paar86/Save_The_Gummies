@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c36mwvup5f8ad"]
+[gd_scene load_steps=18 format=3 uid="uid://c36mwvup5f8ad"]
 
 [ext_resource type="Script" path="res://src/entities/ball_creature/ball_creature.gd" id="1_r5tyh"]
 [ext_resource type="Texture2D" uid="uid://cvnkx10pug7s8" path="res://assets/ball_creature/ball_creature_tiny.png" id="2_0gvlg"]
@@ -8,6 +8,11 @@
 [ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie.gdshader" id="5_6f6km"]
 [ext_resource type="Texture2D" uid="uid://bpesacbyulktm" path="res://assets/ball_creature/arrow_marker.png" id="7_e5flx"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/components/arrow_marker.gd" id="8_7l0pn"]
+[ext_resource type="Script" path="res://src/common/state_machine/state_machine.gd" id="9_mseys"]
+[ext_resource type="Script" path="res://src/entities/ball_creature/states/idle.gd" id="10_gsxf2"]
+[ext_resource type="Script" path="res://src/entities/ball_creature/states/rolling.gd" id="11_2yhqs"]
+[ext_resource type="Script" path="res://src/entities/ball_creature/states/air.gd" id="12_hhntu"]
+[ext_resource type="Script" path="res://src/entities/ball_creature/states/carried.gd" id="13_6dm14"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_etqu6"]
 rough = true
@@ -60,6 +65,33 @@ visible = false
 z_index = 10
 texture = ExtResource("7_e5flx")
 script = ExtResource("8_7l0pn")
+
+[node name="GroundDetector" type="RayCast2D" parent="Node/Sprite2D"]
+target_position = Vector2(0, 5)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("9_mseys")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("ball_creature", "states_for_transition")]
+script = ExtResource("10_gsxf2")
+ball_creature = NodePath("../..")
+states_for_transition = [NodePath("../Rolling"), NodePath("../Air"), NodePath("../Carried")]
+
+[node name="Rolling" type="Node" parent="StateMachine" node_paths=PackedStringArray("ball_creature", "states_for_transition")]
+script = ExtResource("11_2yhqs")
+ball_creature = NodePath("../..")
+states_for_transition = [NodePath("../Idle"), NodePath("../Air"), NodePath("../Carried")]
+
+[node name="Air" type="Node" parent="StateMachine" node_paths=PackedStringArray("ball_creature", "states_for_transition")]
+script = ExtResource("12_hhntu")
+ball_creature = NodePath("../..")
+states_for_transition = [NodePath("../Idle"), NodePath("../Carried")]
+
+[node name="Carried" type="Node" parent="StateMachine" node_paths=PackedStringArray("ball_creature", "states_for_transition")]
+script = ExtResource("13_6dm14")
+ball_creature = NodePath("../..")
+states_for_transition = [NodePath("../Air")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 
