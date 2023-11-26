@@ -33,6 +33,7 @@ func _ready() -> void:
 	# Signals
 	_player.lives_changed.connect(_health_ui.on_health_changed)
 	_health_ui.on_health_changed(_player.get_current_lives())
+	_health_ui.show()
 
 
 func _unhandled_input(event: InputEvent) -> void:
