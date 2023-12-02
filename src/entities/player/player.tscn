@@ -283,7 +283,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nepf"]
-size = Vector2(7, 14)
+size = Vector2(6, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_akgtd"]
 size = Vector2(12, 7)
@@ -365,7 +365,7 @@ position = Vector2(7, -7)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_qnlu6")
-animation = &"whistle"
+animation = &"idle"
 offset = Vector2(-2, 0)
 
 [node name="PickupTransform2D" type="RemoteTransform2D" parent="."]

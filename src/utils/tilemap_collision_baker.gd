@@ -89,46 +89,50 @@ func run_code(_fake_bool = null):
 	var last_collider
 	var colliders_to_merge = 1 # Used to count how many colliders will merge
 
-	var second_colliders_arr = []
+#	var second_colliders_arr = []
 
-	print("Starting second pass (Merging colliders)...")
+#	print("Starting second pass (Merging colliders)...")
+#
+#	## Second pass: Merge colliders that are on top of eachother and are the same size
+#	while true:
+#		var temp_collider = first_colliders_arr.pop_back()
+#
+#		if temp_collider == null:
+#			# Add final merged collider and break
+#			last_collider.shape.size.y = tile_size.y * colliders_to_merge
+#			last_collider.position.y -= (colliders_to_merge / 2.0 - 0.5) * tile_size.y
+#			second_colliders_arr.append(last_collider)
+#
+#			print("Finished baking tilemap collisions!")
+#			break
+#
+#		if last_collider_pos == Vector2(-99999, -99999):
+#			last_collider_pos = temp_collider.position
+#			last_collider = temp_collider
+#			continue
+#
+#		var tile_y_distance = abs(temp_collider.position.y - last_collider_pos.y) / tile_size.y
+#		if last_collider_pos.x == temp_collider.position.x and tile_y_distance == 1:
+#			#print("Adding 1 to the merge")
+#			colliders_to_merge += 1
+#			last_collider_pos = temp_collider.position
+#		else:
+#			#print("Merging %s colliders" % colliders_to_merge)
+#			last_collider_pos = temp_collider.position
+#			last_collider.shape.size.y = tile_size.y * colliders_to_merge
+#			last_collider.position.y -= (colliders_to_merge / 2.0 - 0.5) * tile_size.y
+#			second_colliders_arr.append(last_collider)
+#
+#			colliders_to_merge = 1
+#
+#		last_collider = temp_collider
+#
+#	## Adds all colliders as children to this node
+#	for collider in second_colliders_arr:
+#		add_child(collider, true)
+#		collider.owner = get_tree().edited_scene_root
 
-	## Second pass: Merge colliders that are on top of eachother and are the same size
-	while true:
-		var temp_collider = first_colliders_arr.pop_back()
-
-		if temp_collider == null:
-			# Add final merged collider and break
-			last_collider.shape.size.y = tile_size.y * colliders_to_merge
-			last_collider.position.y -= (colliders_to_merge / 2.0 - 0.5) * tile_size.y
-			second_colliders_arr.append(last_collider)
-
-			print("Finished baking tilemap collisions!")
-			break
-
-		if last_collider_pos == Vector2(-99999, -99999):
-			last_collider_pos = temp_collider.position
-			last_collider = temp_collider
-			continue
-
-		var tile_y_distance = abs(temp_collider.position.y - last_collider_pos.y) / tile_size.y
-		if last_collider_pos.x == temp_collider.position.x and tile_y_distance == 1:
-			#print("Adding 1 to the merge")
-			colliders_to_merge += 1
-			last_collider_pos = temp_collider.position
-		else:
-			#print("Merging %s colliders" % colliders_to_merge)
-			last_collider_pos = temp_collider.position
-			last_collider.shape.size.y = tile_size.y * colliders_to_merge
-			last_collider.position.y -= (colliders_to_merge / 2.0 - 0.5) * tile_size.y
-			second_colliders_arr.append(last_collider)
-
-			colliders_to_merge = 1
-
-		last_collider = temp_collider
-
-	## Adds all colliders as children to this node
-	for collider in second_colliders_arr:
+	for collider in first_colliders_arr:
 		add_child(collider, true)
 		collider.owner = get_tree().edited_scene_root
 

@@ -2,7 +2,7 @@ class_name PlayerMoveState extends State
 
 const MAX_RUN_SPEED_DEFAULT := 80.0
 const MAX_FALL_SPEED := 180.0
-const ACCELERATION := 200.0
+const ACCELERATION := 300.0
 const TURN_ACCELERATION := 400.0
 const FRICTION := 250.0
 

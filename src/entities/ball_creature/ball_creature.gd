@@ -7,7 +7,7 @@ signal effect_removed(effect: Enums.effect)
 # Secondary velocity has different effect on RigidBody2D so we should be able to tweak it
 const VELOCITY_SECONDARY_SCALE: = 2.0
 
-const FOLLOWING_FORCE: = 50.0
+const FOLLOWING_FORCE: = 150.0
 
 # Creature stops following a player if too near or too far (only in following mode)
 const STOP_FOLLOWING_DISTANCE_NEAR: = 8.0
@@ -133,6 +133,10 @@ func propagate_whistle(source_body: GameCharacter) -> void:
 	_exclamation_sprite.show()
 	_exclamation_timer.start()
 	_following_timer.start()
+
+	# Creature can get stuck near slope sometimes so we push it up a little to make it move
+	if is_on_floor and !linear_velocity.length():
+		apply_impulse(Vector2.UP * 60.0)
 
 
 func _on_effect_added(effect: Enums.effect) -> void:
