@@ -41,9 +41,9 @@ func _on_body_entered(body: Node2D) -> void:
 # Damage made to player
 func _on_damage_made(amount: int, area: Area2D) -> void:
 	var transform_matrix = global_transform
-	get_parent().remove_child(self)
-	area.add_child(self)
-	global_transform = transform_matrix
+	get_parent().call_deferred("remove_child", self)
+	area.call_deferred("add_child", self)
+	set_deferred("global_transform", transform_matrix)
 
 	_speed = 0.0
 	start_self_destruct_countdown(PLAYER_WAIT_TIME)
