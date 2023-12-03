@@ -16,9 +16,11 @@ var aim_direction: Vector2:
 var _sprite_flash_frequency: float = 0.10
 var _sprite_flash_duration: float = 3.0
 var _is_flashing: bool = false
+var _player_hurt_sfx: = preload(SfxResources.PLAYER_HURT)
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var pickup_transform: RemoteTransform2D = $PickupTransform2D
+@onready var ladder_step_player: AudioStreamPlayer2D = $LadderStepPlayer
 @onready var _player_animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var _throw_arrow_pivot: Marker2D = $ThrowArrowPivot
 @onready var _throw_arrow_sprite: Sprite2D = $ThrowArrowPivot/SpriteContainer/ThrowArrowSprite
@@ -119,6 +121,7 @@ func on_objects_detector_area_exited(area: Area2D) -> void:
 
 func on_damage_taken(current_lives: int) -> void:
 	lives_changed.emit(current_lives)
+	AudioStreamManager2D.play_sound(_player_hurt_sfx, self)
 
 	toggle_hurtbox_collider(false)
 	_is_flashing = true

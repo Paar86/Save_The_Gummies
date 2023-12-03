@@ -39,7 +39,8 @@ func physics_process(delta: float) -> void:
 	if character.is_on_wall():
 		_change_direction()
 
-	if character.player_detector.is_colliding() and can_attack:
+	var detector_collider = character.player_detector.get_collider()
+	if detector_collider is Player and can_attack:
 		can_attack_timer.stop()
 		state_machine.transition_to("ReadyToAttack")
 

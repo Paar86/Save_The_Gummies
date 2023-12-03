@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://d2l1fpj8yehom"]
+[gd_scene load_steps=60 format=3 uid="uid://d2l1fpj8yehom"]
 
 [ext_resource type="Script" path="res://src/entities/player/player.gd" id="1_fgl7g"]
 [ext_resource type="PackedScene" uid="uid://cnm077r8cak41" path="res://src/common/components/hurtbox/hurtbox_component.tscn" id="2_e0d2b"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://src/entities/player/states/kick.gd" id="13_puh06"]
 [ext_resource type="Script" path="res://src/entities/player/states/climb.gd" id="14_ab6lr"]
 [ext_resource type="Script" path="res://src/entities/player/states/whistle.gd" id="19_ghrr3"]
+[ext_resource type="AudioStream" uid="uid://sve0ldjydr7c" path="res://assets/sfx/player/player_ladder_step.wav" id="20_387y7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n6kf7"]
 size = Vector2(8, 10)
@@ -514,6 +515,9 @@ collide_with_bodies = false
 libraries = {
 "": SubResource("AnimationLibrary_3ri2q")
 }
+
+[node name="LadderStepPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_387y7")
 
 [connection signal="timeout" from="StateMachine/Move/Air/JumpTimer" to="StateMachine/Move/Air" method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Move/Air/BufferTimer" to="StateMachine/Move/Air" method="_on_buffer_timer_timeout"]

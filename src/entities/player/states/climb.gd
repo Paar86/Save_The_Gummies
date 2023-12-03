@@ -42,12 +42,14 @@ func on_enter(params: StateParams) -> void:
 
 	# Reset the primary velocity so the player doesn't move when exiting the state
 	character.velocity_primary = Vector2.ZERO
+	character.ladder_step_player.playing = true
 
 
 func on_exit() -> void:
 	character.toggle_hitbox_collider(true)
 	passed_ladder_threshold.disconnect(on_ladder_threshold_passed)
 	_is_above_threshold = false
+	character.ladder_step_player.playing = false
 
 
 func physics_process(delta: float) -> void:
@@ -56,6 +58,10 @@ func physics_process(delta: float) -> void:
 	state_machine.change_animation_speed_scale(0.0)
 	if climbing_direction:
 		state_machine.change_animation_speed_scale(1.0)
+
+	var should_player_ladder_sfx = true if climbing_direction != 0 else false
+	if character.ladder_step_player.playing != should_player_ladder_sfx:
+		character.ladder_step_player.playing = should_player_ladder_sfx
 
 	character.move_and_slide()
 

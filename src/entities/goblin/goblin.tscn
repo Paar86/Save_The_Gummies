@@ -165,7 +165,7 @@ shape = SubResource("RectangleShape2D_ujn23")
 [node name="PlayerDetectorRayCast" type="RayCast2D" parent="."]
 position = Vector2(0, -5)
 target_position = Vector2(48, 0)
-collision_mask = 2
+collision_mask = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -10)
