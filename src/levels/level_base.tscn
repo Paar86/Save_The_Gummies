@@ -14,6 +14,7 @@
 script = ExtResource("1_03m7p")
 
 [node name="ObjectsBehind" type="Node" parent="."]
+editor_description = "Arrow shooters, wind generators..."
 
 [node name="TilemapBody" type="StaticBody2D" parent="."]
 collision_mask = 0
@@ -31,8 +32,16 @@ layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Decorations"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 0
+layer_2/tile_data = PackedInt32Array()
 
 [node name="ObjectInMiddle" type="Node" parent="."]
+editor_description = "Ladders, barriers..."
 
 [node name="Enemies" type="Node" parent="."]
 
@@ -54,6 +63,7 @@ update_rotation = false
 update_scale = false
 
 [node name="ObjectsInFront" type="Node" parent="."]
+editor_description = "Basket..."
 
 [node name="DecorationsTileMap" type="TileMap" parent="."]
 tile_set = ExtResource("5_6yw2v")

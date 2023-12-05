@@ -936,7 +936,6 @@ layer_1/tile_data = PackedInt32Array(2424831, 327680, 2, 1769476, 393216, 2, 176
 
 [node name="Ladder" parent="ObjectInMiddle" index="0" instance=ExtResource("3_3usxa")]
 position = Vector2(44, 400)
-metadata/_edit_group_ = true
 
 [node name="SpriteTop" parent="ObjectInMiddle/Ladder" index="0"]
 position = Vector2(0, -44)
@@ -951,7 +950,6 @@ shape = SubResource("RectangleShape2D_4lrnx")
 
 [node name="Ladder2" parent="ObjectInMiddle" index="1" instance=ExtResource("3_3usxa")]
 position = Vector2(-116, 272)
-metadata/_edit_group_ = true
 
 [node name="SpriteTop" parent="ObjectInMiddle/Ladder2" index="0"]
 position = Vector2(0, -28)
@@ -966,7 +964,6 @@ shape = SubResource("RectangleShape2D_434lg")
 
 [node name="Ladder3" parent="ObjectInMiddle" index="2" instance=ExtResource("3_3usxa")]
 position = Vector2(140, 240)
-metadata/_edit_group_ = true
 
 [node name="SpriteTop" parent="ObjectInMiddle/Ladder3" index="0"]
 position = Vector2(0, -44)
@@ -995,7 +992,6 @@ shape = SubResource("RectangleShape2D_b8kj6")
 
 [node name="Ladder5" parent="ObjectInMiddle" index="4" instance=ExtResource("3_3usxa")]
 position = Vector2(284, 336)
-metadata/_edit_group_ = true
 
 [node name="SpriteTop" parent="ObjectInMiddle/Ladder5" index="0"]
 position = Vector2(0, -60)
@@ -1025,7 +1021,6 @@ position = Vector2(-80, 352)
 
 [node name="Player" parent="." index="8"]
 position = Vector2(-80, 352)
-metadata/_edit_group_ = true
 
 [node name="Basket" parent="ObjectsInFront" index="0" instance=ExtResource("4_e8po5")]
 position = Vector2(-112, 352)

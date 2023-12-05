@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://cnm077r8cak41" path="res://src/common/components/hurtbox/hurtbox_component.tscn" id="2_ayyv1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jdmd"]
-size = Vector2(10, 20)
+size = Vector2(16, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wr3gm"]
-size = Vector2(14, 22)
+size = Vector2(18, 22)
 
 [node name="Barrier" type="StaticBody2D"]
 collision_layer = 16

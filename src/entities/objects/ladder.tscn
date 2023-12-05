@@ -8,6 +8,7 @@ editor_description = "Top edge of collision shape should be 2px below tile's wal
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_1lyxq")
+metadata/_edit_group_ = true
 
 [node name="SpriteTop" type="Sprite2D" parent="."]
 texture_repeat = 2
