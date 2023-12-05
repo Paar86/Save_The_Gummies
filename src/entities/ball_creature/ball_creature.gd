@@ -48,8 +48,8 @@ var _bounce_sfx: = preload(SfxResources.BALL_BOUNCE)
 @onready var _sprite: Sprite2D = $Node/Sprite2D
 @onready var _hitbox_component: HitboxComponent = $HitboxComponent
 @onready var _ground_detector: RayCast2D = $Node/Sprite2D/GroundDetector
-@onready var _exclamation_timer: Timer = $ExclamationTimer
-@onready var _exclamation_sprite: Sprite2D = $Node/Sprite2D/ExclamationSprite
+@onready var _symbol_timer: Timer = $SymbolTimer
+@onready var _symbol_sprite: Sprite2D = $Node/Sprite2D/SymbolSprite
 @onready var _following_timer: Timer = $FollowingTimer
 
 
@@ -86,8 +86,10 @@ func _physics_process(delta: float) -> void:
 	var to_player_vector = whistling_player.global_position - global_position
 	var player_distance = to_player_vector.length()
 
+	# Arrived near player's position so stop following
 	if player_distance <= STOP_FOLLOWING_DISTANCE_NEAR or player_distance >= STOP_FOLLOWING_DISTANCE_FAR:
 		whistling_player = null
+		_following_timer.stop()
 		return
 
 	var following_direction = sign(to_player_vector.x)
@@ -130,13 +132,20 @@ func enable_collision() -> void:
 
 func propagate_whistle(source_body: GameCharacter) -> void:
 	whistling_player = source_body
-	_exclamation_sprite.show()
-	_exclamation_timer.start()
+	_show_symbol(0)
 	_following_timer.start()
 
 	# Creature can get stuck near slope sometimes so we push it up a little to make it move
 	if is_on_floor and !linear_velocity.length():
 		apply_impulse(Vector2.UP * 60.0)
+
+
+func _show_symbol(frame_index: int) -> void:
+	frame_index = mini(frame_index, _symbol_sprite.hframes - 1)
+
+	_symbol_sprite.frame = frame_index
+	_symbol_sprite.show()
+	_symbol_timer.start()
 
 
 func _on_effect_added(effect: Enums.effect) -> void:
@@ -166,9 +175,10 @@ func _on_body_entered(body: Node) -> void:
 	AudioStreamManager2D.play_sound(_bounce_sfx, self)
 
 
-func _on_exclamation_timer_timeout() -> void:
-	_exclamation_sprite.hide()
+func _on_symbol_timer_timeout() -> void:
+	_symbol_sprite.hide()
 
 
 func _on_following_timer_timeout() -> void:
 	whistling_player = null
+	_show_symbol(1)
