@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy7x1xm0u6eu6"]
+
+[ext_resource type="Script" path="res://src/user_interface/restart_prompt/restart_prompt.gd" id="1_c37ai"]
+[ext_resource type="Theme" uid="uid://c0whh17s3gj3a" path="res://src/user_interface/theme.tres" id="2_wd3wr"]
+
+[node name="RestartPrompt" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_c37ai")
+
+[node name="UserInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_wd3wr")
+
+[node name="ColorRect" type="ColorRect" parent="UserInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0784314, 0.0784314, 0.0784314, 0.811765)
+
+[node name="Message" type="Label" parent="UserInterface"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.5
+offset_top = 12.0
+offset_right = 57.5
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_wd3wr")
+text = "Press jump key
+to restart"
+horizontal_alignment = 1
+
+[node name="Restart" type="Button" parent="UserInterface"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -36.0
+offset_right = 37.5
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = " Restart "
+
+[connection signal="button_up" from="UserInterface/Restart" to="." method="_on_restart"]
