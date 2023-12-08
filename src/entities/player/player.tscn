@@ -406,7 +406,7 @@ states_for_transition = [NodePath("../Idle"), NodePath("../../Climb")]
 
 [node name="JumpTimer" type="Timer" parent="StateMachine/Move/Air"]
 process_callback = 0
-wait_time = 0.2
+wait_time = 0.175
 one_shot = true
 
 [node name="BufferTimer" type="Timer" parent="StateMachine/Move/Air"]
@@ -416,7 +416,7 @@ one_shot = true
 
 [node name="CoyoteTimer" type="Timer" parent="StateMachine/Move/Air"]
 process_callback = 0
-wait_time = 0.1
+wait_time = 0.75
 one_shot = true
 
 [node name="Carry" type="Node" parent="StateMachine/Move" node_paths=PackedStringArray("move_state")]
