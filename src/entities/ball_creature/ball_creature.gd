@@ -163,7 +163,7 @@ func _on_effect_removed(effect: Enums.effect) -> void:
 
 
 func _set_color(new_color : colors):
-	_sprite.get_material().set_shader_parameter("palette", new_color)
+	get_node("Node/Sprite2D").get_material().set_shader_parameter("palette", new_color)
 	color = new_color
 
 
