@@ -8,6 +8,8 @@ var _states: Array[State] = []
 
 
 func _ready() -> void:
+	await owner.ready
+
 	_states.assign(find_children("*", "State"))
 	for state in _states:
 		state.state_machine = self

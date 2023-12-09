@@ -43,6 +43,7 @@ var _produce_bounce_sfx: = false
 var _damp_default: float = ProjectSettings.get_setting("physics/2d/default_linear_damp")
 var _bounce_sfx: = preload(SfxResources.BALL_BOUNCE)
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var _effects_applier_component: EffectsApplierComponent = $EffectsApplierComponent
 @onready var _sprite: Sprite2D = $Node/Sprite2D

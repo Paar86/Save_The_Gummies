@@ -1,11 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://c36mwvup5f8ad"]
+[gd_scene load_steps=23 format=3 uid="uid://c36mwvup5f8ad"]
 
 [ext_resource type="Script" path="res://src/entities/ball_creature/ball_creature.gd" id="1_r5tyh"]
-[ext_resource type="Texture2D" uid="uid://cvnkx10pug7s8" path="res://assets/ball_creature/ball_creature_tiny.png" id="2_0gvlg"]
 [ext_resource type="PackedScene" uid="uid://cvsgunn02v50s" path="res://src/common/components/hitbox/hitbox_component.tscn" id="2_4pech"]
 [ext_resource type="PackedScene" uid="uid://c8wqsow14x6ea" path="res://src/common/components/effects_applier/effects_applier_component.tscn" id="2_36s0l"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/components/hitbox_component.gd" id="3_208bs"]
 [ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie.gdshader" id="5_6f6km"]
+[ext_resource type="Texture2D" uid="uid://bhg0gu4uapxnm" path="res://assets/ball_creature/ball_creature_spritesheet.png" id="6_lg6ex"]
 [ext_resource type="Texture2D" uid="uid://bpesacbyulktm" path="res://assets/ball_creature/arrow_marker.png" id="7_e5flx"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/components/arrow_marker.gd" id="8_7l0pn"]
 [ext_resource type="Script" path="res://src/common/state_machine/state_machine.gd" id="9_mseys"]
@@ -27,7 +27,61 @@ radius = 3.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_12c18"]
 shader = ExtResource("5_6f6km")
-shader_parameter/palette = 0
+shader_parameter/palette = 2
+
+[sub_resource type="Animation" id="Animation_yqyxa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_n7olu"]
+resource_name = "blinking"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [3, 4, 3]
+}
+
+[sub_resource type="Animation" id="Animation_7sjfl"]
+resource_name = "idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aatl0"]
+_data = {
+"RESET": SubResource("Animation_yqyxa"),
+"blinking": SubResource("Animation_n7olu"),
+"idle": SubResource("Animation_7sjfl")
+}
 
 [node name="BallCreature" type="RigidBody2D"]
 collision_layer = 8
@@ -59,7 +113,9 @@ update_rotation = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Node"]
 material = SubResource("ShaderMaterial_12c18")
-texture = ExtResource("2_0gvlg")
+texture = ExtResource("6_lg6ex")
+hframes = 3
+vframes = 5
 
 [node name="ArrowMarker" type="Sprite2D" parent="Node/Sprite2D"]
 visible = false
@@ -85,6 +141,16 @@ script = ExtResource("10_gsxf2")
 ball_creature = NodePath("../..")
 states_for_transition = [NodePath("../Rolling"), NodePath("../Air"), NodePath("../Carried")]
 
+[node name="AnimationDelayTimer" type="Timer" parent="StateMachine/Idle"]
+editor_description = "Time after which idle aanimations start to pplay."
+wait_time = 3.0
+one_shot = true
+
+[node name="BlinkingDelayTimer" type="Timer" parent="StateMachine/Idle"]
+editor_description = "How long should we wait for another blinking animation."
+wait_time = 3.0
+one_shot = true
+
 [node name="Rolling" type="Node" parent="StateMachine" node_paths=PackedStringArray("ball_creature", "states_for_transition")]
 script = ExtResource("11_2yhqs")
 ball_creature = NodePath("../..")
@@ -107,6 +173,11 @@ one_shot = true
 [node name="FollowingTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_aatl0")
+}
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="SymbolTimer" to="." method="_on_symbol_timer_timeout"]
