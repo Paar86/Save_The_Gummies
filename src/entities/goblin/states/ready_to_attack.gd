@@ -1,13 +1,15 @@
 extends State
 
 @export var character: Goblin
-@onready var _exclamation_mark_timer: Timer = $ExclamationMarkTimer
 
+var _alert_sfx: = preload(SfxResources.GOBLIN_ALERT)
+@onready var _exclamation_mark_timer: Timer = $ExclamationMarkTimer
 
 func on_enter(params: StateParams) -> void:
 	state_machine.change_animation_speed_scale(0)
 	character.exclamation_mark.show()
 	_exclamation_mark_timer.start()
+	AudioStreamManager2D.play_sound(_alert_sfx, character)
 
 
 func on_exit() -> void:
