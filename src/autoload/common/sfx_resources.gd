@@ -13,6 +13,7 @@ const BALL_BOUNCE: = "res://assets/sfx/ball_creature/bounce.wav"
 
 # Goblin
 const GOBLIN_ALERT: = "res://assets/sfx/goblin/goblin_alert.wav"
+const GOBLIN_ATTACK: = "res://assets/sfx/goblin/goblin_attack.wav"
 
 # Basket
 const BASKET_CATCH: = "res://assets/sfx/basket/basket_catch.wav"

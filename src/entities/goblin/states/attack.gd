@@ -1,6 +1,8 @@
 extends State
 
 @export var move_state: GoblinMoveState
+var _attack_sfx: Resource = preload(SfxResources.GOBLIN_ATTACK)
+
 @onready var _attack_timer: Timer = $AttackTimer
 
 
@@ -9,6 +11,7 @@ func on_enter(params: StateParams) -> void:
 	move_state.horizontal_speed = move_state.HORIZONTAL_SPEED_DEFAULT * 4
 	move_state.can_attack = false
 	_attack_timer.start()
+	AudioStreamManager2D.play_sound(_attack_sfx, move_state.character)
 
 
 func on_exit() -> void:
