@@ -33,6 +33,10 @@ func physics_process(delta: float) -> void:
 	_elapsed_time = minf(_elapsed_time, 1.0)
 
 	_picked_object.global_position = _picked_object_original_position.lerp(character.pickup_transform.global_position, _elapsed_time)
-	if _picked_object.global_position == character.pickup_transform.global_position:
+
+	# For some reason, both values are not always the same with lerp weight 1, making
+	# the player stuck in pickup state; therefore we check if both values are equal approximately
+	if _picked_object.global_position.is_equal_approx(character.pickup_transform.global_position):
+		_picked_object.global_position = character.pickup_transform.global_position
 		state_machine.transition_to("CarryIdle")
 		return
