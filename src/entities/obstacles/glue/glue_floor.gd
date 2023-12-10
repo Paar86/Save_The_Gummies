@@ -4,6 +4,8 @@ extends Area2D
 @export var run_configuration: bool = false: set = _run_configuration
 
 var _glue_splash_scene: PackedScene = preload("res://src/entities/obstacles/glue/glue_splash.tscn")
+var _glue_splash_in_sfx: Resource = preload(SfxResources.GLUE_SPLASH_IN)
+var _glue_splash_out_sfx: Resource = preload(SfxResources.GLUE_SPLASH_OUT)
 
 @onready var splash_container: Node = $GlueSplashContainer
 
@@ -57,12 +59,16 @@ func _on_body_entered(body: PhysicsBody2D) -> void:
 	if body is GameCharacter or body is BallCreature:
 		body.apply_effect(Enums.effect.GLUED)
 
+	AudioStreamManager2D.play_sound(_glue_splash_in_sfx, body)
+
 
 func _on_body_exited(body: Node2D) -> void:
 	spawn_glue_splash(body.global_position)
 
 	if body is GameCharacter or body is BallCreature:
 		body.remove_effect(Enums.effect.GLUED)
+
+	AudioStreamManager2D.play_sound(_glue_splash_out_sfx, body)
 
 
 func _on_glue_splash_timout(glue_splash: Node2D) -> void:
