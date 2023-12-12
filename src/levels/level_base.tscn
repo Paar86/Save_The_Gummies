@@ -63,7 +63,7 @@ update_rotation = false
 update_scale = false
 
 [node name="ObjectsInFront" type="Node" parent="."]
-editor_description = "Basket..."
+editor_description = "Basket, glue..."
 
 [node name="DecorationsTileMap" type="TileMap" parent="."]
 tile_set = ExtResource("5_6yw2v")
