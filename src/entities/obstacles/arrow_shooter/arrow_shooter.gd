@@ -1,6 +1,7 @@
 extends Node2D
 
 var _arrow_scene: PackedScene = preload("res://src/entities/obstacles/arrow_shooter/arrow.tscn")
+var _arrow_shoot_sfx: Resource = preload(SfxResources.ARROW_SHOOT)
 
 @onready var _shooter_sprite: Sprite2D = $ShooterSprite
 @onready var _arrows_folder: Node2D = $Arrows
@@ -24,6 +25,7 @@ func prepare_arrow() -> void:
 	await _prepare_timer.timeout
 
 	new_arrow.process_mode = Node.PROCESS_MODE_INHERIT
+	AudioStreamManager2D.play_sound(_arrow_shoot_sfx, self)
 	_after_shot_timer.start()
 
 

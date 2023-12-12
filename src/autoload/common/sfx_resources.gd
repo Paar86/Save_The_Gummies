@@ -18,6 +18,9 @@ const GOBLIN_ATTACK: = "res://assets/sfx/goblin/goblin_attack.wav"
 # Basket
 const BASKET_CATCH: = "res://assets/sfx/basket/basket_catch.wav"
 
+# Obstacles
+const ARROW_SHOOT: = "res://assets/sfx/arrow/arrow_shoot.wav"
+
 # Common
 const DEATH_EXPLOSION: = "res://assets/sfx/effects/death.wav"
 const BREAK_1: = "res://assets/sfx/effects/break_1.wav"

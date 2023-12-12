@@ -22,7 +22,7 @@ func _ready() -> void:
 		var stream_player := AudioStreamPlayer2D.new()
 		stream_player.bus = BUS
 		stream_player.autoplay = false
-		stream_player.max_distance = 320.0
+		stream_player.max_distance = 128.0
 
 		var stream_channel := AudioStreamLocal.new(stream_player)
 		stream_channel.stream_player.connect("finished", Callable(self, "_on_stream_finished").bind(stream_channel))

@@ -5,6 +5,7 @@ const WORLD_WAIT_TIME: float = 1.0
 const PLAYER_WAIT_TIME: float = 1.0
 
 var _speed: float = SPEED_DEFAULT
+var _arrow_hit_sfx: Resource = preload(SfxResources.PLAYER_STOMP)
 
 @onready var _hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var _hitbox_component: HitboxComponent = $HitboxComponent
@@ -36,6 +37,7 @@ func start_self_destruct_countdown(wait_time) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	_speed = 0.0
 	start_self_destruct_countdown(WORLD_WAIT_TIME)
+	AudioStreamManager2D.play_sound(_arrow_hit_sfx, self)
 
 
 # Damage made to player
