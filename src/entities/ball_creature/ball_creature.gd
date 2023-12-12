@@ -154,6 +154,7 @@ func _on_effect_added(effect: Enums.effect) -> void:
 		Enums.effect.GLUED:
 			linear_damp = 5
 			physics_material_override.bounce = 0.0
+			_produce_bounce_sfx = false
 
 
 func _on_effect_removed(effect: Enums.effect) -> void:
@@ -161,6 +162,8 @@ func _on_effect_removed(effect: Enums.effect) -> void:
 		Enums.effect.GLUED:
 			linear_damp = _damp_default
 			physics_material_override.bounce = 0.4
+			if not _effects_applier_component.is_effect_active(Enums.effect.GLUED):
+				_produce_bounce_sfx = true
 
 
 func _set_color(new_color : colors):

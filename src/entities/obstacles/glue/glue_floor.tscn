@@ -7,6 +7,7 @@
 collision_layer = 0
 collision_mask = 14
 script = ExtResource("1_7ly7m")
+metadata/_edit_group_ = true
 
 [node name="GlueFloorStart" type="Sprite2D" parent="."]
 texture = ExtResource("2_gyxy1")

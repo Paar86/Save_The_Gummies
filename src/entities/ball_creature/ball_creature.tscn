@@ -27,7 +27,7 @@ radius = 3.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_12c18"]
 shader = ExtResource("5_6f6km")
-shader_parameter/palette = 4
+shader_parameter/palette = 3
 
 [sub_resource type="Animation" id="Animation_yqyxa"]
 length = 0.001
@@ -104,7 +104,7 @@ tracks/0/path = NodePath("Node/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.65, 1.2),
+"times": PackedFloat32Array(0, 0.6, 0.65, 1.15),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [12, 13, 14, 13]

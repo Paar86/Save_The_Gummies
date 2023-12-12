@@ -1,8 +1,8 @@
 class_name Arrow extends Area2D
 
 const SPEED_DEFAULT: float = 120.0
-const WORLD_WAIT_TIME: float = 2.0
-const PLAYER_WAIT_TIME: float = 2.0
+const WORLD_WAIT_TIME: float = 1.0
+const PLAYER_WAIT_TIME: float = 1.0
 
 var _speed: float = SPEED_DEFAULT
 

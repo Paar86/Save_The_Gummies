@@ -9,11 +9,10 @@ script = ExtResource("1_weg2i")
 [node name="Arrows" type="Node2D" parent="."]
 
 [node name="AfterShotTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 
 [node name="PrepareTimer" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
 
 [node name="ShooterSprite" type="Sprite2D" parent="."]

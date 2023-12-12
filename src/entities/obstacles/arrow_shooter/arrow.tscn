@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://62trp8v03f0d" path="res://assets/obstacles/arrow_spritesheet.png" id="5_kx20u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_864ow"]
-size = Vector2(14, 6)
+size = Vector2(14, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_036uj"]
 size = Vector2(6, 2)
@@ -41,6 +41,7 @@ collision_layer = 0
 script = ExtResource("1_6bkri")
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("2_2u0hl")]
+position = Vector2(0, -1)
 collision_layer = 4
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
@@ -50,7 +51,7 @@ shape = SubResource("RectangleShape2D_864ow")
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="HitboxComponent" index="0"]
-position = Vector2(3, 1)
+position = Vector2(4, 0)
 shape = SubResource("RectangleShape2D_036uj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -60,7 +61,6 @@ autoplay = "default"
 frame_progress = 0.626173
 
 [node name="SelfDestructTimer" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
