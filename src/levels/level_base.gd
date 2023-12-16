@@ -18,7 +18,7 @@ func _ready() -> void:
 
 	# Setting camera limits
 	var tile_map_boundaries: = _tile_map.get_used_rect()
-	var tile_map_cell_size: = _tile_map.cell_quadrant_size
+	var tile_map_cell_size: = _tile_map.rendering_quadrant_size
 
 	for camera in [_player_camera, _peek_camera]:
 		camera.limit_left = tile_map_boundaries.position.x * tile_map_cell_size + 2
