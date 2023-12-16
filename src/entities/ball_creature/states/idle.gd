@@ -3,8 +3,8 @@ extends State
 @export var ball_creature: BallCreature
 
 var _idle_animations_weights = {
-	"blinking": 0.75,
 	"looking_around": 0.25,
+	"blinking": 0.75,
 }
 
 @onready var _animation_delay_timer: Timer = $AnimationDelayTimer
@@ -47,7 +47,7 @@ func _on_next_animation_delay_timeout() -> void:
 	var weight = randf()
 	var next_animation_name = "blinking"
 	for animation in _idle_animations_weights:
-		if weight >= _idle_animations_weights[animation]:
+		if weight <= _idle_animations_weights[animation]:
 			next_animation_name = animation
 			break
 

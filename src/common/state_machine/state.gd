@@ -6,6 +6,10 @@ class_name State extends Node
 ## Marks the state as abstract.
 ## Abstract state cannot be transitioned into and is used only for code sharing.
 @export var abstract := false
+# Wheter or not the state can be transferred to from any state or not.
+# If false, the state can be accessed only from states which which have it
+# marked as possible for transition.
+@export var universal := false
 
 var state_machine: StateMachine = null
 var state_name: String:

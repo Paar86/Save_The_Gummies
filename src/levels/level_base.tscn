@@ -47,11 +47,6 @@ player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_kapmh")]
 
-[node name="CameraTransform" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("../../PlayerCamera")
-update_rotation = false
-update_scale = false
-
 [node name="ObjectsInFront" type="Node" parent="."]
 editor_description = "Basket, glue..."
 
@@ -59,6 +54,10 @@ editor_description = "Basket, glue..."
 tile_set = ExtResource("5_6yw2v")
 format = 2
 layer_0/tile_data = PackedInt32Array(-393212, 1, 2, -393210, 1, 2, -393209, 65537, 2)
+
+[node name="PlayerRespawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -73,3 +72,5 @@ grow_vertical = 0
 texture = ExtResource("5_pd1ws")
 stretch_mode = 1
 script = ExtResource("6_y8hi7")
+
+[connection signal="timeout" from="PlayerRespawnTimer" to="." method="_on_player_respawn_timer_timeout"]

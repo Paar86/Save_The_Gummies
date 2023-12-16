@@ -27,7 +27,7 @@ radius = 3.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_12c18"]
 shader = ExtResource("5_6f6km")
-shader_parameter/palette = 3
+shader_parameter/palette = 4
 
 [sub_resource type="Animation" id="Animation_yqyxa"]
 length = 0.001

@@ -4,7 +4,7 @@ extends Node
 @export var levels: Array[PackedScene]
 @export var credits: PackedScene
 @export var pause_screen: PackedScene
-@export var restart_prompt: PackedScene
+#@export var restart_prompt: PackedScene
 
 @onready var _active_scene: Node = $ActiveScene
 
@@ -26,9 +26,9 @@ func _ready() -> void:
 	_pause_scene = pause_screen.instantiate()
 	self.add_child(_pause_scene)
 	_pause_scene.visible = false
-	_restart_scene = restart_prompt.instantiate()
-	self.add_child(_restart_scene)
-	_restart_scene.visible = false
+	#_restart_scene = restart_prompt.instantiate()
+	#self.add_child(_restart_scene)
+	#_restart_scene.visible = false
 
 
 func _on_change_level() -> void:

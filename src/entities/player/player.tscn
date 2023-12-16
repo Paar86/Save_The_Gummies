@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://d2l1fpj8yehom"]
+[gd_scene load_steps=61 format=3 uid="uid://d2l1fpj8yehom"]
 
 [ext_resource type="Script" path="res://src/entities/player/player.gd" id="1_fgl7g"]
 [ext_resource type="PackedScene" uid="uid://cnm077r8cak41" path="res://src/common/components/hurtbox/hurtbox_component.tscn" id="2_e0d2b"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://src/entities/player/states/climb.gd" id="14_ab6lr"]
 [ext_resource type="Script" path="res://src/entities/player/states/whistle.gd" id="19_ghrr3"]
 [ext_resource type="AudioStream" uid="uid://sve0ldjydr7c" path="res://assets/sfx/player/player_ladder_step.wav" id="20_387y7"]
+[ext_resource type="Script" path="res://src/entities/player/states/death.gd" id="20_uhguk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n6kf7"]
 size = Vector2(8, 14)
@@ -345,7 +346,6 @@ metadata/_edit_group_ = true
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("2_e0d2b")]
 collision_layer = 2
-lives = 3
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(0, -7)
@@ -459,6 +459,12 @@ states_for_transition = [NodePath("../Move/Idle"), NodePath("../Move/Air")]
 script = ExtResource("19_ghrr3")
 character = NodePath("../..")
 states_for_transition = [NodePath("../Move/Idle")]
+
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "states_for_transition")]
+script = ExtResource("20_uhguk")
+character = NodePath("../..")
+states_for_transition = [NodePath("../Move/Idle")]
+universal = true
 
 [node name="PickupArea" type="Area2D" parent="."]
 visible = false

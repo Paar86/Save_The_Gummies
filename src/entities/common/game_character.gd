@@ -40,6 +40,14 @@ func flush_effect(effect: Enums.effect) -> void:
 	_effects_applier_component.flush_effect(effect)
 
 
+func flush_all_effects() -> void:
+	_effects_applier_component.flush_all_effects()
+
+
+func flush_movement_modificators() -> void:
+	_effects_applier_component.flush_movement_modificators()
+
+
 func apply_movement_modificator(modificator: Vector2) -> void:
 	_effects_applier_component.apply_movement_modificator(modificator)
 

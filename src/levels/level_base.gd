@@ -4,13 +4,17 @@ signal camera_above_player
 
 var ball_creature: BallCreature
 var _checkpoints: Array[Checkpoint] = []
+# For remembering the position of Player in tree for proper z-index
+var _player_tree_index: = 0
 var _player_respawn_point: = Vector2.ZERO
+var _player_scene: PackedScene = preload("res://src/entities/player/player.tscn")
 
 @onready var _player: Player = $Player
 @onready var _player_camera: Camera2D = $PlayerCamera
 @onready var _peek_camera: PeekCamera = $PeekCamera
 @onready var _tile_map: TileMap = $TileMap
 @onready var _health_ui: TextureRect = $UI/HealthCounter
+@onready var _player_respawn_timer: Timer = $PlayerRespawnTimer
 
 
 func _ready() -> void:
@@ -18,14 +22,12 @@ func _ready() -> void:
 	assert(ball_creature_scenes.size() > 0, "There is no ball create scene child!")
 	ball_creature = ball_creature_scenes[0]
 
-	# Signals
-	_player.lives_changed.connect(_health_ui.on_health_changed)
-	_health_ui.on_health_changed(_player.get_current_lives())
-	_health_ui.show()
+	assert(_player, "No player in the level!")
 
-	# Player
 	_player_respawn_point = _player.global_position
+	_player_tree_index = _player.get_index()
 
+	_configure_player()
 	_configure_cameras()
 	_register_checkpoints()
 
@@ -59,6 +61,17 @@ func _register_checkpoints() -> void:
 		checkpoint.checkpoint_activated.connect(_on_checkpoint_activated)
 
 
+func _configure_player() -> void:
+	var camera_transform_scene: = RemoteTransform2D.new()
+	camera_transform_scene.name = "CameraTransform"
+	camera_transform_scene.remote_path = _player_camera.get_path()
+	_player.add_child(camera_transform_scene)
+	camera_transform_scene.owner = self
+
+	# Signals
+	_player.lives_depleted.connect(_on_player_lives_depleted)
+
+
 func _on_peek_camera_at_player() -> void:
 	_player_camera.make_current()
 
@@ -75,3 +88,21 @@ func _on_checkpoint_activated(activated_checkpoint: Checkpoint) -> void:
 
 	# And remember the new respawn position
 	_player_respawn_point = activated_checkpoint.global_position
+
+
+func _on_player_lives_depleted() -> void:
+	_player_respawn_timer.start()
+
+
+func _on_player_respawn_timer_timeout() -> void:
+	var player = _player_scene.instantiate() as Player
+	player.global_position = _player_respawn_point
+	player.start_invincible = true
+	player.name = "Player"
+	_player = player
+	call_deferred("add_child", player)
+	call_deferred("move_child", player, _player_tree_index)
+
+	await player.ready
+	player.owner = self
+	_configure_player()

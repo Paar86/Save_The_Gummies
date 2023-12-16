@@ -4,7 +4,7 @@ signal lives_changed(new_value: int)
 signal lives_depleted
 signal effects_propagated(effects: Array[String])
 
-@export var lives = 99
+@export var lives = 1
 
 var _collision_bitmask_default: int = 0
 
