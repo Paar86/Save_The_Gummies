@@ -55,7 +55,7 @@ func _configure_cameras() -> void:
 
 func _register_checkpoints() -> void:
 	_checkpoints.assign(find_children("*", "Checkpoint"))
-	_checkpoints.sort_custom(func(ch1, ch2): return ch2.name > ch1.name)
+	_checkpoints.sort_custom(func(ch1, ch2): return ch2.name.nocasecmp_to(ch1.name) > 0)
 
 	for checkpoint in _checkpoints:
 		checkpoint.checkpoint_activated.connect(_on_checkpoint_activated)

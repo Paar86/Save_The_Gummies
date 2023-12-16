@@ -12,7 +12,7 @@ func on_enter(params: StateParams) -> void:
 	AudioStreamManager2D.play_sound(_alert_sfx, character)
 
 
-func on_exit() -> void:
+func on_exit(transition: Transition) -> void:
 	state_machine.change_animation_speed_scale(1)
 	character.exclamation_mark.hide()
 	_exclamation_mark_timer.stop()

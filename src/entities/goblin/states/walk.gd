@@ -13,7 +13,7 @@ func on_enter(params: StateParams) -> void:
 	_walk_timer.start()
 
 
-func on_exit() -> void:
+func on_exit(transition: Transition) -> void:
 	_walk_timer.stop()
 
 

@@ -8,12 +8,18 @@ const MAX_SPEED_OVERRIDE: = move_state.MAX_RUN_SPEED_DEFAULT / 2
 var _can_throw: = false
 var _is_aiming: = false
 var _is_fast_aiming_up: = false
+var _child_states: Array[State] = []
+var _child_states_names: Array[StringName] = []
 
 # How long until aim arrow is shown
 @onready var _to_aim_timer: Timer = $ToAimTimer
 
 
 func _ready() -> void:
+	_child_states.assign(find_children("*", "State"))
+	for child_state in _child_states:
+		_child_states_names.append(child_state.name)
+
 	Events.player_pickup_drop_requested.connect(_on_player_pickup_drop_requested)
 
 
@@ -35,8 +41,11 @@ func on_enter(params: StateParams) -> void:
 	move_state.max_speed = MAX_SPEED_OVERRIDE
 
 
-func on_exit() -> void:
-	move_state.max_speed = move_state.MAX_RUN_SPEED_DEFAULT
+func on_exit(transition: Transition) -> void:
+	if not _child_states_names.has(transition.target_state_name):
+		move_state.max_speed = move_state.MAX_RUN_SPEED_DEFAULT
+		# In case of forced transition to death state
+		release_pickup(Vector2.ZERO)
 
 
 func unhandled_input(event: InputEvent) -> void:

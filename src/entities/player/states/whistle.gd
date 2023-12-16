@@ -14,7 +14,7 @@ func on_enter(params: StateParams) -> void:
 		affected_body.propagate_whistle(character)
 
 
-func on_exit() -> void:
+func on_exit(transition: Transition) -> void:
 	character.animation_player.animation_finished.disconnect(_on_animation_timeout)
 
 

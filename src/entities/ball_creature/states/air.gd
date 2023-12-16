@@ -7,7 +7,7 @@ func on_enter(params: StateParams) -> void:
 	ball_creature.ignore_following = true
 
 
-func on_exit() -> void:
+func on_exit(transition: Transition) -> void:
 	ball_creature.ignore_following = false
 
 

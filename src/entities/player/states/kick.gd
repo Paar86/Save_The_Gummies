@@ -11,7 +11,7 @@ func on_enter(params: StateParams) -> void:
 	character.animation_player.play("small_jump")
 
 
-func on_exit() -> void:
+func on_exit(transition: Transition) -> void:
 	character.animation_player.animation_finished.disconnect(_on_kick_timeout)
 
 

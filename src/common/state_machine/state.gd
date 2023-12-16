@@ -21,7 +21,7 @@ func on_enter(params: StateParams) -> void:
 	pass
 
 
-func on_exit() -> void:
+func on_exit(transition: Transition) -> void:
 	pass
 
 

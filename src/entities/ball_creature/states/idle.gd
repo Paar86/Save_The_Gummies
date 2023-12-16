@@ -21,7 +21,7 @@ func on_enter(params: StateParams) -> void:
 	_animation_delay_timer.start()
 
 
-func on_exit() -> void:
+func on_exit(transition: Transition) -> void:
 	_animation_delay_timer.stop()
 	_next_animation_delay_timer.stop()
 	ball_creature.animation_player.disconnect("animation_finished", _on_animation_finished)

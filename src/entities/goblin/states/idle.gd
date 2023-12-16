@@ -22,7 +22,7 @@ func on_enter(params: StateParams) -> void:
 		move_state.can_attack_timer.start()
 
 
-func on_exit() -> void:
+func on_exit(transition: Transition) -> void:
 	_idle_timer.stop()
 	move_state.horizontal_speed = move_state.HORIZONTAL_SPEED_DEFAULT
 

@@ -37,7 +37,10 @@ func transition_to(state_name: String, params: StateParams = null) -> void:
 
 	# There is no state at the beginning so nothing can "exit"
 	if current_state:
-		current_state.on_exit()
+		var transition = Transition.new()
+		transition.original_state_name = current_state.name
+		transition.target_state_name = desired_state.name
+		current_state.on_exit(transition)
 
 	current_state = desired_state
 	current_state.on_enter(params)

@@ -45,7 +45,7 @@ func on_enter(params: StateParams) -> void:
 	character.ladder_step_player.playing = true
 
 
-func on_exit() -> void:
+func on_exit(transition: Transition) -> void:
 	character.toggle_hitbox_collider(true)
 	passed_ladder_threshold.disconnect(on_ladder_threshold_passed)
 	_is_above_threshold = false

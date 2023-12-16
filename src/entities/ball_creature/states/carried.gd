@@ -4,18 +4,10 @@ extends State
 
 
 func on_enter(params: StateParams) -> void:
-#	var animation_name = "looking_around"
-#	var animation = ball_creature.animation_player.get_animation(animation_name)
-#	animation.loop_mode = Animation.LOOP_LINEAR
-
 	ball_creature.animation_player.play("looking_around_stressed")
 
 
-func on_exit() -> void:
-#	var animation_name = "looking_around"
-#	var animation = ball_creature.animation_player.get_animation(animation_name)
-#	animation.loop_mode = Animation.LOOP_NONE
-
+func on_exit(transition: Transition) -> void:
 	ball_creature.animation_player.play("RESET")
 
 

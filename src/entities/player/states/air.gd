@@ -47,7 +47,7 @@ func on_enter(params: StateParams) -> void:
 		_coyote_timer.start()
 
 
-func on_exit() -> void:
+func on_exit(transition: Transition) -> void:
 	Events.player_bounce_up_requested.disconnect(_on_bounce_up_requested)
 
 	move_state.gravity_scale = 1.0

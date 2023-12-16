@@ -10,8 +10,8 @@ func on_enter(params: StateParams) -> void:
 	state_machine.change_animation("carry_idle")
 
 
-func on_exit() -> void:
-	carry_state.on_exit()
+func on_exit(transition: Transition) -> void:
+	carry_state.on_exit(transition)
 
 
 func unhandled_input(event: InputEvent) -> void:

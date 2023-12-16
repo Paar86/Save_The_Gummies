@@ -14,7 +14,7 @@ func on_enter(params: StateParams) -> void:
 	AudioStreamManager2D.play_sound(_attack_sfx, move_state.character)
 
 
-func on_exit() -> void:
+func on_exit(transition: Transition) -> void:
 	move_state.horizontal_speed = move_state.HORIZONTAL_SPEED_DEFAULT
 	_attack_timer.stop()
 
