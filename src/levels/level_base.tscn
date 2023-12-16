@@ -22,22 +22,12 @@ script = ExtResource("2_ncq64")
 tilemap_nodepath = NodePath("../TileMap")
 
 [node name="TileMap" type="TileMap" parent="."]
-cell_quadrant_size = 8
+rendering_quadrant_size = 8
 format = 2
 layer_0/name = "Base"
 layer_1/name = "Slopes"
-layer_1/enabled = true
-layer_1/modulate = Color(1, 1, 1, 1)
-layer_1/y_sort_enabled = false
-layer_1/y_sort_origin = 0
-layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
 layer_2/name = "Decorations"
-layer_2/enabled = true
-layer_2/modulate = Color(1, 1, 1, 1)
-layer_2/y_sort_enabled = false
-layer_2/y_sort_origin = 0
-layer_2/z_index = 0
 layer_2/tile_data = PackedInt32Array()
 
 [node name="ObjectInMiddle" type="Node" parent="."]
