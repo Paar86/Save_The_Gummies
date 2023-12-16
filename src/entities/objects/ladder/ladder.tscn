@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cpjklwe1a6wss"]
 
-[ext_resource type="Script" path="res://src/entities/objects/ladder.gd" id="1_1lyxq"]
+[ext_resource type="Script" path="res://src/entities/objects/ladder/ladder.gd" id="1_1lyxq"]
 [ext_resource type="Texture2D" uid="uid://c5xmt17rxx4fu" path="res://assets/objects/ladder.png" id="1_lrb3x"]
 
 [node name="Ladder" type="Area2D" groups=["Ladders"]]

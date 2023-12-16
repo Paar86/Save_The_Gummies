@@ -15,6 +15,10 @@ const BALL_BOUNCE: = "res://assets/sfx/ball_creature/bounce.wav"
 const GOBLIN_ALERT: = "res://assets/sfx/goblin/goblin_alert.wav"
 const GOBLIN_ATTACK: = "res://assets/sfx/goblin/goblin_attack.wav"
 
+#Checkpoint
+const BELL_RING: = "res://assets/sfx/checkpoint/bell_ring.wav"
+const BELL_FALLING: = "res://assets/sfx/checkpoint/bell_falling.wav"
+
 # Basket
 const BASKET_CATCH: = "res://assets/sfx/basket/basket_catch.wav"
 
