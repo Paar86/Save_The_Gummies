@@ -9,7 +9,7 @@ func on_enter(params: StateParams) -> void:
 	_stun_timer.start()
 	move_state.horizontal_speed_scale = 0.0
 	move_state.character.toggle_hitbox_collider(false)
-	move_state.character.toggle_exclamation_mark(false)
+	move_state.character._reaction_symbol.force_stop()
 
 
 func on_exit(transition: Transition) -> void:

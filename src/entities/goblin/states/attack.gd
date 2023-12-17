@@ -18,6 +18,9 @@ func on_exit(transition: Transition) -> void:
 	move_state.horizontal_speed = move_state.HORIZONTAL_SPEED_DEFAULT
 	_attack_timer.stop()
 
+	if not move_state.can_attack:
+		move_state.can_attack_timer.start()
+
 
 func physics_process(delta: float) -> void:
 	move_state.physics_process(delta)

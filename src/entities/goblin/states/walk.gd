@@ -5,15 +5,17 @@ extends State
 
 
 func _ready() -> void:
-	_walk_timer.timeout.connect(on_walk_timer_timeout)
+	_walk_timer.timeout.connect(_on_walk_timer_timeout)
 
 
 func on_enter(params: StateParams) -> void:
+	move_state.character.whistle_heard.connect(_on_whistle_heard)
 	state_machine.change_animation("walk")
 	_walk_timer.start()
 
 
 func on_exit(transition: Transition) -> void:
+	move_state.character.whistle_heard.disconnect(_on_whistle_heard)
 	_walk_timer.stop()
 
 
@@ -29,5 +31,10 @@ func propagate_effects(effects: Array[String]) -> void:
 	move_state.propagate_effects(effects)
 
 
-func on_walk_timer_timeout() -> void:
+func _on_walk_timer_timeout() -> void:
+	state_machine.transition_to("Idle")
+
+
+func _on_whistle_heard(direction: float) -> void:
+	move_state._on_whistle_heard(direction)
 	state_machine.transition_to("Idle")

@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bpesacbyulktm" path="res://assets/ball_creature/arrow_marker.png" id="7_e5flx"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/components/arrow_marker.gd" id="8_7l0pn"]
 [ext_resource type="Script" path="res://src/common/state_machine/state_machine.gd" id="9_mseys"]
-[ext_resource type="Texture2D" uid="uid://ctgyrk53xqb28" path="res://assets/ui/symbols.png" id="9_quqqo"]
+[ext_resource type="PackedScene" uid="uid://begdx77jtet0m" path="res://src/common/reaction_symbol/reaction_symbol.tscn" id="9_qjcsl"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/states/idle.gd" id="10_gsxf2"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/states/rolling.gd" id="11_2yhqs"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/states/air.gd" id="12_hhntu"]
@@ -162,11 +162,7 @@ script = ExtResource("8_7l0pn")
 [node name="GroundDetector" type="RayCast2D" parent="Node/Sprite2D"]
 target_position = Vector2(0, 5)
 
-[node name="SymbolSprite" type="Sprite2D" parent="Node/Sprite2D"]
-visible = false
-position = Vector2(0, -12)
-texture = ExtResource("9_quqqo")
-hframes = 2
+[node name="ReactionSymbol" parent="Node/Sprite2D" instance=ExtResource("9_qjcsl")]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("9_mseys")
@@ -202,10 +198,6 @@ script = ExtResource("13_6dm14")
 ball_creature = NodePath("../..")
 states_for_transition = [NodePath("../Air")]
 
-[node name="SymbolTimer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
 [node name="FollowingTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
@@ -216,7 +208,6 @@ libraries = {
 }
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="timeout" from="SymbolTimer" to="." method="_on_symbol_timer_timeout"]
 [connection signal="timeout" from="FollowingTimer" to="." method="_on_following_timer_timeout"]
 
 [editable path="HitboxComponent"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://begdx77jtet0m"]
+
+[ext_resource type="Texture2D" uid="uid://ctgyrk53xqb28" path="res://assets/ui/symbols.png" id="1_wfva4"]
+[ext_resource type="Script" path="res://src/common/reaction_symbol/reaction_symbol.gd" id="2_g6ry8"]
+
+[node name="ReactionSymbol" type="Sprite2D"]
+visible = false
+position = Vector2(0, -12)
+texture = ExtResource("1_wfva4")
+hframes = 2
+script = ExtResource("2_g6ry8")
+
+[node name="ShowTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="ShowTimer" to="." method="_on_show_timer_timeout"]

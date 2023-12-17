@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://src/entities/goblin/components/goblin_hitbox_component.gd" id="4_3316s"]
 [ext_resource type="Script" path="res://src/entities/goblin/states/idle.gd" id="4_v4a5c"]
 [ext_resource type="Script" path="res://src/entities/goblin/states/walk.gd" id="5_ty2ch"]
-[ext_resource type="Texture2D" uid="uid://ctgyrk53xqb28" path="res://assets/ui/symbols.png" id="7_xpq5g"]
+[ext_resource type="PackedScene" uid="uid://begdx77jtet0m" path="res://src/common/reaction_symbol/reaction_symbol.tscn" id="7_y2j53"]
 [ext_resource type="Script" path="res://src/entities/goblin/states/stunned.gd" id="9_1x0gj"]
 [ext_resource type="Script" path="res://src/entities/goblin/states/attack.gd" id="10_2ugi7"]
 [ext_resource type="Script" path="res://src/entities/goblin/states/ready_to_attack.gd" id="11_a8cgn"]
@@ -175,12 +175,8 @@ autoplay = "idle"
 frame_progress = 0.489601
 offset = Vector2(2, 1)
 
-[node name="ExclamationMark" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(0, -21)
-texture = ExtResource("7_xpq5g")
-region_enabled = true
-region_rect = Rect2(0, 0, 16, 16)
+[node name="ReactionSymbol" parent="." instance=ExtResource("7_y2j53")]
+position = Vector2(0, -20)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -242,13 +238,13 @@ script = ExtResource("11_a8cgn")
 character = NodePath("../..")
 states_for_transition = [NodePath("../Move/Stunned"), NodePath("../Move/Attack")]
 
-[node name="ExclamationMarkTimer" type="Timer" parent="StateMachine/ReadyToAttack"]
+[node name="ReadyToAttackTimer" type="Timer" parent="StateMachine/ReadyToAttack"]
 one_shot = true
 
 [connection signal="timeout" from="StateMachine/Move/Stunned/StunTimer" to="StateMachine/Move/Stunned" method="_on_stun_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Move/Attack/AttackTimer" to="StateMachine/Move/Attack" method="on_attack_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Move/CanAttackTimer" to="StateMachine/Move" method="_on_can_attack_timer_timeout"]
-[connection signal="timeout" from="StateMachine/ReadyToAttack/ExclamationMarkTimer" to="StateMachine/ReadyToAttack" method="on_exclamation_mark_timer_timeout"]
+[connection signal="timeout" from="StateMachine/ReadyToAttack/ReadyToAttackTimer" to="StateMachine/ReadyToAttack" method="_on_ready_to_attack_timer_timeout"]
 
 [editable path="HurtboxComponent"]
 [editable path="HitboxComponent"]
