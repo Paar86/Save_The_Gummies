@@ -1,6 +1,16 @@
+@tool
 class_name Goblin extends GameCharacter
 
 signal whistle_heard(direction: float)
+
+@export var change_direction_in_editor: bool:
+	set(value):
+		var animated_sprite = get_node("AnimatedSprite2D")
+		var hitbox_component = get_node("HitboxComponent")
+		var facing_direction = sign(animated_sprite.scale.x) * -1
+		player_detector.scale.x = sign(facing_direction)
+		animated_sprite.scale.x = sign(facing_direction)
+		hitbox_component.position = Vector2(abs(hitbox_component.position.x) * facing_direction, hitbox_component.position.y)
 
 var _facing_direction: = 1.0
 
@@ -38,6 +48,9 @@ func change_direction(new_direction: float) -> void:
 func propagate_whistle(source_body: GameCharacter) -> void:
 	var source_body_direction: = source_body.global_position - global_position
 	var whistle_direction_x: = sign(source_body_direction.x) as float
+	if whistle_direction_x == 0:
+		whistle_direction_x = 1.0
+
 	whistle_heard.emit(whistle_direction_x)
 
 
