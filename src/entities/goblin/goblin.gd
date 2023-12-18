@@ -15,6 +15,8 @@ signal whistle_heard(direction: float)
 		animated_sprite.scale.x = sign(facing_direction)
 		hitbox_component.position = Vector2(abs(hitbox_component.position.x) * facing_direction, hitbox_component.position.y)
 		ground_det.position = Vector2(abs(ground_det.position.x) * facing_direction, ground_det.position.y)
+		# We must make children editable for the changes to make an effect
+		get_parent().set_editable_instance(self, true);
 
 var _facing_direction: = 1.0
 
