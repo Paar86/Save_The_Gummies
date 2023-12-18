@@ -38,6 +38,8 @@ var is_on_floor: bool:
 var attack_strength_buffered: = 0.0
 var whistling_player: Player
 var ignore_following: bool = false
+var is_inside_wall: bool:
+	get: return _collision_tester.has_overlapping_bodies()
 
 var _produce_bounce_sfx: = false
 var _damp_default: float = ProjectSettings.get_setting("physics/2d/default_linear_damp")
@@ -51,6 +53,7 @@ var _bounce_sfx: = preload(SfxResources.BALL_BOUNCE)
 @onready var _ground_detector: RayCast2D = $Node/Sprite2D/GroundDetector
 @onready var _reaction_symbol: ReactionSymbol = $Node/Sprite2D/ReactionSymbol
 @onready var _following_timer: Timer = $FollowingTimer
+@onready var _collision_tester: Area2D = $CollisionTester
 
 
 func _ready() -> void:

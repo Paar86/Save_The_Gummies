@@ -67,13 +67,21 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func release_pickup(impulse: Vector2) -> void:
-	var thrown_object = move_state.character.hold_object as BallCreature
+	var character: = move_state.character
+	var thrown_object = character.hold_object as BallCreature
 	if not thrown_object:
 		return
 
+
+	character.pickup_transform.set_deferred("remote_path", null)
+
+	if thrown_object.is_inside_wall:
+		thrown_object.global_position = (
+			Vector2(character.global_position.x, character.pickup_transform.global_position.y)
+			)
+
 	thrown_object.collision_layer = 0
 	move_state.character.hold_object = null
-	move_state.character.pickup_transform.set_deferred("remote_path", null)
 	thrown_object.set_deferred("freeze", false)
 	thrown_object.call_deferred("apply_central_impulse", impulse)
 	thrown_object.enable_collision()
