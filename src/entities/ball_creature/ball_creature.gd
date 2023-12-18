@@ -25,21 +25,10 @@ enum colors {
 
 @export var color = colors.BLUE_DARK_BLUE : set = _set_color;
 
-var pickable: bool = true:
-	set(value):
-		pickable = value
-	get:
-		return pickable
-
-var is_on_floor: bool:
-	get:
-		return _ground_detector.is_colliding()
-
+var start_in_safe_state: = false
 var attack_strength_buffered: = 0.0
 var whistling_player: Player
 var ignore_following: bool = false
-var is_inside_wall: bool:
-	get: return _collision_tester.has_overlapping_bodies()
 
 var _produce_bounce_sfx: = false
 var _damp_default: float = ProjectSettings.get_setting("physics/2d/default_linear_damp")
@@ -54,10 +43,27 @@ var _bounce_sfx: = preload(SfxResources.BALL_BOUNCE)
 @onready var _reaction_symbol: ReactionSymbol = $Node/Sprite2D/ReactionSymbol
 @onready var _following_timer: Timer = $FollowingTimer
 @onready var _collision_tester: Area2D = $CollisionTester
+@onready var _state_machine: StateMachine = $StateMachine
 
+var pickable: bool = true:
+	set(value):
+		pickable = value
+	get:
+		return pickable
+
+var is_on_floor: bool:
+	get:
+		return _ground_detector.is_colliding()
+
+var is_inside_wall: bool:
+	get: return _collision_tester.has_overlapping_bodies()
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
+		return
+
+	if start_in_safe_state:
+		_state_machine.initial_state = get_node("StateMachine/Safe")
 		return
 
 	_effects_applier_component.effect_added.connect(func(effect: Enums.effect) -> void: effect_added.emit(effect))
@@ -134,6 +140,9 @@ func enable_collision() -> void:
 
 
 func propagate_whistle(source_body: GameCharacter) -> void:
+	if not pickable:
+		return
+
 	whistling_player = source_body
 	_reaction_symbol.show_symbol(Enums.reaction_symbol.EXCLAMATION)
 	_following_timer.start()

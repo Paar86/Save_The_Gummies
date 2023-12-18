@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c36mwvup5f8ad"]
+[gd_scene load_steps=27 format=3 uid="uid://c36mwvup5f8ad"]
 
 [ext_resource type="Script" path="res://src/entities/ball_creature/ball_creature.gd" id="1_r5tyh"]
 [ext_resource type="PackedScene" uid="uid://cvsgunn02v50s" path="res://src/common/components/hitbox/hitbox_component.tscn" id="2_4pech"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://src/entities/ball_creature/states/rolling.gd" id="11_2yhqs"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/states/air.gd" id="12_hhntu"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/states/carried.gd" id="13_6dm14"]
+[ext_resource type="Script" path="res://src/entities/ball_creature/states/safe.gd" id="15_65psy"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_etqu6"]
 rough = true
@@ -30,7 +31,7 @@ radius = 2.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_12c18"]
 shader = ExtResource("5_6f6km")
-shader_parameter/palette = 2
+shader_parameter/palette = 3
 
 [sub_resource type="Animation" id="Animation_yqyxa"]
 length = 0.001
@@ -207,6 +208,14 @@ script = ExtResource("13_6dm14")
 ball_creature = NodePath("../..")
 states_for_transition = [NodePath("../Air")]
 
+[node name="Safe" type="Node" parent="StateMachine" node_paths=PackedStringArray("ball_creature")]
+script = ExtResource("15_65psy")
+ball_creature = NodePath("../..")
+universal = true
+
+[node name="CheerTimer" type="Timer" parent="StateMachine/Safe"]
+wait_time = 3.0
+
 [node name="FollowingTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
@@ -219,6 +228,7 @@ libraries = {
 [node name="Area2D" type="Area2D" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="StateMachine/Safe/CheerTimer" to="StateMachine/Safe" method="_on_cheer_timer_timeout"]
 [connection signal="timeout" from="FollowingTimer" to="." method="_on_following_timer_timeout"]
 
 [editable path="HitboxComponent"]
