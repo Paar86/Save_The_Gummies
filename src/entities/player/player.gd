@@ -8,7 +8,7 @@ var pickable_objects: Array[RigidBody2D] = []
 var whistle_affected_bodies: Array[PhysicsBody2D] = []
 var touching_ladders: Array[Area2D] = []
 var ladders_under_player: Array[Area2D] = []
-var hold_object: BallCreature = null
+var held_object: BallCreature = null
 
 # in seconds
 var _sprite_flash_frequency: float = 0.10

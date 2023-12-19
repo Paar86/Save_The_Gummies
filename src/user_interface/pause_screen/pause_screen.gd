@@ -4,7 +4,7 @@ var _pause = true
 
 
 func _ready() -> void:
-	Events.reload_level.connect(_on_reload)
+	Events.reload_level_requested.connect(_on_reload)
 	Events.player_dead.connect(_on_player_dead)
 
 

@@ -22,7 +22,7 @@ func on_enter(params: StateParams) -> void:
 	_picked_object.set_deferred("freeze", true)
 	_picked_object.disable_collision()
 
-	character.hold_object = _picked_object
+	character.held_object = _picked_object
 
 	_elapsed_time = 0.0
 	character.velocity_primary = Vector2.ZERO

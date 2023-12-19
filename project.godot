@@ -37,6 +37,13 @@ window/size/window_width_override=1024
 window/size/window_height_override=1024
 window/stretch/mode="viewport"
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "purple",
+"res://assets/sfx/": "green"
+}
+
 [input]
 
 ui_accept={

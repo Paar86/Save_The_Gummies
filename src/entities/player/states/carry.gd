@@ -37,7 +37,7 @@ func physics_process(delta: float) -> void:
 
 
 func on_enter(params: StateParams) -> void:
-	move_state.character.pickup_transform.set_deferred("remote_path", move_state.character.hold_object.get_path())
+	move_state.character.pickup_transform.set_deferred("remote_path", move_state.character.held_object.get_path())
 	move_state.max_speed = MAX_SPEED_OVERRIDE
 
 
@@ -68,7 +68,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 func release_pickup(impulse: Vector2) -> void:
 	var character: = move_state.character
-	var thrown_object = character.hold_object as BallCreature
+	var thrown_object = character.held_object as BallCreature
 	if not thrown_object:
 		return
 
@@ -81,7 +81,7 @@ func release_pickup(impulse: Vector2) -> void:
 			)
 
 	thrown_object.collision_layer = 0
-	move_state.character.hold_object = null
+	move_state.character.held_object = null
 	thrown_object.set_deferred("freeze", false)
 	thrown_object.call_deferred("apply_central_impulse", impulse)
 	thrown_object.enable_collision()

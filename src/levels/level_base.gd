@@ -1,4 +1,4 @@
-extends Node
+class_name Level extends Node
 
 signal camera_above_player
 
@@ -8,6 +8,7 @@ var _checkpoints: Array[Checkpoint] = []
 var _player_tree_index: = 0
 var _player_respawn_point: = Vector2.ZERO
 var _player_scene: PackedScene = preload("res://src/entities/player/player.tscn")
+var _game_stats: GameStats
 
 @onready var _player: Player = $Player
 @onready var _player_camera: Camera2D = $PlayerCamera
@@ -15,6 +16,9 @@ var _player_scene: PackedScene = preload("res://src/entities/player/player.tscn"
 @onready var _tile_map: TileMap = $TileMap
 @onready var _health_ui: TextureRect = $UI/HealthCounter
 @onready var _player_respawn_timer: Timer = $PlayerRespawnTimer
+
+var game_stats: GameStats:
+	set(value): _game_stats = value
 
 
 func _ready() -> void:
@@ -91,6 +95,7 @@ func _on_checkpoint_activated(activated_checkpoint: Checkpoint) -> void:
 
 
 func _on_player_lives_depleted() -> void:
+	_game_stats.player_deaths_number += 1
 	_player_respawn_timer.start()
 
 
