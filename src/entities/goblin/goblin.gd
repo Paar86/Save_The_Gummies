@@ -31,6 +31,9 @@ var _facing_direction: = 1.0
 
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+
 	super._ready()
 	_facing_direction = sign(_animated_sprite.scale.x)
 	_hurtbox_component.lives_depleted.connect(_on_lives_depleted)

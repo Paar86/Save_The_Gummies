@@ -99,8 +99,10 @@ func _on_checkpoint_activated(activated_checkpoint: Checkpoint) -> void:
 
 
 func _on_player_lives_depleted() -> void:
-	_game_stats.player_deaths_number += 1
 	_player_respawn_timer.start()
+
+	if _game_stats:
+		_game_stats.player_deaths_number += 1
 
 
 func _on_player_respawn_timer_timeout() -> void:
@@ -118,4 +120,7 @@ func _on_player_respawn_timer_timeout() -> void:
 
 
 func _on_ball_creature_captured(ball_creature: BallCreature) -> void:
+	if not _game_stats:
+		return
+
 	_game_stats.saved_ball_creatures_colors.append(ball_creature.color)
