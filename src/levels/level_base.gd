@@ -28,6 +28,10 @@ func _ready() -> void:
 
 	assert(_player, "No player in the level!")
 
+	var basket_scene: Basket = find_child("Basket")
+	assert(basket_scene, "No basket in the level!")
+	basket_scene.ball_creature_captured.connect(_on_ball_creature_captured)
+
 	_player_respawn_point = _player.global_position
 	_player_tree_index = _player.get_index()
 
@@ -111,3 +115,7 @@ func _on_player_respawn_timer_timeout() -> void:
 	await player.ready
 	player.owner = self
 	_configure_player()
+
+
+func _on_ball_creature_captured(ball_creature: BallCreature) -> void:
+	_game_stats.saved_ball_creatures_colors.append(ball_creature.color)

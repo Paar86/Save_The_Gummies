@@ -23,7 +23,7 @@ enum colors {
 	WHEAT_YELLOW_BROWN
 }
 
-@export var color = colors.BLUE_DARK_BLUE : set = _set_color;
+@export var color: = colors.BLUE_DARK_BLUE : set = _set_color;
 
 var start_in_safe_state: = false
 var attack_strength_buffered: = 0.0

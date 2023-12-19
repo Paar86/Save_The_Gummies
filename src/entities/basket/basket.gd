@@ -1,4 +1,4 @@
-extends StaticBody2D
+class_name Basket extends StaticBody2D
 
 signal ball_creature_captured(BallCreature)
 
@@ -20,4 +20,4 @@ func on_creature_detector_body_entered(body: Node2D) -> void:
 	await get_tree().create_timer(WAIT_TIME).timeout
 	if _creature_detector.overlaps_body(body):
 		ball_creature_captured.emit(body)
-		Events.change_level.emit()
+		Events.change_level_requested.emit()
