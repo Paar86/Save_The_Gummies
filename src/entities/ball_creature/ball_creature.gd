@@ -25,7 +25,6 @@ enum colors {
 
 @export var color: = colors.BLUE_DARK_BLUE : set = _set_color;
 
-var start_in_safe_state: = false
 var attack_strength_buffered: = 0.0
 var whistling_player: Player
 var ignore_following: bool = false
@@ -60,10 +59,6 @@ var is_inside_wall: bool:
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
-		return
-
-	if start_in_safe_state:
-		_state_machine.initial_state = get_node("StateMachine/Safe")
 		return
 
 	_effects_applier_component.effect_added.connect(func(effect: Enums.effect) -> void: effect_added.emit(effect))

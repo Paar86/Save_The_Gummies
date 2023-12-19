@@ -4,7 +4,7 @@ signal camera_above_player
 
 var ball_creature: BallCreature
 var _checkpoints: Array[Checkpoint] = []
-# For remembering the position of Player in tree for proper z-index
+# For remembering the position of Player in tree for proper z-indexing
 var _player_tree_index: = 0
 var _player_respawn_point: = Vector2.ZERO
 var _player_scene: PackedScene = preload("res://src/entities/player/player.tscn")
@@ -28,14 +28,11 @@ func _ready() -> void:
 
 	assert(_player, "No player in the level!")
 
-	var basket_scene: Basket = find_child("Basket")
-	assert(basket_scene, "No basket in the level!")
-	basket_scene.ball_creature_captured.connect(_on_ball_creature_captured)
-
 	_player_respawn_point = _player.global_position
 	_player_tree_index = _player.get_index()
 
 	_configure_player()
+	_configure_basket()
 	_configure_cameras()
 	_register_checkpoints()
 
@@ -43,6 +40,15 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		_peek_camera.make_current()
+
+
+func _configure_basket() -> void:
+	var basket_scene: Basket = find_child("Basket")
+	assert(basket_scene, "No basket in the level!")
+	basket_scene.ball_creature_captured.connect(_on_ball_creature_captured)
+
+	if _game_stats:
+		basket_scene.spawn_captured_creatures(_game_stats.saved_ball_creatures_colors)
 
 
 func _configure_cameras() -> void:

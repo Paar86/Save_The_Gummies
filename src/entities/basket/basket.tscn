@@ -77,6 +77,8 @@ _data = {
 collision_mask = 0
 script = ExtResource("1_lintc")
 
+[node name="CapturedCreatures" type="Node2D" parent="."]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(12, -6)
 texture = ExtResource("2_6hfvy")
@@ -102,4 +104,10 @@ libraries = {
 "": SubResource("AnimationLibrary_qgpqw")
 }
 
-[connection signal="body_entered" from="CreatureDetector" to="." method="on_creature_detector_body_entered"]
+[node name="SpawnBoundaryLeft" type="Marker2D" parent="."]
+position = Vector2(5, 0)
+
+[node name="SpawnBoundaryRight" type="Marker2D" parent="."]
+position = Vector2(20, 0)
+
+[connection signal="body_entered" from="CreatureDetector" to="." method="_on_creature_detector_body_entered"]
