@@ -42,11 +42,13 @@ func on_enter(params: StateParams) -> void:
 
 	# Reset the primary velocity so the player doesn't move when exiting the state
 	character.velocity_primary = Vector2.ZERO
+	character.set_world_detector_monitoring(true)
 	character.ladder_step_player.playing = true
 
 
 func on_exit(transition: Transition) -> void:
 	character.toggle_hitbox_collider(true)
+	character.set_world_detector_monitoring(false)
 	passed_ladder_threshold.disconnect(on_ladder_threshold_passed)
 	_is_above_threshold = false
 	character.ladder_step_player.playing = false
@@ -87,8 +89,16 @@ func physics_process(delta: float) -> void:
 		return
 
 
+func unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("jump") and not character.collides_with_world:
+		character.toggle_world_collision(true)
+		var params := StateParams.new()
+		params.initiated_jumping = true
+		state_machine.transition_to("Air", params)
+
+
 func on_ladder_threshold_passed(above_threshold: bool) -> void:
-	# Is the character is above threshold, we want to disable the collision
+	# If the character is above threshold, we want to disable the collision
 	character.toggle_world_collision(not above_threshold)
 
 

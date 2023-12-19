@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://src/entities/player/states/move.gd" id="5_ob3jm"]
 [ext_resource type="Script" path="res://src/entities/player/states/idle.gd" id="6_kxhls"]
 [ext_resource type="Script" path="res://src/entities/player/states/run.gd" id="7_xjuja"]
+[ext_resource type="Shape2D" uid="uid://dbfohvwgbd1h2" path="res://src/entities/player/resources/player_collision_shape.tres" id="8_5gpwu"]
 [ext_resource type="Script" path="res://src/entities/player/states/carry.gd" id="8_be3oy"]
 [ext_resource type="Script" path="res://src/entities/player/states/air.gd" id="8_j1lab"]
 [ext_resource type="Script" path="res://src/entities/player/states/pickup.gd" id="8_pln1i"]
@@ -284,9 +285,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7nepf"]
-size = Vector2(6, 14)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_akgtd"]
 size = Vector2(12, 7)
 
@@ -377,7 +375,15 @@ update_scale = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
-shape = SubResource("RectangleShape2D_7nepf")
+shape = ExtResource("8_5gpwu")
+
+[node name="WorldDetector" type="Area2D" parent="."]
+position = Vector2(0, -8)
+collision_layer = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldDetector"]
+shape = ExtResource("8_5gpwu")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "animated_sprite")]
 script = ExtResource("3_ffp80")

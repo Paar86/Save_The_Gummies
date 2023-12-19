@@ -10,10 +10,6 @@ var touching_ladders: Array[Area2D] = []
 var ladders_under_player: Array[Area2D] = []
 var hold_object: BallCreature = null
 
-var aim_direction: Vector2:
-	get:
-		return (_throw_arrow_sprite.global_position - _throw_arrow_pivot.global_position).normalized()
-
 # in seconds
 var _sprite_flash_frequency: float = 0.10
 var _sprite_flash_duration: float = 3.0
@@ -32,6 +28,14 @@ var _player_hurt_sfx: = preload(SfxResources.PLAYER_HURT)
 @onready var _hitbox_component: HitboxComponent = $HitboxComponent
 @onready var _hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var _state_machine: StateMachine = $StateMachine
+@onready var _world_detector: Area2D = $WorldDetector
+
+var aim_direction: Vector2:
+	get:
+		return (_throw_arrow_sprite.global_position - _throw_arrow_pivot.global_position).normalized()
+
+var collides_with_world: bool:
+	get: return _world_detector.has_overlapping_bodies()
 
 
 func _ready() -> void:
@@ -75,6 +79,10 @@ func reset_state(start_with_invincibility: bool = false) -> void:
 
 	if start_with_invincibility:
 		_start_invincibility_period()
+
+
+func set_world_detector_monitoring(value: bool) -> void:
+	_world_detector.monitoring = value
 
 
 func toggle_world_collision(value: bool) -> void:
