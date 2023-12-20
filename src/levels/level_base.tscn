@@ -16,6 +16,8 @@ script = ExtResource("1_03m7p")
 [node name="ObjectsBehind" type="Node" parent="."]
 editor_description = "Arrow shooters, wind generators..."
 
+[node name="BallCreaturesCaptured" type="Node" parent="ObjectsBehind"]
+
 [node name="TilemapBody" type="StaticBody2D" parent="."]
 collision_mask = 0
 script = ExtResource("2_ncq64")

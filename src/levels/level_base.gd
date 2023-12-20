@@ -8,6 +8,7 @@ var _checkpoints: Array[Checkpoint] = []
 var _player_tree_index: = 0
 var _player_respawn_point: = Vector2.ZERO
 var _player_scene: PackedScene = preload("res://src/entities/player/player.tscn")
+var _creature_packed: PackedScene = preload("res://src/entities/ball_creature/ball_creature_captured.tscn")
 var _game_stats: GameStats
 
 @onready var _player: Player = $Player
@@ -16,6 +17,7 @@ var _game_stats: GameStats
 @onready var _tile_map: TileMap = $TileMap
 @onready var _health_ui: TextureRect = $UI/HealthCounter
 @onready var _player_respawn_timer: Timer = $PlayerRespawnTimer
+@onready var _ball_creatures_captured_folder: Node = $ObjectsBehind/BallCreaturesCaptured
 
 var game_stats: GameStats:
 	set(value): _game_stats = value
@@ -47,8 +49,16 @@ func _configure_basket() -> void:
 	assert(basket_scene, "No basket in the level!")
 	basket_scene.ball_creature_captured.connect(_on_ball_creature_captured)
 
+	# Spawn already captured ball creatures
 	if _game_stats:
-		basket_scene.spawn_captured_creatures(_game_stats.saved_ball_creatures_colors)
+		var spawn_points_dict: = basket_scene.get_creatures_spawn_points(_game_stats.saved_ball_creatures_colors)
+		for global_pos_key in spawn_points_dict:
+			var creature_instance: = _creature_packed.instantiate() as BallCreatureCaptured
+			creature_instance.animation_delay = randf()
+			creature_instance.color = spawn_points_dict[global_pos_key]
+			creature_instance.global_position = global_pos_key
+			_ball_creatures_captured_folder.add_child(creature_instance)
+			creature_instance.owner = self
 
 
 func _configure_cameras() -> void:

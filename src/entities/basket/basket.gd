@@ -16,27 +16,24 @@ var _creature_packed: PackedScene = preload("res://src/entities/ball_creature/ba
 var _basket_catch_sfx: = preload(SfxResources.BASKET_CATCH)
 
 
-func spawn_captured_creatures(creature_colors: Array[int]) -> void:
+## Gets spawn points as a dictionary of global positions and colors.
+func get_creatures_spawn_points(creature_colors: Array[int]) -> Dictionary:
+	var spawn_points_dict: Dictionary = {}
 	if not creature_colors or creature_colors.size() == 0:
-		return
+		return spawn_points_dict
 
-	var creatures_count: = creature_colors.size() as int
+	var spawn_interval: = _get_spawn_interval(creature_colors.size())
+	var horizontal_spawn_origin: = _spawn_boundary_left.global_position.x + CREATURE_RADIUS
+	for j in creature_colors.size():
+		var horizontal_spawn_offset: = spawn_interval * j
+		var spawn_point: = Vector2(
+			horizontal_spawn_origin + horizontal_spawn_offset,
+			_spawn_boundary_left.global_position.y - CREATURE_RADIUS
+		).floor()
 
-	var spawn_boundary_left_x : = _spawn_boundary_left.position.x + CREATURE_RADIUS
-	var spawn_boundary_right_x: = _spawn_boundary_right.position.x - CREATURE_RADIUS
-	var spawn_boundary_y: = _spawn_boundary_left.position.y - CREATURE_RADIUS
-	assert(spawn_boundary_left_x < spawn_boundary_right_x, "Left boundary must be to the left of the right boundary!")
-	var spawn_area_distance: = spawn_boundary_right_x - spawn_boundary_left_x
-	var spawn_interval: = spawn_area_distance / (creatures_count - 1)
+		spawn_points_dict[spawn_point] = creature_colors[j]
 
-	var spawn_position: = Vector2(spawn_boundary_left_x, spawn_boundary_y)
-	for creature_color in creature_colors:
-		var creature_instance: = create_creature_instance(spawn_position, creature_color)
-		_captured_creatures_node.add_child(creature_instance)
-		creature_instance.owner = self
-
-		# Calculate position for next creature
-		spawn_position.x += spawn_interval
+	return spawn_points_dict
 
 
 func create_creature_instance(spawn_position: Vector2, color: int) -> Node2D:
@@ -45,6 +42,17 @@ func create_creature_instance(spawn_position: Vector2, color: int) -> Node2D:
 	creature_instance.color = color
 	creature_instance.animation_delay = randf()
 	return creature_instance
+
+
+func _get_spawn_interval(creatures_count: int) -> float:
+	var spawn_boundary_left_x : = _spawn_boundary_left.position.x + CREATURE_RADIUS
+	var spawn_boundary_right_x: = _spawn_boundary_right.position.x - CREATURE_RADIUS
+	var spawn_boundary_y: = _spawn_boundary_left.position.y - CREATURE_RADIUS
+	assert(spawn_boundary_left_x < spawn_boundary_right_x, "Left boundary must be to the left of the right boundary!")
+	var spawn_area_distance: = spawn_boundary_right_x - spawn_boundary_left_x
+	var spawn_interval: = spawn_area_distance / (creatures_count - 1) if creatures_count > 1 else spawn_area_distance
+
+	return spawn_interval
 
 
 func _on_creature_detector_body_entered(body: Node2D) -> void:
