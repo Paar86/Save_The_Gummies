@@ -46,7 +46,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _configure_basket() -> void:
 	var basket_scene: Basket = find_child("Basket")
-	assert(basket_scene, "No basket in the level!")
+	if not basket_scene:
+		push_error("No basket in the level!")
+		return
+
 	basket_scene.ball_creature_captured.connect(_on_ball_creature_captured)
 
 	# Spawn already captured ball creatures

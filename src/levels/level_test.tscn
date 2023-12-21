@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://becvu2tommbnh"]
 
 [ext_resource type="PackedScene" uid="uid://dvje8c8sahcwc" path="res://src/levels/level_base.tscn" id="1_wv10m"]
-[ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/grass_tiny_tileset.tres" id="2_y5w7g"]
+[ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/world_tilesets.tres" id="2_y5w7g"]
 [ext_resource type="PackedScene" uid="uid://dxoq0cmr425ux" path="res://src/entities/obstacles/wind_generator/wind_generator.tscn" id="3_3leu3"]
 [ext_resource type="PackedScene" uid="uid://cpovy1sj2g2mi" path="res://src/entities/obstacles/arrow_shooter/arrow_shooter.tscn" id="4_3n1k1"]
 [ext_resource type="PackedScene" uid="uid://blpixln5eug03" path="res://src/entities/obstacles/glue/glue_floor.tscn" id="5_igaj5"]

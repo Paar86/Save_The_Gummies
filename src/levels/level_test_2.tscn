@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dvje8c8sahcwc" path="res://src/levels/level_base.tscn" id="1_jlemu"]
 [ext_resource type="PackedScene" uid="uid://cpovy1sj2g2mi" path="res://src/entities/obstacles/arrow_shooter/arrow_shooter.tscn" id="2_75pj3"]
-[ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/grass_tiny_tileset.tres" id="5_aqx13"]
+[ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/world_tilesets.tres" id="5_aqx13"]
 [ext_resource type="PackedScene" uid="uid://cpjklwe1a6wss" path="res://src/entities/objects/ladder/ladder.tscn" id="6_n4w0b"]
 [ext_resource type="PackedScene" uid="uid://bmmhoexfwl035" path="res://src/entities/obstacles/barrier/barrier.tscn" id="7_cvsn6"]
 [ext_resource type="PackedScene" uid="uid://c1ny4x7ikhd2j" path="res://src/entities/goblin/goblin.tscn" id="8_p7e4l"]

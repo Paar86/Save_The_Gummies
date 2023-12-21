@@ -1,7 +1,7 @@
 [gd_scene load_steps=141 format=3 uid="uid://cc13d3lpr7snh"]
 
 [ext_resource type="PackedScene" uid="uid://dvje8c8sahcwc" path="res://src/levels/level_base.tscn" id="1_ntw5h"]
-[ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/grass_tiny_tileset.tres" id="2_7qxas"]
+[ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/world_tilesets.tres" id="2_7qxas"]
 [ext_resource type="PackedScene" uid="uid://bdunj75mnaoqb" path="res://src/entities/objects/checkpoint/checkpoint.tscn" id="2_s5pcf"]
 [ext_resource type="PackedScene" uid="uid://cpjklwe1a6wss" path="res://src/entities/objects/ladder/ladder.tscn" id="3_3usxa"]
 [ext_resource type="PackedScene" uid="uid://c1ny4x7ikhd2j" path="res://src/entities/goblin/goblin.tscn" id="4_2xbyo"]
