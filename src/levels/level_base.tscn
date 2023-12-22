@@ -80,4 +80,8 @@ texture = ExtResource("5_pd1ws")
 stretch_mode = 1
 script = ExtResource("6_y8hi7")
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
 [connection signal="timeout" from="PlayerRespawnTimer" to="." method="_on_player_respawn_timer_timeout"]
