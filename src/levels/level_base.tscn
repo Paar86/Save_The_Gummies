@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvje8c8sahcwc"]
+[gd_scene load_steps=11 format=3 uid="uid://dvje8c8sahcwc"]
 
 [ext_resource type="Script" path="res://src/levels/level_base.gd" id="1_03m7p"]
 [ext_resource type="PackedScene" uid="uid://c36mwvup5f8ad" path="res://src/entities/ball_creature/ball_creature.tscn" id="2_3bdtq"]
+[ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/world_tilesets.tres" id="2_05iby"]
 [ext_resource type="PackedScene" uid="uid://bq2tohpkkvyrt" path="res://src/common/camera/player_camera.tscn" id="2_fykds"]
 [ext_resource type="PackedScene" uid="uid://d2l1fpj8yehom" path="res://src/entities/player/player.tscn" id="2_kapmh"]
 [ext_resource type="Script" path="res://src/external_utils/tilemap_collision_baker.gd" id="2_ncq64"]
@@ -12,6 +13,10 @@
 
 [node name="LevelBase" type="Node"]
 script = ExtResource("1_03m7p")
+
+[node name="TileMapBackground" type="TileMap" parent="."]
+tile_set = ExtResource("2_05iby")
+format = 2
 
 [node name="ObjectsBehind" type="Node" parent="."]
 editor_description = "Arrow shooters, wind generators..."

@@ -70,10 +70,10 @@ func _configure_cameras() -> void:
 	var tile_map_cell_size: = _tile_map.rendering_quadrant_size
 
 	for camera in [_player_camera, _peek_camera]:
-		camera.limit_left = tile_map_boundaries.position.x * tile_map_cell_size + 2
-		camera.limit_right = tile_map_boundaries.end.x * tile_map_cell_size - 2
-		camera.limit_top = tile_map_boundaries.position.y * tile_map_cell_size + 2
-		camera.limit_bottom = tile_map_boundaries.end.y * tile_map_cell_size - 2
+		camera.limit_left = tile_map_boundaries.position.x * tile_map_cell_size + 5
+		camera.limit_right = tile_map_boundaries.end.x * tile_map_cell_size - 5
+		camera.limit_top = tile_map_boundaries.position.y * tile_map_cell_size + 5
+		camera.limit_bottom = tile_map_boundaries.end.y * tile_map_cell_size - 5
 
 	# Additional settings
 	_peek_camera.ball_creature = ball_creature
