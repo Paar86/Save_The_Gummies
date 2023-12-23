@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cgc87flocko36"]
+[gd_scene load_steps=7 format=3 uid="uid://cgc87flocko36"]
 
 [ext_resource type="Script" path="res://src/managers/game_manager.gd" id="1_x3hhf"]
 [ext_resource type="PackedScene" uid="uid://blqx3sorahm5u" path="res://src/user_interface/title_screen/title_screen.tscn" id="2_f2yxe"]
-[ext_resource type="PackedScene" uid="uid://dyfvc3jli6hx" path="res://src/user_interface/pause_screen/pause_screen.tscn" id="3_ehts2"]
 [ext_resource type="PackedScene" uid="uid://cc13d3lpr7snh" path="res://src/levels/level_1.tscn" id="3_scwlx"]
 [ext_resource type="PackedScene" uid="uid://cbyx4ppl0a235" path="res://src/levels/level_2.tscn" id="4_m8wv3"]
 [ext_resource type="PackedScene" uid="uid://c4pmwhydd4bb6" path="res://src/user_interface/credits/credits.tscn" id="5_6d0c0"]
@@ -14,7 +13,6 @@ script = ExtResource("1_x3hhf")
 title_screen = ExtResource("2_f2yxe")
 levels = Array[PackedScene]([ExtResource("3_scwlx"), ExtResource("4_m8wv3"), ExtResource("5_ytvop")])
 credits = ExtResource("5_6d0c0")
-pause_screen = ExtResource("3_ehts2")
 
 [node name="ActiveScene" type="Node" parent="."]
 process_mode = 1

@@ -21,6 +21,7 @@ var _game_stats: GameStats
 @onready var _player_respawn_timer: Timer = $PlayerRespawnTimer
 @onready var _ball_creatures_captured_folder: Node = $ObjectsBehind/BallCreaturesCaptured
 @onready var _initial_peek_delay_timer: Timer = $InitialPeekDelayTimer
+@onready var _pause_screen: CanvasLayer = $PauseScreen
 
 var game_stats: GameStats:
 	set(value): _game_stats = value
@@ -36,6 +37,9 @@ func _ready() -> void:
 	_player_respawn_point = _player.global_position
 	_player_tree_index = _player.get_index()
 
+	Events.pause_level_requested.connect(_on_pause_level_requested)
+	Events.unpause_level_requested.connect(_on_unpause_level_requested)
+
 	_configure_player()
 	_configure_basket()
 	_configure_cameras()
@@ -43,9 +47,11 @@ func _ready() -> void:
 
 	if start_with_peek_animation:
 		get_tree().paused = true
+		_pause_screen.set_process_input(false)
 		_peek_camera.set_process_unhandled_input(false)
 		await _play_peek_animation()
 		get_tree().paused = false
+		_pause_screen.set_process_input(true)
 		_peek_camera.set_process_unhandled_input(true)
 
 
@@ -170,3 +176,13 @@ func _on_ball_creature_captured(ball_creature: BallCreature) -> void:
 		return
 
 	_game_stats.saved_ball_creatures_colors.append(ball_creature.color)
+
+
+func _on_pause_level_requested() -> void:
+	get_tree().paused = true
+	_pause_screen.show()
+
+
+func _on_unpause_level_requested() -> void:
+	get_tree().paused = false
+	_pause_screen.hide()
