@@ -47,10 +47,10 @@ editor_description = "Ladders, barriers..."
 [node name="PlayerCamera" parent="." instance=ExtResource("2_fykds")]
 offset = Vector2(0, 0)
 
-[node name="PeekCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player_camera", "player")]
+[node name="PeekCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player_camera")]
+process_mode = 3
 script = ExtResource("3_lfylg")
 player_camera = NodePath("../PlayerCamera")
-player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_kapmh")]
 
@@ -83,5 +83,10 @@ script = ExtResource("6_y8hi7")
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="InitialPeekDelayTimer" type="Timer" parent="."]
+process_mode = 3
+editor_description = "Used during starting animation when automatically peeking at the level's Gummy position."
+one_shot = true
 
 [connection signal="timeout" from="PlayerRespawnTimer" to="." method="_on_player_respawn_timer_timeout"]

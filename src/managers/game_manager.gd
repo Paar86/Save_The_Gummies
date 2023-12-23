@@ -17,9 +17,9 @@ var _game_stats: GameStats
 func _ready() -> void:
 	_game_stats = GameStats.new()
 
-	Events.change_level_requested.connect(_on_change_level)
-	Events.reload_level_requested.connect(_on_reload_level)
-	Events.pause_level_requested.connect(_on_pause_level)
+	Events.change_level_requested.connect(_on_change_level_requested)
+	Events.reload_level_requested.connect(_on_reload_level_requested)
+	Events.pause_level_requested.connect(_on_pause_level_requested)
 
 	_current_scene = title_screen.instantiate()
 	_active_scene.add_child(_current_scene)
@@ -32,12 +32,14 @@ func _ready() -> void:
 
 func get_level_instance(index: int) -> Level:
 	index = clamp(index, 0, levels.size() - 1)
-	var level_instance = levels[_current_scene_index - 1].instantiate()
+	var level_instance = levels[_current_scene_index - 1].instantiate() as Level
 	level_instance.game_stats = _game_stats
+	level_instance.start_with_peek_animation = true
 	return level_instance
 
 
-func _on_change_level() -> void:
+func _on_change_level_requested() -> void:
+	get_tree().paused = true
 	_current_scene.queue_free()
 
 	_current_scene_index += 1
@@ -52,7 +54,7 @@ func _on_change_level() -> void:
 	_active_scene.add_child(_current_scene)
 
 
-func _on_reload_level() -> void:
+func _on_reload_level_requested() -> void:
 	_current_scene.queue_free()
 
 	if _current_scene_index == 0:
@@ -65,7 +67,7 @@ func _on_reload_level() -> void:
 	_active_scene.add_child(_current_scene)
 
 
-func _on_pause_level() -> void:
+func _on_pause_level_requested() -> void:
 	# Dont pause on title screen and credits
 	if not (_current_scene_index in range(1, levels.size() + 1)):
 		return
