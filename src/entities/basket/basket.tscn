@@ -110,4 +110,8 @@ position = Vector2(5, 0)
 [node name="SpawnBoundaryRight" type="Marker2D" parent="."]
 position = Vector2(20, 0)
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(12, -4)
+rect = Rect2(-20, -20, 40, 40)
+
 [connection signal="body_entered" from="CreatureDetector" to="." method="_on_creature_detector_body_entered"]
