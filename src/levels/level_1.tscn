@@ -1028,7 +1028,7 @@ color = 4
 position = Vector2(-80, 352)
 
 [node name="Player" parent="." index="9"]
-position = Vector2(-80, 352)
+position = Vector2(-76, 352)
 
 [node name="Basket" parent="ObjectsInFront" index="0" instance=ExtResource("4_e8po5")]
 position = Vector2(-112, 352)

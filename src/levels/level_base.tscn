@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvje8c8sahcwc"]
+[gd_scene load_steps=12 format=3 uid="uid://dvje8c8sahcwc"]
 
 [ext_resource type="Script" path="res://src/levels/level_base.gd" id="1_03m7p"]
 [ext_resource type="PackedScene" uid="uid://c36mwvup5f8ad" path="res://src/entities/ball_creature/ball_creature.tscn" id="2_3bdtq"]
@@ -10,6 +10,7 @@
 [ext_resource type="TileSet" uid="uid://ctlwpvc6uoe4p" path="res://src/resources/tilesets/decorations_tileset.tres" id="5_6yw2v"]
 [ext_resource type="Texture2D" uid="uid://dx3d0l08f7xrg" path="res://assets/ui/heart.png" id="5_pd1ws"]
 [ext_resource type="Script" path="res://src/levels/health_counter.gd" id="6_y8hi7"]
+[ext_resource type="PackedScene" uid="uid://dyfvc3jli6hx" path="res://src/user_interface/pause_screen/pause_screen.tscn" id="11_n3yy7"]
 
 [node name="LevelBase" type="Node"]
 script = ExtResource("1_03m7p")
@@ -47,10 +48,10 @@ editor_description = "Ladders, barriers..."
 [node name="PlayerCamera" parent="." instance=ExtResource("2_fykds")]
 offset = Vector2(0, 0)
 
-[node name="PeekCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player_camera", "player")]
+[node name="PeekCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player_camera")]
+process_mode = 3
 script = ExtResource("3_lfylg")
 player_camera = NodePath("../PlayerCamera")
-player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_kapmh")]
 
@@ -83,5 +84,14 @@ script = ExtResource("6_y8hi7")
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="InitialPeekDelayTimer" type="Timer" parent="."]
+process_mode = 3
+editor_description = "Used during starting animation when automatically peeking at the level's Gummy position."
+one_shot = true
+
+[node name="PauseScreen" parent="." instance=ExtResource("11_n3yy7")]
+process_mode = 3
+visible = false
 
 [connection signal="timeout" from="PlayerRespawnTimer" to="." method="_on_player_respawn_timer_timeout"]

@@ -2,6 +2,8 @@ class_name Level extends Node
 
 signal camera_above_player
 
+@export var start_with_peek_animation: bool = false
+
 var ball_creature: BallCreature
 var _checkpoints: Array[Checkpoint] = []
 # For remembering the position of Player in tree for proper z-indexing
@@ -18,6 +20,8 @@ var _game_stats: GameStats
 @onready var _health_ui: TextureRect = $UI/HealthCounter
 @onready var _player_respawn_timer: Timer = $PlayerRespawnTimer
 @onready var _ball_creatures_captured_folder: Node = $ObjectsBehind/BallCreaturesCaptured
+@onready var _initial_peek_delay_timer: Timer = $InitialPeekDelayTimer
+@onready var _pause_screen: CanvasLayer = $PauseScreen
 
 var game_stats: GameStats:
 	set(value): _game_stats = value
@@ -33,10 +37,22 @@ func _ready() -> void:
 	_player_respawn_point = _player.global_position
 	_player_tree_index = _player.get_index()
 
+	Events.pause_level_requested.connect(_on_pause_level_requested)
+	Events.unpause_level_requested.connect(_on_unpause_level_requested)
+
 	_configure_player()
 	_configure_basket()
 	_configure_cameras()
 	_register_checkpoints()
+
+	if start_with_peek_animation:
+		get_tree().paused = true
+		_pause_screen.set_process_input(false)
+		_peek_camera.set_process_unhandled_input(false)
+		await _play_peek_animation()
+		get_tree().paused = false
+		_pause_screen.set_process_input(true)
+		_peek_camera.set_process_unhandled_input(true)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -77,7 +93,7 @@ func _configure_cameras() -> void:
 
 	# Additional settings
 	_peek_camera.ball_creature = ball_creature
-	_peek_camera.arrived_at_player.connect(_on_peek_camera_at_player)
+	_peek_camera.arrived_at_player_camera.connect(_on_peek_camera_at_player)
 
 
 func _register_checkpoints() -> void:
@@ -97,6 +113,23 @@ func _configure_player() -> void:
 
 	# Signals
 	_player.lives_depleted.connect(_on_player_lives_depleted)
+
+
+func _play_peek_animation() -> void:
+	_peek_camera.make_current()
+	await _create_peek_delay()
+	_peek_camera.set_ball_creature_as_target()
+	await _peek_camera.arrived_at_target
+	await _create_peek_delay()
+	_peek_camera.set_player_camera_as_target()
+	await _peek_camera.arrived_at_target
+	await _create_peek_delay()
+	_player_camera.make_current()
+
+
+func _create_peek_delay() -> void:
+	_initial_peek_delay_timer.start()
+	await _initial_peek_delay_timer.timeout
 
 
 func _on_peek_camera_at_player() -> void:
@@ -143,3 +176,13 @@ func _on_ball_creature_captured(ball_creature: BallCreature) -> void:
 		return
 
 	_game_stats.saved_ball_creatures_colors.append(ball_creature.color)
+
+
+func _on_pause_level_requested() -> void:
+	get_tree().paused = true
+	_pause_screen.show()
+
+
+func _on_unpause_level_requested() -> void:
+	get_tree().paused = false
+	_pause_screen.hide()

@@ -335,8 +335,10 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 17
+slide_on_ceiling = false
+floor_constant_speed = true
 floor_snap_length = 5.0
-safe_margin = 0.05
+safe_margin = 0.1
 script = ExtResource("1_fgl7g")
 metadata/_edit_group_ = true
 
@@ -366,6 +368,7 @@ position = Vector2(7, -7)
 position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_qnlu6")
 animation = &"idle"
+autoplay = "idle"
 offset = Vector2(-2, 0)
 
 [node name="PickupTransform2D" type="RemoteTransform2D" parent="."]
@@ -374,10 +377,11 @@ position = Vector2(7, -7)
 update_scale = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -7)
 shape = ExtResource("8_5gpwu")
 
 [node name="WorldDetector" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -8)
 collision_layer = 0
 monitoring = false

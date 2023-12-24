@@ -679,7 +679,7 @@ size = Vector2(20, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0nwpn"]
 size = Vector2(20, 8)
 
-[node name="LevelBase" instance=ExtResource("1_fu4y7")]
+[node name="Level3" instance=ExtResource("1_fu4y7")]
 
 [node name="ArrowShooters" type="Node" parent="ObjectsBehind" index="0"]
 
