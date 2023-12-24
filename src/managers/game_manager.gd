@@ -24,15 +24,15 @@ func _ready() -> void:
 
 
 func get_level_instance(index: int) -> Level:
-	index = clamp(index, 0, levels.size() - 1)
-	var level_instance = levels[_current_scene_index - 1].instantiate() as Level
+	index = clampi(index, 0, levels.size() - 1)
+	var level_instance: = levels[_current_scene_index - 1].instantiate() as Level
 	level_instance.game_stats = _game_stats
 	level_instance.start_with_peek_animation = true
 	return level_instance
 
 
 func _on_change_level_requested() -> void:
-	get_tree().paused = true
+	_active_scene.remove_child(_current_scene)
 	_current_scene.queue_free()
 
 	_current_scene_index += 1

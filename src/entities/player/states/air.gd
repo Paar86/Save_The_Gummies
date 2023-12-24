@@ -102,7 +102,7 @@ func physics_process(delta: float) -> void:
 		state_machine.transition_to("Idle", params)
 		return
 
-	if move_state.character.is_on_ceiling():
+	if move_state.character.is_on_ceiling() and _is_jumping:
 		move_state.character.velocity_primary.y = 0.0
 		move_state.gravity_scale = JUMP_GRAVITY_SCALE
 		_is_jumping = false
