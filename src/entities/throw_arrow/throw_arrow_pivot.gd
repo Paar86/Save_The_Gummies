@@ -2,15 +2,18 @@ extends Marker2D
 
 const OSCILLATION_DISTANCE: = 2.0
 const OSCILLATION_SPEED_MODIFIER: = 15.0
-const MIN_ANGLE: = deg_to_rad(-180.0)
-const MAX_ANGLE: = deg_to_rad(0.0)
+const MIN_ANGLE: = deg_to_rad(-200.0)
+const MAX_ANGLE: = deg_to_rad(20.0)
 const ROTATION_SPEED: = 3.0
 const DEFAULT_ROTATION: = deg_to_rad(65.0)
+const INITIAL_DOT_OFFSET: = 7.0
+const DOT_GAP: = 3.5
 
 var _face_direction: = 1.0
 var _aiming_enabled: = false
 
 @onready var _throw_sprite: Sprite2D = $SpriteContainer/ThrowArrowSprite
+@onready var _dots: Array = $DotsContainer.get_children()
 
 
 func _ready() -> void:
@@ -28,10 +31,19 @@ func _process(delta: float) -> void:
 
 	if transform.x.x != 0.0 and sign(transform.x.x) != _face_direction:
 		Events.player_direction_changed.emit(sign(transform.x.x))
+	
+	# Dot placement
+	var dots_offset: = INITIAL_DOT_OFFSET
+	var direction: = (_throw_sprite.global_position - global_position).normalized()
+	for dot in _dots:
+		dot.global_position = global_position + dots_offset*direction
+		dots_offset += DOT_GAP
 
 
 func enable() -> void:
 	_throw_sprite.show()
+	for dot in _dots:
+		dot.show()
 	_aiming_enabled = true
 	rotation = get_default_rotation_rad()
 	process_mode = Node.PROCESS_MODE_INHERIT
@@ -39,6 +51,8 @@ func enable() -> void:
 
 func disable() -> void:
 	_throw_sprite.hide()
+	for dot in _dots:
+		dot.hide()
 	_aiming_enabled = false
 	rotation = get_default_rotation_rad()
 	process_mode = Node.PROCESS_MODE_DISABLED
