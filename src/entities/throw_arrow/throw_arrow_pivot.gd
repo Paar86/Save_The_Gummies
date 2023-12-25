@@ -31,8 +31,11 @@ func _process(delta: float) -> void:
 
 	if transform.x.x != 0.0 and sign(transform.x.x) != _face_direction:
 		Events.player_direction_changed.emit(sign(transform.x.x))
-	
-	# Dot placement
+
+	_place_dots()
+
+
+func _place_dots():
 	var dots_offset: = INITIAL_DOT_OFFSET
 	var direction: = (_throw_sprite.global_position - global_position).normalized()
 	for dot in _dots:
@@ -42,6 +45,7 @@ func _process(delta: float) -> void:
 
 func enable() -> void:
 	_throw_sprite.show()
+	_place_dots()
 	for dot in _dots:
 		dot.show()
 	_aiming_enabled = true
