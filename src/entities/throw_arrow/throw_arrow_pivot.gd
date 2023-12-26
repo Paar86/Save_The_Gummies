@@ -45,8 +45,8 @@ func _place_dots():
 
 func enable() -> void:
 	_throw_sprite.show()
+	_place_dots()
 	for dot in _dots:
-		_place_dots()
 		dot.show()
 	_aiming_enabled = true
 	rotation = get_default_rotation_rad()
