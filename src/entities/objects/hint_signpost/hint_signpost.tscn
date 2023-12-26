@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqc3qd27hev05"]
+
+[ext_resource type="Script" path="res://src/entities/objects/hint_signpost/hint_signpost.gd" id="1_kfid3"]
+[ext_resource type="Texture2D" uid="uid://f6386xpwiquj" path="res://assets/objects/hint_signpost.png" id="1_ugecq"]
+[ext_resource type="Texture2D" uid="uid://dbxm3w7uondwd" path="res://assets/ui/icon_up.png" id="2_k0prl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yinkf"]
+size = Vector2(20, 16)
+
+[node name="HintSignpost" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_kfid3")
+
+[node name="UpKeySprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -20)
+texture = ExtResource("2_k0prl")
+
+[node name="BodySprite" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_ugecq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_yinkf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
