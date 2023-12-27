@@ -22,6 +22,7 @@ var _game_stats: GameStats
 @onready var _ball_creatures_captured_folder: Node = $ObjectsBehind/BallCreaturesCaptured
 @onready var _initial_peek_delay_timer: Timer = $InitialPeekDelayTimer
 @onready var _pause_screen: CanvasLayer = $PauseScreen
+@onready var _hint_window: HintWindow = $UI/HintWindow
 
 var game_stats: GameStats:
 	set(value): _game_stats = value
@@ -40,6 +41,7 @@ func _ready() -> void:
 	Events.pause_level_requested.connect(_on_pause_level_requested)
 	Events.unpause_level_requested.connect(_on_unpause_level_requested)
 
+	_configure_hints()
 	_configure_player()
 	_configure_basket()
 	_configure_cameras()
@@ -115,6 +117,18 @@ func _configure_player() -> void:
 	_player.lives_depleted.connect(_on_player_lives_depleted)
 
 
+func _configure_hints() -> void:
+	var hint_signposts: Array[HintSignpost]
+	hint_signposts.assign(find_children("*", "HintSignpost"))
+	if hint_signposts.size() == 0:
+		return
+
+	for signpost in hint_signposts:
+		signpost.hint_message_requested.connect(_on_hint_message_requested)
+
+	_hint_window.hint_window_closed.connect(_on_hint_window_closed)
+
+
 func _play_peek_animation() -> void:
 	_peek_camera.make_current()
 	await _create_peek_delay()
@@ -186,3 +200,12 @@ func _on_pause_level_requested() -> void:
 func _on_unpause_level_requested() -> void:
 	get_tree().paused = false
 	_pause_screen.hide()
+
+
+func _on_hint_message_requested(message: String) -> void:
+	get_tree().paused = true
+	_hint_window.show_hint(message)
+
+
+func _on_hint_window_closed() -> void:
+	get_tree().paused = false
