@@ -1,8 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://b20478nvktj3k"]
+[gd_scene load_steps=9 format=3 uid="uid://b20478nvktj3k"]
 
 [ext_resource type="Script" path="res://src/entities/ball_creature/ball_creature_captured.gd" id="1_ufb1a"]
 [ext_resource type="Texture2D" uid="uid://bhg0gu4uapxnm" path="res://assets/ball_creature/ball_creature_spritesheet.png" id="2_mprvu"]
 [ext_resource type="PackedScene" uid="uid://cbjpup34gan1c" path="res://src/entities/ball_creature/paletted_sprite.tscn" id="2_y7gdq"]
+[ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie_alt.gdshader" id="3_3f4v8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_paojq"]
+resource_local_to_scene = true
+shader = ExtResource("3_3f4v8")
+shader_parameter/primary_replacement_color = Vector3(41, 173, 255)
+shader_parameter/secondary_replacement_color = Vector3(29, 43, 83)
 
 [sub_resource type="Animation" id="Animation_1q3nh"]
 length = 0.001
@@ -46,6 +53,7 @@ _data = {
 script = ExtResource("1_ufb1a")
 
 [node name="PalettedSprite" parent="." instance=ExtResource("2_y7gdq")]
+material = SubResource("ShaderMaterial_paojq")
 texture = ExtResource("2_mprvu")
 hframes = 3
 vframes = 5

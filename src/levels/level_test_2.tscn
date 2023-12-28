@@ -1,8 +1,9 @@
-[gd_scene load_steps=47 format=3 uid="uid://bnuhq8nf46q8i"]
+[gd_scene load_steps=49 format=3 uid="uid://bnuhq8nf46q8i"]
 
 [ext_resource type="PackedScene" uid="uid://dvje8c8sahcwc" path="res://src/levels/level_base.tscn" id="1_jlemu"]
 [ext_resource type="PackedScene" uid="uid://bqc3qd27hev05" path="res://src/entities/objects/hint_signpost/hint_signpost.tscn" id="2_lodt6"]
 [ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/world_tilesets.tres" id="5_aqx13"]
+[ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie_alt.gdshader" id="6_oddbk"]
 [ext_resource type="PackedScene" uid="uid://bmmhoexfwl035" path="res://src/entities/obstacles/barrier/barrier.tscn" id="7_cvsn6"]
 [ext_resource type="PackedScene" uid="uid://c1ny4x7ikhd2j" path="res://src/entities/goblin/goblin.tscn" id="8_p7e4l"]
 [ext_resource type="PackedScene" uid="uid://blpixln5eug03" path="res://src/entities/obstacles/glue/glue_floor.tscn" id="10_14vyf"]
@@ -123,6 +124,12 @@ size = Vector2(40, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3es5c"]
 size = Vector2(40, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vuwso"]
+resource_local_to_scene = true
+shader = ExtResource("6_oddbk")
+shader_parameter/primary_replacement_color = Vector3(255, 0, 77)
+shader_parameter/secondary_replacement_color = Vector3(126, 37, 83)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h5nqq"]
 size = Vector2(40, 8)
@@ -317,6 +324,7 @@ position = Vector2(-58, 121)
 position = Vector2(72, 117)
 
 [node name="PalettedSprite" parent="BallCreature/Node" index="0"]
+material = SubResource("ShaderMaterial_vuwso")
 position = Vector2(72, 117)
 color = 3
 
