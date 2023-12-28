@@ -316,6 +316,10 @@ position = Vector2(-58, 121)
 [node name="BallCreature" parent="." index="7"]
 position = Vector2(72, 117)
 
+[node name="PalettedSprite" parent="BallCreature/Node" index="0"]
+position = Vector2(72, 117)
+color = 3
+
 [node name="PlayerCamera" parent="." index="8"]
 position = Vector2(16, 120)
 
@@ -345,4 +349,6 @@ tile_set = ExtResource("5_aqx13")
 format = 2
 layer_0/tile_data = PackedInt32Array(196610, 393218, 2, 196611, 458754, 2, 196612, 524290, 2, 655370, 393218, 2, 655371, 458754, 2, 655372, 524290, 2)
 
+[editable path="BallCreature"]
+[editable path="BallCreature/HitboxComponent"]
 [editable path="ObjectsInFront/GlueFloor"]

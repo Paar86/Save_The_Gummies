@@ -1021,8 +1021,11 @@ position = Vector2(128, 240)
 position = Vector2(-199, 312)
 
 [node name="BallCreature" parent="." index="6"]
-position = Vector2(340, 268)
-color = 4
+position = Vector2(-16, 340)
+
+[node name="PalettedSprite" parent="BallCreature/Node" index="0"]
+position = Vector2(-16, 340)
+color = 1
 
 [node name="PlayerCamera" parent="." index="7"]
 position = Vector2(-80, 352)
@@ -1038,3 +1041,5 @@ position = Vector2(-112, 352)
 [editable path="ObjectInMiddle/Ladder3"]
 [editable path="ObjectInMiddle/Ladder4"]
 [editable path="ObjectInMiddle/Ladder5"]
+[editable path="BallCreature"]
+[editable path="BallCreature/HitboxComponent"]

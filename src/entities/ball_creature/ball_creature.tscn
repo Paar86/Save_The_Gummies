@@ -1,10 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://c36mwvup5f8ad"]
+[gd_scene load_steps=25 format=3 uid="uid://c36mwvup5f8ad"]
 
 [ext_resource type="Script" path="res://src/entities/ball_creature/ball_creature.gd" id="1_r5tyh"]
 [ext_resource type="PackedScene" uid="uid://cvsgunn02v50s" path="res://src/common/components/hitbox/hitbox_component.tscn" id="2_4pech"]
 [ext_resource type="PackedScene" uid="uid://c8wqsow14x6ea" path="res://src/common/components/effects_applier/effects_applier_component.tscn" id="2_36s0l"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/components/hitbox_component.gd" id="3_208bs"]
-[ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie.gdshader" id="5_6f6km"]
+[ext_resource type="PackedScene" uid="uid://cbjpup34gan1c" path="res://src/entities/ball_creature/paletted_sprite.tscn" id="5_njjxm"]
 [ext_resource type="Texture2D" uid="uid://bhg0gu4uapxnm" path="res://assets/ball_creature/ball_creature_spritesheet.png" id="6_lg6ex"]
 [ext_resource type="Texture2D" uid="uid://bpesacbyulktm" path="res://assets/ball_creature/arrow_marker.png" id="7_e5flx"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/components/arrow_marker.gd" id="8_7l0pn"]
@@ -28,16 +28,12 @@ radius = 3.5
 [sub_resource type="CircleShape2D" id="CircleShape2D_2c3r5"]
 radius = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_12c18"]
-shader = ExtResource("5_6f6km")
-shader_parameter/palette = 3
-
 [sub_resource type="Animation" id="Animation_yqyxa"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node/Sprite2D:frame")
+tracks/0/path = NodePath("Node/PalettedSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -53,7 +49,7 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node/Sprite2D:frame")
+tracks/0/path = NodePath("Node/PalettedSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -69,7 +65,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node/Sprite2D:frame")
+tracks/0/path = NodePath("Node/PalettedSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -85,7 +81,7 @@ length = 2.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node/Sprite2D:frame")
+tracks/0/path = NodePath("Node/PalettedSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -103,7 +99,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node/Sprite2D:frame")
+tracks/0/path = NodePath("Node/PalettedSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -130,6 +126,7 @@ physics_material_override = SubResource("PhysicsMaterial_etqu6")
 max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_r5tyh")
+metadata/_edit_group_ = true
 
 [node name="EffectsApplierComponent" parent="." instance=ExtResource("2_36s0l")]
 
@@ -151,27 +148,26 @@ collision_layer = 0
 shape = SubResource("CircleShape2D_2c3r5")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
-remote_path = NodePath("../Node/Sprite2D")
+remote_path = NodePath("../Node/PalettedSprite")
 update_rotation = false
 
 [node name="Node" type="Node" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Node"]
-material = SubResource("ShaderMaterial_12c18")
+[node name="PalettedSprite" parent="Node" instance=ExtResource("5_njjxm")]
 texture = ExtResource("6_lg6ex")
 hframes = 3
 vframes = 5
 
-[node name="ArrowMarker" type="Sprite2D" parent="Node/Sprite2D"]
+[node name="ArrowMarker" type="Sprite2D" parent="Node/PalettedSprite"]
 visible = false
 z_index = 10
 texture = ExtResource("7_e5flx")
 script = ExtResource("8_7l0pn")
 
-[node name="GroundDetector" type="RayCast2D" parent="Node/Sprite2D"]
+[node name="GroundDetector" type="RayCast2D" parent="Node/PalettedSprite"]
 target_position = Vector2(0, 5)
 
-[node name="ReactionSymbol" parent="Node/Sprite2D" instance=ExtResource("9_qjcsl")]
+[node name="ReactionSymbol" parent="Node/PalettedSprite" instance=ExtResource("9_qjcsl")]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("9_mseys")

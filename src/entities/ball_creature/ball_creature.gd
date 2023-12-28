@@ -13,18 +13,6 @@ const FOLLOWING_FORCE: = 150.0
 const STOP_FOLLOWING_DISTANCE_NEAR: = 8.0
 const STOP_FOLLOWING_DISTANCE_FAR: = 120.0
 
-enum colors {
-	BLUE_DARK_BLUE,
-	GREEN_DARK_GREEN,
-	YELLOW_DARK_YELLOW,
-	MAGENTA_MAROON,
-	PINK_MAROON,
-	DARK_YELLOW_BROWN,
-	WHEAT_YELLOW_BROWN
-}
-
-@export var color: = colors.BLUE_DARK_BLUE : set = _set_color;
-
 var attack_strength_buffered: = 0.0
 var whistling_player: Player
 var ignore_following: bool = false
@@ -36,10 +24,10 @@ var _bounce_sfx: = preload(SfxResources.BALL_BOUNCE)
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var _effects_applier_component: EffectsApplierComponent = $EffectsApplierComponent
-@onready var _sprite: Sprite2D = $Node/Sprite2D
+@onready var _sprite: PalettedSprite = $Node/PalettedSprite
 @onready var _hitbox_component: HitboxComponent = $HitboxComponent
-@onready var _ground_detector: RayCast2D = $Node/Sprite2D/GroundDetector
-@onready var _reaction_symbol: ReactionSymbol = $Node/Sprite2D/ReactionSymbol
+@onready var _ground_detector: RayCast2D = $Node/PalettedSprite/GroundDetector
+@onready var _reaction_symbol: ReactionSymbol = $Node/PalettedSprite/ReactionSymbol
 @onready var _following_timer: Timer = $FollowingTimer
 @onready var _collision_tester: Area2D = $CollisionTester
 @onready var _state_machine: StateMachine = $StateMachine
@@ -56,6 +44,11 @@ var is_on_floor: bool:
 
 var is_inside_wall: bool:
 	get: return _collision_tester.has_overlapping_bodies()
+
+
+var color: int:
+	get: return _sprite.color
+
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
@@ -162,11 +155,6 @@ func _on_effect_removed(effect: Enums.effect) -> void:
 			physics_material_override.bounce = 0.4
 			if not _effects_applier_component.is_effect_active(Enums.effect.GLUED):
 				_produce_bounce_sfx = true
-
-
-func _set_color(new_color : colors):
-	get_node("Node/Sprite2D").get_material().set_shader_parameter("palette", new_color)
-	color = new_color
 
 
 func _on_body_entered(body: Node) -> void:

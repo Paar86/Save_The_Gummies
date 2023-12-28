@@ -1683,7 +1683,6 @@ position = Vector2(-144, 168)
 
 [node name="BallCreature" parent="." index="6"]
 position = Vector2(24, 76)
-color = 3
 
 [node name="PlayerCamera" parent="." index="7"]
 position = Vector2(72, 160)

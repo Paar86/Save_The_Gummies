@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbjpup34gan1c"]
+
+[ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie_alt.gdshader" id="1_gtjux"]
+[ext_resource type="Script" path="res://src/entities/ball_creature/paletted_sprite.gd" id="1_seldw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bqtu"]
+resource_local_to_scene = true
+shader = ExtResource("1_gtjux")
+shader_parameter/primary_replacement_color = Vector3(41, 173, 255)
+shader_parameter/secondary_replacement_color = Vector3(29, 43, 83)
+
+[node name="PalettedSprite" type="Sprite2D"]
+material = SubResource("ShaderMaterial_1bqtu")
+script = ExtResource("1_seldw")

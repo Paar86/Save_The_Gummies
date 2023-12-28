@@ -1,26 +1,21 @@
 class_name BallCreatureCaptured extends Node2D
 
-enum colors {
-	BLUE_DARK_BLUE,
-	GREEN_DARK_GREEN,
-	YELLOW_DARK_YELLOW,
-	MAGENTA_MAROON,
-	PINK_MAROON,
-	DARK_YELLOW_BROWN,
-	WHEAT_YELLOW_BROWN
-}
-
 var animation_delay: = 0.0
-var color: = colors.BLUE_DARK_BLUE:
+var color: int:
 	set(new_color):
-		get_node("Sprite2D").get_material().set_shader_parameter("palette", new_color)
+		if _sprite:
+			_sprite.color = new_color
+
 		color = new_color
 
 
+@onready var _sprite: PalettedSprite = $PalettedSprite
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _animation_delay_timer: Timer = $AnimationDelayTimer
 
+
 func _ready() -> void:
+	_sprite.color = color
 	animation_delay = maxf(0.0, animation_delay)
 
 	if not animation_delay:
