@@ -54,21 +54,19 @@ particles_anim_loop = false
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
 point_count = 1
 
-[sub_resource type="CurveTexture" id="CurveTexture_uu3n6"]
+[sub_resource type="CurveTexture" id="CurveTexture_jkr22"]
 curve = SubResource("Curve_3s1vy")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i106c"]
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(8, 12, 1)
-particle_flag_disable_z = true
 spread = 0.0
-gravity = Vector3(98, 0, 0)
 initial_velocity_min = 160.0
 initial_velocity_max = 160.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(98, 0, 0)
 anim_offset_max = 1.0
-anim_offset_curve = SubResource("CurveTexture_uu3n6")
+anim_offset_curve = SubResource("CurveTexture_jkr22")
 
 [node name="WindGenerator" type="StaticBody2D"]
 collision_layer = 16

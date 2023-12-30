@@ -1,7 +1,8 @@
-[gd_scene load_steps=49 format=3 uid="uid://bnuhq8nf46q8i"]
+[gd_scene load_steps=50 format=3 uid="uid://bnuhq8nf46q8i"]
 
 [ext_resource type="PackedScene" uid="uid://dvje8c8sahcwc" path="res://src/levels/level_base.tscn" id="1_jlemu"]
 [ext_resource type="PackedScene" uid="uid://bqc3qd27hev05" path="res://src/entities/objects/hint_signpost/hint_signpost.tscn" id="2_lodt6"]
+[ext_resource type="PackedScene" uid="uid://deqsyg5gxba07" path="res://src/entities/obstacles/wall_fan/wall_fan.tscn" id="3_jmo6n"]
 [ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/world_tilesets.tres" id="5_aqx13"]
 [ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie_alt.gdshader" id="6_oddbk"]
 [ext_resource type="PackedScene" uid="uid://bmmhoexfwl035" path="res://src/entities/obstacles/barrier/barrier.tscn" id="7_cvsn6"]
@@ -139,6 +140,8 @@ size = Vector2(40, 8)
 [node name="TileMapBackground" parent="." index="0"]
 layer_0/name = "Base"
 layer_0/tile_data = PackedInt32Array(720897, 327681, 9, 720898, 524289, 12, 720899, 589825, 10, 720900, 589825, 10, 720901, 589825, 10, 720902, 393217, 9, 786438, 589825, 10, 851974, 524289, 12, 917510, 589825, 10, 983046, 589825, 11, 983045, 589825, 11, 983044, 589825, 11, 983043, 589825, 11, 983042, 589825, 11, 983041, 589825, 11, 917505, 458753, 12, 851969, 589825, 10, 786433, 589825, 10, 786434, 458753, 12, 851970, 589825, 10, 917506, 524289, 12, 851971, 589825, 10, 786435, 589825, 10, 786436, 589825, 12, 851972, 524289, 12, 917508, 589825, 10, 917509, 458753, 12, 851973, 589825, 10, 786437, 589825, 10, 786439, 720897, 10, 851975, 720897, 10, 917511, 720897, 10, 983047, 720897, 11, 786432, 524289, 9, 851968, 524289, 9, 917504, 327681, 9, 983040, 589825, 11, 720896, 524289, 8, 720903, 720897, 8, 720914, 655361, 8, 720913, 655361, 8, 720912, 655361, 8, 720911, 655361, 8, 786447, 524289, 12, 786446, 524289, 9, 851982, 524289, 9, 917518, 524289, 9, 983054, 524289, 11, 983055, 589825, 11, 983056, 589825, 11, 983057, 589825, 11, 983058, 589825, 11, 983059, 720897, 11, 917523, 720897, 10, 851987, 720897, 10, 786451, 720897, 10, 720915, 720897, 8, 786448, 458753, 12, 786449, 589825, 12, 786450, 589825, 10, 851986, 589825, 10, 851985, 589825, 10, 851984, 589825, 10, 851983, 589825, 12, 917519, 589825, 10, 917520, 458753, 12, 917521, 589825, 10, 917522, 589825, 10, 720910, 524289, 8, 786427, 655361, 8, 786428, 655361, 8, 786429, 720897, 8, 851965, 393217, 9, 917502, 720897, 10, 983038, 393217, 9, 983039, 655361, 8, 983037, 589825, 10, 917501, 589825, 12, 851964, 327681, 10, 917500, 524289, 9, 917498, 720897, 10, 983034, 393217, 9, 983033, 524289, 9, 917497, 524289, 9, 851961, 524289, 9, 851962, 393217, 10, 786425, 524289, 8, 786426, 655361, 8, 851963, 589825, 11, 851966, 720897, 8, 983036, 327681, 9, 1048570, 589825, 11, 1048569, 524289, 11, 1048572, 589825, 11, 1048573, 589825, 11, 1048574, 589825, 11, 1048575, 589825, 11, 917507, 524289, 12, 655361, 524289, 8, 655362, 655361, 8, 655363, 655361, 8, 655364, 655361, 8, 655365, 655361, 8, 655366, 720897, 8, 1048571, 589825, 11, 983035, 655361, 8)
+layer_1/name = "Decorations"
+layer_1/tile_data = PackedInt32Array(655356, 131074, 0, 720892, 131074, 1, 655357, 196610, 0, 720893, 196610, 1)
 
 [node name="HintSignpost" parent="ObjectsBehind" index="1" instance=ExtResource("2_lodt6")]
 position = Vector2(32, 120)
@@ -146,6 +149,9 @@ hint_message = "Example text for the hint signpost.
 Support for icons, eg:
 *key_up*, *key_right*
 *key_ctrl*, *key_spacebar*"
+
+[node name="WallFan" parent="ObjectsBehind" index="2" instance=ExtResource("3_jmo6n")]
+position = Vector2(-64, 120)
 
 [node name="ObjectsMiddle" type="Node" parent="." index="2"]
 
@@ -315,17 +321,17 @@ layer_1/tile_data = PackedInt32Array(655361, 524289, 1, 655362, 589825, 2, 65536
 layer_2/name = "Overlay"
 layer_2/tile_data = PackedInt32Array(983045, 655361, 4, 983046, 720897, 4, 983047, 720897, 4, 983048, 720897, 4, 983049, 720897, 4, 983050, 720897, 4, 983051, 720897, 4, 983052, 720897, 4, 983053, 720897, 4, 983054, 720897, 4, 983055, 720897, 4, 983056, 720897, 4, 983057, 720897, 4, 983058, 720897, 4, 589827, 655361, 4, 589828, 786433, 4)
 layer_3/name = "Decorations"
-layer_3/tile_data = PackedInt32Array(917509, 2, 0, 917499, 393218, 0, 983035, 393218, 1, 917500, 458754, 0, 983036, 458754, 1, 589839, 2, 3, 589840, 65538, 3, 524305, 131074, 2, 589841, 131074, 3, 589842, 196610, 3, 983039, 262146, 1, 917504, 327682, 1, 655356, 131074, 0, 720892, 131074, 1, 655357, 196610, 0, 720893, 196610, 1)
+layer_3/tile_data = PackedInt32Array(917509, 2, 0, 917499, 393218, 0, 983035, 393218, 1, 917500, 458754, 0, 983036, 458754, 1, 589839, 2, 3, 589840, 65538, 3, 524305, 131074, 2, 589841, 131074, 3, 589842, 196610, 3, 983039, 262146, 1, 917504, 327682, 1)
 
 [node name="Goblin" parent="Enemies" index="0" instance=ExtResource("8_p7e4l")]
-position = Vector2(-58, 121)
+position = Vector2(-40, 88)
 
 [node name="BallCreature" parent="." index="7"]
-position = Vector2(72, 117)
+position = Vector2(72, 116)
 
 [node name="PalettedSprite" parent="BallCreature/Node" index="0"]
 material = SubResource("ShaderMaterial_vuwso")
-position = Vector2(72, 117)
+position = Vector2(72, 116)
 color = 3
 
 [node name="PlayerCamera" parent="." index="8"]
@@ -347,6 +353,10 @@ position = Vector2(32, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectsInFront/GlueFloor" index="4"]
 position = Vector2(20, -2)
 shape = SubResource("RectangleShape2D_h5nqq")
+
+[node name="HintWindow" parent="UI" index="1"]
+offset_top = -8.0
+offset_bottom = -8.0
 
 [node name="ParallaxLayer" parent="ParallaxBackground" index="0"]
 motion_scale = Vector2(0.5, 0.5)
