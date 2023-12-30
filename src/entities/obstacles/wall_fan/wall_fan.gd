@@ -1,6 +1,6 @@
 class_name WallFan extends Area2D
 
-const WIND_STRENGTH: float = 50.0
+const WIND_STRENGTH: float = 40.0
 
 
 func _on_body_entered(body: Node2D) -> void:
