@@ -20,6 +20,7 @@ var _key_icons_string: = {
 
 
 func _ready() -> void:
+	show()
 	set_process_input(false)
 
 

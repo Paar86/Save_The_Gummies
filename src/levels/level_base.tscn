@@ -83,6 +83,7 @@ stretch_mode = 1
 script = ExtResource("6_y8hi7")
 
 [node name="HintWindow" parent="UI" instance=ExtResource("11_u8im1")]
+visible = false
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
