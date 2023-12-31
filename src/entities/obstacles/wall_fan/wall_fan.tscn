@@ -98,7 +98,7 @@ region_rect = Rect2(0, 0, 8, 16)
 position = Vector2(7, -6)
 sprite_frames = SubResource("SpriteFrames_hrsox")
 autoplay = "default"
-frame_progress = 0.516135
+frame_progress = 0.591355
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(40, -8)
@@ -112,6 +112,8 @@ process_material = SubResource("ParticleProcessMaterial_2cxki")
 texture = ExtResource("2_3aa7g")
 lifetime = 0.4
 randomness = 1.0
+fixed_fps = 0
+interpolate = false
 visibility_rect = Rect2(-21.5184, -23.906, 113.359, 47.8896)
 script = ExtResource("3_re172")
 
