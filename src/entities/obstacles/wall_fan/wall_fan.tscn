@@ -78,7 +78,7 @@ emission_box_extents = Vector3(8, 8, 1)
 spread = 0.0
 initial_velocity_min = 160.0
 initial_velocity_max = 160.0
-gravity = Vector3(98, 0, 0)
+gravity = Vector3(0, 0, 0)
 anim_offset_max = 1.0
 anim_offset_curve = SubResource("CurveTexture_uu3n6")
 
@@ -98,7 +98,7 @@ region_rect = Rect2(0, 0, 8, 16)
 position = Vector2(7, -6)
 sprite_frames = SubResource("SpriteFrames_hrsox")
 autoplay = "default"
-frame_progress = 0.591355
+frame_progress = 0.194655
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(40, -8)
