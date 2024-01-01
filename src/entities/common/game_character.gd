@@ -11,7 +11,12 @@ var _star_explosion: PackedScene = preload("res://src/effects/death/star_explosi
 # Properties
 var velocity_secondary: Vector2:
 	get:
-		return _effects_applier_component.velocity_secondary
+		# TODO: This should probably be implemented more elegantly
+		var modificator: = 1.0
+		if is_effect_active(Enums.effect.GLUED):
+			modificator = 0.5
+
+		return _effects_applier_component.velocity_secondary * modificator
 
 var velocity_combined: Vector2:
 	get:

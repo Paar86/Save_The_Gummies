@@ -7,6 +7,8 @@ signal effect_removed(effect: Enums.effect)
 var velocity_secondary: Vector2 = Vector2.ZERO
 
 var _applied_effects: Array[Enums.effect] = []
+# TODO: This could be renamed to 'movement_adders'
+# and there could also be 'movement_reducers', e.g. when glued
 var _applied_movement_modificators: Array[Vector2] = []
 
 

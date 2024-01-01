@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c36mwvup5f8ad"]
+[gd_scene load_steps=27 format=3 uid="uid://c36mwvup5f8ad"]
 
 [ext_resource type="Script" path="res://src/entities/ball_creature/ball_creature.gd" id="1_r5tyh"]
 [ext_resource type="PackedScene" uid="uid://cvsgunn02v50s" path="res://src/common/components/hitbox/hitbox_component.tscn" id="2_4pech"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://src/entities/ball_creature/components/hitbox_component.gd" id="3_208bs"]
 [ext_resource type="PackedScene" uid="uid://cbjpup34gan1c" path="res://src/entities/ball_creature/paletted_sprite.tscn" id="5_njjxm"]
 [ext_resource type="Texture2D" uid="uid://bhg0gu4uapxnm" path="res://assets/ball_creature/ball_creature_spritesheet.png" id="6_lg6ex"]
+[ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie_alt.gdshader" id="6_mybgu"]
 [ext_resource type="Texture2D" uid="uid://bpesacbyulktm" path="res://assets/ball_creature/arrow_marker.png" id="7_e5flx"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/components/arrow_marker.gd" id="8_7l0pn"]
 [ext_resource type="Script" path="res://src/common/state_machine/state_machine.gd" id="9_mseys"]
@@ -27,6 +28,12 @@ radius = 3.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2c3r5"]
 radius = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o5jby"]
+resource_local_to_scene = true
+shader = ExtResource("6_mybgu")
+shader_parameter/primary_replacement_color = Vector3(41, 173, 255)
+shader_parameter/secondary_replacement_color = Vector3(29, 43, 83)
 
 [sub_resource type="Animation" id="Animation_yqyxa"]
 length = 0.001
@@ -154,6 +161,7 @@ update_rotation = false
 [node name="Node" type="Node" parent="."]
 
 [node name="PalettedSprite" parent="Node" instance=ExtResource("5_njjxm")]
+material = SubResource("ShaderMaterial_o5jby")
 texture = ExtResource("6_lg6ex")
 hframes = 3
 vframes = 5

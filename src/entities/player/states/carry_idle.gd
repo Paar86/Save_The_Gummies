@@ -19,7 +19,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func physics_process(delta: float) -> void:
-	if not move_state.character.is_on_wall() and move_state.character.velocity.x != 0.0:
+	if not move_state.character.is_on_wall() and move_state.character.velocity_primary.length() != 0.0:
 		state_machine.transition_to("CarryWalk")
 		return
 

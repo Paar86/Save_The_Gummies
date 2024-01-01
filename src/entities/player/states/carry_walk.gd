@@ -18,10 +18,11 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func physics_process(delta: float) -> void:
-	var movement_speed_scale: float = abs(move_state.character.velocity.x) / move_state.MAX_RUN_SPEED_DEFAULT
+	var real_velocity = move_state.character.get_real_velocity()
+	var movement_speed_scale: float = abs(real_velocity.length()) / move_state.MAX_RUN_SPEED_DEFAULT
 	state_machine.change_animation_speed_scale(movement_speed_scale)
 
-	if move_state.character.velocity.x == 0.0:
+	if move_state.character.velocity_primary.length() == 0.0:
 		state_machine.transition_to("CarryIdle")
 		return
 

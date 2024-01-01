@@ -1,7 +1,7 @@
 class_name PlayerCarryState extends State
 
 const THROW_STRENGTH: = 800.0
-const MAX_SPEED_OVERRIDE: = move_state.MAX_RUN_SPEED_DEFAULT / 2
+const MAX_SPEED_OVERRIDE: = move_state.MAX_RUN_SPEED_DEFAULT * 0.75
 
 @export var move_state: PlayerMoveState
 

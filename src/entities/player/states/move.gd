@@ -54,8 +54,7 @@ func unhandled_input(event: InputEvent) -> void:
 			state_machine.transition_to("Whistle")
 			return
 
-		# We shouldn't be able to pick up anything when we're in windy area
-		if character.pickable_objects.size() > 0 and character.velocity_secondary == Vector2.ZERO:
+		if character.pickable_objects.size() > 0:
 			state_machine.transition_to("Pickup")
 			return
 
@@ -118,7 +117,8 @@ func _on_effect_added(effect: Enums.effect) -> void:
 			jump_enabled = false
 			max_speed_modifier = 0.5
 		Enums.effect.WIND:
-			Events.player_pickup_drop_requested.emit()
+			pass
+			#Events.player_pickup_drop_requested.emit()
 
 
 func _on_effect_removed(effect: Enums.effect) -> void:
