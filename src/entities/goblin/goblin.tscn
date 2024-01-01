@@ -144,6 +144,7 @@ size = Vector2(6, 12)
 collision_layer = 4
 collision_mask = 21
 script = ExtResource("1_i1jgx")
+metadata/_edit_group_ = true
 
 [node name="EffectsApplierComponent" parent="." instance=ExtResource("2_jj1ia")]
 
@@ -184,6 +185,11 @@ shape = SubResource("RectangleShape2D_jyw6e")
 
 [node name="ObstacleDetector" type="RayCast2D" parent="."]
 position = Vector2(0, -4)
+target_position = Vector2(5, 0)
+collision_mask = 5
+
+[node name="ObstacleDetector2" type="RayCast2D" parent="."]
+position = Vector2(0, -11)
 target_position = Vector2(5, 0)
 collision_mask = 5
 

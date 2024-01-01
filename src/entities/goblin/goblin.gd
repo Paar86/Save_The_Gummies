@@ -6,17 +6,14 @@ signal whistle_heard(direction: float)
 ## Flips the horizontal orientation of the enemy in editor.
 @export var change_direction_in_editor: bool:
 	set(value):
-		var animated_sprite = get_node("AnimatedSprite2D")
-		var hitbox_component = get_node("HitboxComponent")
-		var ground_det = get_node("GroundDetector")
-		var facing_direction = sign(animated_sprite.scale.x) * -1
-		player_detector.scale.x = sign(facing_direction)
-		obstacle_detector.scale.x = sign(facing_direction)
-		animated_sprite.scale.x = sign(facing_direction)
-		hitbox_component.position = Vector2(abs(hitbox_component.position.x) * facing_direction, hitbox_component.position.y)
-		ground_det.position = Vector2(abs(ground_det.position.x) * facing_direction, ground_det.position.y)
 		# We must make children editable for the changes to make an effect
 		get_parent().set_editable_instance(self, true);
+		var facing_direction = sign(_animated_sprite.scale.x) * -1
+		change_direction(facing_direction)
+
+var is_near_obstacle: bool:
+	get:
+		return obstacle_detector.is_colliding() or obstacle_detector_2.is_colliding()
 
 var _facing_direction: = 1.0
 
@@ -24,6 +21,7 @@ var _facing_direction: = 1.0
 @onready var state_machine: StateMachine = $StateMachine
 @onready var ground_detector: RayCast2D = $GroundDetector
 @onready var obstacle_detector: RayCast2D = $ObstacleDetector
+@onready var obstacle_detector_2: RayCast2D = $ObstacleDetector2
 
 @onready var _reaction_symbol: ReactionSymbol = $ReactionSymbol
 @onready var _animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -54,6 +52,7 @@ func change_direction(new_direction: float) -> void:
 		_facing_direction = new_direction
 		player_detector.scale.x = sign(new_direction)
 		obstacle_detector.scale.x = sign(new_direction)
+		obstacle_detector_2.scale.x = sign(new_direction)
 		_animated_sprite.scale.x = sign(new_direction)
 		_hitbox_component.position = Vector2(abs(_hitbox_component.position.x) * new_direction, _hitbox_component.position.y)
 		ground_detector.position = Vector2(abs(ground_detector.position.x) * new_direction, ground_detector.position.y)

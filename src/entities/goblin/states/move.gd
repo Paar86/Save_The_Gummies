@@ -34,7 +34,7 @@ func physics_process(delta: float) -> void:
 	character.velocity = character.velocity_combined
 	character.move_and_slide()
 
-	if character.obstacle_detector.is_colliding() or not character.ground_detector.is_colliding():
+	if character.is_near_obstacle or not character.ground_detector.is_colliding():
 		_change_direction()
 
 	var detector_collider = character.player_detector.get_collider()
