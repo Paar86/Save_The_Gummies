@@ -56,7 +56,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2jir"]
-size = Vector2(80, 16)
+size = Vector2(64, 16)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5wylg"]
 particles_animation = true
@@ -87,6 +87,7 @@ collision_layer = 0
 collision_mask = 14
 monitorable = false
 script = ExtResource("1_54mbg")
+metadata/_edit_group_ = true
 
 [node name="BodySprite" type="Sprite2D" parent="."]
 position = Vector2(4, -7)
@@ -101,7 +102,7 @@ autoplay = "default"
 frame_progress = 0.194655
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(40, -8)
+position = Vector2(32, -8)
 shape = SubResource("RectangleShape2D_d2jir")
 
 [node name="WindParticles" type="GPUParticles2D" parent="."]
@@ -110,7 +111,7 @@ position = Vector2(8, -8)
 amount = 5
 process_material = SubResource("ParticleProcessMaterial_2cxki")
 texture = ExtResource("2_3aa7g")
-lifetime = 0.4
+lifetime = 0.35
 randomness = 1.0
 fixed_fps = 0
 interpolate = false

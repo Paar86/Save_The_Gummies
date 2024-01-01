@@ -19,6 +19,9 @@ script = ExtResource("1_03m7p")
 [node name="TileMapBackground" type="TileMap" parent="."]
 tile_set = ExtResource("2_05iby")
 format = 2
+layer_0/name = "Base"
+layer_1/name = "Decorations"
+layer_1/tile_data = PackedInt32Array()
 
 [node name="ObjectsBehind" type="Node" parent="."]
 editor_description = "Arrow shooters, wind generators..."
