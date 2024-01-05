@@ -1,9 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://deqsyg5gxba07"]
+[gd_scene load_steps=16 format=3 uid="uid://deqsyg5gxba07"]
 
 [ext_resource type="Script" path="res://src/entities/obstacles/wall_fan/wall_fan.gd" id="1_54mbg"]
 [ext_resource type="Texture2D" uid="uid://betym73xvi3rr" path="res://assets/obstacles/wall_fan_spritesheet.png" id="1_sj5xw"]
 [ext_resource type="Texture2D" uid="uid://dy5xjxlyr1wwe" path="res://assets/obstacles/wind_particles.png" id="2_3aa7g"]
-[ext_resource type="Script" path="res://src/entities/obstacles/wind_generator/wind_particles.gd" id="3_re172"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2kdup"]
 atlas = ExtResource("1_sj5xw")
@@ -72,6 +71,7 @@ point_count = 1
 curve = SubResource("Curve_g7tbs")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2cxki"]
+resource_local_to_scene = true
 particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(8, 8, 1)
@@ -112,11 +112,11 @@ amount = 5
 process_material = SubResource("ParticleProcessMaterial_2cxki")
 texture = ExtResource("2_3aa7g")
 lifetime = 0.35
+explosiveness = 0.25
 randomness = 1.0
 fixed_fps = 0
 interpolate = false
 visibility_rect = Rect2(-21.5184, -23.906, 113.359, 47.8896)
-script = ExtResource("3_re172")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

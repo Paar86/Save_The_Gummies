@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvj8pcrlxfw0x"]
+
+[ext_resource type="PackedScene" uid="uid://deqsyg5gxba07" path="res://src/entities/obstacles/wall_fan/wall_fan.tscn" id="1_gq0sm"]
+
+[sub_resource type="Curve" id="Curve_g7tbs"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_uu3n6"]
+curve = SubResource("Curve_g7tbs")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m6d2w"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(8, 8, 1)
+spread = 0.0
+initial_velocity_min = 280.0
+initial_velocity_max = 280.0
+gravity = Vector3(0, 0, 0)
+anim_offset_max = 1.0
+anim_offset_curve = SubResource("CurveTexture_uu3n6")
+
+[node name="WallFanUnpassable" instance=ExtResource("1_gq0sm")]
+wind_strength = 65.0
+
+[node name="WindParticles" parent="." index="3"]
+process_material = SubResource("ParticleProcessMaterial_m6d2w")
+lifetime = 0.2
