@@ -80,10 +80,12 @@ animation = &"active"
 autoplay = "inactive"
 frame_progress = 0.672295
 
+[node name="DelayTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="InactiveTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
-autostart = true
 
 [node name="TelegraphTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -93,6 +95,7 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
+[connection signal="timeout" from="DelayTimer" to="." method="_on_delay_timer_timeout"]
 [connection signal="timeout" from="InactiveTimer" to="." method="_on_inactive_timer_timeout"]
 [connection signal="timeout" from="TelegraphTimer" to="." method="_on_telegraph_timer_timeout"]
 [connection signal="timeout" from="ActiveTimer" to="." method="_on_active_timer_timeout"]
