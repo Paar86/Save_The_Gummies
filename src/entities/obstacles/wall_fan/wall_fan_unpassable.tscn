@@ -1,6 +1,57 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvj8pcrlxfw0x"]
+[gd_scene load_steps=13 format=3 uid="uid://cvj8pcrlxfw0x"]
 
 [ext_resource type="PackedScene" uid="uid://deqsyg5gxba07" path="res://src/entities/obstacles/wall_fan/wall_fan.tscn" id="1_gq0sm"]
+[ext_resource type="Texture2D" uid="uid://betym73xvi3rr" path="res://assets/obstacles/wall_fan_spritesheet.png" id="2_8aiqd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2kdup"]
+atlas = ExtResource("2_8aiqd")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqyis"]
+atlas = ExtResource("2_8aiqd")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acgp3"]
+atlas = ExtResource("2_8aiqd")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m187f"]
+atlas = ExtResource("2_8aiqd")
+region = Rect2(32, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tihnf"]
+atlas = ExtResource("2_8aiqd")
+region = Rect2(40, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_roxag"]
+atlas = ExtResource("2_8aiqd")
+region = Rect2(48, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6k4am"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2kdup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqyis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acgp3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m187f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tihnf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_roxag")
+}],
+"loop": true,
+"name": &"default",
+"speed": 40.0
+}]
 
 [sub_resource type="Curve" id="Curve_g7tbs"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
@@ -22,7 +73,11 @@ anim_offset_max = 1.0
 anim_offset_curve = SubResource("CurveTexture_uu3n6")
 
 [node name="WallFanUnpassable" instance=ExtResource("1_gq0sm")]
-wind_strength = 65.0
+wind_strength = 80.0
+
+[node name="RibbonSprite" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_6k4am")
+frame_progress = 0.557742
 
 [node name="WindParticles" parent="." index="3"]
 process_material = SubResource("ParticleProcessMaterial_m6d2w")

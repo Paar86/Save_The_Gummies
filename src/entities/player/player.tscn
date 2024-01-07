@@ -289,7 +289,7 @@ animations = [{
 size = Vector2(12, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8nf7h"]
-size = Vector2(112, 112)
+size = Vector2(112, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4tvp5"]
 size = Vector2(10, 8)
@@ -488,6 +488,7 @@ shape = SubResource("RectangleShape2D_akgtd")
 
 [node name="WhistleArea" type="Area2D" parent="."]
 visible = false
+position = Vector2(0, -4)
 collision_layer = 0
 collision_mask = 12
 
