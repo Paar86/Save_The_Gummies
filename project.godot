@@ -27,6 +27,7 @@ AudioStreamManager="*res://src/autoload/audio_manager/audio_stream_manager.gd"
 AudioStreamManager2D="*res://src/autoload/audio_manager/audio_stream_manager_2D.gd"
 AreaCollisionHandler="*res://src/autoload/utilities/area_collision_handler.gd"
 SfxResources="*res://src/autoload/common/sfx_resources.gd"
+GlobalTicker="*res://src/autoload/utilities/global_ticker.gd"
 
 [display]
 

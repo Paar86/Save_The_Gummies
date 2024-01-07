@@ -1,52 +1,61 @@
 extends Node2D
 
-@export var delay_time: = 0.0
-@export var inactive_time: = 3.0
-@export var telegraph_time: = 2.0
-@export var active_time: = 2.0
+enum FireState { DELAYED, INACTIVE, TELEGRAPHING, ACTIVE }
 
-@onready var _delay_timer: Timer = $DelayTimer
-@onready var _inactive_timer: Timer = $InactiveTimer
-@onready var _telegraph_timer: Timer = $TelegraphTimer
-@onready var _active_timer: Timer = $ActiveTimer
+@export var delay_half_ticks: = 0
+@export var inactive_half_ticks: = 6
+@export var telegraph_half_ticks: = 4
+@export var active_half_ticks: = 4
+
+var _current_state: FireState = FireState.DELAYED
+var _half_ticks_counter: = 0
+var _target_ticks_count: = -1
+var _count_half_ticks: = false
+
 @onready var _animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var _hitbox_component: HitboxComponent = $HitboxComponent
 @onready var _hitbox_collision: CollisionShape2D = $HitboxComponent/CollisionShape2D
 
 
 func _ready() -> void:
-	_inactive_timer.wait_time = inactive_time
-	_telegraph_timer.wait_time = telegraph_time
-	_active_timer.wait_time = active_time
+	GlobalTicker.half_second_ticked.connect(_on_half_second_ticked)
+	_target_ticks_count = delay_half_ticks
 
-	if delay_time:
-		_delay_timer.wait_time = delay_time
-		_delay_timer.start()
+
+func _process(delta: float) -> void:
+	if _target_ticks_count == -1:
+		push_error("Target ticks count not set properly!")
 		return
 
-	_on_delay_timer_timeout()
+	if _half_ticks_counter < _target_ticks_count:
+		return
+
+	_half_ticks_counter = 0
+	_target_ticks_count = -1
+	_transition_to_another_state()
 
 
 func toggle_collision(value: bool) -> void:
 	_hitbox_collision.set_deferred("disabled", !value)
 
 
-func _on_inactive_timer_timeout() -> void:
-	_animated_sprite.play("telegraph")
-	_telegraph_timer.start()
+func _on_half_second_ticked() -> void:
+	_half_ticks_counter += 1
 
 
-func _on_telegraph_timer_timeout() -> void:
-	_animated_sprite.play("active")
-	toggle_collision(true)
-	_active_timer.start()
-
-
-func _on_active_timer_timeout() -> void:
-	_animated_sprite.play("inactive")
-	toggle_collision(false)
-	_inactive_timer.start()
-
-
-func _on_delay_timer_timeout() -> void:
-	_inactive_timer.start()
+func _transition_to_another_state() -> void:
+	match _current_state:
+		FireState.DELAYED, FireState.INACTIVE:
+			_current_state = FireState.TELEGRAPHING
+			_animated_sprite.play("telegraph")
+			_target_ticks_count = telegraph_half_ticks
+		FireState.TELEGRAPHING:
+			_current_state = FireState.ACTIVE
+			_animated_sprite.play("active")
+			toggle_collision(true)
+			_target_ticks_count = active_half_ticks
+		FireState.ACTIVE:
+			_current_state = FireState.INACTIVE
+			_animated_sprite.play("inactive")
+			toggle_collision(false)
+			_target_ticks_count = inactive_half_ticks
