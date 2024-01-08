@@ -15,6 +15,7 @@ const STOP_FOLLOWING_DISTANCE_FAR: = 120.0
 
 var attack_strength_buffered: = 0.0
 var whistling_player: Player
+var following_goal_position: = Vector2.ZERO
 var ignore_following: bool = false
 
 var _produce_bounce_sfx: = false
@@ -80,16 +81,17 @@ func _physics_process(delta: float) -> void:
 	if whistling_player == null or ignore_following:
 		return
 
-	var to_player_vector = whistling_player.global_position - global_position
-	var player_distance = to_player_vector.length()
+	var difference: = following_goal_position.x - global_position.x
+	var following_direction: = signf(difference)
+	var following_goal_distance: = absf(difference)
 
-	# Arrived near player's position so stop following
-	if player_distance <= STOP_FOLLOWING_DISTANCE_NEAR or player_distance >= STOP_FOLLOWING_DISTANCE_FAR:
+	# Arrived near whistle position so stop following
+	if following_goal_distance <= STOP_FOLLOWING_DISTANCE_NEAR:
+		following_goal_position = Vector2.ZERO
 		whistling_player = null
 		_following_timer.stop()
 		return
 
-	var following_direction = sign(to_player_vector.x)
 	apply_force(Vector2.RIGHT * FOLLOWING_FORCE * following_direction)
 
 
@@ -132,6 +134,7 @@ func propagate_whistle(source_body: GameCharacter) -> void:
 		return
 
 	whistling_player = source_body
+	following_goal_position = source_body.global_position
 	_reaction_symbol.show_symbol(Enums.reaction_symbol.EXCLAMATION)
 	_following_timer.start()
 

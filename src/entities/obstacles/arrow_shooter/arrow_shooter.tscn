@@ -8,6 +8,10 @@ script = ExtResource("1_weg2i")
 
 [node name="Arrows" type="Node2D" parent="."]
 
+[node name="DelayTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [node name="AfterShotTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
