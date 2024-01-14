@@ -1,11 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://blqx3sorahm5u"]
+[gd_scene load_steps=6 format=3 uid="uid://blqx3sorahm5u"]
 
 [ext_resource type="Script" path="res://src/user_interface/title_screen/title_screen.gd" id="1_py0cm"]
+[ext_resource type="Texture2D" uid="uid://ctilo3xqhg5bp" path="res://assets/ball_creature/ball_creature_big.png" id="2_4yxn8"]
 [ext_resource type="Texture2D" uid="uid://dccdrjbqtpsl" path="res://assets/logo.png" id="2_b5blj"]
 [ext_resource type="Theme" uid="uid://c0whh17s3gj3a" path="res://src/user_interface/theme.tres" id="2_c2m7m"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_pyhyf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4yxn8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="TitleScreen" type="CanvasLayer"]
 script = ExtResource("1_py0cm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(83, 125)
+sprite_frames = SubResource("SpriteFrames_pyhyf")
 
 [node name="UserInterface" type="Control" parent="."]
 layout_mode = 3
