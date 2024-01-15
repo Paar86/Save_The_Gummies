@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c0whh17s3gj3a"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://c0whh17s3gj3a"]
 
 [ext_resource type="FontFile" uid="uid://dygaomrj22gum" path="res://assets/fonts/PixelOperator.ttf" id="1_3vu5x"]
+[ext_resource type="FontFile" uid="uid://dind3ch1iwrtl" path="res://assets/fonts/compression.ttf" id="1_c4jc7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nywkc"]
 content_margin_left = 10.0
@@ -19,6 +20,11 @@ bg_color = Color(0.109804, 0.109804, 0.109804, 1)
 
 [resource]
 default_font = ExtResource("1_3vu5x")
+Button/font_sizes/font_size = 8
+Button/fonts/font = ExtResource("1_c4jc7")
 Button/styles/hover = SubResource("StyleBoxFlat_nywkc")
 Button/styles/normal = SubResource("StyleBoxFlat_cmwjt")
 Button/styles/pressed = SubResource("StyleBoxFlat_mgth3")
+HBoxContainer/constants/separation = 0
+Label/font_sizes/font_size = 8
+Label/fonts/font = ExtResource("1_c4jc7")

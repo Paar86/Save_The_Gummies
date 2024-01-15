@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://blqx3sorahm5u"]
+[gd_scene load_steps=9 format=3 uid="uid://blqx3sorahm5u"]
 
 [ext_resource type="Script" path="res://src/user_interface/title_screen/title_screen.gd" id="1_py0cm"]
 [ext_resource type="Texture2D" uid="uid://ctilo3xqhg5bp" path="res://assets/ball_creature/ball_creature_big.png" id="2_4yxn8"]
-[ext_resource type="Texture2D" uid="uid://dccdrjbqtpsl" path="res://assets/logo.png" id="2_b5blj"]
 [ext_resource type="Theme" uid="uid://c0whh17s3gj3a" path="res://src/user_interface/theme.tres" id="2_c2m7m"]
+[ext_resource type="Texture2D" uid="uid://cmomwci53n4k6" path="res://assets/ui/cursor.png" id="5_jufhv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pyhyf"]
 animations = [{
@@ -16,11 +16,73 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_2a7nx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnormousSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(34, 183)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnormousSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ibyvs"]
+resource_name = "gummy_appearing"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnormousSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.8, 0.9),
+"transitions": PackedFloat32Array(0.329877, 2.07053, 1, 1, 1),
+"update": 0,
+"values": [Vector2(34, 183), Vector2(34, 50), Vector2(34, 135), Vector2(34, 111), Vector2(34, 127)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnormousSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.83, 1.17), Vector2(1, 1), Vector2(1.13, 0.855), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mb2nq"]
+_data = {
+"RESET": SubResource("Animation_2a7nx"),
+"gummy_appearing": SubResource("Animation_ibyvs")
+}
+
 [node name="TitleScreen" type="CanvasLayer"]
 script = ExtResource("1_py0cm")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(83, 125)
+[node name="EnormousSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(34, 183)
 sprite_frames = SubResource("SpriteFrames_pyhyf")
 
 [node name="UserInterface" type="Control" parent="."]
@@ -32,35 +94,69 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_c2m7m")
 
-[node name="TextureRect" type="TextureRect" parent="UserInterface"]
+[node name="OptionsContainer" type="VBoxContainer" parent="UserInterface"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -64.0
-offset_top = 8.0
-offset_right = 64.0
-offset_bottom = 57.0
-grow_horizontal = 2
-texture = ExtResource("2_b5blj")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Play" type="Button" parent="UserInterface"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 14
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -36.0
-offset_top = 14.0
-offset_right = 36.0
-offset_bottom = 38.0
+offset_top = -10.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-focus_mode = 0
-mouse_default_cursor_shape = 2
-text = "Play"
 
-[connection signal="button_up" from="UserInterface/Play" to="." method="_on_play_button_up"]
+[node name="NewLevelOption" type="HBoxContainer" parent="UserInterface/OptionsContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CursorPosition0" type="Control" parent="UserInterface/OptionsContainer/NewLevelOption"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+
+[node name="Text" type="Label" parent="UserInterface/OptionsContainer/NewLevelOption"]
+layout_mode = 2
+theme = ExtResource("2_c2m7m")
+text = "New Game"
+
+[node name="SelectLevelOption" type="HBoxContainer" parent="UserInterface/OptionsContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CursorPosition1" type="Control" parent="UserInterface/OptionsContainer/SelectLevelOption"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+
+[node name="SubLabel" type="Label" parent="UserInterface/OptionsContainer/SelectLevelOption"]
+layout_mode = 2
+text = "Choose:"
+horizontal_alignment = 1
+
+[node name="LeftMarker" type="Label" parent="UserInterface/OptionsContainer/SelectLevelOption"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+theme = ExtResource("2_c2m7m")
+text = "<"
+
+[node name="LevelNumber" type="Label" parent="UserInterface/OptionsContainer/SelectLevelOption"]
+layout_mode = 2
+text = "1"
+
+[node name="RightMarker" type="Label" parent="UserInterface/OptionsContainer/SelectLevelOption"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+theme = ExtResource("2_c2m7m")
+text = ">"
+
+[node name="Cursor" type="TextureRect" parent="UserInterface"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = ExtResource("5_jufhv")
+stretch_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mb2nq")
+}
+autoplay = "gummy_appearing"
