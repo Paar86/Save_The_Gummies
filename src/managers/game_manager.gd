@@ -15,6 +15,7 @@ var _game_stats: GameStats
 func _ready() -> void:
 	_game_stats = GameStats.new()
 
+	Events.new_game_requested.connect(_on_new_game_request)
 	Events.change_level_requested.connect(_on_change_level_requested)
 	Events.reload_level_requested.connect(_on_reload_level_requested)
 
@@ -58,3 +59,8 @@ func _on_reload_level_requested() -> void:
 		_current_scene = levels[_current_scene_index - 1].instantiate()
 
 	_active_scene.add_child(_current_scene)
+
+
+func _on_new_game_request(initial_level_number: int) -> void:
+	# TODO: Start the game from a level defined in the parameter
+	pass

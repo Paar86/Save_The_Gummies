@@ -109,10 +109,6 @@ grow_vertical = 2
 layout_mode = 2
 alignment = 1
 
-[node name="CursorPosition0" type="Control" parent="UserInterface/OptionsContainer/NewLevelOption"]
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-
 [node name="Text" type="Label" parent="UserInterface/OptionsContainer/NewLevelOption"]
 layout_mode = 2
 theme = ExtResource("2_c2m7m")
@@ -122,27 +118,25 @@ text = "New Game"
 layout_mode = 2
 alignment = 1
 
-[node name="CursorPosition1" type="Control" parent="UserInterface/OptionsContainer/SelectLevelOption"]
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-
-[node name="SubLabel" type="Label" parent="UserInterface/OptionsContainer/SelectLevelOption"]
-layout_mode = 2
-text = "Choose:"
-horizontal_alignment = 1
-
 [node name="LeftMarker" type="Label" parent="UserInterface/OptionsContainer/SelectLevelOption"]
+visible = false
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 theme = ExtResource("2_c2m7m")
 text = "<"
 
+[node name="SubLabel" type="Label" parent="UserInterface/OptionsContainer/SelectLevelOption"]
+layout_mode = 2
+text = "Level:"
+horizontal_alignment = 1
+
 [node name="LevelNumber" type="Label" parent="UserInterface/OptionsContainer/SelectLevelOption"]
 layout_mode = 2
 text = "1"
 
 [node name="RightMarker" type="Label" parent="UserInterface/OptionsContainer/SelectLevelOption"]
+visible = false
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 theme = ExtResource("2_c2m7m")
