@@ -128,7 +128,7 @@ text = "<"
 
 [node name="SubLabel" type="Label" parent="UserInterface/OptionsContainer/SelectLevelOption"]
 layout_mode = 2
-text = "Level:"
+text = "Level "
 horizontal_alignment = 1
 
 [node name="LevelNumber" type="Label" parent="UserInterface/OptionsContainer/SelectLevelOption"]

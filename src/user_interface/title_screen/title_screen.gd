@@ -1,4 +1,4 @@
-extends CanvasLayer
+class_name TitleScreen extends CanvasLayer
 
 var level_count: = 1
 
