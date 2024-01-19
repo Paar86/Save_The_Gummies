@@ -1,75 +1,50 @@
-[gd_scene load_steps=9 format=3 uid="uid://blqx3sorahm5u"]
+[gd_scene load_steps=15 format=3 uid="uid://blqx3sorahm5u"]
 
 [ext_resource type="Script" path="res://src/user_interface/title_screen/title_screen.gd" id="1_py0cm"]
-[ext_resource type="Texture2D" uid="uid://ctilo3xqhg5bp" path="res://assets/ball_creature/ball_creature_big.png" id="2_4yxn8"]
 [ext_resource type="Theme" uid="uid://c0whh17s3gj3a" path="res://src/user_interface/theme.tres" id="2_c2m7m"]
+[ext_resource type="PackedScene" uid="uid://c36mwvup5f8ad" path="res://src/entities/ball_creature/ball_creature.tscn" id="3_hbanw"]
+[ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie_alt.gdshader" id="4_6rd38"]
 [ext_resource type="Texture2D" uid="uid://cmomwci53n4k6" path="res://assets/ui/cursor.png" id="5_jufhv"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_pyhyf"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_4yxn8")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o5jby"]
+resource_local_to_scene = true
+shader = ExtResource("4_6rd38")
+shader_parameter/primary_replacement_color = Vector3(41, 173, 255)
+shader_parameter/secondary_replacement_color = Vector3(29, 43, 83)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dme6m"]
+resource_local_to_scene = true
+shader = ExtResource("4_6rd38")
+shader_parameter/primary_replacement_color = Vector3(0, 228, 54)
+shader_parameter/secondary_replacement_color = Vector3(0, 135, 81)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mju1q"]
+resource_local_to_scene = true
+shader = ExtResource("4_6rd38")
+shader_parameter/primary_replacement_color = Vector3(255, 119, 168)
+shader_parameter/secondary_replacement_color = Vector3(126, 37, 83)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0vnkk"]
+resource_local_to_scene = true
+shader = ExtResource("4_6rd38")
+shader_parameter/primary_replacement_color = Vector3(255, 236, 39)
+shader_parameter/secondary_replacement_color = Vector3(255, 163, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bn0ri"]
+resource_local_to_scene = true
+shader = ExtResource("4_6rd38")
+shader_parameter/primary_replacement_color = Vector3(255, 0, 77)
+shader_parameter/secondary_replacement_color = Vector3(126, 37, 83)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2nj2"]
+size = Vector2(294, 24)
 
 [sub_resource type="Animation" id="Animation_2a7nx"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("EnormousSprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(34, 183)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("EnormousSprite:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_ibyvs"]
 resource_name = "gummy_appearing"
 length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("EnormousSprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.6, 0.8, 0.9),
-"transitions": PackedFloat32Array(0.329877, 2.07053, 1, 1, 1),
-"update": 0,
-"values": [Vector2(34, 183), Vector2(34, 50), Vector2(34, 135), Vector2(34, 111), Vector2(34, 127)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("EnormousSprite:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.83, 1.17), Vector2(1, 1), Vector2(1.13, 0.855), Vector2(1, 1)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mb2nq"]
 _data = {
@@ -80,10 +55,78 @@ _data = {
 [node name="TitleScreen" type="CanvasLayer"]
 script = ExtResource("1_py0cm")
 
-[node name="EnormousSprite" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(34, 183)
-sprite_frames = SubResource("SpriteFrames_pyhyf")
+[node name="BallCreatures" type="Node" parent="."]
+
+[node name="BallCreature" parent="BallCreatures" instance=ExtResource("3_hbanw")]
+position = Vector2(39, -9)
+contact_monitor = false
+pickable = false
+
+[node name="PalettedSprite" parent="BallCreatures/BallCreature/Node" index="0"]
+material = SubResource("ShaderMaterial_o5jby")
+position = Vector2(39, -9)
+
+[node name="StateMachine" parent="BallCreatures/BallCreature" index="6" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Happy")
+
+[node name="BallCreature2" parent="BallCreatures" instance=ExtResource("3_hbanw")]
+position = Vector2(109, -25)
+contact_monitor = false
+
+[node name="PalettedSprite" parent="BallCreatures/BallCreature2/Node" index="0"]
+material = SubResource("ShaderMaterial_dme6m")
+position = Vector2(109, -25)
+color = 1
+
+[node name="StateMachine" parent="BallCreatures/BallCreature2" index="6" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Happy")
+
+[node name="BallCreature3" parent="BallCreatures" instance=ExtResource("3_hbanw")]
+position = Vector2(84, -15)
+contact_monitor = false
+
+[node name="PalettedSprite" parent="BallCreatures/BallCreature3/Node" index="0"]
+material = SubResource("ShaderMaterial_mju1q")
+position = Vector2(84, -15)
+color = 4
+
+[node name="StateMachine" parent="BallCreatures/BallCreature3" index="6" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Happy")
+
+[node name="AnimationPlayer" parent="BallCreatures/BallCreature3" index="8"]
+root_node = NodePath("../../BallCreature3")
+
+[node name="BallCreature4" parent="BallCreatures" instance=ExtResource("3_hbanw")]
+position = Vector2(60, -32)
+contact_monitor = false
+
+[node name="PalettedSprite" parent="BallCreatures/BallCreature4/Node" index="0"]
+material = SubResource("ShaderMaterial_0vnkk")
+position = Vector2(60, -32)
+color = 2
+
+[node name="StateMachine" parent="BallCreatures/BallCreature4" index="6" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Happy")
+
+[node name="BallCreature5" parent="BallCreatures" instance=ExtResource("3_hbanw")]
+position = Vector2(15, -24)
+contact_monitor = false
+
+[node name="PalettedSprite" parent="BallCreatures/BallCreature5/Node" index="0"]
+material = SubResource("ShaderMaterial_bn0ri")
+position = Vector2(15, -24)
+color = 3
+
+[node name="StateMachine" parent="BallCreatures/BallCreature5" index="6" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Happy")
+
+[node name="InvisibleFloor" type="StaticBody2D" parent="."]
+position = Vector2(61, 118)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleFloor"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_u2nj2")
 
 [node name="UserInterface" type="Control" parent="."]
 layout_mode = 3
@@ -144,8 +187,8 @@ text = ">"
 
 [node name="Cursor" type="TextureRect" parent="UserInterface"]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = -8.0
+offset_top = -8.0
 texture = ExtResource("5_jufhv")
 stretch_mode = 2
 
@@ -154,3 +197,14 @@ libraries = {
 "": SubResource("AnimationLibrary_mb2nq")
 }
 autoplay = "gummy_appearing"
+
+[editable path="BallCreatures/BallCreature"]
+[editable path="BallCreatures/BallCreature/HitboxComponent"]
+[editable path="BallCreatures/BallCreature2"]
+[editable path="BallCreatures/BallCreature2/HitboxComponent"]
+[editable path="BallCreatures/BallCreature3"]
+[editable path="BallCreatures/BallCreature3/HitboxComponent"]
+[editable path="BallCreatures/BallCreature4"]
+[editable path="BallCreatures/BallCreature4/HitboxComponent"]
+[editable path="BallCreatures/BallCreature5"]
+[editable path="BallCreatures/BallCreature5/HitboxComponent"]

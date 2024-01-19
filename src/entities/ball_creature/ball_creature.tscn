@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c36mwvup5f8ad"]
+[gd_scene load_steps=29 format=3 uid="uid://c36mwvup5f8ad"]
 
 [ext_resource type="Script" path="res://src/entities/ball_creature/ball_creature.gd" id="1_r5tyh"]
 [ext_resource type="PackedScene" uid="uid://cvsgunn02v50s" path="res://src/common/components/hitbox/hitbox_component.tscn" id="2_4pech"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://src/entities/ball_creature/states/rolling.gd" id="11_2yhqs"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/states/air.gd" id="12_hhntu"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/states/carried.gd" id="13_6dm14"]
+[ext_resource type="Script" path="res://src/entities/ball_creature/states/happy.gd" id="16_jpx0s"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_etqu6"]
 rough = true
@@ -116,10 +117,26 @@ tracks/0/keys = {
 "values": [12, 13, 14, 13]
 }
 
+[sub_resource type="Animation" id="Animation_yh7vr"]
+resource_name = "happy"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node/PalettedSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aatl0"]
 _data = {
 "RESET": SubResource("Animation_yqyxa"),
 "blinking": SubResource("Animation_n7olu"),
+"happy": SubResource("Animation_yh7vr"),
 "idle": SubResource("Animation_7sjfl"),
 "looking_around": SubResource("Animation_kusyi"),
 "looking_around_stressed": SubResource("Animation_1r1wy")
@@ -210,6 +227,15 @@ states_for_transition = [NodePath("../Idle"), NodePath("../Carried")]
 script = ExtResource("13_6dm14")
 ball_creature = NodePath("../..")
 states_for_transition = [NodePath("../Air")]
+
+[node name="Happy" type="Node" parent="StateMachine" node_paths=PackedStringArray("ball_creature", "states_for_transition")]
+script = ExtResource("16_jpx0s")
+ball_creature = NodePath("../..")
+states_for_transition = [NodePath("../Idle")]
+
+[node name="JumpTimer" type="Timer" parent="StateMachine/Happy"]
+wait_time = 3.0
+one_shot = true
 
 [node name="FollowingTimer" type="Timer" parent="."]
 wait_time = 3.0

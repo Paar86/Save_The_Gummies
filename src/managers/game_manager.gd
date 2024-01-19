@@ -14,8 +14,6 @@ var _game_stats: GameStats
 
 
 func _ready() -> void:
-	_game_stats = GameStats.new()
-
 	Events.change_scene_requested.connect(_on_change_scene_requested)
 	Events.new_game_requested.connect(_on_new_game_requested)
 	Events.change_level_requested.connect(_on_change_level_requested)
@@ -67,6 +65,8 @@ func _on_reload_level_requested() -> void:
 
 
 func _on_new_game_requested(initial_level_number: int) -> void:
+	_game_stats = GameStats.new()
+	_game_stats.initial_level_number = initial_level_number
 	var start_level_index: = initial_level_number - 1
 	_load_level(start_level_index)
 

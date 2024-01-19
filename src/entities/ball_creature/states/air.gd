@@ -17,5 +17,8 @@ func physics_process(delta: float) -> void:
 		return
 
 	if ball_creature.is_on_floor:
+		if not ball_creature.pickable:
+			state_machine.transition_to("Happy")
+			return
+
 		state_machine.transition_to("Idle")
-		return

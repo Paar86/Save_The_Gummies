@@ -13,6 +13,9 @@ const FOLLOWING_FORCE: = 150.0
 const STOP_FOLLOWING_DISTANCE_NEAR: = 8.0
 const STOP_FOLLOWING_DISTANCE_FAR: = 120.0
 
+# Wheter to allow leaving happy state íf active; used in title screen
+var happy_mode_locked: = true
+
 var attack_strength_buffered: = 0.0
 var whistling_player: Player
 var following_goal_position: = Vector2.ZERO
@@ -33,7 +36,7 @@ var _bounce_sfx: = preload(SfxResources.BALL_BOUNCE)
 @onready var _collision_tester: Area2D = $CollisionTester
 @onready var _state_machine: StateMachine = $StateMachine
 
-var pickable: bool = true:
+@export var pickable: bool = true:
 	set(value):
 		pickable = value
 	get:
