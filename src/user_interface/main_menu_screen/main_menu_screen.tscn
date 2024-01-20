@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://blqx3sorahm5u"]
+[gd_scene load_steps=16 format=3 uid="uid://blqx3sorahm5u"]
 
-[ext_resource type="Script" path="res://src/user_interface/title_screen/title_screen.gd" id="1_py0cm"]
+[ext_resource type="Script" path="res://src/user_interface/main_menu_screen/main_menu_screen.gd" id="1_py0cm"]
 [ext_resource type="Theme" uid="uid://c0whh17s3gj3a" path="res://src/user_interface/theme.tres" id="2_c2m7m"]
 [ext_resource type="PackedScene" uid="uid://c36mwvup5f8ad" path="res://src/entities/ball_creature/ball_creature.tscn" id="3_hbanw"]
 [ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie_alt.gdshader" id="4_6rd38"]
+[ext_resource type="Script" path="res://src/user_interface/main_menu_screen/menu_options.gd" id="5_5eye2"]
 [ext_resource type="Texture2D" uid="uid://cmomwci53n4k6" path="res://assets/ui/cursor.png" id="5_jufhv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o5jby"]
@@ -52,7 +53,7 @@ _data = {
 "gummy_appearing": SubResource("Animation_ibyvs")
 }
 
-[node name="TitleScreen" type="CanvasLayer"]
+[node name="MainMenuScreen" type="CanvasLayer"]
 script = ExtResource("1_py0cm")
 
 [node name="BallCreatures" type="Node" parent="."]
@@ -93,9 +94,6 @@ color = 4
 [node name="StateMachine" parent="BallCreatures/BallCreature3" index="6" node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Happy")
 
-[node name="AnimationPlayer" parent="BallCreatures/BallCreature3" index="8"]
-root_node = NodePath("../../BallCreature3")
-
 [node name="BallCreature4" parent="BallCreatures" instance=ExtResource("3_hbanw")]
 position = Vector2(60, -32)
 contact_monitor = false
@@ -128,7 +126,7 @@ collision_mask = 0
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_u2nj2")
 
-[node name="UserInterface" type="Control" parent="."]
+[node name="MenuOptions" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -136,8 +134,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_c2m7m")
+script = ExtResource("5_5eye2")
 
-[node name="OptionsContainer" type="VBoxContainer" parent="UserInterface"]
+[node name="OptionsContainer" type="VBoxContainer" parent="MenuOptions"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -148,20 +147,20 @@ offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NewLevelOption" type="HBoxContainer" parent="UserInterface/OptionsContainer"]
+[node name="NewLevelOption" type="HBoxContainer" parent="MenuOptions/OptionsContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Text" type="Label" parent="UserInterface/OptionsContainer/NewLevelOption"]
+[node name="Text" type="Label" parent="MenuOptions/OptionsContainer/NewLevelOption"]
 layout_mode = 2
 theme = ExtResource("2_c2m7m")
 text = "New Game"
 
-[node name="SelectLevelOption" type="HBoxContainer" parent="UserInterface/OptionsContainer"]
+[node name="SelectLevelOption" type="HBoxContainer" parent="MenuOptions/OptionsContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="LeftMarker" type="Label" parent="UserInterface/OptionsContainer/SelectLevelOption"]
+[node name="LeftMarker" type="Label" parent="MenuOptions/OptionsContainer/SelectLevelOption"]
 visible = false
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(8, 8)
@@ -169,23 +168,23 @@ layout_mode = 2
 theme = ExtResource("2_c2m7m")
 text = "<"
 
-[node name="SubLabel" type="Label" parent="UserInterface/OptionsContainer/SelectLevelOption"]
+[node name="SubLabel" type="Label" parent="MenuOptions/OptionsContainer/SelectLevelOption"]
 layout_mode = 2
 text = "Level "
 horizontal_alignment = 1
 
-[node name="LevelNumber" type="Label" parent="UserInterface/OptionsContainer/SelectLevelOption"]
+[node name="LevelNumber" type="Label" parent="MenuOptions/OptionsContainer/SelectLevelOption"]
 layout_mode = 2
 text = "1"
 
-[node name="RightMarker" type="Label" parent="UserInterface/OptionsContainer/SelectLevelOption"]
+[node name="RightMarker" type="Label" parent="MenuOptions/OptionsContainer/SelectLevelOption"]
 visible = false
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 theme = ExtResource("2_c2m7m")
 text = ">"
 
-[node name="Cursor" type="TextureRect" parent="UserInterface"]
+[node name="Cursor" type="TextureRect" parent="MenuOptions"]
 layout_mode = 0
 offset_left = -8.0
 offset_top = -8.0

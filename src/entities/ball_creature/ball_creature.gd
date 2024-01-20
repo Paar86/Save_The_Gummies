@@ -35,6 +35,7 @@ var _bounce_sfx: = preload(SfxResources.BALL_BOUNCE)
 @onready var _following_timer: Timer = $FollowingTimer
 @onready var _collision_tester: Area2D = $CollisionTester
 @onready var _state_machine: StateMachine = $StateMachine
+@onready var _arrow_marker: Sprite2D = $Node/PalettedSprite/ArrowMarker
 
 @export var pickable: bool = true:
 	set(value):
@@ -52,6 +53,12 @@ var is_inside_wall: bool:
 
 var color: int:
 	get: return _sprite.color
+
+
+# Peeking with camera in a level
+var enabled_tracking: = false:
+	set(value):
+		_arrow_marker.enabled = value
 
 
 func _ready() -> void:

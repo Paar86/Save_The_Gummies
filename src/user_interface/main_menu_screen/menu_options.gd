@@ -1,4 +1,6 @@
-class_name TitleScreen extends CanvasLayer
+class_name MainMenuOptions extends Control
+
+signal new_game_option_confirmed(int)
 
 var level_count: = 1
 
@@ -13,7 +15,7 @@ var _accept_funcs: = {
 }
 
 var _menu_options: Array[HBoxContainer]
-var _level_choice_current: = 0
+var _level_choice_current: = 1
 var _cursor_position_current: = 0:
 	set(value):
 		var original_position: = _cursor_position_current
@@ -31,17 +33,16 @@ var _cursor_position_current: = 0:
 	get:
 		return _cursor_position_current
 
-@onready var _cursor: = $UserInterface/Cursor as Control
-@onready var _left_marker: = $UserInterface/OptionsContainer/SelectLevelOption/LeftMarker as Label
-@onready var _right_marker: = $UserInterface/OptionsContainer/SelectLevelOption/RightMarker as Label
-@onready var _level_number: = $UserInterface/OptionsContainer/SelectLevelOption/LevelNumber as Label
+@onready var _cursor: = $Cursor as Control
+@onready var _left_marker: = $OptionsContainer/SelectLevelOption/LeftMarker as Label
+@onready var _right_marker: = $OptionsContainer/SelectLevelOption/RightMarker as Label
+@onready var _level_number: = $OptionsContainer/SelectLevelOption/LevelNumber as Label
 
 
 func _ready() -> void:
 	_menu_options.assign(find_children("*Option", "HBoxContainer"))
 	_cursor.show()
 	_cursor.global_position = Vector2(10.0, _menu_options[0].global_position.y)
-	_change_level_choice(1)
 
 
 func _input(event: InputEvent) -> void:
@@ -79,7 +80,9 @@ func _change_level_choice(add_number: int) -> void:
 
 
 func _start_new_game() -> void:
-	Events.new_game_requested.emit(_level_choice_current)
+	new_game_option_confirmed.emit(_level_choice_current)
+	set_process_input(false)
+	hide()
 
 
 func _on_option_entered(index: int) -> void:

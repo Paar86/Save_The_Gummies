@@ -4,6 +4,14 @@ const AMPLITUDE: = 4.0
 const FREQUENCY: = 0.01
 const INITIAL_POSITION: = 12.0
 
+var enabled: = false:
+	set(value):
+		set_process_unhandled_input(value)
+
+
+func _ready() -> void:
+	set_process_unhandled_input(false)
+
 
 func _physics_process(delta: float) -> void:
 	if not self.visible:

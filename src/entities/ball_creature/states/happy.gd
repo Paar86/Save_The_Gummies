@@ -18,11 +18,12 @@ func on_exit(transition: Transition) -> void:
 
 
 func physics_process(delta: float) -> void:
-	if ball_creature.sleeping and not ball_creature.happy_mode_locked:
+	if not ball_creature.happy_mode_locked:
 		state_machine.transition_to("Idle")
 		return
 
 	if ball_creature.is_on_floor and not _jump_timer.time_left:
+		_jump_timer.wait_time = randf_range(3.0, 4.0)
 		_jump_timer.start()
 
 
