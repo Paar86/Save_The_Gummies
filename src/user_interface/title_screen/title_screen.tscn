@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://d01q02fnsaxyn"]
+[gd_scene load_steps=16 format=3 uid="uid://d01q02fnsaxyn"]
 
 [ext_resource type="Script" path="res://src/user_interface/title_screen/title_screen.gd" id="1_py0cm"]
+[ext_resource type="Theme" uid="uid://c0whh17s3gj3a" path="res://src/user_interface/theme.tres" id="2_c2m7m"]
 [ext_resource type="PackedScene" uid="uid://c36mwvup5f8ad" path="res://src/entities/ball_creature/ball_creature.tscn" id="3_hbanw"]
 [ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie_alt.gdshader" id="4_6rd38"]
+[ext_resource type="Texture2D" uid="uid://dccdrjbqtpsl" path="res://assets/logo.png" id="5_3p7je"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d78q5"]
 resource_local_to_scene = true
@@ -36,6 +38,60 @@ shader_parameter/secondary_replacement_color = Vector3(126, 37, 83)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_acepw"]
 size = Vector2(294, 24)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ipqgs"]
+content_margin_top = 35.0
+
+[sub_resource type="Animation" id="Animation_6n7d3"]
+resource_name = "logo_entry"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.2),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [Vector2(64, 173), Vector2(64, 17), Vector2(64, 47)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shake_logo"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_haqee"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(64, 173)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tiibn"]
+_data = {
+"RESET": SubResource("Animation_haqee"),
+"logo_entry": SubResource("Animation_6n7d3")
+}
 
 [node name="TitleScreen" type="Node"]
 script = ExtResource("1_py0cm")
@@ -183,6 +239,33 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleFloor"]
 shape = SubResource("RectangleShape2D_acepw")
+
+[node name="StartGameLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -29.0
+offset_right = 44.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_c2m7m")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ipqgs")
+text = "Press ENTER"
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(64, 173)
+texture = ExtResource("5_3p7je")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tiibn")
+}
+autoplay = "logo_entry"
 
 [editable path="BallCreatures/BallCreature"]
 [editable path="BallCreatures/BallCreature/HitboxComponent"]
