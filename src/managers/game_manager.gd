@@ -1,6 +1,7 @@
 extends Node
 
 @export var author_title: PackedScene
+@export var title_screen: PackedScene
 @export var main_menu_screen: PackedScene
 @export var levels: Array[PackedScene]
 @export var credits: PackedScene
@@ -73,8 +74,10 @@ func _on_new_game_requested(initial_level_number: int) -> void:
 
 func _on_change_scene_requested() -> void:
 	if _current_scene is GameByTitle:
+		_load_scene(title_screen.instantiate())
+
+	if _current_scene is TitleScreen:
 		var scene: = main_menu_screen.instantiate()
 		(scene as MainMenuScreen).level_count = levels.size()
 		_load_scene(scene)
-
 
