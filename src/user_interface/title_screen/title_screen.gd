@@ -76,6 +76,7 @@ func _are_all_creatures_freed() -> bool:
 
 
 func _on_game_start() -> void:
+	_logo.hide()
 	_start_requested = true
 	_start_game_label.hide()
 	set_physics_process(true)

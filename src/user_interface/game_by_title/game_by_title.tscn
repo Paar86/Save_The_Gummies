@@ -18,7 +18,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_bax7c")
-text = "Josef Sustek
-Presents"
+text = "A Game By
+Josef Sustek"
 horizontal_alignment = 1
 script = ExtResource("2_u6oow")

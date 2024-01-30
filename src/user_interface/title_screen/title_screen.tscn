@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://c0whh17s3gj3a" path="res://src/user_interface/theme.tres" id="2_c2m7m"]
 [ext_resource type="PackedScene" uid="uid://c36mwvup5f8ad" path="res://src/entities/ball_creature/ball_creature.tscn" id="3_hbanw"]
 [ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie_alt.gdshader" id="4_6rd38"]
-[ext_resource type="Texture2D" uid="uid://dccdrjbqtpsl" path="res://assets/logo.png" id="5_3p7je"]
+[ext_resource type="Texture2D" uid="uid://2giy0wwrwbe8" path="res://assets/ui/game_logo.png" id="5_hc5a5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d78q5"]
 resource_local_to_scene = true
@@ -42,6 +42,21 @@ size = Vector2(294, 24)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ipqgs"]
 content_margin_top = 35.0
 
+[sub_resource type="Animation" id="Animation_haqee"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(62, 173)]
+}
+
 [sub_resource type="Animation" id="Animation_6n7d3"]
 resource_name = "logo_entry"
 length = 3.0
@@ -55,7 +70,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.7, 1.2),
 "transitions": PackedFloat32Array(0.5, 2, 1),
 "update": 0,
-"values": [Vector2(64, 173), Vector2(64, 17), Vector2(64, 47)]
+"values": [Vector2(62, 173), Vector2(62, 17), Vector2(62, 47)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -72,21 +87,6 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_haqee"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Logo:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(64, 173)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tiibn"]
 _data = {
 "RESET": SubResource("Animation_haqee"),
@@ -99,13 +99,13 @@ script = ExtResource("1_py0cm")
 [node name="BallCreatures" type="Node" parent="."]
 
 [node name="BallCreature" parent="BallCreatures" instance=ExtResource("3_hbanw")]
-position = Vector2(39, -9)
+position = Vector2(38, -9)
 contact_monitor = false
 pickable = false
 
 [node name="PalettedSprite" parent="BallCreatures/BallCreature/Node" index="0"]
 material = SubResource("ShaderMaterial_d78q5")
-position = Vector2(39, -9)
+position = Vector2(38, -9)
 
 [node name="StateMachine" parent="BallCreatures/BallCreature" index="6" node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Happy")
@@ -153,12 +153,12 @@ states_for_transition = [null]
 states_for_transition = [null]
 
 [node name="BallCreature3" parent="BallCreatures" instance=ExtResource("3_hbanw")]
-position = Vector2(84, -15)
+position = Vector2(83, -15)
 contact_monitor = false
 
 [node name="PalettedSprite" parent="BallCreatures/BallCreature3/Node" index="0"]
 material = SubResource("ShaderMaterial_28p7t")
-position = Vector2(84, -15)
+position = Vector2(83, -15)
 color = 4
 
 [node name="StateMachine" parent="BallCreatures/BallCreature3" index="6" node_paths=PackedStringArray("initial_state")]
@@ -258,8 +258,8 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_ipqgs")
 text = "Press ENTER"
 
 [node name="Logo" type="Sprite2D" parent="."]
-position = Vector2(64, 173)
-texture = ExtResource("5_3p7je")
+position = Vector2(62, 173)
+texture = ExtResource("5_hc5a5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
