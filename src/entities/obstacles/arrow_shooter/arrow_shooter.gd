@@ -1,15 +1,23 @@
 extends Node2D
 
+@export var delay_time: = 0.0
+
 var _arrow_scene: PackedScene = preload("res://src/entities/obstacles/arrow_shooter/arrow.tscn")
 var _arrow_shoot_sfx: Resource = preload(SfxResources.ARROW_SHOOT)
 
 @onready var _shooter_sprite: Sprite2D = $ShooterSprite
 @onready var _arrows_folder: Node2D = $Arrows
+@onready var _delay_timer: Timer = $DelayTimer
 @onready var _after_shot_timer: Timer = $AfterShotTimer
 @onready var _prepare_timer: Timer = $PrepareTimer
 
 
 func _ready() -> void:
+	if delay_time:
+		_delay_timer.wait_time = delay_time
+		_delay_timer.start()
+		await _delay_timer.timeout
+
 	prepare_arrow()
 
 

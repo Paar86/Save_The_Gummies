@@ -18,4 +18,3 @@ func physics_process(delta: float) -> void:
 
 	if ball_creature.is_on_floor:
 		state_machine.transition_to("Idle")
-		return

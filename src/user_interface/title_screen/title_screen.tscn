@@ -1,50 +1,279 @@
-[gd_scene load_steps=4 format=3 uid="uid://blqx3sorahm5u"]
+[gd_scene load_steps=16 format=3 uid="uid://d01q02fnsaxyn"]
 
 [ext_resource type="Script" path="res://src/user_interface/title_screen/title_screen.gd" id="1_py0cm"]
-[ext_resource type="Texture2D" uid="uid://dccdrjbqtpsl" path="res://assets/logo.png" id="2_b5blj"]
 [ext_resource type="Theme" uid="uid://c0whh17s3gj3a" path="res://src/user_interface/theme.tres" id="2_c2m7m"]
+[ext_resource type="PackedScene" uid="uid://c36mwvup5f8ad" path="res://src/entities/ball_creature/ball_creature.tscn" id="3_hbanw"]
+[ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie_alt.gdshader" id="4_6rd38"]
+[ext_resource type="Texture2D" uid="uid://2giy0wwrwbe8" path="res://assets/ui/game_logo.png" id="5_hc5a5"]
 
-[node name="TitleScreen" type="CanvasLayer"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d78q5"]
+resource_local_to_scene = true
+shader = ExtResource("4_6rd38")
+shader_parameter/primary_replacement_color = Vector3(41, 173, 255)
+shader_parameter/secondary_replacement_color = Vector3(29, 43, 83)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8i31h"]
+resource_local_to_scene = true
+shader = ExtResource("4_6rd38")
+shader_parameter/primary_replacement_color = Vector3(0, 228, 54)
+shader_parameter/secondary_replacement_color = Vector3(0, 135, 81)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_28p7t"]
+resource_local_to_scene = true
+shader = ExtResource("4_6rd38")
+shader_parameter/primary_replacement_color = Vector3(255, 119, 168)
+shader_parameter/secondary_replacement_color = Vector3(126, 37, 83)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gkhgi"]
+resource_local_to_scene = true
+shader = ExtResource("4_6rd38")
+shader_parameter/primary_replacement_color = Vector3(255, 236, 39)
+shader_parameter/secondary_replacement_color = Vector3(255, 163, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_we3f0"]
+resource_local_to_scene = true
+shader = ExtResource("4_6rd38")
+shader_parameter/primary_replacement_color = Vector3(255, 0, 77)
+shader_parameter/secondary_replacement_color = Vector3(126, 37, 83)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_acepw"]
+size = Vector2(294, 24)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ipqgs"]
+content_margin_top = 35.0
+
+[sub_resource type="Animation" id="Animation_haqee"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(62, 173)]
+}
+
+[sub_resource type="Animation" id="Animation_6n7d3"]
+resource_name = "logo_entry"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.2),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [Vector2(62, 173), Vector2(62, 17), Vector2(62, 47)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shake_logo"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tiibn"]
+_data = {
+"RESET": SubResource("Animation_haqee"),
+"logo_entry": SubResource("Animation_6n7d3")
+}
+
+[node name="TitleScreen" type="Node"]
 script = ExtResource("1_py0cm")
 
-[node name="UserInterface" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_c2m7m")
+[node name="BallCreatures" type="Node" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="UserInterface"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -64.0
-offset_top = 8.0
-offset_right = 64.0
-offset_bottom = 57.0
-grow_horizontal = 2
-texture = ExtResource("2_b5blj")
-expand_mode = 1
-stretch_mode = 5
+[node name="BallCreature" parent="BallCreatures" instance=ExtResource("3_hbanw")]
+position = Vector2(38, -9)
+contact_monitor = false
+pickable = false
 
-[node name="Play" type="Button" parent="UserInterface"]
-layout_mode = 1
+[node name="PalettedSprite" parent="BallCreatures/BallCreature/Node" index="0"]
+material = SubResource("ShaderMaterial_d78q5")
+position = Vector2(38, -9)
+
+[node name="StateMachine" parent="BallCreatures/BallCreature" index="6" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Happy")
+
+[node name="Idle" parent="BallCreatures/BallCreature/StateMachine" index="0" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null, null, null]
+
+[node name="Rolling" parent="BallCreatures/BallCreature/StateMachine" index="1" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null, null, null]
+
+[node name="Air" parent="BallCreatures/BallCreature/StateMachine" index="2" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null, null]
+
+[node name="Carried" parent="BallCreatures/BallCreature/StateMachine" index="3" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null]
+
+[node name="Happy" parent="BallCreatures/BallCreature/StateMachine" index="4" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null]
+
+[node name="BallCreature2" parent="BallCreatures" instance=ExtResource("3_hbanw")]
+position = Vector2(109, -25)
+contact_monitor = false
+
+[node name="PalettedSprite" parent="BallCreatures/BallCreature2/Node" index="0"]
+material = SubResource("ShaderMaterial_8i31h")
+position = Vector2(109, -25)
+color = 1
+
+[node name="StateMachine" parent="BallCreatures/BallCreature2" index="6" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Happy")
+
+[node name="Idle" parent="BallCreatures/BallCreature2/StateMachine" index="0" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null, null, null]
+
+[node name="Rolling" parent="BallCreatures/BallCreature2/StateMachine" index="1" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null, null, null]
+
+[node name="Air" parent="BallCreatures/BallCreature2/StateMachine" index="2" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null, null]
+
+[node name="Carried" parent="BallCreatures/BallCreature2/StateMachine" index="3" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null]
+
+[node name="Happy" parent="BallCreatures/BallCreature2/StateMachine" index="4" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null]
+
+[node name="BallCreature3" parent="BallCreatures" instance=ExtResource("3_hbanw")]
+position = Vector2(83, -15)
+contact_monitor = false
+
+[node name="PalettedSprite" parent="BallCreatures/BallCreature3/Node" index="0"]
+material = SubResource("ShaderMaterial_28p7t")
+position = Vector2(83, -15)
+color = 4
+
+[node name="StateMachine" parent="BallCreatures/BallCreature3" index="6" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Happy")
+
+[node name="Idle" parent="BallCreatures/BallCreature3/StateMachine" index="0" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null, null, null]
+
+[node name="Rolling" parent="BallCreatures/BallCreature3/StateMachine" index="1" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null, null, null]
+
+[node name="Air" parent="BallCreatures/BallCreature3/StateMachine" index="2" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null, null]
+
+[node name="Carried" parent="BallCreatures/BallCreature3/StateMachine" index="3" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null]
+
+[node name="Happy" parent="BallCreatures/BallCreature3/StateMachine" index="4" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null]
+
+[node name="BallCreature4" parent="BallCreatures" instance=ExtResource("3_hbanw")]
+position = Vector2(60, -32)
+contact_monitor = false
+
+[node name="PalettedSprite" parent="BallCreatures/BallCreature4/Node" index="0"]
+material = SubResource("ShaderMaterial_gkhgi")
+position = Vector2(60, -32)
+color = 2
+
+[node name="StateMachine" parent="BallCreatures/BallCreature4" index="6" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Happy")
+
+[node name="Idle" parent="BallCreatures/BallCreature4/StateMachine" index="0" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null, null, null]
+
+[node name="Rolling" parent="BallCreatures/BallCreature4/StateMachine" index="1" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null, null, null]
+
+[node name="Air" parent="BallCreatures/BallCreature4/StateMachine" index="2" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null, null]
+
+[node name="Carried" parent="BallCreatures/BallCreature4/StateMachine" index="3" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null]
+
+[node name="Happy" parent="BallCreatures/BallCreature4/StateMachine" index="4" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null]
+
+[node name="BallCreature5" parent="BallCreatures" instance=ExtResource("3_hbanw")]
+position = Vector2(15, -24)
+contact_monitor = false
+
+[node name="PalettedSprite" parent="BallCreatures/BallCreature5/Node" index="0"]
+material = SubResource("ShaderMaterial_we3f0")
+position = Vector2(15, -24)
+color = 3
+
+[node name="StateMachine" parent="BallCreatures/BallCreature5" index="6" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Happy")
+
+[node name="Idle" parent="BallCreatures/BallCreature5/StateMachine" index="0" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null, null, null]
+
+[node name="Rolling" parent="BallCreatures/BallCreature5/StateMachine" index="1" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null, null, null]
+
+[node name="Air" parent="BallCreatures/BallCreature5/StateMachine" index="2" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null, null]
+
+[node name="Carried" parent="BallCreatures/BallCreature5/StateMachine" index="3" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null]
+
+[node name="Happy" parent="BallCreatures/BallCreature5/StateMachine" index="4" node_paths=PackedStringArray("states_for_transition")]
+states_for_transition = [null]
+
+[node name="InvisibleFloor" type="StaticBody2D" parent="."]
+position = Vector2(61, 124)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleFloor"]
+shape = SubResource("RectangleShape2D_acepw")
+
+[node name="StartGameLabel" type="Label" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -36.0
-offset_top = 14.0
-offset_right = 36.0
-offset_bottom = 38.0
+offset_left = -44.0
+offset_top = -29.0
+offset_right = 44.0
+offset_bottom = 28.0
 grow_horizontal = 2
 grow_vertical = 2
-focus_mode = 0
-mouse_default_cursor_shape = 2
-text = "Play"
+theme = ExtResource("2_c2m7m")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ipqgs")
+text = "Press ENTER"
 
-[connection signal="button_up" from="UserInterface/Play" to="." method="_on_play_button_up"]
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(62, 173)
+texture = ExtResource("5_hc5a5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tiibn")
+}
+autoplay = "logo_entry"
+
+[editable path="BallCreatures/BallCreature"]
+[editable path="BallCreatures/BallCreature/HitboxComponent"]
+[editable path="BallCreatures/BallCreature2"]
+[editable path="BallCreatures/BallCreature2/HitboxComponent"]
+[editable path="BallCreatures/BallCreature3"]
+[editable path="BallCreatures/BallCreature3/HitboxComponent"]
+[editable path="BallCreatures/BallCreature4"]
+[editable path="BallCreatures/BallCreature4/HitboxComponent"]
+[editable path="BallCreatures/BallCreature5"]
+[editable path="BallCreatures/BallCreature5/HitboxComponent"]

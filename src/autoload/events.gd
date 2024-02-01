@@ -11,7 +11,9 @@ signal player_bounce_up_requested
 signal player_pickup_drop_requested
 
 # Global events
+signal change_scene_requested
 signal change_level_requested
 signal reload_level_requested
 signal pause_level_requested
 signal unpause_level_requested
+signal new_game_requested(initial_level_number: int)

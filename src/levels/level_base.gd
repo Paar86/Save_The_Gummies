@@ -32,6 +32,7 @@ func _ready() -> void:
 	var ball_creature_scenes = find_children("*", "BallCreature")
 	assert(ball_creature_scenes.size() > 0, "There is no ball create scene child!")
 	ball_creature = ball_creature_scenes[0]
+	ball_creature.enabled_tracking = true
 
 	assert(_player, "No player in the level!")
 
