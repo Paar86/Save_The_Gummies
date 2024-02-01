@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctmsdk0ofpk4a"]
+
+[ext_resource type="Script" path="res://src/user_interface/story_text/story_text.gd" id="1_44mkm"]
+[ext_resource type="PackedScene" uid="uid://b3k8nu13o07m" path="res://src/user_interface/hint_window/hint_window.tscn" id="1_yv0yh"]
+
+[node name="StoryText" type="Node"]
+script = ExtResource("1_44mkm")
+
+[node name="HintWindow" parent="." instance=ExtResource("1_yv0yh")]
+process_mode = 0
