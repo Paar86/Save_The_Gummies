@@ -5,6 +5,7 @@ extends Node
 @export var main_menu_screen: PackedScene
 @export var levels: Array[PackedScene]
 @export var credits: PackedScene
+@export var story_text: PackedScene
 
 @onready var _active_scene: Node = $ActiveScene
 
@@ -68,8 +69,8 @@ func _on_reload_level_requested() -> void:
 func _on_new_game_requested(initial_level_number: int) -> void:
 	_game_stats = GameStats.new()
 	_game_stats.initial_level_number = initial_level_number
-	var start_level_index: = initial_level_number - 1
-	_load_level(start_level_index)
+
+	_load_scene(story_text.instantiate())
 
 
 func _on_change_scene_requested() -> void:
@@ -80,4 +81,8 @@ func _on_change_scene_requested() -> void:
 		var scene: = main_menu_screen.instantiate()
 		(scene as MainMenuScreen).level_count = levels.size()
 		_load_scene(scene)
+
+	if _current_scene is StoryText:
+		var start_level_index: = _game_stats.initial_level_number - 1
+		_load_level(start_level_index)
 
