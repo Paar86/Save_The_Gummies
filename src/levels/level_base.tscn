@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvje8c8sahcwc"]
+[gd_scene load_steps=17 format=3 uid="uid://dvje8c8sahcwc"]
 
 [ext_resource type="Script" path="res://src/levels/level_base.gd" id="1_03m7p"]
 [ext_resource type="PackedScene" uid="uid://c36mwvup5f8ad" path="res://src/entities/ball_creature/ball_creature.tscn" id="2_3bdtq"]
@@ -12,6 +12,14 @@
 [ext_resource type="Script" path="res://src/levels/health_counter.gd" id="6_y8hi7"]
 [ext_resource type="PackedScene" uid="uid://dyfvc3jli6hx" path="res://src/user_interface/pause_screen/pause_screen.tscn" id="11_n3yy7"]
 [ext_resource type="PackedScene" uid="uid://b3k8nu13o07m" path="res://src/user_interface/hint_window/hint_window.tscn" id="11_u8im1"]
+[ext_resource type="Script" path="res://src/levels/transition_layer.gd" id="13_63ghm"]
+[ext_resource type="Shader" path="res://src/resources/shaders/transition_effect.gdshader" id="13_u8vnc"]
+[ext_resource type="Texture2D" uid="uid://b35cnrrooyq0d" path="res://assets/shaders/curtain_mask.png" id="14_bq84k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oi2rl"]
+shader = ExtResource("13_u8vnc")
+shader_parameter/cutoff_value = 0.0
+shader_parameter/mask = ExtResource("14_bq84k")
 
 [node name="LevelBase" type="Node"]
 script = ExtResource("1_03m7p")
@@ -100,5 +108,18 @@ one_shot = true
 [node name="PauseScreen" parent="." instance=ExtResource("11_n3yy7")]
 process_mode = 3
 visible = false
+
+[node name="TransitionLayer" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("13_63ghm")
+
+[node name="ColorRect" type="ColorRect" parent="TransitionLayer"]
+material = SubResource("ShaderMaterial_oi2rl")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="timeout" from="PlayerRespawnTimer" to="." method="_on_player_respawn_timer_timeout"]

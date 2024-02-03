@@ -23,6 +23,7 @@ var _game_stats: GameStats
 @onready var _initial_peek_delay_timer: Timer = $InitialPeekDelayTimer
 @onready var _pause_screen: CanvasLayer = $PauseScreen
 @onready var _hint_window: HintWindow = $UI/HintWindow
+@onready var _transition_layer: TransitionLayer = $TransitionLayer
 
 var game_stats: GameStats:
 	set(value): _game_stats = value
@@ -47,6 +48,11 @@ func _ready() -> void:
 	_configure_basket()
 	_configure_cameras()
 	_register_checkpoints()
+
+	get_tree().paused = true
+	_transition_layer.start_transition_effect(0.0, 1.0)
+	await _transition_layer.transition_finished
+	get_tree().paused = false
 
 	if start_with_peek_animation:
 		get_tree().paused = true
