@@ -6,31 +6,31 @@
 [ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie_alt.gdshader" id="4_6rd38"]
 [ext_resource type="Texture2D" uid="uid://2giy0wwrwbe8" path="res://assets/ui/game_logo.png" id="5_hc5a5"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d78q5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o5jby"]
 resource_local_to_scene = true
 shader = ExtResource("4_6rd38")
 shader_parameter/primary_replacement_color = Vector3(41, 173, 255)
 shader_parameter/secondary_replacement_color = Vector3(29, 43, 83)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8i31h"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hjubf"]
 resource_local_to_scene = true
 shader = ExtResource("4_6rd38")
 shader_parameter/primary_replacement_color = Vector3(0, 228, 54)
 shader_parameter/secondary_replacement_color = Vector3(0, 135, 81)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_28p7t"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3kdjb"]
 resource_local_to_scene = true
 shader = ExtResource("4_6rd38")
 shader_parameter/primary_replacement_color = Vector3(255, 119, 168)
 shader_parameter/secondary_replacement_color = Vector3(126, 37, 83)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gkhgi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gyrxe"]
 resource_local_to_scene = true
 shader = ExtResource("4_6rd38")
 shader_parameter/primary_replacement_color = Vector3(255, 236, 39)
 shader_parameter/secondary_replacement_color = Vector3(255, 163, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_we3f0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e5buo"]
 resource_local_to_scene = true
 shader = ExtResource("4_6rd38")
 shader_parameter/primary_replacement_color = Vector3(255, 0, 77)
@@ -104,134 +104,59 @@ contact_monitor = false
 pickable = false
 
 [node name="PalettedSprite" parent="BallCreatures/BallCreature/Node" index="0"]
-material = SubResource("ShaderMaterial_d78q5")
+material = SubResource("ShaderMaterial_o5jby")
 position = Vector2(38, -9)
 
 [node name="StateMachine" parent="BallCreatures/BallCreature" index="6" node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Happy")
-
-[node name="Idle" parent="BallCreatures/BallCreature/StateMachine" index="0" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null, null, null]
-
-[node name="Rolling" parent="BallCreatures/BallCreature/StateMachine" index="1" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null, null, null]
-
-[node name="Air" parent="BallCreatures/BallCreature/StateMachine" index="2" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null, null]
-
-[node name="Carried" parent="BallCreatures/BallCreature/StateMachine" index="3" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null]
-
-[node name="Happy" parent="BallCreatures/BallCreature/StateMachine" index="4" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null]
 
 [node name="BallCreature2" parent="BallCreatures" instance=ExtResource("3_hbanw")]
 position = Vector2(109, -25)
 contact_monitor = false
 
 [node name="PalettedSprite" parent="BallCreatures/BallCreature2/Node" index="0"]
-material = SubResource("ShaderMaterial_8i31h")
+material = SubResource("ShaderMaterial_hjubf")
 position = Vector2(109, -25)
 color = 1
 
 [node name="StateMachine" parent="BallCreatures/BallCreature2" index="6" node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Happy")
 
-[node name="Idle" parent="BallCreatures/BallCreature2/StateMachine" index="0" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null, null, null]
-
-[node name="Rolling" parent="BallCreatures/BallCreature2/StateMachine" index="1" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null, null, null]
-
-[node name="Air" parent="BallCreatures/BallCreature2/StateMachine" index="2" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null, null]
-
-[node name="Carried" parent="BallCreatures/BallCreature2/StateMachine" index="3" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null]
-
-[node name="Happy" parent="BallCreatures/BallCreature2/StateMachine" index="4" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null]
-
 [node name="BallCreature3" parent="BallCreatures" instance=ExtResource("3_hbanw")]
 position = Vector2(83, -15)
 contact_monitor = false
 
 [node name="PalettedSprite" parent="BallCreatures/BallCreature3/Node" index="0"]
-material = SubResource("ShaderMaterial_28p7t")
+material = SubResource("ShaderMaterial_3kdjb")
 position = Vector2(83, -15)
 color = 4
 
 [node name="StateMachine" parent="BallCreatures/BallCreature3" index="6" node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Happy")
 
-[node name="Idle" parent="BallCreatures/BallCreature3/StateMachine" index="0" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null, null, null]
-
-[node name="Rolling" parent="BallCreatures/BallCreature3/StateMachine" index="1" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null, null, null]
-
-[node name="Air" parent="BallCreatures/BallCreature3/StateMachine" index="2" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null, null]
-
-[node name="Carried" parent="BallCreatures/BallCreature3/StateMachine" index="3" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null]
-
-[node name="Happy" parent="BallCreatures/BallCreature3/StateMachine" index="4" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null]
-
 [node name="BallCreature4" parent="BallCreatures" instance=ExtResource("3_hbanw")]
 position = Vector2(60, -32)
 contact_monitor = false
 
 [node name="PalettedSprite" parent="BallCreatures/BallCreature4/Node" index="0"]
-material = SubResource("ShaderMaterial_gkhgi")
+material = SubResource("ShaderMaterial_gyrxe")
 position = Vector2(60, -32)
 color = 2
 
 [node name="StateMachine" parent="BallCreatures/BallCreature4" index="6" node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Happy")
 
-[node name="Idle" parent="BallCreatures/BallCreature4/StateMachine" index="0" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null, null, null]
-
-[node name="Rolling" parent="BallCreatures/BallCreature4/StateMachine" index="1" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null, null, null]
-
-[node name="Air" parent="BallCreatures/BallCreature4/StateMachine" index="2" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null, null]
-
-[node name="Carried" parent="BallCreatures/BallCreature4/StateMachine" index="3" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null]
-
-[node name="Happy" parent="BallCreatures/BallCreature4/StateMachine" index="4" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null]
-
 [node name="BallCreature5" parent="BallCreatures" instance=ExtResource("3_hbanw")]
 position = Vector2(15, -24)
 contact_monitor = false
 
 [node name="PalettedSprite" parent="BallCreatures/BallCreature5/Node" index="0"]
-material = SubResource("ShaderMaterial_we3f0")
+material = SubResource("ShaderMaterial_e5buo")
 position = Vector2(15, -24)
 color = 3
 
 [node name="StateMachine" parent="BallCreatures/BallCreature5" index="6" node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Happy")
-
-[node name="Idle" parent="BallCreatures/BallCreature5/StateMachine" index="0" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null, null, null]
-
-[node name="Rolling" parent="BallCreatures/BallCreature5/StateMachine" index="1" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null, null, null]
-
-[node name="Air" parent="BallCreatures/BallCreature5/StateMachine" index="2" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null, null]
-
-[node name="Carried" parent="BallCreatures/BallCreature5/StateMachine" index="3" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null]
-
-[node name="Happy" parent="BallCreatures/BallCreature5/StateMachine" index="4" node_paths=PackedStringArray("states_for_transition")]
-states_for_transition = [null]
 
 [node name="InvisibleFloor" type="StaticBody2D" parent="."]
 position = Vector2(61, 124)
