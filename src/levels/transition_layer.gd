@@ -7,12 +7,19 @@ const TRANSITION_DURATION: = 1.0
 @onready var _color_rect: = $ColorRect as ColorRect
 
 
-func start_transition_effect(starting_value: float, target_value: float, duration: float = TRANSITION_DURATION) -> void:
+func start_transition_effect(
+	starting_value: float,
+	target_value: float,
+	hide_after_finished: bool = true,
+	duration: float = TRANSITION_DURATION) -> void:
 	show()
 	var tween: = get_tree().create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_method(_set_shader_param_value, starting_value, target_value, duration)
 	await tween.finished
-	hide()
+
+	if hide_after_finished:
+		hide()
+
 	transition_finished.emit()
 
 

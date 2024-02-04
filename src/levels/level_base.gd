@@ -193,10 +193,13 @@ func _on_player_respawn_timer_timeout() -> void:
 
 
 func _on_ball_creature_captured(ball_creature: BallCreature) -> void:
-	if not _game_stats:
-		return
+	if _game_stats:
+			_game_stats.saved_ball_creatures_colors.append(ball_creature.color)
 
-	_game_stats.saved_ball_creatures_colors.append(ball_creature.color)
+	get_tree().paused = true
+	_transition_layer.start_transition_effect(1.0, 0.0, false)
+	await _transition_layer.transition_finished
+	Events.change_level_requested.emit()
 
 
 func _on_pause_level_requested() -> void:
