@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvje8c8sahcwc"]
+[gd_scene load_steps=22 format=3 uid="uid://dvje8c8sahcwc"]
 
 [ext_resource type="Script" path="res://src/levels/level_base.gd" id="1_03m7p"]
 [ext_resource type="PackedScene" uid="uid://c36mwvup5f8ad" path="res://src/entities/ball_creature/ball_creature.tscn" id="2_3bdtq"]
@@ -12,6 +12,21 @@
 [ext_resource type="Script" path="res://src/levels/health_counter.gd" id="6_y8hi7"]
 [ext_resource type="PackedScene" uid="uid://dyfvc3jli6hx" path="res://src/user_interface/pause_screen/pause_screen.tscn" id="11_n3yy7"]
 [ext_resource type="PackedScene" uid="uid://b3k8nu13o07m" path="res://src/user_interface/hint_window/hint_window.tscn" id="11_u8im1"]
+[ext_resource type="Theme" uid="uid://c0whh17s3gj3a" path="res://src/user_interface/theme.tres" id="12_cym4v"]
+[ext_resource type="FontFile" uid="uid://bt5y8x3ki3d4x" path="res://assets/fonts/Stacked pixel.ttf" id="12_fdw6w"]
+[ext_resource type="Shader" path="res://src/levels/shaders/cheer_text.gdshader" id="12_mlvte"]
+[ext_resource type="Script" path="res://src/levels/transition_layer.gd" id="13_63ghm"]
+[ext_resource type="Script" path="res://src/levels/cheer_label.gd" id="13_jloai"]
+[ext_resource type="Shader" path="res://src/resources/shaders/transition_effect.gdshader" id="13_u8vnc"]
+[ext_resource type="Texture2D" uid="uid://b35cnrrooyq0d" path="res://assets/shaders/curtain_mask.png" id="14_bq84k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vnn13"]
+shader = ExtResource("12_mlvte")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oi2rl"]
+shader = ExtResource("13_u8vnc")
+shader_parameter/cutoff_value = 0.0
+shader_parameter/mask = ExtResource("14_bq84k")
 
 [node name="LevelBase" type="Node"]
 script = ExtResource("1_03m7p")
@@ -88,6 +103,29 @@ script = ExtResource("6_y8hi7")
 [node name="HintWindow" parent="UI" instance=ExtResource("11_u8im1")]
 visible = false
 
+[node name="CheerLabel" type="Label" parent="UI"]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_vnn13")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -3.5
+offset_right = 24.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.92549, 0.152941, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0.301961, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("12_fdw6w")
+theme_override_font_sizes/font_size = 16
+text = "<undefined>"
+script = ExtResource("13_jloai")
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -100,5 +138,34 @@ one_shot = true
 [node name="PauseScreen" parent="." instance=ExtResource("11_n3yy7")]
 process_mode = 3
 visible = false
+
+[node name="TransitionLayer" type="CanvasLayer" parent="."]
+script = ExtResource("13_63ghm")
+
+[node name="ColorRect" type="ColorRect" parent="TransitionLayer"]
+material = SubResource("ShaderMaterial_oi2rl")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LevelNumberLabel" type="Label" parent="TransitionLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -3.5
+offset_right = 32.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_cym4v")
+text = "Level -1"
 
 [connection signal="timeout" from="PlayerRespawnTimer" to="." method="_on_player_respawn_timer_timeout"]
