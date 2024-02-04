@@ -2,7 +2,7 @@ class_name Basket extends StaticBody2D
 
 signal ball_creature_captured(BallCreature)
 
-const WAIT_TIME: = 2.0
+const WAIT_TIME: = 1.0
 const CREATURE_RADIUS: = 4.0
 
 var _creature_packed: PackedScene = preload("res://src/entities/ball_creature/ball_creature_captured.tscn")

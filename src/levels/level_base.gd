@@ -2,8 +2,11 @@ class_name Level extends Node
 
 signal camera_above_player
 
+const LEVEL_NUMBER_TIME: = 2.0
+
 @export var start_with_peek_animation: bool = false
 
+var level_number: = -1
 var ball_creature: BallCreature
 var _checkpoints: Array[Checkpoint] = []
 # For remembering the position of Player in tree for proper z-indexing
@@ -30,6 +33,7 @@ var game_stats: GameStats:
 
 
 func _ready() -> void:
+	(%LevelNumberLabel as Label).text = "Level " + str(level_number)
 	var ball_creature_scenes = find_children("*", "BallCreature")
 	assert(ball_creature_scenes.size() > 0, "There is no ball create scene child!")
 	ball_creature = ball_creature_scenes[0]
@@ -50,18 +54,26 @@ func _ready() -> void:
 	_register_checkpoints()
 
 	get_tree().paused = true
+
+	%LevelNumberLabel.show()
+	await get_tree().create_timer(LEVEL_NUMBER_TIME, true).timeout
+	%LevelNumberLabel.hide()
+
 	_transition_layer.start_transition_effect(0.0, 1.0)
 	await _transition_layer.transition_finished
-	get_tree().paused = false
 
 	if start_with_peek_animation:
-		get_tree().paused = true
 		_pause_screen.set_process_input(false)
 		_peek_camera.set_process_unhandled_input(false)
 		await _play_peek_animation()
-		get_tree().paused = false
 		_pause_screen.set_process_input(true)
 		_peek_camera.set_process_unhandled_input(true)
+
+	var cheer_label: = %CheerLabel as CheerLabel
+	cheer_label.show_cheer_text("START!")
+	await cheer_label.finished
+
+	get_tree().paused = false
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -197,6 +209,11 @@ func _on_ball_creature_captured(ball_creature: BallCreature) -> void:
 			_game_stats.saved_ball_creatures_colors.append(ball_creature.color)
 
 	get_tree().paused = true
+
+	var cheer_label: = %CheerLabel as CheerLabel
+	cheer_label.show_cheer_text("SAVED!")
+	await cheer_label.finished
+
 	_transition_layer.start_transition_effect(1.0, 0.0, false)
 	await _transition_layer.transition_finished
 	Events.change_level_requested.emit()

@@ -45,6 +45,7 @@ func _load_level(index: int) -> void:
 	var level_instance: = levels[index].instantiate() as Level
 	level_instance.game_stats = _game_stats
 	level_instance.start_with_peek_animation = true
+	level_instance.level_number = index + 1
 	_load_scene(level_instance)
 
 
