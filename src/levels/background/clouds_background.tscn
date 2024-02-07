@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cna1lldr5sydy"]
+
+[ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/world_tilesets.tres" id="1_d61w7"]
+
+[node name="CloudsTileMap" type="TileMap"]
+tile_set = ExtResource("1_d61w7")
+format = 2
+layer_0/tile_data = PackedInt32Array(196610, 393218, 2, 196611, 458754, 2, 196612, 524290, 2, 655370, 393218, 2, 655371, 458754, 2, 655372, 524290, 2)

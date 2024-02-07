@@ -8,6 +8,10 @@ const TRANSITION_DELAY: = 1.0
 @onready var _color_rect: = $ColorRect as ColorRect
 
 
+func _ready() -> void:
+	show()
+
+
 func start_transition_effect(
 	starting_value: float,
 	target_value: float,
