@@ -256,6 +256,9 @@ states_for_transition = [NodePath("../Move/Stunned"), NodePath("../Move/Attack")
 [node name="ReadyToAttackTimer" type="Timer" parent="StateMachine/ReadyToAttack"]
 one_shot = true
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+rect = Rect2(-24, -32, 48, 56)
+
 [connection signal="timeout" from="StateMachine/Move/Stunned/StunTimer" to="StateMachine/Move/Stunned" method="_on_stun_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Move/Attack/AttackTimer" to="StateMachine/Move/Attack" method="on_attack_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Move/CanAttackTimer" to="StateMachine/Move" method="_on_can_attack_timer_timeout"]
