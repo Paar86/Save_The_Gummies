@@ -129,6 +129,8 @@ script = ExtResource("13_jloai")
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(128, 128)
 
 [node name="InitialPeekDelayTimer" type="Timer" parent="."]
 process_mode = 3
@@ -140,6 +142,7 @@ process_mode = 3
 visible = false
 
 [node name="TransitionLayer" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("13_63ghm")
 
 [node name="ColorRect" type="ColorRect" parent="TransitionLayer"]

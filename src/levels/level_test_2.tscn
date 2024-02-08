@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bnuhq8nf46q8i"]
+[gd_scene load_steps=51 format=3 uid="uid://bnuhq8nf46q8i"]
 
 [ext_resource type="PackedScene" uid="uid://dvje8c8sahcwc" path="res://src/levels/level_base.tscn" id="1_jlemu"]
 [ext_resource type="PackedScene" uid="uid://bqc3qd27hev05" path="res://src/entities/objects/hint_signpost/hint_signpost.tscn" id="2_lodt6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie_alt.gdshader" id="6_oddbk"]
 [ext_resource type="PackedScene" uid="uid://bmmhoexfwl035" path="res://src/entities/obstacles/barrier/barrier.tscn" id="7_cvsn6"]
 [ext_resource type="PackedScene" uid="uid://c1ny4x7ikhd2j" path="res://src/entities/goblin/goblin.tscn" id="8_p7e4l"]
+[ext_resource type="PackedScene" uid="uid://cna1lldr5sydy" path="res://src/levels/background/clouds_background.tscn" id="9_wkjoc"]
 [ext_resource type="PackedScene" uid="uid://blpixln5eug03" path="res://src/entities/obstacles/glue/glue_floor.tscn" id="10_14vyf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ccdep"]
@@ -360,10 +361,7 @@ visible = true
 motion_scale = Vector2(0.5, 0.5)
 motion_mirroring = Vector2(128, 128)
 
-[node name="TileMap" type="TileMap" parent="ParallaxBackground/ParallaxLayer" index="0"]
-tile_set = ExtResource("5_aqx13")
-format = 2
-layer_0/tile_data = PackedInt32Array(196610, 393218, 2, 196611, 458754, 2, 196612, 524290, 2, 655370, 393218, 2, 655371, 458754, 2, 655372, 524290, 2)
+[node name="TileMap" parent="ParallaxBackground/ParallaxLayer" index="0" instance=ExtResource("9_wkjoc")]
 
 [editable path="BallCreature"]
 [editable path="BallCreature/HitboxComponent"]
