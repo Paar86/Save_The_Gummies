@@ -154,20 +154,24 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="LevelNumberLabel" type="Label" parent="TransitionLayer"]
-unique_name_in_owner = true
-visible = false
+[node name="HBoxContainer" type="HBoxContainer" parent="TransitionLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -32.0
-offset_top = -3.5
+offset_top = -20.0
 offset_right = 32.0
-offset_bottom = 3.5
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="LevelNumberLabel" type="Label" parent="TransitionLayer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("12_cym4v")
 text = "Level -1"
 
