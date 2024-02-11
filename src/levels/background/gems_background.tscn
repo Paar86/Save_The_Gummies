@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjwnh68wh3m4w"]
+
+[ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/world_tilesets.tres" id="1_0xksc"]
+
+[node name="GemsBackground" type="TileMap"]
+tile_set = ExtResource("1_0xksc")
+rendering_quadrant_size = 8
+format = 2
+layer_0/tile_data = PackedInt32Array(65538, 327682, 3, 196619, 327682, 3, 458758, 327682, 3, 393216, 327682, 3, 589837, 327682, 3, 917514, 327682, 3, 720899, 327682, 3)
