@@ -142,10 +142,11 @@ process_mode = 3
 visible = false
 
 [node name="TransitionLayer" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("13_63ghm")
 
 [node name="ColorRect" type="ColorRect" parent="TransitionLayer"]
+unique_name_in_owner = true
+visible = false
 material = SubResource("ShaderMaterial_oi2rl")
 anchors_preset = 15
 anchor_right = 1.0

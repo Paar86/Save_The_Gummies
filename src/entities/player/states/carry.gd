@@ -80,7 +80,8 @@ func release_pickup(impulse: Vector2) -> void:
 			Vector2(character.global_position.x, character.pickup_transform.global_position.y)
 			)
 
-	thrown_object.collision_layer = 0
+	#thrown_object.collision_layer = 0
+	thrown_object.toggle_collision_layer(false)
 	move_state.character.held_object = null
 	thrown_object.set_deferred("freeze", false)
 	thrown_object.call_deferred("apply_central_impulse", impulse)
@@ -91,10 +92,11 @@ func release_pickup(impulse: Vector2) -> void:
 	_is_aiming = false
 
 	if impulse != Vector2.ZERO:
-		(thrown_object as BallCreature).attack_strength_buffered = impulse.length()
+		thrown_object.attack_strength_buffered = impulse.length()
 		state_machine.transition_to("Kick")
-		await get_tree().create_timer(0.07).timeout
-		thrown_object.collision_layer = 8
+		thrown_object.toggle_collision_layer(true, 0.07)
+		#await get_tree().create_timer(0.07).timeout
+		#thrown_object.collision_layer = 8
 		return
 
 	thrown_object.collision_layer = 8

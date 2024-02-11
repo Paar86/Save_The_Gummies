@@ -129,6 +129,14 @@ func remove_movement_modificator(modificator: Vector2) -> void:
 	_effects_applier_component.remove_movement_modificator(modificator)
 
 
+func toggle_collision_layer(value: bool, delay: float = 0.0) -> void:
+	delay = maxf(delay, 0.0)
+	if delay:
+		await get_tree().create_timer(delay).timeout
+
+	set_collision_layer_value(4, value)
+
+
 func disable_collision() -> void:
 	_collision_shape.set_deferred("disabled", true)
 	_hitbox_component.toggle_collision(false)

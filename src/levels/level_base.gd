@@ -4,7 +4,7 @@ signal camera_above_player
 
 const LEVEL_NUMBER_TIME: = 2.0
 
-@export var start_with_peek_animation: bool = false
+@export var animate_at_level_start: bool = false
 
 var level_number: = -1
 var ball_creature: BallCreature
@@ -55,23 +55,24 @@ func _ready() -> void:
 
 	get_tree().paused = true
 
-	%LevelNumberLabel.show()
-	await get_tree().create_timer(LEVEL_NUMBER_TIME, true).timeout
-	%LevelNumberLabel.hide()
+	if animate_at_level_start:
+		%ColorRect.show()
+		%LevelNumberLabel.show()
+		await get_tree().create_timer(LEVEL_NUMBER_TIME, true).timeout
+		%LevelNumberLabel.hide()
 
-	_transition_layer.start_transition_effect(0.0, 1.0)
-	await _transition_layer.transition_finished
+		_transition_layer.start_transition_effect(0.0, 1.0)
+		await _transition_layer.transition_finished
 
-	if start_with_peek_animation:
 		_pause_screen.set_process_input(false)
 		_peek_camera.set_process_unhandled_input(false)
 		await _play_peek_animation()
 		_pause_screen.set_process_input(true)
 		_peek_camera.set_process_unhandled_input(true)
 
-	var cheer_label: = %CheerLabel as CheerLabel
-	cheer_label.show_cheer_text("START!")
-	await cheer_label.finished
+		var cheer_label: = %CheerLabel as CheerLabel
+		cheer_label.show_cheer_text("START!")
+		await cheer_label.finished
 
 	get_tree().paused = false
 
