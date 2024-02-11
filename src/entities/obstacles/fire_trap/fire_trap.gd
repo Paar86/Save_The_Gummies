@@ -40,6 +40,11 @@ func toggle_collision(value: bool) -> void:
 
 
 func _on_half_second_ticked() -> void:
+	# For grouping fire traps under a single node which can be disable,
+	# e.g. with VisibilityEnabler2D
+	if not get_parent().process_mode == PROCESS_MODE_INHERIT:
+		return
+
 	_half_ticks_counter += 1
 
 
