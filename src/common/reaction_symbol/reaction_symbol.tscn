@@ -5,6 +5,7 @@
 
 [node name="ReactionSymbol" type="Sprite2D"]
 visible = false
+z_index = 99
 position = Vector2(0, -12)
 texture = ExtResource("1_wfva4")
 hframes = 2

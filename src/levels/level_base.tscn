@@ -65,6 +65,7 @@ editor_description = "Ladders, barriers..."
 [node name="BallCreature" parent="." instance=ExtResource("2_3bdtq")]
 
 [node name="PlayerCamera" parent="." instance=ExtResource("2_fykds")]
+editor_description = "Remote transform is created and set in code in level base object script."
 offset = Vector2(0, 0)
 
 [node name="PeekCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player_camera")]
