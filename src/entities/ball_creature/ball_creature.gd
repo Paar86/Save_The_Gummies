@@ -140,11 +140,13 @@ func toggle_collision_layer(value: bool, delay: float = 0.0) -> void:
 func disable_collision() -> void:
 	_collision_shape.set_deferred("disabled", true)
 	_hitbox_component.toggle_collision(false)
+	_ground_detector.enabled = false
 
 
 func enable_collision() -> void:
 	_collision_shape.set_deferred("disabled", false)
 	_hitbox_component.toggle_collision(true)
+	_ground_detector.enabled = true
 
 
 func propagate_whistle(source_body: GameCharacter) -> void:
