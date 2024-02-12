@@ -159,7 +159,7 @@ func propagate_whistle(source_body: GameCharacter) -> void:
 	_following_timer.start()
 
 	# Creature can get stuck near slope sometimes so we push it up a little to make it move
-	if is_on_floor and !linear_velocity.length():
+	if is_on_floor and linear_velocity.is_equal_approx(Vector2.ZERO):
 		apply_impulse(Vector2.UP * 60.0)
 
 
