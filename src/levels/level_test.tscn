@@ -180,5 +180,8 @@ layer_0/tile_data = PackedInt32Array(-393212, 1, 2, -393210, 1, 2, -393209, 6553
 layer_1/name = "Overlay"
 layer_1/tile_data = PackedInt32Array(65544, 262145, 65536, 65545, 262145, 65536, 65546, 262145, 65536, 65547, 262145, 65536, 65548, 262145, 65536, 65543, 262145, 65536, 65549, 262145, 65536)
 
+[node name="ColorRect" parent="TransitionLayer" index="0"]
+unique_name_in_owner = false
+
 [editable path="ObjectInMiddle/Ladder"]
 [editable path="ObjectsInFront/GlueFloor"]

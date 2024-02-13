@@ -129,14 +129,24 @@ func remove_movement_modificator(modificator: Vector2) -> void:
 	_effects_applier_component.remove_movement_modificator(modificator)
 
 
+func toggle_collision_layer(value: bool, delay: float = 0.0) -> void:
+	delay = maxf(delay, 0.0)
+	if delay:
+		await get_tree().create_timer(delay).timeout
+
+	set_collision_layer_value(4, value)
+
+
 func disable_collision() -> void:
 	_collision_shape.set_deferred("disabled", true)
 	_hitbox_component.toggle_collision(false)
+	_ground_detector.enabled = false
 
 
 func enable_collision() -> void:
 	_collision_shape.set_deferred("disabled", false)
 	_hitbox_component.toggle_collision(true)
+	_ground_detector.enabled = true
 
 
 func propagate_whistle(source_body: GameCharacter) -> void:
@@ -149,7 +159,7 @@ func propagate_whistle(source_body: GameCharacter) -> void:
 	_following_timer.start()
 
 	# Creature can get stuck near slope sometimes so we push it up a little to make it move
-	if is_on_floor and !linear_velocity.length():
+	if is_on_floor and linear_velocity.is_equal_approx(Vector2.ZERO):
 		apply_impulse(Vector2.UP * 60.0)
 
 
