@@ -24,6 +24,7 @@ var velocity_combined: Vector2:
 
 # Nodes
 @onready var _effects_applier_component: EffectsApplierComponent = $EffectsApplierComponent
+@onready var _hurtbox_component: HurtboxComponent = $HurtboxComponent
 
 
 func _ready() -> void:

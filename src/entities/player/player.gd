@@ -26,7 +26,6 @@ var _player_hurt_sfx: = preload(SfxResources.PLAYER_HURT)
 @onready var _ladder_detector_middle: RayCast2D = $Raycasts/LadderDetectorMiddle
 @onready var _ladder_detector_right: RayCast2D = $Raycasts/LadderDetectorRight
 @onready var _hitbox_component: HitboxComponent = $HitboxComponent
-@onready var _hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var _state_machine: StateMachine = $StateMachine
 @onready var _world_detector: Area2D = $WorldDetector
 

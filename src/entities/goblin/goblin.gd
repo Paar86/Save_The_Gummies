@@ -25,7 +25,6 @@ var _facing_direction: = 1.0
 
 @onready var _reaction_symbol: ReactionSymbol = $ReactionSymbol
 @onready var _animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var _hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var _hitbox_component: HitboxComponent = $HitboxComponent
 
 
