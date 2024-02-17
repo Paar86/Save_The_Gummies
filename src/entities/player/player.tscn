@@ -334,7 +334,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 17
+collision_mask = 49
 slide_on_ceiling = false
 floor_constant_speed = true
 floor_snap_length = 5.0

@@ -142,7 +142,7 @@ size = Vector2(6, 12)
 
 [node name="Goblin" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 21
+collision_mask = 53
 script = ExtResource("1_i1jgx")
 metadata/_edit_group_ = true
 
@@ -186,12 +186,12 @@ shape = SubResource("RectangleShape2D_jyw6e")
 [node name="ObstacleDetector" type="RayCast2D" parent="."]
 position = Vector2(0, -4)
 target_position = Vector2(5, 0)
-collision_mask = 21
+collision_mask = 53
 
 [node name="ObstacleDetector2" type="RayCast2D" parent="."]
 position = Vector2(0, -11)
 target_position = Vector2(5, 0)
-collision_mask = 21
+collision_mask = 53
 
 [node name="GroundDetector" type="RayCast2D" parent="."]
 position = Vector2(3, -2)
