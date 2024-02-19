@@ -11,10 +11,10 @@
 [ext_resource type="Script" path="res://src/entities/obstacles/crusher/states/resting.gd" id="7_30n2n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x658q"]
-size = Vector2(16, 15)
+size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_otqip"]
-size = Vector2(16, 20)
+size = Vector2(14, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1jefw"]
 size = Vector2(32, 112)
@@ -40,7 +40,7 @@ texture_mode = 1
 
 [node name="MainBody" type="AnimatableBody2D" parent="."]
 position = Vector2(8, 8)
-collision_layer = 32
+collision_layer = 48
 sync_to_physics = false
 script = ExtResource("2_01qpt")
 
@@ -74,7 +74,6 @@ states_for_transition = [NodePath("../Idle")]
 texture = ExtResource("2_nmdm6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MainBody"]
-position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_x658q")
 
 [node name="RestTimer" type="Timer" parent="MainBody"]

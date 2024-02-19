@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c36mwvup5f8ad"]
+[gd_scene load_steps=30 format=3 uid="uid://c36mwvup5f8ad"]
 
 [ext_resource type="Script" path="res://src/entities/ball_creature/ball_creature.gd" id="1_r5tyh"]
 [ext_resource type="PackedScene" uid="uid://cvsgunn02v50s" path="res://src/common/components/hitbox/hitbox_component.tscn" id="2_4pech"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://src/entities/ball_creature/states/air.gd" id="12_hhntu"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/states/carried.gd" id="13_6dm14"]
 [ext_resource type="Script" path="res://src/entities/ball_creature/states/happy.gd" id="16_jpx0s"]
+[ext_resource type="Script" path="res://src/entities/ball_creature/states/crushed.gd" id="17_l0h0r"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_etqu6"]
 rough = true
@@ -166,6 +167,7 @@ shape = SubResource("CircleShape2D_rslvb")
 shape = SubResource("CircleShape2D_xxh6r")
 
 [node name="CollisionTester" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionTester"]
@@ -191,6 +193,9 @@ script = ExtResource("8_7l0pn")
 
 [node name="GroundDetector" type="RayCast2D" parent="Node/PalettedSprite"]
 target_position = Vector2(0, 5)
+
+[node name="CeilingDetector" type="RayCast2D" parent="Node/PalettedSprite"]
+target_position = Vector2(0, -5)
 
 [node name="ReactionSymbol" parent="Node/PalettedSprite" instance=ExtResource("9_qjcsl")]
 
@@ -237,6 +242,12 @@ states_for_transition = [NodePath("../Idle")]
 wait_time = 3.0
 one_shot = true
 
+[node name="Crushed" type="Node" parent="StateMachine" node_paths=PackedStringArray("ball_creature", "states_for_transition")]
+script = ExtResource("17_l0h0r")
+ball_creature = NodePath("../..")
+states_for_transition = [NodePath("../Idle")]
+universal = true
+
 [node name="FollowingTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
@@ -245,8 +256,6 @@ one_shot = true
 libraries = {
 "": SubResource("AnimationLibrary_aatl0")
 }
-
-[node name="Area2D" type="Area2D" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="FollowingTimer" to="." method="_on_following_timer_timeout"]

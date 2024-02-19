@@ -3,6 +3,7 @@ extends CrusherState
 var _acceleration: = 180.0
 var _max_speed: = 120.0
 var _vertical_velocity: = 0.0
+var _crushed_ball_creature: BallCreature
 
 
 func on_exit(transition: Transition) -> void:
@@ -10,13 +11,10 @@ func on_exit(transition: Transition) -> void:
 
 
 func physics_process(delta: float) -> void:
-	for crushed_object in crusher_body.crushed_objects:
-		if not crushed_object is GameCharacter:
-			continue
-
-		var crushed_character: = crushed_object as GameCharacter
-		if crushed_character.is_on_floor() and crushed_character.global_position.y > crusher_body.global_position.y:
-			crushed_character._hurtbox_component.make_damage(999)
+	crusher_body.handle_crushed_objects(
+		func(crusher_body: CrusherMainBody, crushed_object: PhysicsBody2D) -> bool:
+		return crushed_object.global_position.y > crusher_body.global_position.y,
+	)
 
 	_vertical_velocity += _acceleration * delta
 	_vertical_velocity = clampf(_vertical_velocity, 0.0, _max_speed)

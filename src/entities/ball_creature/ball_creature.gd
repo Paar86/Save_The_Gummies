@@ -31,6 +31,7 @@ var _bounce_sfx: = preload(SfxResources.BALL_BOUNCE)
 @onready var _sprite: PalettedSprite = $Node/PalettedSprite
 @onready var _hitbox_component: HitboxComponent = $HitboxComponent
 @onready var _ground_detector: RayCast2D = $Node/PalettedSprite/GroundDetector
+@onready var _ceiling_detector: RayCast2D = $Node/PalettedSprite/CeilingDetector
 @onready var _reaction_symbol: ReactionSymbol = $Node/PalettedSprite/ReactionSymbol
 @onready var _following_timer: Timer = $FollowingTimer
 @onready var _collision_tester: Area2D = $CollisionTester
@@ -41,11 +42,15 @@ var _bounce_sfx: = preload(SfxResources.BALL_BOUNCE)
 	set(value):
 		pickable = value
 	get:
-		return pickable
+		return pickable and not freeze
 
 var is_on_floor: bool:
 	get:
 		return _ground_detector.is_colliding()
+
+var is_on_ceiling: bool:
+	get:
+		return _ceiling_detector.is_colliding()
 
 var is_inside_wall: bool:
 	get: return _collision_tester.has_overlapping_bodies()
@@ -53,7 +58,6 @@ var is_inside_wall: bool:
 
 var color: int:
 	get: return _sprite.color
-
 
 # Peeking with camera in a level
 var enabled_tracking: = false:
@@ -169,6 +173,8 @@ func _on_effect_added(effect: Enums.effect) -> void:
 			linear_damp = 5
 			physics_material_override.bounce = 0.0
 			_produce_bounce_sfx = false
+		Enums.effect.CRUSHED:
+			_state_machine.transition_to("Crushed")
 
 
 func _on_effect_removed(effect: Enums.effect) -> void:

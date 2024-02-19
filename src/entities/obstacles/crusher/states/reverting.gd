@@ -1,18 +1,17 @@
 extends CrusherState
 
 var _ascending_speed: = 25.0
+var _crushed_ball_creature: BallCreature
 
 
 func physics_process(delta: float) -> void:
-	for crushed_object in crusher_body.crushed_objects:
-		if not crushed_object is GameCharacter:
-			continue
+	crusher_body.handle_crushed_objects(
+		func(crusher_body: CrusherMainBody, crushed_object: PhysicsBody2D) -> bool:
+		return crushed_object.global_position.y < crusher_body.global_position.y,
+		true
+	)
 
-		var crushed_character: = crushed_object as GameCharacter
-		if crushed_character.is_on_ceiling() and crushed_character.global_position.y < crusher_body.global_position.y:
-			crushed_character._hurtbox_component.make_damage(999)
-
-	var collider: = crusher_body.move_and_collide(_ascending_speed * Vector2.UP * delta)
+	var collider: = crusher_body.move_and_collide(_ascending_speed * Vector2.UP * delta, false, 0.0)
 	crusher_body.body_moved.emit()
 
 	if collider and collider.get_collider() is StaticBody2D:
