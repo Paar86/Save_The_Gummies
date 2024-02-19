@@ -1,0 +1,107 @@
+[gd_scene load_steps=13 format=3 uid="uid://conmbq7klpskm"]
+
+[ext_resource type="Texture2D" uid="uid://cacokdpeyyi8" path="res://assets/obstacles/chain.png" id="1_rlge2"]
+[ext_resource type="Script" path="res://src/entities/obstacles/crusher/crusher.gd" id="1_rm2qi"]
+[ext_resource type="Script" path="res://src/entities/obstacles/crusher/main_body.gd" id="2_01qpt"]
+[ext_resource type="Texture2D" uid="uid://b7vtua30mp8sh" path="res://assets/obstacles/crusher.png" id="2_nmdm6"]
+[ext_resource type="Script" path="res://src/common/state_machine/state_machine.gd" id="2_ppfgw"]
+[ext_resource type="Script" path="res://src/entities/obstacles/crusher/states/idle.gd" id="3_rcmn8"]
+[ext_resource type="Script" path="res://src/entities/obstacles/crusher/states/falling.gd" id="4_vew4p"]
+[ext_resource type="Script" path="res://src/entities/obstacles/crusher/states/reverting.gd" id="5_uo0x1"]
+[ext_resource type="Script" path="res://src/entities/obstacles/crusher/states/resting.gd" id="7_30n2n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x658q"]
+size = Vector2(14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_otqip"]
+size = Vector2(14, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1jefw"]
+size = Vector2(32, 112)
+
+[node name="Crusher" type="Node2D"]
+script = ExtResource("1_rm2qi")
+
+[node name="ChainL" type="Line2D" parent="."]
+texture_repeat = 2
+position = Vector2(4, 0)
+points = PackedVector2Array(0, 0, 0, 0)
+width = 3.0
+texture = ExtResource("1_rlge2")
+texture_mode = 1
+
+[node name="ChainR" type="Line2D" parent="."]
+texture_repeat = 2
+position = Vector2(12, 0)
+points = PackedVector2Array(0, 0, 0, 0)
+width = 3.0
+texture = ExtResource("1_rlge2")
+texture_mode = 1
+
+[node name="MainBody" type="AnimatableBody2D" parent="."]
+position = Vector2(8, 8)
+collision_layer = 16
+sync_to_physics = false
+script = ExtResource("2_01qpt")
+
+[node name="StateMachine" type="Node" parent="MainBody" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_ppfgw")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="MainBody/StateMachine" node_paths=PackedStringArray("crusher_body", "rest_timer", "states_for_transition")]
+script = ExtResource("3_rcmn8")
+crusher_body = NodePath("../..")
+rest_timer = NodePath("../../RestTimer")
+states_for_transition = [NodePath("../Falling")]
+
+[node name="Falling" type="Node" parent="MainBody/StateMachine" node_paths=PackedStringArray("crusher_body", "states_for_transition")]
+script = ExtResource("4_vew4p")
+crusher_body = NodePath("../..")
+states_for_transition = [NodePath("../Resting")]
+
+[node name="Resting" type="Node" parent="MainBody/StateMachine" node_paths=PackedStringArray("crusher_body", "rest_timer", "states_for_transition")]
+script = ExtResource("7_30n2n")
+crusher_body = NodePath("../..")
+rest_timer = NodePath("../../RestTimer")
+states_for_transition = [NodePath("../Reverting")]
+
+[node name="Reverting" type="Node" parent="MainBody/StateMachine" node_paths=PackedStringArray("crusher_body", "states_for_transition")]
+script = ExtResource("5_uo0x1")
+crusher_body = NodePath("../..")
+states_for_transition = [NodePath("../Idle")]
+
+[node name="MainSprite" type="Sprite2D" parent="MainBody"]
+texture = ExtResource("2_nmdm6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainBody"]
+shape = SubResource("RectangleShape2D_x658q")
+
+[node name="RestTimer" type="Timer" parent="MainBody"]
+editor_description = "How long will the crusher rest after returning back to it's original position before it can be activated again."
+wait_time = 2.0
+one_shot = true
+
+[node name="CrushEffectorArea" type="Area2D" parent="MainBody"]
+visible = false
+collision_layer = 0
+collision_mask = 14
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainBody/CrushEffectorArea"]
+shape = SubResource("RectangleShape2D_otqip")
+
+[node name="PlayerDetectorArea" type="Area2D" parent="."]
+editor_description = "Intentionaly set so it can detect a player in limited area extents."
+visible = false
+position = Vector2(8, 72)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectorArea"]
+shape = SubResource("RectangleShape2D_1jefw")
+
+[connection signal="body_entered" from="MainBody/CrushEffectorArea" to="MainBody" method="_on_crush_effector_area_body_entered"]
+[connection signal="body_exited" from="MainBody/CrushEffectorArea" to="MainBody" method="_on_crush_effector_area_body_exited"]
+[connection signal="body_entered" from="PlayerDetectorArea" to="." method="_on_player_detector_area_body_entered"]
+[connection signal="body_exited" from="PlayerDetectorArea" to="." method="_on_player_detector_area_body_exited"]

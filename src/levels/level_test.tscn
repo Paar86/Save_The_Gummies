@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://becvu2tommbnh"]
+[gd_scene load_steps=27 format=3 uid="uid://becvu2tommbnh"]
 
 [ext_resource type="PackedScene" uid="uid://dvje8c8sahcwc" path="res://src/levels/level_base.tscn" id="1_wv10m"]
 [ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/world_tilesets.tres" id="2_y5w7g"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dayyvi88hdu0a" path="res://src/entities/obstacles/fire_trap/fire_trap.tscn" id="6_u2tis"]
 [ext_resource type="PackedScene" uid="uid://c1ny4x7ikhd2j" path="res://src/entities/goblin/goblin.tscn" id="8_ks4ma"]
 [ext_resource type="PackedScene" uid="uid://cpjklwe1a6wss" path="res://src/entities/objects/ladder/ladder.tscn" id="8_llwp4"]
+[ext_resource type="PackedScene" uid="uid://conmbq7klpskm" path="res://src/entities/obstacles/crusher/crusher.tscn" id="11_s0egt"]
 [ext_resource type="PackedScene" uid="uid://4h183oy5hfs8" path="res://src/entities/basket/basket.tscn" id="12_m5erk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4iavd"]
@@ -152,6 +153,7 @@ position = Vector2(16, 120)
 
 [node name="Player" parent="." index="9"]
 position = Vector2(16, 120)
+platform_on_leave = 2
 
 [node name="GlueFloor" parent="ObjectsInFront" index="0" instance=ExtResource("5_igaj5")]
 position = Vector2(88, 120)
@@ -172,6 +174,9 @@ position = Vector2(160, 88)
 
 [node name="Basket" parent="ObjectsInFront" index="2" instance=ExtResource("12_m5erk")]
 position = Vector2(-96, 112)
+
+[node name="Crusher" parent="ObjectsInFront" index="3" instance=ExtResource("11_s0egt")]
+position = Vector2(-24, 56)
 
 [node name="DecorationsTileMap" parent="." index="11"]
 rendering_quadrant_size = 8
