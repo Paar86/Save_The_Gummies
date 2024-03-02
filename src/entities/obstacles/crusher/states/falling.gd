@@ -23,4 +23,6 @@ func physics_process(delta: float) -> void:
 
 	# Check if the collider is baked collision shape
 	if collision and collision.get_collider() is StaticBody2D:
-			state_machine.transition_to("Resting")
+		Events.screen_shake_requested.emit()
+
+		state_machine.transition_to("Resting")
