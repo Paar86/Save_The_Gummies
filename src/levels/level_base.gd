@@ -106,8 +106,9 @@ func _configure_cameras() -> void:
 	# Setting camera limits
 	var tile_map_boundaries: = _tile_map.get_used_rect()
 	var tile_map_cell_size: = _tile_map.rendering_quadrant_size
+	var cameras: Array[Camera2D] = [_player_camera, _peek_camera]
 
-	for camera in [_player_camera, _peek_camera]:
+	for camera in cameras:
 		camera.limit_left = tile_map_boundaries.position.x * tile_map_cell_size + 5
 		camera.limit_right = tile_map_boundaries.end.x * tile_map_cell_size - 5
 		camera.limit_top = tile_map_boundaries.position.y * tile_map_cell_size + 5
@@ -116,6 +117,9 @@ func _configure_cameras() -> void:
 	# Additional settings
 	_peek_camera.ball_creature = ball_creature
 	_peek_camera.arrived_at_player_camera.connect(_on_peek_camera_at_player)
+
+	var screen_shaker: = %ScreenShaker as ScreenShaker
+	screen_shaker.register_cameras(cameras)
 
 
 func _register_checkpoints() -> void:

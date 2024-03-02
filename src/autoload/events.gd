@@ -17,3 +17,6 @@ signal reload_level_requested
 signal pause_level_requested
 signal unpause_level_requested
 signal new_game_requested(initial_level_number: int)
+
+# Level specific
+signal screen_shake_requested
