@@ -24,7 +24,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if _target_ticks_count == -1:
-		push_error("Target ticks count not set properly!")
+		#push_error("Target ticks count not set properly!")
+		set_process(false)
 		return
 
 	if _half_ticks_counter < _target_ticks_count:

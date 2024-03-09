@@ -61,7 +61,7 @@ func handle_crushed_objects(is_right_height_func: Callable, check_ceiling: bool 
 			if not crushed_object.is_effect_active(Enums.effect.CRUSHED):
 				crushed_object.apply_effect(Enums.effect.CRUSHED)
 
-	# Stop crushing a ball creature when it's not longer near the crusher
+	# Stop crushing a ball creature when it's no longer near the crusher
 	if _crushed_ball_creature and not crushed_objects.has(_crushed_ball_creature):
 		_crushed_ball_creature.remove_effect(Enums.effect.CRUSHED)
 		_crushed_ball_creature = null

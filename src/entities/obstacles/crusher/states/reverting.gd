@@ -20,4 +20,5 @@ func physics_process(delta: float) -> void:
 
 	if crusher_body.position.y < crusher_body._origin_position.y:
 		crusher_body.set_deferred("position", crusher_body._origin_position)
+		crusher_body.body_moved.emit()
 		state_machine.transition_to("Idle")
