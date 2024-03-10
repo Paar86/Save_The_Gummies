@@ -21,6 +21,7 @@ size = Vector2(32, 112)
 
 [node name="Crusher" type="Node2D"]
 script = ExtResource("1_rm2qi")
+metadata/_edit_group_ = true
 
 [node name="ChainL" type="Line2D" parent="."]
 texture_repeat = 2
