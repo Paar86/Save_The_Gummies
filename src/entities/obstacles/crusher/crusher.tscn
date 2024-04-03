@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://conmbq7klpskm"]
+[gd_scene load_steps=14 format=3 uid="uid://conmbq7klpskm"]
 
 [ext_resource type="Texture2D" uid="uid://cacokdpeyyi8" path="res://assets/obstacles/chain.png" id="1_rlge2"]
 [ext_resource type="Script" path="res://src/entities/obstacles/crusher/crusher.gd" id="1_rm2qi"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://src/entities/obstacles/crusher/states/falling.gd" id="4_vew4p"]
 [ext_resource type="Script" path="res://src/entities/obstacles/crusher/states/reverting.gd" id="5_uo0x1"]
 [ext_resource type="Script" path="res://src/entities/obstacles/crusher/states/resting.gd" id="7_30n2n"]
+[ext_resource type="AudioStream" uid="uid://dpvm82kgc4b5i" path="res://assets/sfx/crusher/reverting_mod.wav" id="10_8almb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x658q"]
 size = Vector2(14, 16)
@@ -90,6 +91,12 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MainBody/CrushEffectorArea"]
 shape = SubResource("RectangleShape2D_otqip")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="MainBody"]
+stream = ExtResource("10_8almb")
+volume_db = -2.0
+max_distance = 128.0
+bus = &"SFX"
 
 [node name="PlayerDetectorArea" type="Area2D" parent="."]
 editor_description = "Intentionaly set so it can detect a player in limited area extents."

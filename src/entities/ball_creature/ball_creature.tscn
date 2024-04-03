@@ -193,6 +193,7 @@ script = ExtResource("8_7l0pn")
 
 [node name="GroundDetector" type="RayCast2D" parent="Node/PalettedSprite"]
 target_position = Vector2(0, 5)
+collision_mask = 17
 
 [node name="CeilingDetector" type="RayCast2D" parent="Node/PalettedSprite"]
 target_position = Vector2(0, -5)
