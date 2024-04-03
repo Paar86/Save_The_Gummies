@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://src/entities/obstacles/crusher/states/falling.gd" id="4_vew4p"]
 [ext_resource type="Script" path="res://src/entities/obstacles/crusher/states/reverting.gd" id="5_uo0x1"]
 [ext_resource type="Script" path="res://src/entities/obstacles/crusher/states/resting.gd" id="7_30n2n"]
-[ext_resource type="AudioStream" uid="uid://dpvm82kgc4b5i" path="res://assets/sfx/crusher/reverting_mod.wav" id="10_8almb"]
+[ext_resource type="AudioStream" uid="uid://cx8h5l8rrhol3" path="res://assets/sfx/crusher/reverting.wav" id="10_eosbj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x658q"]
 size = Vector2(14, 16)
@@ -93,7 +93,7 @@ monitorable = false
 shape = SubResource("RectangleShape2D_otqip")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="MainBody"]
-stream = ExtResource("10_8almb")
+stream = ExtResource("10_eosbj")
 volume_db = -2.0
 max_distance = 128.0
 bus = &"SFX"
