@@ -10,8 +10,11 @@ const VELOCITY_SECONDARY_SCALE: = 2.0
 const FOLLOWING_FORCE: = 150.0
 
 # Creature stops following a player if too near or too far (only in following mode)
-const STOP_FOLLOWING_DISTANCE_NEAR: = 8.0
+const STOP_FOLLOWING_DISTANCE_NEAR: = 4.0
 const STOP_FOLLOWING_DISTANCE_FAR: = 120.0
+
+# How fast must the ball move to produce bounce sound effect
+const BOUNCE_SFX_VELOCITY: = 20.0
 
 # Wheter to allow leaving happy state íf active; used in title screen
 var happy_mode_locked: = true
@@ -79,6 +82,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
+
+	if not _ground_detector.is_colliding() and sleeping:
+		sleeping = false
 
 	if _effects_applier_component.velocity_secondary != Vector2.ZERO:
 		apply_central_force(_effects_applier_component.velocity_secondary * VELOCITY_SECONDARY_SCALE)
@@ -164,7 +170,8 @@ func propagate_whistle(source_body: GameCharacter) -> void:
 
 	# Creature can get stuck near slope sometimes so we push it up a little to make it move
 	if is_on_floor and linear_velocity.is_equal_approx(Vector2.ZERO):
-		apply_impulse(Vector2.UP * 60.0)
+		print("Trying to loose free...")
+		apply_impulse(Vector2.UP * 80.0)
 
 
 func _on_effect_added(effect: Enums.effect) -> void:
@@ -187,11 +194,13 @@ func _on_effect_removed(effect: Enums.effect) -> void:
 
 
 func _on_body_entered(body: Node) -> void:
+	# To avoid producing sound when the ball is spawned
 	if not _produce_bounce_sfx:
 		_produce_bounce_sfx = true
 		return
 
-	AudioStreamManager2D.play_sound(_bounce_sfx, self)
+	if linear_velocity.length() > BOUNCE_SFX_VELOCITY:
+		AudioStreamManager2D.play_sound(_bounce_sfx, self)
 
 
 func _on_following_timer_timeout() -> void:

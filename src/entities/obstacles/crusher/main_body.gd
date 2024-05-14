@@ -13,6 +13,7 @@ var _crushed_ball_creature: BallCreature
 
 @onready var _collision_shape: = $CollisionShape2D as CollisionShape2D
 @onready var _rest_timer: = $RestTimer as Timer
+@onready var _audio_player: = $AudioStreamPlayer2D as AudioStreamPlayer2D
 
 
 func _ready() -> void:
@@ -61,10 +62,18 @@ func handle_crushed_objects(is_right_height_func: Callable, check_ceiling: bool 
 			if not crushed_object.is_effect_active(Enums.effect.CRUSHED):
 				crushed_object.apply_effect(Enums.effect.CRUSHED)
 
-	# Stop crushing a ball creature when it's not longer near the crusher
+	# Stop crushing a ball creature when it's no longer near the crusher
 	if _crushed_ball_creature and not crushed_objects.has(_crushed_ball_creature):
 		_crushed_ball_creature.remove_effect(Enums.effect.CRUSHED)
 		_crushed_ball_creature = null
+
+
+func play_reverting_sfx() -> void:
+	_audio_player.play()
+
+
+func stop_reverting_sfx() -> void:
+	_audio_player.stop()
 
 
 func _on_crush_effector_area_body_entered(body: Node2D) -> void:

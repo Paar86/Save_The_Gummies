@@ -5,7 +5,8 @@ class_name Crusher extends Node2D
 @onready var _main_body: = $MainBody as CrusherMainBody
 
 func _ready() -> void:
-	_main_body.body_moved.connect(_on_main_body_moved)
+	_main_body.body_moved.connect(_on_main_body_moved, CONNECT_DEFERRED)
+	_update_chain_lines()
 
 
 func _update_chain_lines() -> void:

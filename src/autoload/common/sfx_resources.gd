@@ -25,6 +25,10 @@ const BASKET_CATCH: = "res://assets/sfx/basket/basket_catch.wav"
 # Obstacles
 const ARROW_SHOOT: = "res://assets/sfx/arrow/arrow_shoot.wav"
 
+# Crusher
+const CRUSHER_STOMP: = "res://assets/sfx/crusher/stomp.wav"
+const CRUSHER_FALLING: = "res://assets/sfx/crusher/falling.wav"
+
 # Common
 const DEATH_EXPLOSION: = "res://assets/sfx/effects/death.wav"
 const BREAK_1: = "res://assets/sfx/effects/break_1.wav"

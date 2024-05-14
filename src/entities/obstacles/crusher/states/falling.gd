@@ -3,7 +3,12 @@ extends CrusherState
 var _acceleration: = 180.0
 var _max_speed: = 120.0
 var _vertical_velocity: = 0.0
-var _crushed_ball_creature: BallCreature
+var _falling_sfx: = preload(SfxResources.CRUSHER_FALLING)
+var _stomp_sfx: = preload(SfxResources.CRUSHER_STOMP)
+
+
+func on_enter(params: StateParams) -> void:
+	AudioStreamManager2D.play_sound(_falling_sfx, crusher_body)
 
 
 func on_exit(transition: Transition) -> void:
@@ -24,5 +29,5 @@ func physics_process(delta: float) -> void:
 	# Check if the collider is baked collision shape
 	if collision and collision.get_collider() is StaticBody2D:
 		Events.screen_shake_requested.emit()
-
+		AudioStreamManager2D.play_sound(_stomp_sfx, crusher_body)
 		state_machine.transition_to("Resting")
