@@ -10,7 +10,7 @@ const VELOCITY_SECONDARY_SCALE: = 2.0
 const FOLLOWING_FORCE: = 150.0
 
 # Creature stops following a player if too near or too far (only in following mode)
-const STOP_FOLLOWING_DISTANCE_NEAR: = 8.0
+const STOP_FOLLOWING_DISTANCE_NEAR: = 4.0
 const STOP_FOLLOWING_DISTANCE_FAR: = 120.0
 
 # How fast must the ball move to produce bounce sound effect
@@ -170,7 +170,8 @@ func propagate_whistle(source_body: GameCharacter) -> void:
 
 	# Creature can get stuck near slope sometimes so we push it up a little to make it move
 	if is_on_floor and linear_velocity.is_equal_approx(Vector2.ZERO):
-		apply_impulse(Vector2.UP * 60.0)
+		print("Trying to loose free...")
+		apply_impulse(Vector2.UP * 80.0)
 
 
 func _on_effect_added(effect: Enums.effect) -> void:

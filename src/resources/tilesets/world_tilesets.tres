@@ -2769,6 +2769,18 @@ texture_region_size = Vector2i(8, 8)
 11:4/0/terrains_peering_bit/top_left_corner = 0
 11:4/0/terrains_peering_bit/top_side = 0
 11:4/0/terrains_peering_bit/top_right_corner = 0
+9:5/0 = 0
+9:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+9:5/0/physics_layer_0/angular_velocity = 0.0
+8:5/0 = 0
+8:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+8:5/0/physics_layer_0/angular_velocity = 0.0
+10:5/0 = 0
+10:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+10:5/0/physics_layer_0/angular_velocity = 0.0
+11:5/0 = 0
+11:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+11:5/0/physics_layer_0/angular_velocity = 0.0
 
 [resource]
 tile_size = Vector2i(8, 8)
