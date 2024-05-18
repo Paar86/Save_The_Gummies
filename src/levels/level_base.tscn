@@ -60,6 +60,7 @@ layer_2/tile_data = PackedInt32Array()
 
 [node name="TileMapNoPhysics" type="TileMap" parent="."]
 editor_description = "Used only for visual tile representation. Physics is done manually by special node."
+rendering_quadrant_size = 8
 format = 2
 
 [node name="ObjectInMiddle" type="Node" parent="."]

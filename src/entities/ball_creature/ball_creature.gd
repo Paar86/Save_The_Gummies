@@ -170,8 +170,7 @@ func propagate_whistle(source_body: GameCharacter) -> void:
 
 	# Creature can get stuck near slope sometimes so we push it up a little to make it move
 	if is_on_floor and linear_velocity.is_equal_approx(Vector2.ZERO):
-		print("Trying to loose free...")
-		apply_impulse(Vector2.UP * 80.0)
+		apply_impulse(Vector2.UP * 90.0)
 
 
 func _on_effect_added(effect: Enums.effect) -> void:

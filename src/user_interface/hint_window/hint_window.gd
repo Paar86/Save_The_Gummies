@@ -12,6 +12,7 @@ var _key_icons_string: = {
 	"*key_right*": "[img]res://assets/ui/icon_right.png[/img]",
 	"*key_ctrl*": "[img]res://assets/ui/icon_ctrl.png[/img]",
 	"*key_spacebar*": "[img]res://assets/ui/icon_spacebar.png[/img]",
+	"*key_enter*": "[img]res://assets/ui/icon_enter.png[/img]",
 }
 
 @onready var _animated_border: = $AnimatedBorder as NinePatchRect
@@ -20,6 +21,9 @@ var _key_icons_string: = {
 
 
 func _ready() -> void:
+	if _hint_text.text:
+		_hint_text.text = _replace_key_icons_strings(_hint_text.text)
+
 	show()
 	set_process_input(false)
 
