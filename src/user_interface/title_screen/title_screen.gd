@@ -23,6 +23,8 @@ func _ready() -> void:
 	set_process_input(false)
 	set_physics_process(false)
 
+	MusicManager.play_music("title")
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
@@ -86,6 +88,8 @@ func _on_game_start() -> void:
 		ball_creature.happy_mode_locked = false
 		var modifier: = 1 if ball_creature.position.x < viewport_half else -1
 		ball_creature.constant_force.x = BALL_CREATURE_CONSTANT_FORCE * modifier
+
+		MusicManager.stop_music_with_fadeout()
 
 
 func _show_start_game_prompt() -> void:

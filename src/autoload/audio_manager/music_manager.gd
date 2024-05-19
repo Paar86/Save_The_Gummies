@@ -5,7 +5,9 @@ const BUS := "Music"
 var _music_player: AudioStreamPlayer
 var _current_music_name := ""
 
-@onready var playlist = {}
+@onready var playlist = {
+	"title": preload("res://assets/music/title.ogg"),
+}
 
 
 func play_music(music_name: String) -> void:
@@ -34,17 +36,13 @@ func stop_music_with_fadeout() -> void:
 	_current_music_name = ""
 	var original_volume = _music_player.volume_db
 
-	var tween := get_tree().create_tween()
-	tween.interpolate_property(_music_player,
+	var tween := get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
+	tween.tween_property(_music_player,
 								"volume_db",
-								_music_player.volume_db,
 								-60.0,
-								5.0,
-								Tween.TRANS_LINEAR,
-								Tween.EASE_OUT)
-	tween.play()
+								4.0)
 
-	await tween.tween_all_completed
+	await tween.finished
 	_music_player.stream_paused = true
 	_music_player.volume_db = original_volume
 
