@@ -2558,7 +2558,7 @@ position = Vector2(644, 224)
 [node name="Goblin6" parent="Enemies" index="4" instance=ExtResource("5_ehcf8")]
 position = Vector2(676, 224)
 
-[node name="BallCreature" parent="." index="6"]
+[node name="BallCreature" parent="." index="7"]
 position = Vector2(156, 20)
 continuous_cd = 1
 
@@ -2567,13 +2567,13 @@ material = SubResource("ShaderMaterial_o5jby")
 position = Vector2(156, 20)
 color = 5
 
-[node name="PlayerCamera" parent="." index="7"]
+[node name="PlayerCamera" parent="." index="8"]
 position = Vector2(860, 128)
 
-[node name="PeekCamera" parent="." index="8"]
+[node name="PeekCamera" parent="." index="9"]
 position = Vector2(860, 128)
 
-[node name="Player" parent="." index="9"]
+[node name="Player" parent="." index="10"]
 position = Vector2(860, 128)
 
 [node name="Crushers" type="Node" parent="ObjectsInFront" index="0"]

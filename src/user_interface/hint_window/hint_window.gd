@@ -18,6 +18,7 @@ var _key_icons_string: = {
 @onready var _animated_border: = $AnimatedBorder as NinePatchRect
 @onready var _hint_text: = $HintText as RichTextLabel
 @onready var _animation_player: = $AnimationPlayer as AnimationPlayer
+@onready var _hint_sfx: = preload(SfxResources.HINT_SHOW)
 
 
 func _ready() -> void:
@@ -46,6 +47,8 @@ func show_hint(message: String) -> void:
 	_animated_border.show()
 	_animation_player.play("grow")
 	_is_window_opening = true
+
+	AudioStreamManager.play_sound(_hint_sfx)
 
 
 func _close_hint() -> void:

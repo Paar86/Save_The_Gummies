@@ -6,7 +6,10 @@ var _music_player: AudioStreamPlayer
 var _current_music_name := ""
 
 @onready var playlist = {
+	"start": preload("res://assets/music/start.wav"),
+	"win": preload("res://assets/music/win.wav"),
 	"title": preload("res://assets/music/title.ogg"),
+	"outdoor": preload("res://assets/music/outdoor.ogg")
 }
 
 
@@ -40,7 +43,7 @@ func stop_music_with_fadeout() -> void:
 	tween.tween_property(_music_player,
 								"volume_db",
 								-60.0,
-								4.0)
+								2.0)
 
 	await tween.finished
 	_music_player.stream_paused = true

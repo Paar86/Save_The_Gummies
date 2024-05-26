@@ -30,9 +30,12 @@ var _cursor_position_current: = 0:
 		_on_option_entered(_cursor_position_current)
 		_on_option_exited(original_position)
 		_cursor.global_position = Vector2(10.0, _menu_options[_cursor_position_current].global_position.y)
+		AudioStreamManager.play_sound(_cursor_move_sfx)
 	get:
 		return _cursor_position_current
 
+@onready var _cursor_move_sfx: = preload(SfxResources.CURSOR_MOVE)
+@onready var _confirm_sfx: = preload(SfxResources.CONFIRM_2)
 @onready var _cursor: = $Cursor as Control
 @onready var _left_marker: = $OptionsContainer/SelectLevelOption/LeftMarker as Label
 @onready var _right_marker: = $OptionsContainer/SelectLevelOption/RightMarker as Label
@@ -78,11 +81,14 @@ func _change_level_choice(add_number: int) -> void:
 	if new_level_choice == level_count:
 		_right_marker.modulate.a = 0.0
 
+	AudioStreamManager.play_sound(_cursor_move_sfx)
+
 
 func _start_new_game() -> void:
 	new_game_option_confirmed.emit(_level_choice_current)
 	set_process_input(false)
 	hide()
+	AudioStreamManager.play_sound(_confirm_sfx)
 
 
 func _on_option_entered(index: int) -> void:

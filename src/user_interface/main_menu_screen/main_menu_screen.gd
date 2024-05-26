@@ -11,4 +11,5 @@ func _ready() -> void:
 
 
 func _on_new_game_option_confirmed(initial_level_number) -> void:
+	await MusicManager.stop_music_with_fadeout()
 	Events.new_game_requested.emit(initial_level_number)

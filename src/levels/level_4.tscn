@@ -2298,7 +2298,7 @@ scale = Vector2(-1, 1)
 [node name="GroundDetector" parent="Enemies/Goblin6" index="9"]
 position = Vector2(-3, -2)
 
-[node name="BallCreature" parent="." index="6"]
+[node name="BallCreature" parent="." index="7"]
 position = Vector2(136, 4)
 
 [node name="PalettedSprite" parent="BallCreature/Node" index="0"]
@@ -2306,10 +2306,10 @@ material = SubResource("ShaderMaterial_e28vt")
 position = Vector2(136, 4)
 color = 5
 
-[node name="PlayerCamera" parent="." index="7"]
+[node name="PlayerCamera" parent="." index="8"]
 position = Vector2(-904, -48)
 
-[node name="Player" parent="." index="9"]
+[node name="Player" parent="." index="10"]
 position = Vector2(-904, -48)
 
 [node name="Glue" type="Node" parent="ObjectsInFront" index="0"]

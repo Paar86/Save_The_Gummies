@@ -7,6 +7,8 @@ const PLAYER_KICK: = "res://assets/sfx/player/player_kick.wav"
 const PLAYER_PICKUP: = "res://assets/sfx/player/player_pickup.wav"
 const PLAYER_WHISTLE: = "res://assets/sfx/player/player_whistle.wav"
 const PLAYER_HURT: = "res://assets/sfx/player/player_hurt.wav"
+const PLAYER_PEEK: = "res://assets/sfx/player/player_peek.wav"
+const PLAYER_PEEK_BACK: = "res://assets/sfx/player/player_peek2.wav"
 
 # Ball creature
 const BALL_BOUNCE: = "res://assets/sfx/ball_creature/bounce.wav"
@@ -28,6 +30,13 @@ const ARROW_SHOOT: = "res://assets/sfx/arrow/arrow_shoot.wav"
 # Crusher
 const CRUSHER_STOMP: = "res://assets/sfx/crusher/stomp.wav"
 const CRUSHER_FALLING: = "res://assets/sfx/crusher/falling.wav"
+
+# UI
+const CONFIRM: = "res://assets/sfx/ui/confirm.wav"
+const CONFIRM_2: = "res://assets/sfx/ui/confirm2.wav"
+const GREETING: = "res://assets/sfx/ui/greet.wav"
+const HINT_SHOW: = "res://assets/sfx/ui/hint.wav"
+const CURSOR_MOVE: = "res://assets/sfx/ui/cursor_move.wav"
 
 # Common
 const DEATH_EXPLOSION: = "res://assets/sfx/effects/death.wav"

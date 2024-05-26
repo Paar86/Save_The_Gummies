@@ -5,6 +5,7 @@ signal camera_above_player
 const LEVEL_NUMBER_TIME: = 2.0
 
 @export var animate_at_level_start: bool = false
+@export var music_name: String = ""
 
 var level_number: = -1
 var ball_creature: BallCreature
@@ -27,6 +28,8 @@ var _game_stats: GameStats
 @onready var _pause_screen: CanvasLayer = $PauseScreen
 @onready var _hint_window: HintWindow = $UI/HintWindow
 @onready var _transition_layer: TransitionLayer = $TransitionLayer
+@onready var _peek_sfx: = preload(SfxResources.PLAYER_PEEK)
+@onready var _peek_back_sfx: = preload(SfxResources.PLAYER_PEEK_BACK)
 
 var game_stats: GameStats:
 	set(value): _game_stats = value
@@ -72,9 +75,11 @@ func _ready() -> void:
 
 		var cheer_label: = %CheerLabel as CheerLabel
 		cheer_label.show_cheer_text("START!")
-		await cheer_label.finished
 
 	get_tree().paused = false
+
+	if music_name:
+		MusicManager.play_music(music_name)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -156,9 +161,11 @@ func _configure_hints() -> void:
 func _play_peek_animation() -> void:
 	_peek_camera.make_current()
 	await _create_peek_delay()
+	AudioStreamManager.play_sound(_peek_sfx)
 	_peek_camera.set_ball_creature_as_target()
 	await _peek_camera.arrived_at_target
 	await _create_peek_delay()
+	AudioStreamManager.play_sound(_peek_back_sfx)
 	_peek_camera.set_player_camera_as_target()
 	await _peek_camera.arrived_at_target
 	await _create_peek_delay()
@@ -214,6 +221,7 @@ func _on_ball_creature_captured(ball_creature: BallCreature) -> void:
 			_game_stats.saved_ball_creatures_colors.append(ball_creature.color)
 
 	get_tree().paused = true
+	MusicManager.play_music("win")
 
 	var cheer_label: = %CheerLabel as CheerLabel
 	cheer_label.show_cheer_text("SAVED!")

@@ -13,6 +13,7 @@ var _ball_creatures_all: Array[BallCreature] = []
 
 @onready var _logo: = $Logo as Sprite2D
 @onready var _start_game_label: = $StartGameLabel as Label
+@onready var _confirm_sfx: = preload(SfxResources.CONFIRM)
 
 
 func _ready() -> void:
@@ -22,8 +23,6 @@ func _ready() -> void:
 
 	set_process_input(false)
 	set_physics_process(false)
-
-	MusicManager.play_music("title")
 
 
 func _input(event: InputEvent) -> void:
@@ -45,6 +44,7 @@ func shake_logo() -> void:
 		ball_creature.freeze = false
 
 	_show_start_game_prompt()
+	MusicManager.play_music("title")
 
 	var original_logo_position: = _logo.position
 	for i in LOGO_SHAKE_COUNT:
@@ -89,7 +89,7 @@ func _on_game_start() -> void:
 		var modifier: = 1 if ball_creature.position.x < viewport_half else -1
 		ball_creature.constant_force.x = BALL_CREATURE_CONSTANT_FORCE * modifier
 
-		MusicManager.stop_music_with_fadeout()
+	AudioStreamManager.play_sound(_confirm_sfx)
 
 
 func _show_start_game_prompt() -> void:

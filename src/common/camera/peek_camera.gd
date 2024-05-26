@@ -8,6 +8,8 @@ signal arrived_at_target(Node2D)
 var ball_creature: Node2D
 var _is_at_target: bool = false
 
+@onready var _peek_audio_stream: = $AudioStreamPlayer
+
 var _current_target_object: Node2D:
 	set(value):
 		_is_at_target = false
@@ -24,10 +26,13 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		set_ball_creature_as_target()
+		_peek_audio_stream.play()
+
 
 	if event.is_action_released("ui_accept"):
 		_current_target_object = null
 		arrived_at_player_camera.emit()
+		_peek_audio_stream.stop()
 
 
 # We do the calculation in physics_process to eliminate most of the jitter when the creature is moving
