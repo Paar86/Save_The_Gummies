@@ -15,6 +15,8 @@ var _count_half_ticks: = false
 @onready var _animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var _hitbox_component: HitboxComponent = $HitboxComponent
 @onready var _hitbox_collision: CollisionShape2D = $HitboxComponent/CollisionShape2D
+@onready var _fire_tele_sound: AudioStreamPlayer2D = $FireTelegraphSound
+@onready var _fire_sound: AudioStreamPlayer2D = $FireSound
 
 
 func _ready() -> void:
@@ -50,13 +52,18 @@ func _on_half_second_ticked() -> void:
 
 
 func _transition_to_another_state() -> void:
+	_fire_tele_sound.stop()
+	_fire_sound.stop()
+
 	match _current_state:
 		FireState.DELAYED, FireState.INACTIVE:
 			_current_state = FireState.TELEGRAPHING
+			_fire_tele_sound.play()
 			_animated_sprite.play("telegraph")
 			_target_ticks_count = telegraph_half_ticks
 		FireState.TELEGRAPHING:
 			_current_state = FireState.ACTIVE
+			_fire_sound.play()
 			_animated_sprite.play("active")
 			toggle_collision(true)
 			_target_ticks_count = active_half_ticks

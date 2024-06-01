@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dayyvi88hdu0a"]
+[gd_scene load_steps=14 format=3 uid="uid://dayyvi88hdu0a"]
 
 [ext_resource type="Texture2D" uid="uid://m3usghthgrv2" path="res://assets/obstacles/fire.png" id="1_46k66"]
 [ext_resource type="Script" path="res://src/entities/obstacles/fire_trap/fire_trap.gd" id="1_oclme"]
 [ext_resource type="PackedScene" uid="uid://cvsgunn02v50s" path="res://src/common/components/hitbox/hitbox_component.tscn" id="2_74sil"]
 [ext_resource type="Script" path="res://src/entities/obstacles/fire_trap/fire_trap_hitbox_component.gd" id="3_b2mnv"]
+[ext_resource type="AudioStream" uid="uid://dh47cm8t7e7r" path="res://assets/sfx/fire_trap/fire_tele.wav" id="5_q8206"]
+[ext_resource type="AudioStream" uid="uid://pyjiy7wlt3dr" path="res://assets/sfx/fire_trap/fire.wav" id="6_rhvk3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n4fwd"]
 size = Vector2(6, 14)
@@ -78,5 +80,19 @@ position = Vector2(4, -8)
 sprite_frames = SubResource("SpriteFrames_i0r4u")
 animation = &"telegraph"
 autoplay = "inactive"
+
+[node name="FireTelegraphSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_q8206")
+volume_db = -2.0
+max_distance = 128.0
+attenuation = 2.0
+bus = &"SFX"
+
+[node name="FireSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_rhvk3")
+volume_db = -2.0
+max_distance = 128.0
+attenuation = 2.0
+bus = &"SFX"
 
 [editable path="HitboxComponent"]

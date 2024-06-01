@@ -14,6 +14,7 @@ var _ball_creatures_all: Array[BallCreature] = []
 @onready var _logo: = $Logo as Sprite2D
 @onready var _start_game_label: = $StartGameLabel as Label
 @onready var _confirm_sfx: = preload(SfxResources.CONFIRM)
+@onready var _shake_sfx: = preload(SfxResources.BREAK_1)
 
 
 func _ready() -> void:
@@ -44,6 +45,7 @@ func shake_logo() -> void:
 		ball_creature.freeze = false
 
 	_show_start_game_prompt()
+	AudioStreamManager.play_sound(_shake_sfx)
 	MusicManager.play_music("title")
 
 	var original_logo_position: = _logo.position
