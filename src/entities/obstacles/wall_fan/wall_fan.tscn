@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://deqsyg5gxba07"]
+[gd_scene load_steps=17 format=3 uid="uid://deqsyg5gxba07"]
 
 [ext_resource type="Script" path="res://src/entities/obstacles/wall_fan/wall_fan.gd" id="1_54mbg"]
 [ext_resource type="Texture2D" uid="uid://betym73xvi3rr" path="res://assets/obstacles/wall_fan_spritesheet.png" id="1_sj5xw"]
 [ext_resource type="Texture2D" uid="uid://dy5xjxlyr1wwe" path="res://assets/obstacles/wind_particles.png" id="2_3aa7g"]
+[ext_resource type="AudioStream" uid="uid://c7a2y2qlwnfhh" path="res://assets/sfx/wind_generator/blowing.wav" id="4_xjev1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2kdup"]
 atlas = ExtResource("1_sj5xw")
@@ -117,6 +118,12 @@ randomness = 1.0
 fixed_fps = 0
 interpolate = false
 visibility_rect = Rect2(-21.5184, -23.906, 113.359, 47.8896)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_xjev1")
+autoplay = true
+max_distance = 128.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

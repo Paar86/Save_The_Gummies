@@ -1,4 +1,4 @@
-[gd_scene load_steps=282 format=3 uid="uid://brv6b7wxcciuo"]
+[gd_scene load_steps=284 format=3 uid="uid://brv6b7wxcciuo"]
 
 [ext_resource type="PackedScene" uid="uid://dvje8c8sahcwc" path="res://src/levels/level_base.tscn" id="1_fu4y7"]
 [ext_resource type="PackedScene" uid="uid://cpovy1sj2g2mi" path="res://src/entities/obstacles/arrow_shooter/arrow_shooter.tscn" id="2_2wpxs"]
@@ -10,6 +10,7 @@
 [ext_resource type="TileSet" uid="uid://ctlwpvc6uoe4p" path="res://src/resources/tilesets/decorations_tileset.tres" id="5_7kowv"]
 [ext_resource type="PackedScene" uid="uid://bmmhoexfwl035" path="res://src/entities/obstacles/barrier/barrier.tscn" id="5_coubi"]
 [ext_resource type="PackedScene" uid="uid://4h183oy5hfs8" path="res://src/entities/basket/basket.tscn" id="8_ynwli"]
+[ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie_alt.gdshader" id="9_roe5a"]
 [ext_resource type="PackedScene" uid="uid://cna1lldr5sydy" path="res://src/levels/background/clouds_background.tscn" id="10_6wfc3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sww07"]
@@ -785,6 +786,12 @@ size = Vector2(8, 46)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sdtfk"]
 size = Vector2(8, 54)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o5jby"]
+resource_local_to_scene = true
+shader = ExtResource("9_roe5a")
+shader_parameter/primary_replacement_color = Vector3(255, 0, 77)
+shader_parameter/secondary_replacement_color = Vector3(126, 37, 83)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lrqsl"]
 size = Vector2(60, 8)
@@ -2043,6 +2050,11 @@ position = Vector2(-144, 168)
 [node name="BallCreature" parent="." index="7"]
 position = Vector2(24, 76)
 
+[node name="PalettedSprite" parent="BallCreature/Node" index="0"]
+material = SubResource("ShaderMaterial_o5jby")
+position = Vector2(24, 76)
+color = 3
+
 [node name="PlayerCamera" parent="." index="8"]
 position = Vector2(72, 160)
 
@@ -2216,6 +2228,8 @@ position = Vector2(104, 160)
 [editable path="Enemies/Goblin"]
 [editable path="Enemies/Goblin/HurtboxComponent"]
 [editable path="Enemies/Goblin/HitboxComponent"]
+[editable path="BallCreature"]
+[editable path="BallCreature/HitboxComponent"]
 [editable path="ObjectsInFront/GlueFloors/GlueFloor2"]
 [editable path="ObjectsInFront/GlueFloors/GlueFloor3"]
 [editable path="ObjectsInFront/GlueFloors/GlueFloor4"]

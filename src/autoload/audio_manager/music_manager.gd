@@ -34,6 +34,14 @@ func play_music(music_name: String) -> void:
 	_current_music_name = music_name
 
 
+func pause_music() -> void:
+	_music_player.stream_paused = true
+
+
+func unpause_music() -> void:
+	_music_player.stream_paused = false
+
+
 func stop_music() -> void:
 	_current_music_name = ""
 	_music_player.stop()

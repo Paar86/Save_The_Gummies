@@ -976,6 +976,10 @@ visible = false
 [node name="WindParticles" parent="ObjectsBehind/WallFans/WallFanUnpassable3" index="3"]
 process_material = SubResource("ParticleProcessMaterial_40epw")
 
+[node name="AudioStreamPlayer2D" parent="ObjectsBehind/WallFans/WallFanUnpassable3" index="4"]
+volume_db = -2.0
+attenuation = 2.0
+
 [node name="WallFan6" parent="ObjectsBehind/WallFans" index="11" instance=ExtResource("2_k2psb")]
 position = Vector2(-752, -136)
 
@@ -2389,20 +2393,14 @@ rect = Rect2(-28, -10, 56, 23)
 enable_node_path = NodePath(".")
 
 [node name="FireTrap5" parent="ObjectsInFront/FireTraps/FireTrapsGroup" index="0" instance=ExtResource("10_h28rb")]
-position = Vector2(-4, 8)
+position = Vector2(3, 8)
 delay_half_ticks = 2
-inactive_half_ticks = 3
+inactive_half_ticks = 2
 telegraph_half_ticks = 2
 
 [node name="FireTrap10" parent="ObjectsInFront/FireTraps/FireTrapsGroup" index="1" instance=ExtResource("10_h28rb")]
 position = Vector2(-20, 8)
-inactive_half_ticks = 3
-telegraph_half_ticks = 2
-
-[node name="FireTrap6" parent="ObjectsInFront/FireTraps/FireTrapsGroup" index="2" instance=ExtResource("10_h28rb")]
-position = Vector2(12, 8)
-delay_half_ticks = 4
-inactive_half_ticks = 3
+inactive_half_ticks = 2
 telegraph_half_ticks = 2
 
 [node name="FireTrapsGroup2" type="VisibleOnScreenEnabler2D" parent="ObjectsInFront/FireTraps" index="2"]

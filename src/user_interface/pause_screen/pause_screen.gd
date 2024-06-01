@@ -7,10 +7,6 @@ func _ready() -> void:
 	Events.reload_level_requested.connect(_on_reload)
 
 
-func _on_continue_button_up() -> void:
-	Events.unpause_level_requested.emit()
-
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		if not visible and _can_pause:

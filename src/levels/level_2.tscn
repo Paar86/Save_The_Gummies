@@ -1,4 +1,4 @@
-[gd_scene load_steps=244 format=3 uid="uid://cbyx4ppl0a235"]
+[gd_scene load_steps=246 format=3 uid="uid://cbyx4ppl0a235"]
 
 [ext_resource type="PackedScene" uid="uid://dvje8c8sahcwc" path="res://src/levels/level_base.tscn" id="1_trin5"]
 [ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/world_tilesets.tres" id="2_84q13"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://4h183oy5hfs8" path="res://src/entities/basket/basket.tscn" id="3_q6px8"]
 [ext_resource type="PackedScene" uid="uid://cpjklwe1a6wss" path="res://src/entities/objects/ladder/ladder.tscn" id="4_mdl01"]
 [ext_resource type="PackedScene" uid="uid://c1ny4x7ikhd2j" path="res://src/entities/goblin/goblin.tscn" id="6_la6ta"]
+[ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie_alt.gdshader" id="8_86ain"]
 [ext_resource type="PackedScene" uid="uid://cna1lldr5sydy" path="res://src/levels/background/clouds_background.tscn" id="9_4my3y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gxpu5"]
@@ -711,6 +712,12 @@ size = Vector2(8, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nxsh"]
 size = Vector2(8, 38)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o5jby"]
+resource_local_to_scene = true
+shader = ExtResource("8_86ain")
+shader_parameter/primary_replacement_color = Vector3(255, 204, 170)
+shader_parameter/secondary_replacement_color = Vector3(171, 82, 54)
 
 [node name="Level2" instance=ExtResource("1_trin5")]
 music_name = "level_c"
@@ -1774,6 +1781,11 @@ position = Vector2(312, 160)
 [node name="BallCreature" parent="." index="7"]
 position = Vector2(268, 140)
 
+[node name="PalettedSprite" parent="BallCreature/Node" index="0"]
+material = SubResource("ShaderMaterial_o5jby")
+position = Vector2(268, 140)
+color = 6
+
 [node name="PlayerCamera" parent="." index="8"]
 position = Vector2(40, 96)
 
@@ -1789,3 +1801,5 @@ position = Vector2(0, 96)
 [editable path="ObjectInMiddle/Ladders/Ladder3"]
 [editable path="ObjectInMiddle/Ladders/Ladder4"]
 [editable path="ObjectInMiddle/Ladders/Ladder2"]
+[editable path="BallCreature"]
+[editable path="BallCreature/HitboxComponent"]

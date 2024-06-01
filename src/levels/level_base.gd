@@ -234,11 +234,13 @@ func _on_ball_creature_captured(ball_creature: BallCreature) -> void:
 
 func _on_pause_level_requested() -> void:
 	get_tree().paused = true
+	MusicManager.pause_music()
 	_pause_screen.show()
 
 
 func _on_unpause_level_requested() -> void:
 	get_tree().paused = false
+	MusicManager.unpause_music()
 	_pause_screen.hide()
 
 

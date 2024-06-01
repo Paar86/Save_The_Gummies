@@ -1008,8 +1008,8 @@ size = Vector2(8, 46)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o5jby"]
 resource_local_to_scene = true
 shader = ExtResource("4_q1s5e")
-shader_parameter/primary_replacement_color = Vector3(255, 163, 0)
-shader_parameter/secondary_replacement_color = Vector3(171, 82, 54)
+shader_parameter/primary_replacement_color = Vector3(0, 228, 54)
+shader_parameter/secondary_replacement_color = Vector3(0, 135, 81)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_paofh"]
 size = Vector2(24, 8)
@@ -2566,7 +2566,7 @@ continuous_cd = 1
 [node name="PalettedSprite" parent="BallCreature/Node" index="0"]
 material = SubResource("ShaderMaterial_o5jby")
 position = Vector2(156, 20)
-color = 5
+color = 1
 
 [node name="PlayerCamera" parent="." index="8"]
 position = Vector2(860, 128)
