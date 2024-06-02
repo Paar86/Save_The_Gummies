@@ -28,6 +28,12 @@ func on_enter(params: StateParams) -> void:
 	character.velocity_primary = Vector2.ZERO
 
 
+func on_exit(transition: Transition) -> void:
+	if transition.target_state_name == "Death":
+		_picked_object.set_deferred("freeze", false)
+		_picked_object.enable_collision()
+
+
 func physics_process(delta: float) -> void:
 	_elapsed_time += delta * PICKUP_SPEED_MODIFIER
 	_elapsed_time = minf(_elapsed_time, 1.0)

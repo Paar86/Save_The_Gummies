@@ -20,11 +20,8 @@ func _ready() -> void:
 	for child_state in _child_states:
 		_child_states_names.append(child_state.name)
 
-	Events.player_pickup_drop_requested.connect(_on_player_pickup_drop_requested)
-
 
 func physics_process(delta: float) -> void:
-#	if not is_aiming:
 	move_state.physics_process(delta)
 
 	if not move_state.character.is_on_floor():
@@ -42,9 +39,9 @@ func on_enter(params: StateParams) -> void:
 
 
 func on_exit(transition: Transition) -> void:
+	# Triggers if transitioning to death state
 	if not _child_states_names.has(transition.target_state_name):
 		move_state.max_speed = move_state.MAX_RUN_SPEED_DEFAULT
-		# In case of forced transition to death state
 		release_pickup(Vector2.ZERO)
 
 
@@ -80,7 +77,6 @@ func release_pickup(impulse: Vector2) -> void:
 			Vector2(character.global_position.x, character.pickup_transform.global_position.y)
 			)
 
-	#thrown_object.collision_layer = 0
 	thrown_object.toggle_collision_layer(false)
 	move_state.character.held_object = null
 	thrown_object.set_deferred("freeze", false)
@@ -95,8 +91,6 @@ func release_pickup(impulse: Vector2) -> void:
 		thrown_object.attack_strength_buffered = impulse.length()
 		state_machine.transition_to("Kick")
 		thrown_object.toggle_collision_layer(true, 0.07)
-		#await get_tree().create_timer(0.07).timeout
-		#thrown_object.collision_layer = 8
 		return
 
 	thrown_object.collision_layer = 8
@@ -113,7 +107,3 @@ func get_fast_vertical_impulse() -> Vector2:
 func on_to_aim_timer_timeout() -> void:
 	Events.player_aiming_requested.emit()
 	_is_aiming = true
-
-
-func _on_player_pickup_drop_requested() -> void:
-	release_pickup(Vector2.ZERO)
