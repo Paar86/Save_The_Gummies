@@ -57,7 +57,7 @@ func _on_change_level_requested() -> void:
 		_load_level(_current_level_index + 1)
 		return
 
-	# TODO: Otherwise load credits scene.
+	_load_scene(credits.instantiate())
 
 
 func _on_reload_level_requested() -> void:
@@ -77,13 +77,19 @@ func _on_new_game_requested(initial_level_number: int) -> void:
 func _on_change_scene_requested() -> void:
 	if _current_scene is GameByTitle:
 		_load_scene(title_screen.instantiate())
+		return
 
 	if _current_scene is TitleScreen:
 		var scene: = main_menu_screen.instantiate()
 		(scene as MainMenuScreen).level_count = levels.size()
 		_load_scene(scene)
+		return
 
 	if _current_scene is StoryText:
 		var start_level_index: = _game_stats.initial_level_number - 1
 		_load_level(start_level_index)
+		return
+
+	if _current_scene is Credits:
+		_load_scene(author_title.instantiate())
 

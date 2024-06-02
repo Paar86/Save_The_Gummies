@@ -2373,20 +2373,21 @@ active_half_ticks = -1
 [node name="FireTrap6" parent="ObjectInMiddle/FireTraps" index="3" instance=ExtResource("3_tgusn")]
 position = Vector2(428, 80)
 
-[node name="FireTrapGroup" type="VisibleOnScreenEnabler2D" parent="ObjectInMiddle/FireTraps" index="4"]
-position = Vector2(656, 64)
-rect = Rect2(-24, -24, 48, 48)
-enable_node_path = NodePath(".")
-
-[node name="FireTrap8" parent="ObjectInMiddle/FireTraps/FireTrapGroup" index="0" instance=ExtResource("3_tgusn")]
-position = Vector2(-12, 16)
-
-[node name="FireTrap9" parent="ObjectInMiddle/FireTraps/FireTrapGroup" index="1" instance=ExtResource("3_tgusn")]
-position = Vector2(4, 0)
+[node name="FireTrap9" parent="ObjectInMiddle/FireTraps" index="4" instance=ExtResource("3_tgusn")]
+position = Vector2(660, 64)
 delay_half_ticks = 4
 
-[node name="FireTrap7" parent="ObjectInMiddle/FireTraps" index="5" instance=ExtResource("3_tgusn")]
+[node name="FireTrapGroup" type="Node2D" parent="ObjectInMiddle/FireTraps" index="5"]
+
+[node name="FireTrap7" parent="ObjectInMiddle/FireTraps/FireTrapGroup" index="0" instance=ExtResource("3_tgusn")]
 position = Vector2(200, 232)
+
+[node name="FireTrap8" parent="ObjectInMiddle/FireTraps/FireTrapGroup" index="1" instance=ExtResource("3_tgusn")]
+position = Vector2(644, 80)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="ObjectInMiddle/FireTraps/FireTrapGroup" index="2"]
+position = Vector2(656, 64)
+rect = Rect2(-24, -24, 48, 48)
 
 [node name="Ladders" type="Node" parent="ObjectInMiddle" index="1"]
 

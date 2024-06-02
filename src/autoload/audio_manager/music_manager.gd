@@ -9,6 +9,7 @@ var _current_music_name := ""
 	"start": preload("res://assets/music/start.wav"),
 	"win": preload("res://assets/music/win.wav"),
 	"title": preload("res://assets/music/title.ogg"),
+	"credits": preload("res://assets/music/credits.ogg"),
 	"level_a": preload("res://assets/music/level_a.ogg"),
 	"level_b": preload("res://assets/music/level_b.ogg"),
 	"level_c": preload("res://assets/music/level_c.ogg"),

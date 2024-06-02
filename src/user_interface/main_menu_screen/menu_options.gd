@@ -30,7 +30,7 @@ var _cursor_position_current: = 0:
 		_on_option_entered(_cursor_position_current)
 		_on_option_exited(original_position)
 		_cursor.global_position = Vector2(10.0, _menu_options[_cursor_position_current].global_position.y)
-		AudioStreamManager.play_sound(_cursor_move_sfx)
+		AudioStreamManager.play_sound(_cursor_move_sfx, -6.0)
 	get:
 		return _cursor_position_current
 
@@ -81,7 +81,7 @@ func _change_level_choice(add_number: int) -> void:
 	if new_level_choice == level_count:
 		_right_marker.modulate.a = 0.0
 
-	AudioStreamManager.play_sound(_cursor_move_sfx)
+	AudioStreamManager.play_sound(_cursor_move_sfx, -6.0)
 
 
 func _start_new_game() -> void:

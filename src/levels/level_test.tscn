@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://becvu2tommbnh"]
+[gd_scene load_steps=28 format=3 uid="uid://becvu2tommbnh"]
 
 [ext_resource type="PackedScene" uid="uid://dvje8c8sahcwc" path="res://src/levels/level_base.tscn" id="1_wv10m"]
 [ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/world_tilesets.tres" id="2_y5w7g"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c1ny4x7ikhd2j" path="res://src/entities/goblin/goblin.tscn" id="8_ks4ma"]
 [ext_resource type="PackedScene" uid="uid://cpjklwe1a6wss" path="res://src/entities/objects/ladder/ladder.tscn" id="8_llwp4"]
 [ext_resource type="PackedScene" uid="uid://conmbq7klpskm" path="res://src/entities/obstacles/crusher/crusher.tscn" id="11_s0egt"]
+[ext_resource type="PackedScene" uid="uid://deqsyg5gxba07" path="res://src/entities/obstacles/wall_fan/wall_fan.tscn" id="12_cld7l"]
 [ext_resource type="PackedScene" uid="uid://4h183oy5hfs8" path="res://src/entities/basket/basket.tscn" id="12_m5erk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4iavd"]
@@ -145,13 +146,13 @@ position = Vector2(140, 120)
 [node name="Goblin" parent="Enemies" index="0" instance=ExtResource("8_ks4ma")]
 position = Vector2(64, 120)
 
-[node name="BallCreature" parent="." index="6"]
+[node name="BallCreature" parent="." index="7"]
 position = Vector2(42, 116)
 
-[node name="PlayerCamera" parent="." index="7"]
+[node name="PlayerCamera" parent="." index="8"]
 position = Vector2(16, 120)
 
-[node name="Player" parent="." index="9"]
+[node name="Player" parent="." index="10"]
 position = Vector2(16, 120)
 platform_on_leave = 2
 
@@ -178,7 +179,10 @@ position = Vector2(-96, 112)
 [node name="Crusher" parent="ObjectsInFront" index="3" instance=ExtResource("11_s0egt")]
 position = Vector2(-24, 56)
 
-[node name="DecorationsTileMap" parent="." index="11"]
+[node name="WallFan" parent="ObjectsInFront" index="4" instance=ExtResource("12_cld7l")]
+position = Vector2(8, 40)
+
+[node name="DecorationsTileMap" parent="." index="12"]
 rendering_quadrant_size = 8
 layer_0/name = "Base"
 layer_0/tile_data = PackedInt32Array(-393212, 1, 2, -393210, 1, 2, -393209, 65537, 2, 851963, 393217, 0, 917499, 393217, 1, 851964, 458753, 0, 917500, 458753, 1, 917524, 1, 1, 917525, 65537, 1, 458760, 262145, 0, 262148, 262145, 0, 917502, 262145, 1, 917503, 327681, 1, 458765, 1, 0, 851954, 131073, 0, 917490, 131073, 1, 851955, 196609, 0, 917491, 196609, 1, 917512, 262145, 1, 917513, 327681, 1, 655374, 327681, 2, 655369, 262145, 2, 720905, 262145, 3)

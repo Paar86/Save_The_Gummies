@@ -83,6 +83,12 @@ editor_description = "How long will the crusher rest after returning back to it'
 wait_time = 2.0
 one_shot = true
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="MainBody"]
+stream = ExtResource("10_eosbj")
+volume_db = -2.0
+max_distance = 128.0
+bus = &"SFX"
+
 [node name="CrushEffectorArea" type="Area2D" parent="MainBody"]
 visible = false
 collision_layer = 0
@@ -91,12 +97,6 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MainBody/CrushEffectorArea"]
 shape = SubResource("RectangleShape2D_otqip")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="MainBody"]
-stream = ExtResource("10_eosbj")
-volume_db = -2.0
-max_distance = 128.0
-bus = &"SFX"
 
 [node name="PlayerDetectorArea" type="Area2D" parent="."]
 editor_description = "Intentionaly set so it can detect a player in limited area extents."

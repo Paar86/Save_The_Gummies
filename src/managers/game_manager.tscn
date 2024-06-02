@@ -5,12 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://cc13d3lpr7snh" path="res://src/levels/level_1.tscn" id="3_scwlx"]
 [ext_resource type="PackedScene" uid="uid://blqx3sorahm5u" path="res://src/user_interface/main_menu_screen/main_menu_screen.tscn" id="4_4pyll"]
 [ext_resource type="PackedScene" uid="uid://cbyx4ppl0a235" path="res://src/levels/level_2.tscn" id="4_m8wv3"]
-[ext_resource type="PackedScene" uid="uid://c4pmwhydd4bb6" path="res://src/user_interface/credits/credits.tscn" id="5_6d0c0"]
 [ext_resource type="PackedScene" uid="uid://brv6b7wxcciuo" path="res://src/levels/level_3.tscn" id="5_ytvop"]
 [ext_resource type="PackedScene" uid="uid://cquowkxnuypd8" path="res://src/user_interface/game_by_title/game_by_title.tscn" id="7_2blmn"]
 [ext_resource type="PackedScene" uid="uid://bmcr5b27xfg1s" path="res://src/levels/level_4.tscn" id="8_vsjhn"]
 [ext_resource type="PackedScene" uid="uid://cmjp6c4oo4hn" path="res://src/levels/level_5.tscn" id="9_e204a"]
 [ext_resource type="PackedScene" uid="uid://ctmsdk0ofpk4a" path="res://src/user_interface/story_text/story_text.tscn" id="9_yt4m4"]
+[ext_resource type="PackedScene" uid="uid://p7io5qkhyh6s" path="res://src/user_interface/credits/credits_alt.tscn" id="10_esqp5"]
 
 [node name="GameManager" type="Node"]
 process_mode = 3
@@ -19,7 +19,7 @@ author_title = ExtResource("7_2blmn")
 title_screen = ExtResource("2_f2yxe")
 main_menu_screen = ExtResource("4_4pyll")
 levels = Array[PackedScene]([ExtResource("3_scwlx"), ExtResource("4_m8wv3"), ExtResource("5_ytvop"), ExtResource("8_vsjhn"), ExtResource("9_e204a")])
-credits = ExtResource("5_6d0c0")
+credits = ExtResource("10_esqp5")
 story_text = ExtResource("9_yt4m4")
 
 [node name="ActiveScene" type="Node" parent="."]

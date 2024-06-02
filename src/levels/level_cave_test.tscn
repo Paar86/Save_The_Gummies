@@ -1,9 +1,11 @@
-[gd_scene load_steps=40 format=3 uid="uid://bhqvy4e4c640o"]
+[gd_scene load_steps=42 format=3 uid="uid://bhqvy4e4c640o"]
 
 [ext_resource type="PackedScene" uid="uid://dvje8c8sahcwc" path="res://src/levels/level_base.tscn" id="1_3c4vm"]
 [ext_resource type="TileSet" uid="uid://b7sy6v702d6in" path="res://src/resources/tilesets/world_tilesets.tres" id="2_w4ueg"]
 [ext_resource type="PackedScene" uid="uid://cpjklwe1a6wss" path="res://src/entities/objects/ladder/ladder.tscn" id="3_v1nxn"]
 [ext_resource type="Shader" path="res://src/entities/ball_creature/shaders/gummie_alt.gdshader" id="4_a8utb"]
+[ext_resource type="PackedScene" uid="uid://cjwnh68wh3m4w" path="res://src/levels/background/gems_background.tscn" id="5_aunwf"]
+[ext_resource type="PackedScene" uid="uid://4h183oy5hfs8" path="res://src/entities/basket/basket.tscn" id="5_go6eq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kuvqu"]
 size = Vector2(32, 8)
@@ -110,8 +112,8 @@ size = Vector2(8, 78)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kgphr"]
 resource_local_to_scene = true
 shader = ExtResource("4_a8utb")
-shader_parameter/primary_replacement_color = Vector3(0, 228, 54)
-shader_parameter/secondary_replacement_color = Vector3(0, 135, 81)
+shader_parameter/primary_replacement_color = Vector3(255, 163, 0)
+shader_parameter/secondary_replacement_color = Vector3(171, 82, 54)
 
 [node name="LevelCaveTest" instance=ExtResource("1_3c4vm")]
 
@@ -270,16 +272,21 @@ region_rect = Rect2(0, 0, 8, 64)
 position = Vector2(0, -39)
 shape = SubResource("RectangleShape2D_qjir3")
 
-[node name="BallCreature" parent="." index="6"]
+[node name="BallCreature" parent="." index="7"]
 position = Vector2(80, 84)
 
 [node name="PalettedSprite" parent="BallCreature/Node" index="0"]
 material = SubResource("ShaderMaterial_kgphr")
 position = Vector2(80, 84)
-color = 1
+color = 5
 
-[node name="Player" parent="." index="9"]
+[node name="Player" parent="." index="10"]
 position = Vector2(40, 112)
+
+[node name="Basket" parent="ObjectsInFront" index="0" instance=ExtResource("5_go6eq")]
+position = Vector2(-65.625, 168.375)
+
+[node name="GemsBackground" parent="ParallaxBackground/ParallaxLayer" index="0" instance=ExtResource("5_aunwf")]
 
 [editable path="ObjectInMiddle/Ladder"]
 [editable path="BallCreature"]

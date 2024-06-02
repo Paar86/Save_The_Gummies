@@ -121,8 +121,10 @@ visibility_rect = Rect2(-21.5184, -23.906, 113.359, 47.8896)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_xjev1")
+volume_db = -2.0
 autoplay = true
 max_distance = 128.0
+attenuation = 2.07053
 bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

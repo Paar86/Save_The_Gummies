@@ -538,7 +538,6 @@ shader_parameter/primary_replacement_color = Vector3(41, 173, 255)
 shader_parameter/secondary_replacement_color = Vector3(29, 43, 83)
 
 [node name="Level1" instance=ExtResource("1_ntw5h")]
-animate_at_level_start = true
 music_name = "level_a"
 
 [node name="TileMapBackground" parent="." index="0"]
@@ -555,8 +554,7 @@ position = Vector2(-44, 296)
 
 [node name="HintSignpost" parent="ObjectsBehind/Signposts" index="0" instance=ExtResource("3_gfk4m")]
 position = Vector2(-20, 344)
-hint_message = "
-Get your
+hint_message = "Get your
 Gummies back
 to the basket!
 
@@ -567,8 +565,7 @@ location."
 
 [node name="HintSignpost3" parent="ObjectsBehind/Signposts" index="1" instance=ExtResource("3_gfk4m")]
 position = Vector2(400, 272)
-hint_message = "
-Call a Gummy
+hint_message = "Call a Gummy
 with *key_ctrl*.
 
 Press *key_ctrl* again
@@ -579,9 +576,7 @@ release it."
 
 [node name="HintSignpost4" parent="ObjectsBehind/Signposts" index="2" instance=ExtResource("3_gfk4m")]
 position = Vector2(260, 272)
-hint_message = "
-
-Hold *key_ctrl* to
+hint_message = "Hold *key_ctrl* to
 start aiming.
 Aim with *key_left* and
 *key_right*.
@@ -591,10 +586,7 @@ stop aiming."
 
 [node name="HintSignpost6" parent="ObjectsBehind/Signposts" index="3" instance=ExtResource("3_gfk4m")]
 position = Vector2(164, 192)
-hint_message = "
-
-
-Hold *key_up* and
+hint_message = "Hold *key_up* and
 press *key_ctrl*
 to quickly
 kick a Gummy
@@ -1368,7 +1360,7 @@ scale = Vector2(-1, 1)
 position = Vector2(224, 336)
 
 [node name="Goblin2" parent="Enemies" index="1" instance=ExtResource("4_2xbyo")]
-position = Vector2(128, 240)
+position = Vector2(152, 240)
 
 [node name="Goblin3" parent="Enemies" index="2" instance=ExtResource("4_2xbyo")]
 position = Vector2(-199, 312)
