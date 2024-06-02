@@ -6,6 +6,7 @@
 
 [node name="ThrowArrowPivot" type="Marker2D"]
 process_mode = 4
+z_as_relative = false
 script = ExtResource("1_sqp48")
 
 [node name="Marker2D" type="Marker2D" parent="."]
@@ -20,6 +21,7 @@ update_scale = false
 
 [node name="ThrowArrowSprite" type="Sprite2D" parent="SpriteContainer"]
 visible = false
+z_index = 4096
 position = Vector2(16, 0)
 texture = ExtResource("2_f5bvl")
 

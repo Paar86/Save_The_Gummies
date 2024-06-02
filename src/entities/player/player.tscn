@@ -361,7 +361,6 @@ shape = SubResource("RectangleShape2D_s5oim")
 
 [node name="ThrowArrowPivot" parent="." instance=ExtResource("2_pd4ny")]
 visible = false
-z_index = 4096
 position = Vector2(7, -7)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
