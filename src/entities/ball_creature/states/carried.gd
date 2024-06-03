@@ -5,6 +5,7 @@ extends State
 
 func on_enter(params: StateParams) -> void:
 	ball_creature.animation_player.play("looking_around_stressed")
+	ball_creature.picked_up.emit()
 
 
 func on_exit(transition: Transition) -> void:

@@ -3,6 +3,7 @@ class_name BallCreature extends RigidBody2D
 
 signal effect_added(effect: Enums.effect)
 signal effect_removed(effect: Enums.effect)
+signal picked_up
 
 # Secondary velocity has different effect on RigidBody2D so we should be able to tweak it
 const VELOCITY_SECONDARY_SCALE: = 2.0
@@ -84,6 +85,7 @@ func _ready() -> void:
 
 	effect_added.connect(_on_effect_added)
 	effect_removed.connect(_on_effect_removed)
+	picked_up.connect(_on_picked_up)
 
 
 func _physics_process(delta: float) -> void:
@@ -114,9 +116,7 @@ func _physics_process(delta: float) -> void:
 
 	# Arrived near whistle position so stop following
 	if following_goal_distance <= STOP_FOLLOWING_DISTANCE_NEAR:
-		following_goal_position = Vector2.ZERO
-		whistling_player = null
-		_following_timer.stop()
+		_reset_following()
 		return
 
 	apply_force(Vector2.RIGHT * FOLLOWING_FORCE * following_direction)
@@ -180,6 +180,12 @@ func propagate_whistle(source_body: GameCharacter) -> void:
 		apply_impulse(Vector2.UP * 90.0)
 
 
+func _reset_following() -> void:
+	following_goal_position = Vector2.ZERO
+	whistling_player = null
+	_following_timer.stop()
+
+
 func _on_effect_added(effect: Enums.effect) -> void:
 	match effect:
 		Enums.effect.GLUED:
@@ -212,3 +218,7 @@ func _on_body_entered(body: Node) -> void:
 func _on_following_timer_timeout() -> void:
 	whistling_player = null
 	_reaction_symbol.show_symbol(Enums.reaction_symbol.QUESTION)
+
+
+func _on_picked_up() -> void:
+	_reset_following()
