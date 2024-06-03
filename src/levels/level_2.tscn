@@ -716,8 +716,8 @@ size = Vector2(8, 38)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o5jby"]
 resource_local_to_scene = true
 shader = ExtResource("8_86ain")
-shader_parameter/primary_replacement_color = Vector3(255, 204, 170)
-shader_parameter/secondary_replacement_color = Vector3(171, 82, 54)
+shader_parameter/primary_replacement_color = Vector3(255, 236, 39)
+shader_parameter/secondary_replacement_color = Vector3(255, 163, 0)
 
 [node name="Level2" instance=ExtResource("1_trin5")]
 music_name = "level_c"
@@ -1784,7 +1784,7 @@ position = Vector2(268, 140)
 [node name="PalettedSprite" parent="BallCreature/Node" index="0"]
 material = SubResource("ShaderMaterial_o5jby")
 position = Vector2(268, 140)
-color = 6
+color = 2
 
 [node name="PlayerCamera" parent="." index="8"]
 position = Vector2(40, 96)
