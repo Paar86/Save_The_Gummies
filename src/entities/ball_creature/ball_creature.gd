@@ -56,7 +56,14 @@ var is_on_ceiling: bool:
 		return _ceiling_detector.is_colliding()
 
 var is_inside_wall: bool:
-	get: return _collision_tester.has_overlapping_bodies()
+	get:
+		var overlapping_bodies: = _collision_tester.get_overlapping_bodies()
+		return overlapping_bodies.any(func(body: PhysicsBody2D): return body.get_collision_layer_value(1) == true)
+
+var is_inside_world_object: bool:
+	get:
+		var overlapping_bodies: = _collision_tester.get_overlapping_bodies()
+		return overlapping_bodies.any(func(body: PhysicsBody2D): return body.get_collision_layer_value(5) == true)
 
 
 var color: int:
@@ -160,7 +167,7 @@ func enable_collision() -> void:
 
 
 func propagate_whistle(source_body: GameCharacter) -> void:
-	if not pickable:
+	if not pickable and not ignore_following:
 		return
 
 	whistling_player = source_body

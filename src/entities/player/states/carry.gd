@@ -72,7 +72,7 @@ func release_pickup(impulse: Vector2) -> void:
 
 	character.pickup_transform.set_deferred("remote_path", null)
 
-	if thrown_object.is_inside_wall:
+	if thrown_object.is_inside_wall or thrown_object.is_inside_world_object:
 		thrown_object.global_position = (
 			Vector2(character.global_position.x, character.pickup_transform.global_position.y)
 			)
