@@ -86,9 +86,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		_peek_camera.make_current()
 
-	if event.is_action_pressed("ui_end"):
-		_on_ball_creature_captured(ball_creature)
-
 
 func _configure_basket() -> void:
 	var basket_scene: Basket = find_child("Basket")
