@@ -11,8 +11,12 @@ config_version=5
 [application]
 
 config/name="Save_The_Gummies"
+config/version="1.0"
 run/main_scene="res://src/managers/game_manager.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/show_image=false
+config/icon="res://assets/icons/icon.png"
+config/windows_native_icon="res://assets/icons/icon.ico"
 
 [audio]
 
@@ -28,15 +32,16 @@ AudioStreamManager2D="*res://src/autoload/audio_manager/audio_stream_manager_2D.
 AreaCollisionHandler="*res://src/autoload/utilities/area_collision_handler.gd"
 SfxResources="*res://src/autoload/common/sfx_resources.gd"
 GlobalTicker="*res://src/autoload/utilities/global_ticker.gd"
+ScreenCapture="res://src/autoload/utilities/screen_capture.tscn"
 
 [display]
 
 window/size/viewport_width=128
 window/size/viewport_height=128
-window/size/resizable=false
 window/size/window_width_override=1024
 window/size/window_height_override=1024
 window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 
 [file_customization]
 
@@ -85,8 +90,12 @@ action={
 }
 pause={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":80,"key_label":0,"unicode":112,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":80,"key_label":0,"unicode":112,"echo":false,"script":null)
+]
+}
+screen_capture={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194343,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 
