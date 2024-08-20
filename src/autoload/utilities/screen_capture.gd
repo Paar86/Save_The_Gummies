@@ -16,4 +16,3 @@ func take_screenshot(): # Function for taking screenshots and saving them
 
 	image.save_png(screenshot_path)
 	print("Screenshot taken...")
-

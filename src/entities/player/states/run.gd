@@ -30,4 +30,3 @@ func physics_process(delta: float) -> void:
 	if move_state.character.velocity_primary.x == 0.0:
 		state_machine.transition_to("Idle")
 		return
-

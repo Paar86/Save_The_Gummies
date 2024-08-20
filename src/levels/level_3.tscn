@@ -1888,7 +1888,7 @@ editor_description = "Used only for visual tile representation. Physics is done 
 tile_set = ExtResource("5_7kowv")
 layer_0/tile_data = PackedInt32Array(1245213, 720896, 0, 1245212, 0, 4, 1310749, 720896, 3, 1310748, 327680, 3, 196611, 720896, 0, 196610, 0, 4, 262147, 720896, 3, 262146, 589824, 1, 1572894, 720896, 0, 1572893, 0, 4, 1638429, 327680, 1, 1638430, 720896, 2, 1703966, 720896, 3, 1703965, 589824, 3)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="TileMapNoPhysics" index="0"]
+[node name="StaticBody2D" type="StaticBody2D" parent="TileMapNoPhysics" index="1"]
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TileMapNoPhysics/StaticBody2D" index="0"]

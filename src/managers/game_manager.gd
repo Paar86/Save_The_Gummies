@@ -92,4 +92,3 @@ func _on_change_scene_requested() -> void:
 
 	if _current_scene is Credits:
 		_load_scene(author_title.instantiate())
-

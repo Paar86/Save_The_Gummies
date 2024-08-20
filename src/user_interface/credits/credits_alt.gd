@@ -54,4 +54,3 @@ func _flip_page() -> void:
 	# Don't go to another pages, allow returning to main menu instead
 	if _current_page == _pages_text.size() - 1:
 		_can_interact = true
-

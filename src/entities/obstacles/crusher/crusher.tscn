@@ -28,7 +28,7 @@ metadata/_edit_group_ = true
 texture_repeat = 2
 position = Vector2(4, 0)
 points = PackedVector2Array(0, 0, 0, 0)
-width = 3.0
+width = 4.0
 texture = ExtResource("1_rlge2")
 texture_mode = 1
 
@@ -36,7 +36,7 @@ texture_mode = 1
 texture_repeat = 2
 position = Vector2(12, 0)
 points = PackedVector2Array(0, 0, 0, 0)
-width = 3.0
+width = 4.0
 texture = ExtResource("1_rlge2")
 texture_mode = 1
 
